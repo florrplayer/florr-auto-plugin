@@ -15,7 +15,7 @@ This project is **welcomed** to be used in any other florr.io projects.
 - Anti-AFK: random pauses + periodic petal slot switching
 - Auto-reconnect: clicks Start when dropped to main menu
 - Auto-open browser: launches Edge at florr.io if no window found
-- Dynamic resolution support (4K / maximized window, not only 1920x1080 fullscreen)
+- Dynamic resolution support: works at 4096x2160 (4K) / maximized window / any window size, no manual setup needed (auto-calibrates screen center, minimap position and canvas offset)
 - Keyboard (WASD) movement via PostMessage
 
 ## Usage
@@ -50,9 +50,7 @@ To decide on the positions and areas, I've already prepared `map_select.py` and 
 
 ## Implements
 
-For this is CLIENT-SIDE, so I haven't do any resolution support.
-
-You need to run this code in 1920x1080 with florr.io tab on the top and fullscreen.
+The plugin auto-detects the window size (including 4096x2160 4K and maximized windows), so no resolution setup is needed. Just keep the florr.io tab visible (not covered by other windows) and run `main.py`.
 
 Go run `main.py`
 
