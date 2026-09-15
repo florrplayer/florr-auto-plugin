@@ -25,7 +25,7 @@ py -3.12 main.py desert    :: desert map (anthell / ocean also available)
 py -3.12 main.py anthell
 ```
 
-Run with the florr window visible (minimize the cmd window so it does not cover the minimap). Waypoints are configured in `main.py` (`patrol_points`).
+Run with the florr window visible (minimize the cmd window so it does not cover the minimap). When the script starts, the current map opens automatically for patrol-point selection: left-click to add points, right-click to undo, and press Enter to confirm.
 
 ## The Lazy Theta Star
 

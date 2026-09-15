@@ -218,23 +218,26 @@ def check_map_border(opencv_img):
 
 
 def toggle_map():
-    if get_player_position() == (250, 50):
+    pos = get_player_position()
+    if pos is not None and distance(pos, (250, 50)) <= 2.5:
         get_window().press(ord('M'))
         time.sleep(1)
 
 
 def calc_anti_stuck(borders, weight=1.0):
-    screen_center = np.array([960, 540])
-    total_force = np.array([0.0, 0.0])
+    frame = get_frame()
+    h, w = frame.shape[:2]
+    screen_center = np.array(get_screen_center(), dtype=np.float64)
+    total_force = np.array([0.0, 0.0], dtype=np.float64)
     for point in borders:
-        point_vector = np.array(point)
-        distance = np.linalg.norm(screen_center - point_vector)
-        if distance == 0:
+        point_vector = np.array(point, dtype=np.float64)
+        distance_vec = np.linalg.norm(screen_center - point_vector)
+        if distance_vec == 0:
             continue
-        total_force += (screen_center - point_vector) / distance
+        total_force += (screen_center - point_vector) / distance_vec
     final_position = screen_center + total_force * weight
-    final_position[0] = np.clip(final_position[0], 0, 1920)
-    final_position[1] = np.clip(final_position[1], 0, 1080)
+    final_position[0] = np.clip(final_position[0], 0, w)
+    final_position[1] = np.clip(final_position[1], 0, h)
     toggle_map()
     return final_position[0], final_position[1]
 
@@ -244,8 +247,8 @@ def execute_anti_stuck(duration=1.5):
     opencv_img = get_frame()
     borders = check_map_border(opencv_img)
     suggested_position = calc_anti_stuck(borders)
-    screen_center = np.array([960, 540])
-    delta = suggested_position - screen_center
+    screen_center = np.array(get_screen_center(), dtype=np.float64)
+    delta = np.array(suggested_position, dtype=np.float64) - screen_center
     max_delta = np.max(np.abs(delta))
     if max_delta == 0:
         return

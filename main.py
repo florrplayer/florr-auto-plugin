@@ -234,7 +234,7 @@ def reset_keyboard():
 
 
 def go_direction(start, end):
-    """朝 end 移动，用 WASD 键盘控制；卡死/掠过/掉线分别处理"""
+    """朝 end 移动，用 WASD 键盘控制；改为带迟滞的平滑走路，降低抖动和来回切键。"""
     w = get_window()
     last_dist, min_dist, still = 1e9, 1e9, 0
     current_keys = set()
@@ -255,29 +255,42 @@ def go_direction(start, end):
             if d <= ARRIVE:
                 set_keys(set())
                 return True
-            if d > last_dist:
-                set_keys(set())
-                return True if min_dist <= ARRIVE * 3 else "stuck"
-            if d == last_dist:
-                still += 1
-            else:
-                still = 0
-            min_dist = min(min_dist, d)
-            if still > 13:
-                set_keys(set())
-                return "stuck"
-            last_dist = d
+
             stage = check_stage()
             if stage in ("in_game_dead", "in_menu"):
                 set_keys(set())
                 return stage
+
+            # 只在“明显后退/明显无推进”时判定为卡住；允许 1~2px 误差，不要因抖动突然停止
+            if d > last_dist + 1.5:
+                set_keys(set())
+                return True if min_dist <= ARRIVE * 3 else "stuck"
+            if abs(d - last_dist) < 0.8:
+                still += 1
+            else:
+                still = 0
+            min_dist = min(min_dist, d)
+            if still > 18:
+                set_keys(set())
+                return "stuck"
+            last_dist = d
+
             dx, dy = end[0] - pos[0], end[1] - pos[1]
-            keys = set()
-            if abs(dx) > 1.5:
-                keys.add("d" if dx > 0 else "a")
-            if abs(dy) > 1.5:
-                keys.add("s" if dy > 0 else "w")
-            set_keys(keys)
+            desired = set()
+            if abs(dx) > 1.2:
+                desired.add("d" if dx > 0 else "a")
+            if abs(dy) > 1.2:
+                desired.add("s" if dy > 0 else "w")
+
+            # 平滑策略：保留当前方向，只有在明显偏离时才切换；防止 1px 级抖动引发来回按键
+            if not desired:
+                set_keys(set())
+            elif current_keys and desired.issubset(current_keys):
+                pass
+            elif current_keys and (current_keys & desired):
+                set_keys(current_keys & desired)
+            else:
+                set_keys(desired)
             time.sleep(0.05)
     finally:
         set_keys(set())
@@ -504,6 +517,8 @@ if __name__ == "__main__":
     try:
         apply_map(map_name)
         print(f"[+] 地图: {map_name}")
+        from map_select import select_patrol_points
+        patrol_points = select_patrol_points(map_name)
         # 标定实际窗口客户区尺寸(兼容4K显示器/DPI缩放, 不再硬编码1920x1080)
         from combat import calibrate_screen
         try:
@@ -519,13 +534,6 @@ if __name__ == "__main__":
         if COMBAT_ENABLED:
             print("[+] 战斗模式: 只打 M 怪(青)，避开 U 怪(粉) 5px，贴脸 0.5px 沿原路撤退")
 
-        # ===== 巡逻点配置：用 map_select.py 标定后替换下面的坐标 =====
-        patrol_points = [
-            (202, 146),  # 巡逻点1
-            (287, 142),  # 巡逻点2
-            (285, 81),   # 巡逻点3
-            (192, 62),   # 巡逻点4
-        ]
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
         trail = deque(maxlen=TRAIL_MAX)
@@ -537,7 +545,7 @@ if __name__ == "__main__":
 
         # 防挂机: 定时切换花瓣槽位(slot)
         last_slot_switch = time.time()
-        next_slot_interval = 30 + random.random() * 30  # 30-60秒
+        next_slot_interval = 60 + random.random() * 30  # 60-90秒
 
         while True:
             # 防挂机: 定时切换槽位
@@ -555,7 +563,7 @@ if __name__ == "__main__":
                 time.sleep(0.05 + random.random() * 0.1)
                 w.key_up(vk)
                 last_slot_switch = now
-                next_slot_interval = 30 + random.random() * 30
+                next_slot_interval = 60 + random.random() * 30
 
             # 先检查状态
             stage = check_stage()
