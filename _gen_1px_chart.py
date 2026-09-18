@@ -27,7 +27,7 @@ def arrow(x1, y, x2, color="#94A3B8"):
 text(W//2, 45, "florr 插件坐标系统 · \"1px\" 换算全图", f(34, True), anchor="ma")
 text(W//2, 92, "屏幕像素 ↔ 世界单位 ↔ 地图像素  |  战斗参数实际大小  |  100寸 4K 屏物理尺寸", f(17), fill="#6B7280", anchor="ma")
 
-# ===== 换算链: 三个方框 =====
+# ===== 换算链: 三个方框 ===
 box_y, box_h = 140, 280
 bw = 440
 gap = 60
@@ -35,7 +35,7 @@ x1 = 60
 x2 = x1 + bw + gap
 x3 = x2 + bw + gap
 
-# 方框1: 1 屏幕像素
+# 方框1: 1 屏幕
 rect(x1, box_y, bw, box_h, "#FFF0F3", "#E07A90", 3)
 text(x1+bw//2, box_y+28, "1 屏幕像素", f(24, True), anchor="ma")
 text(x1+bw//2, box_y+68, "Screen Pixel", f(15), fill="#6B7280", anchor="ma")

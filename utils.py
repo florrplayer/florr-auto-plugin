@@ -13,6 +13,7 @@ MAP_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "maps")
 _MAP_CACHE = {}
 _NEAREST_CACHE = {}
 _FRAME = {"t": 0.0, "img": None}
+_STAGE_CACHE = {"image": None, "stage": None}
 ARRIVE = 5.0        # 到达判定阈值（地图像素）
 FRAME_TTL = 0.05    # 帧缓存有效期（秒）
 _screen_center = [960, 540]   # 实际窗口客户区中心(启动时标定, 兼容4K/DPI缩放)
@@ -65,29 +66,33 @@ def check_stage(img=None):
       3. 其他 -> 菜单/装备/加载"""
     if img is None:
         img = get_frame()
+    if _STAGE_CACHE["image"] is img:
+        return _STAGE_CACHE["stage"]
     h, w = img.shape[:2]
     off = _canvas_y_offset
     game_h = max(h - off, 1)
 
     # 1. 检测小地图(游戏中特征): 强制刷新缓存, 避免菜单时缓存了None
-    global _MINIMAP_CACHE
-    _MINIMAP_CACHE["t"] = 0.0   # 强制刷新
     rect = _detect_minimap(img)
     if rect is not None:
+        _MINIMAP_CACHE.update(rect=rect, t=time.time())
+        _STAGE_CACHE.update(image=img, stage="in_game")
         return "in_game"
 
     # 1b. fallback: 用get_map()截取小地图区域(新位置), 检测黑白迷宫特征(黑色像素>10%)
-    gmap = get_map()
+    gmap = get_map(img)
     if gmap is not None and gmap.shape[0] > 30 and gmap.shape[1] > 30:
         mm_gray = cv2.cvtColor(gmap, cv2.COLOR_BGR2GRAY)
         black_ratio = np.sum(mm_gray < 60) / (mm_gray.shape[0] * mm_gray.shape[1])
         if black_ratio > 0.1:
+            _STAGE_CACHE.update(image=img, stage="in_game")
             return "in_game"
 
     # 1c. 玩家定位辅助判断: 如果能在小地图上定位到玩家点, 说明在游戏中
     try:
-        p = get_player_position()
+        p = get_player_position(image=img)
         if p is not None:
+            _STAGE_CACHE.update(image=img, stage="in_game")
             return "in_game"
     except Exception:
         pass
@@ -102,9 +107,11 @@ def check_stage(img=None):
         btn_mean = np.mean(img[y0:y1, x0:x1], axis=(0, 1))
         # 绿色按钮: G通道显著高于B和R
         if btn_mean[1] > 100 and btn_mean[1] > btn_mean[0] + 25 and btn_mean[1] > btn_mean[2] + 25:
+            _STAGE_CACHE.update(image=img, stage="in_game_dead")
             return "in_game_dead"
 
     # 3. 其他(菜单/装备界面/加载中)
+    _STAGE_CACHE.update(image=img, stage="in_menu")
     return "in_menu"
 
 
@@ -166,9 +173,10 @@ def _detect_minimap(frame):
     return None
 
 
-def get_map():
+def get_map(frame=None):
     """截取小地图(动态检测位置, 兼容全屏/最大化/4K)"""
-    frame = get_frame()
+    if frame is None:
+        frame = get_frame()
     h, w = frame.shape[:2]
     now = time.time()
     rect = _MINIMAP_CACHE["rect"]
@@ -252,24 +260,18 @@ def execute_anti_stuck(duration=1.5):
     max_delta = np.max(np.abs(delta))
     if max_delta == 0:
         return
-    duration_x = duration * abs(delta[0]) / max_delta
-    duration_y = duration * abs(delta[1]) / max_delta
-    if delta[0] > 0:
-        keydown("d")
-        time.sleep(duration_x)
-        keyup("d")
-    else:
-        keydown("a")
-        time.sleep(duration_x)
-        keyup("a")
-    if delta[1] > 0:
-        keydown("s")
-        time.sleep(duration_y)
-        keyup("s")
-    else:
-        keydown("w")
-        time.sleep(duration_y)
-        keyup("w")
+    direction = ""
+    if abs(delta[0]) > 1:
+        direction += "d" if delta[0] > 0 else "a"
+    if abs(delta[1]) > 1:
+        direction += "s" if delta[1] > 0 else "w"
+    if not direction:
+        return
+    try:
+        keydown(direction)
+        time.sleep(duration)
+    finally:
+        keyup(direction)
 
 
 def keydown(direction, delta=500):
@@ -304,8 +306,8 @@ def keyup(direction):
         w.key_up(keys)
 
 
-def get_player_position(precise=False):
-    image = get_map()
+def get_player_position(precise=False, image=None):
+    image = get_map(image)
     binary_map = load_binary_map()
     for color in ("f9dd64", "ffde3d", "ffd700", "fffacd", "f0e68c", "e6c200", "f5d76e", "f0c040"):
         position = get_player_location_on_map(image, color, binary_map, precise)

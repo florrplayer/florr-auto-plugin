@@ -13,6 +13,8 @@ MAX_STUCK = 5   # 连续卡死/无路次数上限，超过则跳过当前巡逻�
 PATH_STEP = 40  # 巡逻分段长度(地图像素)：每走完一段回主循环检查战斗
 COMBAT_ENABLED = True  # 战斗模式总开关
 TRAIL_MAX = 800        # 撤退轨迹缓存长度
+MOVE_PROGRESS_TIMEOUT = 1.5  # 持续无有效进展多久才判定卡住
+PATH_CACHE = {"goal": None, "path": None}
 
 
 def line_of_sight(map, n1, n2):
@@ -81,148 +83,16 @@ def go_neighbor(type, count):
     assert type in ["x", "y", "xy"]
     if count == 0:
         return True
-    try:
-        if type == "x":
-            if count > 0:
-                now_position = get_player_position()
-                target = (now_position[0] + count, now_position[1])
-                keydown("d")
-                distance = target[0] - now_position[0]
-                last_distance = distance
-                trys = 0
-                while now_position[0] != target[0]:
-                    stage = check_stage()
-                    if stage != "in_game":
-                        keyup("d")
-                        return stage
-                    now_position = get_player_position()
-                    if now_position == None:
-                        return "stuck"
-                    distance = target[0] - now_position[0]
-                    keydown("d", delta=min(distance*45, 500))
-                    if distance >= last_distance or distance < 0:
-                        trys += 1
-                    if trys > 15:
-                        keyup("d")
-                        return "stuck"
-                    last_distance = distance
-                    time.sleep(0.05)
-                keyup("d")
-            else:
-                now_position = get_player_position()
-                target = (now_position[0] + count, now_position[1])
-                keydown("a")
-                distance = now_position[0] - target[0]
-                last_distance = distance
-                trys = 0
-                while now_position[0] != target[0]:
-                    stage = check_stage()
-                    if stage != "in_game":
-                        keyup("a")
-                        return stage
-                    now_position = get_player_position()
-                    if now_position == None:
-                        return "stuck"
-                    distance = now_position[0] - target[0]
-                    keydown("a", delta=min(distance*45, 500))
-                    if distance >= last_distance or distance < 0:
-                        trys += 1
-                    if trys > 15:
-                        keyup("a")
-                        return "stuck"
-                    last_distance = distance
-                    time.sleep(0.05)
-                keyup("a")
-        elif type == "y":
-            if count > 0:
-                now_position = get_player_position()
-                target = (now_position[0], now_position[1] + count)
-                keydown("s")
-                distance = target[1] - now_position[1]
-                last_distance = distance
-                trys = 0
-                while now_position[1] != target[1]:
-                    stage = check_stage()
-                    if stage != "in_game":
-                        keyup("s")
-                        return stage
-                    now_position = get_player_position()
-                    if now_position == None:
-                        return "stuck"
-                    distance = target[1] - now_position[1]
-                    keydown("s", delta=min(distance*45, 500))
-                    if distance >= last_distance or distance < 0:
-                        trys += 1
-                    if trys > 15:
-                        keyup("s")
-                        return "stuck"
-                    last_distance = distance
-                    time.sleep(0.05)
-                keyup("s")
-            else:
-                now_position = get_player_position()
-                target = (now_position[0], now_position[1] + count)
-                keydown("w")
-                distance = now_position[1] - target[1]
-                last_distance = distance
-                trys = 0
-                while now_position[1] != target[1]:
-                    stage = check_stage()
-                    if stage != "in_game":
-                        keyup("w")
-                        return stage
-                    now_position = get_player_position()
-                    if now_position == None:
-                        return "stuck"
-                    distance = now_position[1] - target[1]
-                    keydown("w", delta=min(distance*45, 500))
-                    if distance >= last_distance or distance < 0:
-                        trys += 1
-                    if trys > 15:
-                        keyup("w")
-                        return "stuck"
-                    last_distance = distance
-                    time.sleep(0.05)
-                keyup("w")
-        elif type == "xy":
-            now_position = get_player_position()
-            target = (now_position[0] + count[0], now_position[1] + count[1])
-            if count[0] > 0 and count[1] > 0:
-                type_ = "sd"
-            elif count[0] > 0 and count[1] < 0:
-                type_ = "wd"
-            elif count[0] < 0 and count[1] > 0:
-                type_ = "sa"
-            elif count[0] < 0 and count[1] < 0:
-                type_ = "wa"
-            keydown(type_)
-            distance = math.sqrt((target[0] - now_position[0])**2 +
-                                 (target[1] - now_position[1])**2)
-            last_distance = distance
-            trys = 0
-            while now_position != target:
-                stage = check_stage()
-                if stage != "in_game":
-                    keyup(type_)
-                    return stage
-                now_position = get_player_position()
-                distance = math.sqrt((target[0] - now_position[0])**2 +
-                                     (target[1] - now_position[1])**2)
-                keydown(type_, delta=min(distance*45, 500))
-                if distance >= last_distance or distance < 0:
-                    trys += 1
-                if trys > 15:
-                    keyup(type_)
-                    return "stuck"
-                last_distance = distance
-                time.sleep(0.05)
-            keyup(type_)
-        return True
-    except TypeError as e:
-        print(e)
-        traceback.print_exc()
-        stage = check_stage()
-        return stage
+    now_position = get_player_position()
+    if now_position is None:
+        return "stuck"
+    if type == "x":
+        target = (now_position[0] + count, now_position[1])
+    elif type == "y":
+        target = (now_position[0], now_position[1] + count)
+    else:
+        target = (now_position[0] + count[0], now_position[1] + count[1])
+    return go_direction(now_position, target)
 
 
 def reset_keyboard():
@@ -236,7 +106,8 @@ def reset_keyboard():
 def go_direction(start, end):
     """朝 end 移动，用 WASD 键盘控制；改为带迟滞的平滑走路，降低抖动和来回切键。"""
     w = get_window()
-    last_dist, min_dist, still = 1e9, 1e9, 0
+    last_dist, min_dist = 1e9, 1e9
+    last_progress = time.monotonic()
     current_keys = set()
     def set_keys(keys):
         nonlocal current_keys
@@ -262,15 +133,11 @@ def go_direction(start, end):
                 return stage
 
             # 只在“明显后退/明显无推进”时判定为卡住；允许 1~2px 误差，不要因抖动突然停止
-            if d > last_dist + 1.5:
-                set_keys(set())
-                return True if min_dist <= ARRIVE * 3 else "stuck"
-            if abs(d - last_dist) < 0.8:
-                still += 1
-            else:
-                still = 0
+            previous_min = min_dist
             min_dist = min(min_dist, d)
-            if still > 18:
+            if d < previous_min - 0.8 or d < last_dist - 0.8:
+                last_progress = time.monotonic()
+            if time.monotonic() - last_progress > MOVE_PROGRESS_TIMEOUT:
                 set_keys(set())
                 return "stuck"
             last_dist = d
@@ -326,10 +193,22 @@ def lazy_theta_pathing(location, area=[], step=0):
         binary = load_binary_map()
         goal = calibrate_player(binary, location)
         print(f"[路径] {pos} -> {goal}")
-        t0 = time.time()
-        path = lazy_theta_star(binary, pos, goal)
-        print(f"[路径] 规划耗时 {time.time() - t0:.3f}s")
+        path = None
+        if step > 0 and PATH_CACHE["goal"] == goal and PATH_CACHE["path"]:
+            cached = PATH_CACHE["path"]
+            nearest_index, nearest_distance = min(
+                ((i, distance(pos, point)) for i, point in enumerate(cached)),
+                key=lambda item: item[1],
+            )
+            if nearest_distance <= ARRIVE * 2:
+                path = cached[nearest_index:]
+                print(f"[路径] 复用剩余路径，偏差 {nearest_distance:.1f}px")
         if path is None:
+            t0 = time.time()
+            path = lazy_theta_star(binary, pos, goal)
+            print(f"[路径] 规划耗时 {time.time() - t0:.3f}s")
+        if path is None:
+            PATH_CACHE.update(goal=None, path=None)
             print("[路径] 无路可达，执行反卡死...")
             execute_anti_stuck()
             stuck_count += 1
@@ -345,14 +224,26 @@ def lazy_theta_pathing(location, area=[], step=0):
                     break
             stat = lazy_theta_execute_path(seg)
             if stat == "stuck":
+                PATH_CACHE.update(goal=None, path=None)
                 execute_anti_stuck()
                 stuck_count += 1
                 if stuck_count >= MAX_STUCK:
                     return "stuck_loop"
                 continue
             if stat in ("in_game_dead", "in_menu"):
+                PATH_CACHE.update(goal=None, path=None)
                 return False
+            current_pos = get_player_position()
+            if current_pos is not None and (
+                    if_in_area(area, current_pos) or
+                    distance(current_pos, goal) <= ARRIVE):
+                PATH_CACHE.update(goal=None, path=None)
+                return True
+            segment_end = len(seg) - 1
+            remaining = path[segment_end:]
+            PATH_CACHE.update(goal=goal, path=remaining if len(remaining) > 1 else None)
             return "step_done"
+        PATH_CACHE.update(goal=None, path=None)
         stat = lazy_theta_execute_path(path)
         pos = get_player_position()
         if pos is not None and (if_in_area(area, pos) or distance(pos, goal) <= ARRIVE):
@@ -407,7 +298,8 @@ def chase_target(patrol_goal, trail):
                 time.sleep(0.3)
                 continue
             trail.append(pos)
-            mythics, ultras = detect_mobs()
+            frame = get_frame()
+            mythics, ultras = detect_mobs(frame)
             ultras_map = [m for m in (screen_to_map_safe(u, pos) for u in ultras) if m]
             if ultra_blocked(ultras_map, pos):
                 return "ultra"
@@ -594,8 +486,9 @@ if __name__ == "__main__":
 
             # ===== 战斗检测（仅巡逻间隙/分段间执行）=====
             if COMBAT_ENABLED:
-                mythics, ultras = detect_mobs()
-                pos = get_player_position()
+                frame = get_frame()
+                mythics, ultras = detect_mobs(frame)
+                pos = get_player_position(image=frame)
                 if pos is not None:
                     ultras_map = [m for m in (screen_to_map_safe(u, pos) for u in ultras) if m]
                     near_u = None
@@ -622,6 +515,7 @@ if __name__ == "__main__":
             if result is True:
                 print(f"[巡逻] 到达点 {patrol_index+1}，前往下一个点")
                 patrol_index = (patrol_index + 1) % len(patrol_points)
+                PATH_CACHE.update(goal=None, path=None)
                 # 防挂机: 到达巡逻点后随机停顿 0.5-2.5 秒
                 pause = 0.5 + random.random() * 2.0
                 print(f"[防挂机] 随机停顿 {pause:.1f}s")
@@ -636,6 +530,8 @@ if __name__ == "__main__":
         print("\n[!] 用户中断")
     finally:
         defense_running = False
+        defense_thread.join(timeout=1.0)
+        reset_keyboard()
         get_window().right_button_up()
         print("[+] 右键防御已关闭")
         get_window().move_onscreen()

@@ -51,16 +51,15 @@ def calibrate_screen(frame=None):
     return w, h
 
 
-def _detect_color(frame, hsv_range, exclude_center=True):
+def _detect_color(hsv, hsv_range, exclude_center=True):
     """按 HSV 区间找色块, 返回中心点列表(屏幕坐标)"""
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = cv2.inRange(hsv, np.array(hsv_range[0]), np.array(hsv_range[1]))
     if exclude_center:
         cx, cy = get_screen_center()
         cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
     # 降采样检测(统一960宽, 提速), 标定后自动适配实际分辨率
     det_w = 960
-    det_h = int(frame.shape[0] / _downscale)
+    det_h = int(hsv.shape[0] / _downscale)
     small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
     n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
     pts = []
@@ -80,8 +79,9 @@ def detect_mobs(frame=None):
     """检测 M/U 怪, 返回 (mythics, ultras) 屏幕坐标列表"""
     if frame is None:
         frame = get_frame()
-    mythics = _detect_color(frame, MYTHIC_HSV)
-    ultras = _detect_color(frame, ULTRA_HSV)
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    mythics = _detect_color(hsv, MYTHIC_HSV)
+    ultras = _detect_color(hsv, ULTRA_HSV)
     return mythics, ultras
 
 
