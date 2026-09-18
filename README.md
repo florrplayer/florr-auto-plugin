@@ -1,5 +1,13 @@
 # florr-auto-pathing
 
+## 📥 直接下载（小白版，双击即用，无需装 Python）
+
+👉 **[点这里下载 florr-auto-v1.1.0-win64.zip](https://github.com/florrplayer/florr-auto-plugin/raw/main/releases/florr-auto-v1.1.0-win64.zip)**
+
+下载后解压：用 Edge 打开 florr.io 进游戏 → 双击 `启动.bat` → 选地图数字 → 回车。
+
+---
+
 Time to upload some of my useful codes.
 
 The whole codes stand on CLIENT-SIDE.
