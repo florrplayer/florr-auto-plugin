@@ -654,13 +654,25 @@ if __name__ == "__main__":
         if COMBAT_ENABLED:
             print("[+] 战斗策略: =秒杀等级自动追(贴0.5px), 更高避开(往怪少处跑), 更低不管")
         print("[!] 提醒: 请把回血花瓣(玫瑰/叶子)放在副槽(配置时勾选的槽位)——血量<10%%时插件自动切到主槽+防御跑路, 恢复后自动切回")
-        # 自动扫描回血花瓣槽位(粉=玫瑰/大丽花, 绿=叶子/丝兰, 橙=海星)
+        # 自动扫描回血花瓣槽位候选(颜色只是候选, 弹窗人工确认防误检)
         try:
             from combat import scan_heal_slots, draw_heal_slots_mark
-            _rows = scan_heal_slots()
-            print(f"[扫描] 回血花瓣槽位  上行ROW0: {_rows[0] if _rows else '?'}  下行ROW1: {_rows[1] if len(_rows) > 1 else '?'}")
-            draw_heal_slots_mark(get_frame(), _rows, "_heal_slots.png")
-            print("[扫描] 已保存 _heal_slots.png（看哪个ROW是副槽，黄框=检出的回血花瓣槽位）")
+            _cand = scan_heal_slots()
+            if _cand:
+                _desc = "  ".join(f"ROW{r}槽{s}({c})" for r, s, c in _cand)
+                print(f"[扫描] 回血花瓣候选: {_desc}")
+                draw_heal_slots_mark(get_frame(), _cand, "_heal_slots.png")
+                print("[扫描] 已保存 _heal_slots.png 供核对")
+                from config import ask_heal_confirm, save_config
+                _picked = ask_heal_confirm(_cand)
+                if _picked:
+                    cfg["heal_slots"] = _picked
+                    save_config(cfg)
+                    print(f"[扫描] 已确认回血槽位: {_picked}（低血时自动切换）")
+                else:
+                    print("[扫描] 未确认，使用原配置")
+            else:
+                print("[扫描] 未检测到回血花瓣候选（如副槽有玫瑰请截图反馈）")
         except Exception as e:
             print(f"[扫描] 失败: {e}")
 

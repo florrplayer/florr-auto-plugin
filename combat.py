@@ -320,8 +320,9 @@ SLOT_COLS = 10                # 最多10个槽(数字键1-9, 0=10)
 
 
 def scan_heal_slots(img=None):
-    """自动扫描屏幕底部槽位区, 检测回血花瓣所在槽位号
-    返回 [[上行槽位列表], [下行槽位列表]] (每行从左到右 1-10)"""
+    """自动扫描屏幕底部槽位区, 检测回血花瓣候选
+    返回 [(行号0/1, 槽位1-10, 命中颜色名), ...] 按行从上到下、槽位从左到右
+    注意: 颜色只是候选(U级花瓣也粉/Common级也绿/传奇也偏红), 需人工确认"""
     if img is None:
         img = get_frame()
     from utils import _canvas_y_offset
@@ -330,25 +331,25 @@ def scan_heal_slots(img=None):
     top = off + int((h - off) * SLOT_BAND_TOP)
     bot = off + int((h - off) * SLOT_BAND_BOT)
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    mask = np.zeros((h, w), dtype=np.uint8)
-    for _name, lo, hi in HEAL_HSV:
-        mask |= cv2.inRange(hsv, np.array(lo), np.array(hi))
-    rows = []
+    found = []
     row_h = (bot - top) / SLOT_ROWS
     col_w = w / SLOT_COLS
     for r in range(SLOT_ROWS):
         y0 = int(top + r * row_h); y1 = int(top + (r + 1) * row_h)
-        slots = []
         for i in range(SLOT_COLS):
             x0 = int(i * col_w); x1 = int((i + 1) * col_w)
-            if cv2.countNonZero(mask[y0:y1, x0:x1]) > 25:
-                slots.append(i + 1)
-        rows.append(slots)
-    return rows
+            names = []
+            for name, lo, hi in HEAL_HSV:
+                m = cv2.inRange(hsv[y0:y1, x0:x1], np.array(lo), np.array(hi))
+                if cv2.countNonZero(m) > 25:
+                    names.append(name)
+            if names:
+                found.append((r, i + 1, "/".join(names)))
+    return found
 
 
-def draw_heal_slots_mark(img, rows, out_path):
-    """在原图上标出槽位行(ROW0绿/ROW1蓝)和检出回血花瓣的槽位(黄框+编号), 存图供玩家确认哪行是副槽"""
+def draw_heal_slots_mark(img, found, out_path):
+    """在原图上标出槽位行(ROW0绿/ROW1蓝)和检出候选槽位(黄框+编号+颜色名), 存图供玩家确认"""
     from utils import _canvas_y_offset
     h, w = img.shape[:2]
     off = _canvas_y_offset
@@ -357,14 +358,15 @@ def draw_heal_slots_mark(img, rows, out_path):
     mark = img.copy()
     row_h = (bot - top) / SLOT_ROWS
     col_w = w / SLOT_COLS
-    for r, slots in enumerate(rows):
+    for r in (0, 1):
         y0 = int(top + r * row_h); y1 = int(top + (r + 1) * row_h)
         color = (0, 255, 0) if r == 0 else (255, 0, 0)
         cv2.rectangle(mark, (0, y0), (w - 1, y1), color, 2)
         cv2.putText(mark, f"ROW{r}", (10, y0 + 24), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
-        for s in slots:
-            x0 = int((s - 1) * col_w); x1 = int(s * col_w)
-            cv2.rectangle(mark, (x0, y0), (x1, y1), (0, 255, 255), 2)
-            cv2.putText(mark, str(s), (x0 + 10, y0 + 32), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
+    for r, s, names in found:
+        y0 = int(top + r * row_h); y1 = int(top + (r + 1) * row_h)
+        x0 = int((s - 1) * col_w); x1 = int(s * col_w)
+        cv2.rectangle(mark, (x0, y0), (x1, y1), (0, 255, 255), 2)
+        cv2.putText(mark, f"{s}:{names}", (x0 + 6, y0 + 32), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
     cv2.imwrite(out_path, mark)
     return mark

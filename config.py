@@ -68,9 +68,9 @@ def _ask(prompt, options, title):
     return result["v"]
 
 
-def _ask_multi(prompt, options, title):
+def _ask_multi(prompt, options, title, preselect=()):
     """问卷星风格多选: 选项列表鼠标点选切换(选中变蓝高亮+凹), 底部[下一步]提交;
-    返回选中的 key 列表(关窗口返回 [])"""
+    preselect: 默认勾选的 key 集合; 返回选中的 key 列表(关窗口返回 [])"""
     result = {"v": []}
     root = tk.Tk()
     root.title(title)
@@ -79,7 +79,7 @@ def _ask_multi(prompt, options, title):
              justify="left", wraplength=480).pack()
     sel = {}
     for key, label in options:
-        v = tk.BooleanVar(value=False)
+        v = tk.BooleanVar(value=(key in preselect))
         b = tk.Label(root, text=label, font=("Microsoft YaHei UI", 11), padx=12, pady=6,
                      bg="#ffffff", relief="groove", borderwidth=1, anchor="w", cursor="hand2")
         b.pack(fill="x", padx=24, pady=3)
@@ -116,6 +116,20 @@ def _submit(sel, multi):
         if vv.get():
             return k
     return None
+
+
+HEAL_COLOR_NAMES = {"rose/dahlia": "粉(玫瑰/大丽花)", "leaf/yucca": "绿(叶子/丝兰)", "starfish": "橙(海星)"}
+
+
+def ask_heal_confirm(cand):
+    """扫描到回血花瓣候选后: 弹窗勾选确认(默认全勾, 可取消误检的), 返回选中槽位列表(关窗口返回 None)
+    cand: [(行号, 槽位1-10, 颜色名), ...]"""
+    if not cand:
+        return None
+    options = [(f"{s}", f"槽位{s}（{'副' if r else '主'}行, {HEAL_COLOR_NAMES.get(c, c)}）") for r, s, c in cand]
+    picked = _ask_multi("扫描到这些槽位可能有回血花瓣（颜色只是候选，U级花瓣也粉/普通级也绿）：\n取消勾选不是回血花瓣的槽位",
+                        options, "回血花瓣确认", preselect=[str(s) for _, s, _ in cand])
+    return [int(k) for k in picked]
 
 
 def ask_update(cfg):
