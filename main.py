@@ -453,12 +453,14 @@ def nearest_proj(projs):
     return near if math.hypot(near[0] - cx, near[1] - cy) <= PROJ_DODGE_R else None
 
 
-def flee_low_hp(trail):
-    """血量<10%: 按R主副槽对调(回血花瓣上主槽) + 按住右键防御 + 往怪少处跑; 恢复后R切回+松开右键"""
+def flee_low_hp(trail, heal_slot=0):
+    """血量<10%: 数字键把副槽heal_slot位切到主槽(只切回血花瓣) + 右键防御 + 往怪少处跑; 恢复后再按一次切回"""
     from combat import detect_all, escape_direction, get_hp_ratio, HP_RECOVER
     w = get_window()
-    print("[低血] 按R主副槽对调(回血花瓣切主槽), 防御跑路")
-    w.key_down(ord("R")); time.sleep(0.05); w.key_up(ord("R"))
+    vk = ord(str(heal_slot)) if heal_slot and 1 <= heal_slot <= 9 else None
+    if vk:
+        print(f"[低血] 数字键{heal_slot}切回血花瓣到主槽, 防御跑路")
+        w.key_down(vk); time.sleep(0.05); w.key_up(vk)
     w.right_button_down()
     try:
         binary = load_binary_map()
@@ -478,12 +480,13 @@ def flee_low_hp(trail):
                 lazy_theta_execute_path(p)
             hp = get_hp_ratio()
             if hp is not None and hp > HP_RECOVER:
-                print(f"[低血] 血量恢复到 {hp*100:.0f}%，R键切回原槽位，回去继续")
+                print(f"[低血] 血量恢复到 {hp*100:.0f}%，数字键{heal_slot}切回原花瓣，回去继续")
                 return True
             time.sleep(0.3)
     finally:
-        # 无论恢复/死亡/回菜单, 都R键切回原槽位并松开右键
-        w.key_down(ord("R")); time.sleep(0.05); w.key_up(ord("R"))
+        # 无论恢复/死亡/回菜单, 都再按一次数字键切回玩家原花瓣并松开右键
+        if vk:
+            w.key_down(vk); time.sleep(0.05); w.key_up(vk)
         w.right_button_up()
 
 
@@ -643,7 +646,7 @@ if __name__ == "__main__":
             print(f"[!] 画布偏移检测失败: {e}")
         if COMBAT_ENABLED:
             print("[+] 战斗策略: =秒杀等级自动追(贴0.5px), 更高避开(往怪少处跑), 更低不管")
-        print("[!] 提醒: 请把回血花瓣(玫瑰/叶子)放在副槽——血量<10%%时插件自动按R切到主槽+防御跑路, 恢复后自动切回")
+        print("[!] 提醒: 请把回血花瓣(玫瑰/叶子)放在副槽对应位置——血量<10%%时插件自动切到主槽+防御跑路, 恢复后自动切回")
 
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
@@ -714,7 +717,7 @@ if __name__ == "__main__":
             hp = get_hp_ratio(get_frame())
             if hp is not None and hp < HP_FLEE:
                 print(f"[低血] 血量 {hp*100:.0f}%，跑路...")
-                r = flee_low_hp(trail)
+                r = flee_low_hp(trail, heal_slot=cfg.get("heal_slot", 0))
                 if r in ("in_game_dead", "in_menu"):
                     continue
                 continue
