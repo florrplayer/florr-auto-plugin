@@ -5,17 +5,23 @@ import os
 import tkinter as tk
 
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-DEFAULTS = {"mode": "defense", "kill_rank": "M", "version": 1}
+DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "version": 2}
 
 MODE_NAMES = {"attack": "全程攻击", "defense": "全程防御", "none": "不弄(手动)"}
-RANK_NAMES = {"M": "只打M(青)", "M+L": "M+传奇(红)", "none": "纯巡逻不打"}
+RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
+RANK_NAMES = {"common": "普通(绿)", "unusual": "罕见(黄)", "rare": "稀有(蓝)", "epic": "史诗(紫)", "legendary": "传奇(红)", "mythic": "神话M(青)", "ultra": "究极U(粉)"}
+# 旧配置兼容(1.x: M=只打神话, M+L=神话+传奇, none=纯巡逻)
+RANK_LEGACY = {"M": "mythic", "M+L": "legendary", "none": "none"}
 
 
 def load_config():
     try:
         with open(CONFIG_PATH, "r", encoding="utf-8") as f:
             cfg = json.load(f)
-        return {**DEFAULTS, **cfg}
+        cfg2 = {**DEFAULTS, **cfg}
+        if cfg2["kill_rank"] in RANK_LEGACY:
+            cfg2["kill_rank"] = RANK_LEGACY[cfg2["kill_rank"]]
+        return cfg2
     except Exception:
         return None
 
@@ -66,10 +72,8 @@ def ask_config():
               ("none", "不弄（纯手动操作）")], "florr 挂机设置 ①/②")
     if m is None:
         m = "defense"
-    r = _ask("你可以秒（<3秒）哪个等级的怪？",
-             [("M", "只打 M 怪（青色）"),
-              ("M+L", "M + 传奇（红色）"),
-              ("none", "纯巡逻不打怪")], "florr 挂机设置 ②/②")
+    r = _ask("你可以秒（<3秒）哪个等级的怪？\\n（=这级自动追贴脸打，更高避开，更低不管）",
+             [(k, RANK_NAMES[k]) for k in RANK_ORDER], "florr 挂机设置 ②/②")
     if r is None:
-        r = "M"
+        r = "mythic"
     return {"mode": m, "kill_rank": r, "version": 1}

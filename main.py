@@ -294,13 +294,12 @@ def screen_to_map_safe(pt, pos):
         return None
 
 
-def chase_target(patrol_goal, trail, kill_legendary=False):
-    """追击最近的 M 怪（右键由防御线程持续按住=自动攻击）。
-    每帧刷新最近目标；U 贴脸返回 'ultra' 交主循环；怪没了/超时返回 'done'
-    用 WASD 键盘移动"""
-    from combat import detect_mobs, choose_target, ultra_blocked, map_to_screen
+def chase_target(patrol_goal, trail, kill_rank):
+    """追击 =秒杀等级的怪(贴 KILL_STOP=0.5px); >秒杀贴近返回 'danger' 交主循环; 没了/超时 'done'"""
+    from combat import detect_all, choose_target, ultra_blocked, screen_to_map_safe, RANK_ORDER, KILL_STOP
     w = get_window()
     start_time = time.time()
+    idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
     current_keys = set()
     def set_k(keys):
         nonlocal current_keys
@@ -321,57 +320,57 @@ def chase_target(patrol_goal, trail, kill_legendary=False):
                 continue
             trail.append(pos)
             frame = get_frame()
-            mythics, ultras = detect_mobs(frame)
-            if kill_legendary:
-                from combat import detect_legendary
-                mythics = mythics + detect_legendary(frame)
-            ultras_map = [m for m in (screen_to_map_safe(u, pos) for u in ultras) if m]
-            if ultra_blocked(ultras_map, pos):
-                return "ultra"
-            mythics_map = [m for m in (screen_to_map_safe(m, pos) for m in mythics) if m]
-            t = choose_target(mythics_map, patrol_goal, pos)
+            ranks_map = detect_all(frame)
+            danger = []
+            for r in RANK_ORDER[idx + 1:]:
+                danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
+            if ultra_blocked(danger, pos):
+                return "danger"
+            prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
+            t = choose_target(prey, patrol_goal, pos)
             if t is None:
-                print("[战斗] M 怪消失，结束追击")
+                print("[战斗] 目标消失，结束追击")
                 return "done"
-            # 用 WASD 键盘朝 M 怪移动, 距离<=3px时停住(右键自动攻击)
             dx, dy = t[0] - pos[0], t[1] - pos[1]
             dist = math.hypot(dx, dy)
             keys = set()
-            if dist > 3.0:
+            if dist > KILL_STOP:
                 if abs(dx) > 1.5:
                     keys.add("d" if dx > 0 else "a")
                 if abs(dy) > 1.5:
                     keys.add("s" if dy > 0 else "w")
             set_k(keys)
             if int(time.time() * 2) % 6 == 0:
-                print(f"[战斗] 追击 M 怪 {t}, 玩家 {pos}, dist={dist:.1f} {'(停住攻击)' if dist<=3.0 else ''}")
+                print(f"[战斗] 追击 {t}, 玩家 {pos}, dist={dist:.1f} {'(贴脸攻击)' if dist<=KILL_STOP else ''}")
             time.sleep(0.05)
     finally:
         set_k(set())
 
 
-def handle_ultra(pos, near_u, trail):
-    """U 怪贴脸：先尝试绕开（U 周围 5px 设墙重规划）；
-    绕不开则贴到距 U 0.5px 处，再沿原路撤退直到 U 消失"""
-    from combat import (build_avoid_map, ULTRA_KISS, ULTRA_AVOID,
-                        detect_mobs, screen_to_map)
+def handle_danger(pos, near, ranks_map, trail, kill_rank):
+    """>秒杀等级的危险怪: 先尝试绕开(5px设墙); 绕不开则往怪最少的方向跑, 直到脱离"""
+    from combat import (build_avoid_map, detect_all, screen_to_map_safe,
+                        RANK_ORDER, escape_direction)
     binary = load_binary_map()
-    dx, dy = pos[0] - near_u[0], pos[1] - near_u[1]
+    dx, dy = pos[0] - near[0], pos[1] - near[1]
     nd = math.hypot(dx, dy) or 1.0
     # 1) 尝试绕开
-    avoid = build_avoid_map(binary, [near_u], pos)
+    avoid = build_avoid_map(binary, [near], pos)
     escape = calibrate_player(avoid, (pos[0] + dx / nd * 40, pos[1] + dy / nd * 40))
     p = lazy_theta_star(avoid, pos, escape)
     if p:
-        print("[U] 尝试绕开...")
+        print("[危险] 尝试绕开...")
         lazy_theta_execute_path(p)
         return True
-    # 2) 绕不开：贴脸 0.5px
-    print("[U] 无法绕开，贴脸 0.5px 后沿原路撤退")
-    kiss = calibrate_player(binary, (near_u[0] + dx / nd * ULTRA_KISS,
-                                     near_u[1] + dy / nd * ULTRA_KISS))
-    go_direction(pos, kiss)
-    # 3) 沿原路撤退直到 U 检测不到
+    # 2) 绕不开：往怪最少的方向跑
+    print("[危险] 绕不开，往怪最少的方向跑")
+    ex, ey = escape_direction(ranks_map, pos)
+    goal = calibrate_player(binary, (pos[0] + ex * 50, pos[1] + ey * 50))
+    p2 = lazy_theta_star(binary, pos, goal)
+    if p2:
+        lazy_theta_execute_path(p2)
+    # 3) 直到危险怪脱离
+    idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
     while True:
         pos = get_player_position()
         if pos is None:
@@ -380,18 +379,14 @@ def handle_ultra(pos, near_u, trail):
         stage = check_stage()
         if stage != "in_game":
             return stage
-        _, ultras = detect_mobs()
-        if not ultras:
-            print("[U] U 已消失，恢复正常巡逻")
+        rmap = detect_all()
+        danger_now = []
+        for r in RANK_ORDER[idx + 1:]:
+            danger_now += [m for m in (screen_to_map_safe(p, pos) for p in (rmap.get(r) or [])) if m]
+        if not ultra_blocked(danger_now, pos):
+            print("[危险] 已脱离，恢复正常巡逻")
             return True
-        if trail:
-            goal = trail.pop()
-        else:
-            nd = math.hypot(pos[0] - near_u[0], pos[1] - near_u[1]) or 1.0
-            goal = calibrate_player(binary,
-                (pos[0] + (pos[0] - near_u[0]) / nd * 50,
-                 pos[1] + (pos[1] - near_u[1]) / nd * 50))
-        go_direction(pos, goal)
+        time.sleep(0.3)
 
 
 if __name__ == "__main__":
@@ -499,7 +494,7 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"[!] 画布偏移检测失败: {e}")
         if COMBAT_ENABLED:
-            print("[+] 战斗模式: 只打 M 怪(青)，避开 U 怪(粉) 5px，贴脸 0.5px 沿原路撤退")
+            print("[+] 战斗策略: =秒杀等级自动追(贴0.5px), 更高避开(往怪少处跑), 更低不管")
 
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
@@ -560,32 +555,32 @@ if __name__ == "__main__":
             goal_pt = patrol_points[patrol_index]
 
             # ===== 战斗检测（仅巡逻间隙/分段间执行）=====
+            # 策略: =秒杀等级自动追(贴0.5px), >秒杀等级避开(往怪少处跑), <秒杀等级不管
             if COMBAT_ENABLED and kill_rank != "none":
                 frame = get_frame()
-                mythics, ultras = detect_mobs(frame)
                 pos = get_player_position(image=frame)
                 if pos is not None:
-                    ultras_map = [m for m in (screen_to_map_safe(u, pos) for u in ultras) if m]
-                    near_u = None
-                    from combat import ultra_blocked
-                    near_u = ultra_blocked(ultras_map, pos)
-                    if near_u:
-                        r = handle_ultra(pos, near_u, trail)
+                    from combat import (detect_all, ultra_blocked, choose_target,
+                                        screen_to_map_safe, RANK_ORDER)
+                    ranks_map = detect_all(frame)
+                    idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
+                    danger = []
+                    for r in RANK_ORDER[idx + 1:]:
+                        danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
+                    near = ultra_blocked(danger, pos)
+                    if near:
+                        r = handle_danger(pos, near, ranks_map, trail, kill_rank)
                         if r in ("in_game_dead", "in_menu"):
                             continue
                         continue
-                    mythics_map = [m for m in (screen_to_map_safe(m, pos) for m in mythics) if m]
-                    if kill_rank == "M+L":
-                        from combat import detect_legendary
-                        mythics_map += [m for m in (screen_to_map_safe(l, pos) for l in detect_legendary(frame)) if m]
-                    from combat import choose_target
-                    target = choose_target(mythics_map, goal_pt, pos)
+                    prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
+                    target = choose_target(prey, goal_pt, pos)
                     if target is not None:
                         if HUMANIZE:
                             time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
-                        print(f"[战斗] 发现 M 怪 {target}，追击...")
-                        r = chase_target(goal_pt, trail, kill_legendary=(kill_rank == "M+L"))
-                        if r == "ultra":
+                        print(f"[战斗] 发现目标 {target}，追击...")
+                        r = chase_target(goal_pt, trail, kill_rank)
+                        if r == "danger":
                             continue
                         print("[战斗] 结束，继续巡逻")
                         continue

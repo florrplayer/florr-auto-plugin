@@ -21,6 +21,18 @@ from utils import get_frame, get_player_position, ARRIVE, set_screen_center
 MYTHIC_HSV = ((85, 100, 100), (100, 255, 255))   # M 怪 青色
 ULTRA_HSV = ((162, 100, 100), (178, 255, 255))   # U 怪 粉色
 LEGENDARY_HSV = ((0, 100, 100), (8, 255, 255))     # 传奇 红 #DE1F1F (OpenCV H 0-4, 与青/粉不冲突)
+KILL_STOP = 0.5                          # 追击贴脸距离(地图像素, 用户要求 0.5)
+# 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
+RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
+RANK_HSV = {
+    "common":    ((50, 120, 120), (70, 255, 255)),
+    "unusual":   ((18, 120, 120), (32, 255, 255)),
+    "rare":      ((110, 120, 120), (130, 255, 255)),
+    "epic":      ((125, 120, 120), (150, 255, 255)),
+    "legendary": ((0, 120, 120), (8, 255, 255)),
+    "mythic":    MYTHIC_HSV,
+    "ultra":     ULTRA_HSV,
+}
 _screen_center = [960, 540]                       # 实际窗口中心(启动时标定, 兼容4K)
 _downscale = 2.0                                   # 降采样比例(实际宽/检测宽, 标定后自动设)
 SCALE_PX_PER_UNIT = 5.0                          # 世界单位/像素(1px=5世界单位, 经验值需标定)
@@ -92,6 +104,34 @@ def detect_legendary(frame=None):
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     return _detect_color(hsv, LEGENDARY_HSV)
+
+
+def detect_all(frame=None):
+    """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}"""
+    if frame is None:
+        frame = get_frame()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    out = {}
+    for rank, rng in RANK_HSV.items():
+        out[rank] = _detect_color(hsv, rng)
+    return out
+
+
+def escape_direction(ranks_map, player_map=None, sectors=8):
+    """把玩家周围分 8 个扇区, 返回怪最少的扇区方向(单位向量)"""
+    if player_map is None:
+        player_map = get_player_position()
+    counts = [0] * sectors
+    for pts in ranks_map.values():
+        for p in (pts or []):
+            m = screen_to_map(p, player_map)
+            if not m:
+                continue
+            ang = math.degrees(math.atan2(m[1] - player_map[1], m[0] - player_map[0])) % 360
+            counts[int(ang / (360 / sectors)) % sectors] += 1
+    best = min(range(sectors), key=lambda k: counts[k])
+    ang = math.radians((best + 0.5) * (360 / sectors))
+    return math.cos(ang), math.sin(ang)
 
 
 def screen_to_map(screen_pt, player_map=None):
