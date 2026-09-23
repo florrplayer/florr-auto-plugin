@@ -24,12 +24,13 @@ LEGENDARY_HSV = ((0, 100, 100), (8, 255, 255))     # 传奇 红 #DE1F1F (OpenCV 
 KILL_STOP = 0.5                          # 追击贴脸距离(地图像素, 用户要求 0.5)
 # 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
+# 精确色相(OpenCV H=真角度/2) + 高S/V防背景误检; 绿/黄/蓝按实测收紧(M/U已校准不动)
 RANK_HSV = {
-    "common":    ((50, 120, 120), (70, 255, 255)),
-    "unusual":   ((18, 120, 120), (32, 255, 255)),
-    "rare":      ((110, 120, 120), (130, 255, 255)),
-    "epic":      ((125, 120, 120), (150, 255, 255)),
-    "legendary": ((0, 120, 120), (8, 255, 255)),
+    "common":    ((52, 120, 160), (60, 255, 255)),
+    "unusual":   ((22, 140, 180), (28, 255, 255)),
+    "rare":      ((116, 140, 180), (122, 255, 255)),
+    "epic":      ((132, 140, 150), (140, 255, 255)),
+    "legendary": ((0, 150, 150), (6, 255, 255)),
     "mythic":    MYTHIC_HSV,
     "ultra":     ULTRA_HSV,
 }
@@ -83,6 +84,9 @@ def _detect_color(hsv, hsv_range, exclude_center=True):
             continue
         if w > MAX_MOB_PX * 1.5 or h > MAX_MOB_PX * 1.5:
             continue
+        if w * 4 < h or h * 4 < w:
+            continue
+        # 怪近似圆形, 长条色块(草丛/水纹/墙影)滤掉
         cx_s, cy_s = cents[i]
         pts.append((int(cx_s * _downscale), int(cy_s * _downscale)))   # 还原全分辨率坐标
     return pts
