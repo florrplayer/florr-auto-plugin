@@ -294,10 +294,12 @@ def screen_to_map_safe(pt, pos):
         return None
 
 
-def chase_target(patrol_goal, trail, kill_rank):
-    """追击 =秒杀等级的怪(贴 KILL_STOP=0.5px); >秒杀贴近返回 'danger' 交主循环; 没了/超时 'done'"""
+def chase_target(patrol_goal, trail, kill_rank, stop_dist=None):
+    """追击 =秒杀等级的怪; 攻击模式停 2px, 防御模式贴 0.5px; >秒杀贴近返回 'danger'; 低血返回 'lowhp'"""
     from combat import (detect_all, choose_target, ultra_blocked, screen_to_map_safe,
-                        RANK_ORDER, KILL_STOP, CHASE_WARN, KISS_SLOW)
+                        RANK_ORDER, KILL_STOP, CHASE_WARN, KISS_SLOW,
+                        get_hp_ratio, HP_FLEE)
+    stop = KILL_STOP if stop_dist is None else stop_dist
     w = get_window()
     start_time = time.time()
     idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
@@ -327,6 +329,10 @@ def chase_target(patrol_goal, trail, kill_rank):
                 danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
             if ultra_blocked(danger, pos, margin=CHASE_WARN):
                 return "danger"
+            hp = get_hp_ratio(frame)
+            if hp is not None and hp < HP_FLEE:
+                print("[低血] 追击中血量过低，中断逃跑")
+                return "lowhp"
             from combat import detect_projectiles
             near_p = nearest_proj(detect_projectiles(frame))
             if near_p:
@@ -340,7 +346,7 @@ def chase_target(patrol_goal, trail, kill_rank):
             dx, dy = t[0] - pos[0], t[1] - pos[1]
             dist = math.hypot(dx, dy)
             keys = set()
-            if dist > KILL_STOP:
+            if dist > stop:
                 if dist <= KISS_SLOW:
                     # 贴脸减速: 间歇点按, 像人小心翼翼试探靠近
                     if int(time.time() * 4) % 2 == 0:
@@ -355,7 +361,7 @@ def chase_target(patrol_goal, trail, kill_rank):
                         keys.add("s" if dy > 0 else "w")
             set_k(keys)
             if int(time.time() * 2) % 6 == 0:
-                print(f"[战斗] 追击 {t}, 玩家 {pos}, dist={dist:.1f} {'(贴脸攻击)' if dist<=KILL_STOP else ''}")
+                print(f"[战斗] 追击 {t}, 玩家 {pos}, dist={dist:.1f} {'(停住攻击)' if dist<=stop else ''}")
             time.sleep(0.05)
     finally:
         set_k(set())
@@ -415,6 +421,31 @@ def nearest_proj(projs):
     cx, cy = get_screen_center()
     near = min(projs, key=lambda q: math.hypot(q[0] - cx, q[1] - cy))
     return near if math.hypot(near[0] - cx, near[1] - cy) <= PROJ_DODGE_R else None
+
+
+def flee_low_hp(trail):
+    """血量<10%: 往怪最少的方向跑, 直到血量恢复到 HP_RECOVER"""
+    from combat import detect_all, escape_direction, get_hp_ratio, HP_RECOVER
+    binary = load_binary_map()
+    while True:
+        pos = get_player_position()
+        if pos is None:
+            time.sleep(0.3)
+            continue
+        stage = check_stage()
+        if stage != "in_game":
+            return stage
+        rmap = detect_all()
+        ex, ey = escape_direction(rmap, pos, binary=binary)
+        goal = calibrate_player(binary, (pos[0] + ex * 60, pos[1] + ey * 60))
+        p = lazy_theta_star(binary, pos, goal)
+        if p:
+            lazy_theta_execute_path(p)
+        hp = get_hp_ratio()
+        if hp is not None and hp > HP_RECOVER:
+            print(f"[低血] 血量恢复到 {hp*100:.0f}%，回去继续")
+            return True
+        time.sleep(0.3)
 
 
 def handle_danger(pos, near, ranks_map, trail, kill_rank):
@@ -632,6 +663,16 @@ if __name__ == "__main__":
 
             goal_pt = patrol_points[patrol_index]
 
+            # ===== 低血量保命(任何模式, 最高优先级) =====
+            from combat import get_hp_ratio, HP_FLEE
+            hp = get_hp_ratio(get_frame())
+            if hp is not None and hp < HP_FLEE:
+                print(f"[低血] 血量 {hp*100:.0f}%，跑路...")
+                r = flee_low_hp(trail)
+                if r in ("in_game_dead", "in_menu"):
+                    continue
+                continue
+
             # ===== 战斗检测（仅巡逻间隙/分段间执行）=====
             # 策略: =秒杀等级自动追(贴0.5px), >秒杀等级避开(往怪少处跑), <秒杀等级不管
             if COMBAT_ENABLED and kill_rank != "none":
@@ -664,8 +705,9 @@ if __name__ == "__main__":
                         if HUMANIZE:
                             time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         print(f"[战斗] 发现目标 {target}，追击...")
-                        r = chase_target(goal_pt, trail, kill_rank)
-                        if r == "danger":
+                        stop_dist = 2.0 if mode == "attack" else 0.5
+                        r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist)
+                        if r in ("danger", "lowhp"):
                             continue
                         print("[战斗] 结束，继续巡逻")
                         continue

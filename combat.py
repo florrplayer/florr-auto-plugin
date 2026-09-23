@@ -28,6 +28,11 @@ KISS_SLOW = 3.0                          # 贴脸减速区: 3px内放慢试探(�
 PROJ_MIN_PX = 4                            # 飞行物最小尺寸(导弹/螯针比怪小)
 PROJ_MAX_PX = 16                           # 飞行物最大尺寸(降采样960宽基准)
 PROJ_DODGE_R = 120                         # 飞行物进入玩家周围120px内才闪避
+HP_BAR_Y = 30                            # 玩家脚下血条位置: 中心下方30px(屏幕px, 默认HUD)
+HP_BAR_H = 4                             # 血条半高(px)
+HP_BAR_W = 50                            # 血条半宽(px)
+HP_FLEE = 0.10                           # 血量低于10% 跑路
+HP_RECOVER = 0.35                        # 血量恢复到35% 才回去继续
 # 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
 # 精确色相(OpenCV H=真角度/2) + 高S/V防背景误检; 绿/黄/蓝按实测收紧(M/U已校准不动)
@@ -192,6 +197,31 @@ def detect_projectiles(frame=None):
             moving.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
     _PROJ_PREV["mask"] = small.copy()
     return moving
+
+
+_HP_MAX = {"v": 0}
+
+
+def get_hp_ratio(frame=None):
+    """检测玩家脚下血条(红色填充), 返回 0-1 血量比例(自适应标定满血); 检测不到返回 None"""
+    global _HP_MAX
+    if frame is None:
+        frame = get_frame()
+    h, w = frame.shape[:2]
+    cx, cy = get_screen_center()
+    x0, x1 = max(0, cx - HP_BAR_W), min(w - 1, cx + HP_BAR_W)
+    y0, y1 = max(0, cy + HP_BAR_Y - HP_BAR_H), min(h - 1, cy + HP_BAR_Y + HP_BAR_H)
+    if y1 <= y0 or x1 <= x0:
+        return None
+    reg = frame[y0:y1 + 1, x0:x1 + 1].astype(int)
+    r, g, b = reg[:, :, 2], reg[:, :, 1], reg[:, :, 0]
+    red = (r > 140) & (r - g > 60) & (r - b > 60)
+    filled = int(red.sum())
+    if filled <= 0:
+        return None  # 没检测到血条(可能关闭了"显示个人资源")
+    if filled > _HP_MAX["v"]:
+        _HP_MAX["v"] = filled
+    return min(filled / max(_HP_MAX["v"], 1), 1.0)
 
 
 def screen_to_map(screen_pt, player_map=None):
