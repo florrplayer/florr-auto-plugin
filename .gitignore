@@ -179,3 +179,6 @@ _debug_*
 _shot*
 _user_shot*.png
 compare.jpg.bak
+
+# 玩家个人配置(不入库)
+config.json

@@ -8,6 +8,7 @@ import win32con
 from collections import deque
 from utils import *
 from window_ctrl import init_window, get_window
+from config import load_config, save_config, ask_config, ask_update, MODE_NAMES, RANK_NAMES
 
 MAX_STUCK = 5   # 连续卡死/无路次数上限，超过则跳过当前巡逻点
 PATH_STEP = 40  # 巡逻分段长度(地图像素)：每走完一段回主循环检查战斗
@@ -293,7 +294,7 @@ def screen_to_map_safe(pt, pos):
         return None
 
 
-def chase_target(patrol_goal, trail):
+def chase_target(patrol_goal, trail, kill_legendary=False):
     """追击最近的 M 怪（右键由防御线程持续按住=自动攻击）。
     每帧刷新最近目标；U 贴脸返回 'ultra' 交主循环；怪没了/超时返回 'done'
     用 WASD 键盘移动"""
@@ -321,6 +322,9 @@ def chase_target(patrol_goal, trail):
             trail.append(pos)
             frame = get_frame()
             mythics, ultras = detect_mobs(frame)
+            if kill_legendary:
+                from combat import detect_legendary
+                mythics = mythics + detect_legendary(frame)
             ultras_map = [m for m in (screen_to_map_safe(u, pos) for u in ultras) if m]
             if ultra_blocked(ultras_map, pos):
                 return "ultra"
@@ -418,6 +422,15 @@ if __name__ == "__main__":
     print("[+] 脚本运行中... 按 Ctrl+C 停止（停止后窗口自动移回）")
 
     # ===== 后台防御线程：一直按住右键 =====
+    # ===== 交互配置(弹窗让玩家选, 存档后只问要不要更新) =====
+    cfg = load_config()
+    if cfg is None or ask_update(cfg):
+        cfg = ask_config()
+        save_config(cfg)
+    mode, kill_rank = cfg["mode"], cfg["kill_rank"]
+    print("[配置] 模式=" + MODE_NAMES.get(mode, mode) + ", 打怪=" + RANK_NAMES.get(kill_rank, kill_rank))
+
+    # ===== 攻防线程(按玩家选择) =====
     defense_running = True
     def defense_loop():
         while defense_running:
@@ -427,9 +440,25 @@ if __name__ == "__main__":
                 time.sleep(0.1 + random.random() * 0.2)
                 get_window().right_button_down()
             time.sleep(0.5)
-    defense_thread = threading.Thread(target=defense_loop, daemon=True)
-    defense_thread.start()
-    print("[+] 右键防御已开启（持续按住）")
+    def attack_loop():
+        while defense_running:
+            get_window().key_down(win32con.VK_SPACE)
+            if HUMANIZE and random.random() < HUMAN_RELEASE_CHANCE:
+                get_window().key_up(win32con.VK_SPACE)
+                time.sleep(0.1 + random.random() * 0.2)
+                get_window().key_down(win32con.VK_SPACE)
+            time.sleep(0.5)
+    defense_thread = None
+    if mode == "attack":
+        defense_thread = threading.Thread(target=attack_loop, daemon=True)
+        defense_thread.start()
+        print("[+] 全程攻击模式已开启（持续按空格发射）")
+    elif mode == "defense":
+        defense_thread = threading.Thread(target=defense_loop, daemon=True)
+        defense_thread.start()
+        print("[+] 右键防御已开启（持续按住）")
+    else:
+        print("[+] 未开启自动攻防（手动操作）")
 
     # ===== 人性化: 鼠标微动线程(模拟真人动鼠标调花瓣方向) =====
     if HUMANIZE:
@@ -531,7 +560,7 @@ if __name__ == "__main__":
             goal_pt = patrol_points[patrol_index]
 
             # ===== 战斗检测（仅巡逻间隙/分段间执行）=====
-            if COMBAT_ENABLED:
+            if COMBAT_ENABLED and kill_rank != "none":
                 frame = get_frame()
                 mythics, ultras = detect_mobs(frame)
                 pos = get_player_position(image=frame)
@@ -546,13 +575,16 @@ if __name__ == "__main__":
                             continue
                         continue
                     mythics_map = [m for m in (screen_to_map_safe(m, pos) for m in mythics) if m]
+                    if kill_rank == "M+L":
+                        from combat import detect_legendary
+                        mythics_map += [m for m in (screen_to_map_safe(l, pos) for l in detect_legendary(frame)) if m]
                     from combat import choose_target
                     target = choose_target(mythics_map, goal_pt, pos)
                     if target is not None:
                         if HUMANIZE:
                             time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         print(f"[战斗] 发现 M 怪 {target}，追击...")
-                        r = chase_target(goal_pt, trail)
+                        r = chase_target(goal_pt, trail, kill_legendary=(kill_rank == "M+L"))
                         if r == "ultra":
                             continue
                         print("[战斗] 结束，继续巡逻")
@@ -580,7 +612,8 @@ if __name__ == "__main__":
         defense_running = False
         if HUMANIZE and 'mouse_running' in dir():
             mouse_running = False
-        defense_thread.join(timeout=1.0)
+        if 'defense_thread' in dir() and defense_thread:
+            defense_thread.join(timeout=1.0)
         reset_keyboard()
         get_window().right_button_up()
         print("[+] 右键防御已关闭")

@@ -20,6 +20,7 @@ from utils import get_frame, get_player_position, ARRIVE, set_screen_center
 # (Legendary 红 H=0, 与粉/青均不冲突)
 MYTHIC_HSV = ((85, 100, 100), (100, 255, 255))   # M 怪 青色
 ULTRA_HSV = ((162, 100, 100), (178, 255, 255))   # U 怪 粉色
+LEGENDARY_HSV = ((0, 100, 100), (8, 255, 255))     # 传奇 红 #DE1F1F (OpenCV H 0-4, 与青/粉不冲突)
 _screen_center = [960, 540]                       # 实际窗口中心(启动时标定, 兼容4K)
 _downscale = 2.0                                   # 降采样比例(实际宽/检测宽, 标定后自动设)
 SCALE_PX_PER_UNIT = 5.0                          # 世界单位/像素(1px=5世界单位, 经验值需标定)
@@ -83,6 +84,14 @@ def detect_mobs(frame=None):
     mythics = _detect_color(hsv, MYTHIC_HSV)
     ultras = _detect_color(hsv, ULTRA_HSV)
     return mythics, ultras
+
+
+def detect_legendary(frame=None):
+    """检测传奇怪(红色 #DE1F1F), 返回屏幕坐标列表"""
+    if frame is None:
+        frame = get_frame()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    return _detect_color(hsv, LEGENDARY_HSV)
 
 
 def screen_to_map(screen_pt, player_map=None):
