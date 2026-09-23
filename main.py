@@ -454,28 +454,37 @@ def nearest_proj(projs):
 
 
 def flee_low_hp(trail):
-    """血量<10%: 往怪最少的方向跑, 直到血量恢复到 HP_RECOVER"""
+    """血量<10%: 按R主副槽对调(回血花瓣上主槽) + 按住右键防御 + 往怪少处跑; 恢复后R切回+松开右键"""
     from combat import detect_all, escape_direction, get_hp_ratio, HP_RECOVER
-    binary = load_binary_map()
-    while True:
-        pos = get_player_position()
-        if pos is None:
+    w = get_window()
+    print("[低血] 按R主副槽对调(回血花瓣切主槽), 防御跑路")
+    w.key_down(ord("R")); time.sleep(0.05); w.key_up(ord("R"))
+    w.right_button_down()
+    try:
+        binary = load_binary_map()
+        while True:
+            pos = get_player_position()
+            if pos is None:
+                time.sleep(0.3)
+                continue
+            stage = check_stage()
+            if stage != "in_game":
+                return stage
+            rmap = detect_all()
+            ex, ey = escape_direction(rmap, pos, binary=binary)
+            goal = calibrate_player(binary, (pos[0] + ex * 60, pos[1] + ey * 60))
+            p = lazy_theta_star(binary, pos, goal)
+            if p:
+                lazy_theta_execute_path(p)
+            hp = get_hp_ratio()
+            if hp is not None and hp > HP_RECOVER:
+                print(f"[低血] 血量恢复到 {hp*100:.0f}%，R键切回原槽位，回去继续")
+                return True
             time.sleep(0.3)
-            continue
-        stage = check_stage()
-        if stage != "in_game":
-            return stage
-        rmap = detect_all()
-        ex, ey = escape_direction(rmap, pos, binary=binary)
-        goal = calibrate_player(binary, (pos[0] + ex * 60, pos[1] + ey * 60))
-        p = lazy_theta_star(binary, pos, goal)
-        if p:
-            lazy_theta_execute_path(p)
-        hp = get_hp_ratio()
-        if hp is not None and hp > HP_RECOVER:
-            print(f"[低血] 血量恢复到 {hp*100:.0f}%，回去继续")
-            return True
-        time.sleep(0.3)
+    finally:
+        # 无论恢复/死亡/回菜单, 都R键切回原槽位并松开右键
+        w.key_down(ord("R")); time.sleep(0.05); w.key_up(ord("R"))
+        w.right_button_up()
 
 
 def handle_danger(pos, near, ranks_map, trail, kill_rank):
@@ -634,6 +643,7 @@ if __name__ == "__main__":
             print(f"[!] 画布偏移检测失败: {e}")
         if COMBAT_ENABLED:
             print("[+] 战斗策略: =秒杀等级自动追(贴0.5px), 更高避开(往怪少处跑), 更低不管")
+        print("[!] 提醒: 请把回血花瓣(玫瑰/叶子)放在副槽——血量<10%%时插件自动按R切到主槽+防御跑路, 恢复后自动切回")
 
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
