@@ -16,6 +16,17 @@ TRAIL_MAX = 800        # 撤退轨迹缓存长度
 MOVE_PROGRESS_TIMEOUT = 1.5  # 持续无有效进展多久才判定卡住
 PATH_CACHE = {"goal": None, "path": None}
 
+# ===== 人性化模拟（让脚本玩得像真人）=====
+HUMANIZE = True            # 总开关
+HUMAN_BLINK_MIN = 6        # 移动中"眨眼"停顿间隔范围(秒)
+HUMAN_BLINK_MAX = 15
+HUMAN_PAUSE_CHANCE = 0.2   # 每段巡逻后随机停顿概率
+HUMAN_REACT_MIN = 0.2      # 发现M怪后的反应延迟范围(秒, 真人不会秒冲)
+HUMAN_REACT_MAX = 0.5
+HUMAN_MOUSE_MIN = 4        # 鼠标微动间隔范围(秒)
+HUMAN_MOUSE_MAX = 12
+HUMAN_RELEASE_CHANCE = 0.02  # 防御线程偶尔松手概率(模拟真人手抖)
+
 
 def line_of_sight(map, n1, n2):
     x0, y0 = n1
@@ -109,6 +120,7 @@ def go_direction(start, end):
     last_dist, min_dist = 1e9, 1e9
     last_progress = time.monotonic()
     current_keys = set()
+    last_blink = None
     def set_keys(keys):
         nonlocal current_keys
         for k in current_keys - keys:
@@ -158,6 +170,12 @@ def go_direction(start, end):
                 set_keys(current_keys & desired)
             else:
                 set_keys(desired)
+            # 人性化: 随机眨眼停顿(模拟真人手抖)
+            if HUMANIZE:
+                if last_blink is None or time.monotonic() - last_blink > HUMAN_BLINK_MIN + random.random() * (HUMAN_BLINK_MAX - HUMAN_BLINK_MIN):
+                    last_blink = time.monotonic()
+                    set_keys(set())
+                    time.sleep(0.08 + random.random() * 0.17)
             time.sleep(0.05)
     finally:
         set_keys(set())
@@ -179,6 +197,9 @@ def lazy_theta_execute_path(path):
             reset_keyboard()
             return move
         reset_keyboard()
+        # 人性化: 每段后随机停顿(像真人看看四周)
+        if HUMANIZE and random.random() < HUMAN_PAUSE_CHANCE:
+            time.sleep(0.3 + random.random() * 0.7)
     return True
 
 
@@ -401,10 +422,35 @@ if __name__ == "__main__":
     def defense_loop():
         while defense_running:
             get_window().right_button_down()
+            if HUMANIZE and random.random() < HUMAN_RELEASE_CHANCE:
+                get_window().right_button_up()
+                time.sleep(0.1 + random.random() * 0.2)
+                get_window().right_button_down()
             time.sleep(0.5)
     defense_thread = threading.Thread(target=defense_loop, daemon=True)
     defense_thread.start()
     print("[+] 右键防御已开启（持续按住）")
+
+    # ===== 人性化: 鼠标微动线程(模拟真人动鼠标调花瓣方向) =====
+    if HUMANIZE:
+        mouse_running = True
+        def human_mouse_loop():
+            import win32api, win32gui
+            w = get_window()
+            while mouse_running:
+                try:
+                    l, t, r, b = win32gui.GetClientRect(w.hwnd)
+                    cw, ch = r - l, b - t
+                    sl, st = win32gui.ClientToScreen(w.hwnd, (0, 0))
+                    mx = sl + random.randint(int(cw * 0.2), int(cw * 0.8))
+                    my = st + random.randint(int(ch * 0.2), int(ch * 0.8))
+                    win32api.SetCursorPos((mx, my))
+                except Exception:
+                    pass
+                time.sleep(HUMAN_MOUSE_MIN + random.random() * (HUMAN_MOUSE_MAX - HUMAN_MOUSE_MIN))
+        mouse_thread = threading.Thread(target=human_mouse_loop, daemon=True)
+        mouse_thread.start()
+        print("[+] 人性化模拟已开启（鼠标微动/眨眼/停顿/反应延迟）")
 
     try:
         apply_map(map_name)
@@ -503,6 +549,8 @@ if __name__ == "__main__":
                     from combat import choose_target
                     target = choose_target(mythics_map, goal_pt, pos)
                     if target is not None:
+                        if HUMANIZE:
+                            time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         print(f"[战斗] 发现 M 怪 {target}，追击...")
                         r = chase_target(goal_pt, trail)
                         if r == "ultra":
@@ -530,6 +578,8 @@ if __name__ == "__main__":
         print("\n[!] 用户中断")
     finally:
         defense_running = False
+        if HUMANIZE and 'mouse_running' in dir():
+            mouse_running = False
         defense_thread.join(timeout=1.0)
         reset_keyboard()
         get_window().right_button_up()
