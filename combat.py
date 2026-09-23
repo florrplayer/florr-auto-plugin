@@ -304,3 +304,67 @@ def build_avoid_map(binary, ultras_map, player_map=None, margin=ULTRA_AVOID):
 def is_kiss_point(u_map, p, kiss=ULTRA_KISS):
     """p 是否在 U 的 kiss 距离上(贴脸点判定)"""
     return math.hypot(p[0] - u_map[0], p[1] - u_map[1]) <= kiss + 0.3
+
+
+# ===== 回血花瓣自动扫描(副槽识别) =====
+# 回血花瓣(维基查证): 玫瑰/大丽花=粉色, 叶子/丝兰=绿色, 海星=橙色
+HEAL_HSV = [
+    ("rose/dahlia", (150, 60, 120), (180, 255, 255)),   # 粉: 玫瑰/大丽花
+    ("leaf/yucca",  (35, 80, 100),  (85, 255, 255)),     # 绿: 叶子/丝兰
+    ("starfish",    (5, 80, 100),   (22, 255, 255)),     # 橙: 海星
+]
+SLOT_BAND_TOP = 0.80          # 槽位条带顶部(画布偏移之下, 窗口高比例)
+SLOT_BAND_BOT = 0.995         # 槽位条带底部
+SLOT_ROWS = 2                 # 主槽/副槽两行
+SLOT_COLS = 10                # 最多10个槽(数字键1-9, 0=10)
+
+
+def scan_heal_slots(img=None):
+    """自动扫描屏幕底部槽位区, 检测回血花瓣所在槽位号
+    返回 [[上行槽位列表], [下行槽位列表]] (每行从左到右 1-10)"""
+    if img is None:
+        img = get_frame()
+    from utils import _canvas_y_offset
+    h, w = img.shape[:2]
+    off = _canvas_y_offset
+    top = off + int((h - off) * SLOT_BAND_TOP)
+    bot = off + int((h - off) * SLOT_BAND_BOT)
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    mask = np.zeros((h, w), dtype=np.uint8)
+    for _name, lo, hi in HEAL_HSV:
+        mask |= cv2.inRange(hsv, np.array(lo), np.array(hi))
+    rows = []
+    row_h = (bot - top) / SLOT_ROWS
+    col_w = w / SLOT_COLS
+    for r in range(SLOT_ROWS):
+        y0 = int(top + r * row_h); y1 = int(top + (r + 1) * row_h)
+        slots = []
+        for i in range(SLOT_COLS):
+            x0 = int(i * col_w); x1 = int((i + 1) * col_w)
+            if cv2.countNonZero(mask[y0:y1, x0:x1]) > 25:
+                slots.append(i + 1)
+        rows.append(slots)
+    return rows
+
+
+def draw_heal_slots_mark(img, rows, out_path):
+    """在原图上标出槽位行(ROW0绿/ROW1蓝)和检出回血花瓣的槽位(黄框+编号), 存图供玩家确认哪行是副槽"""
+    from utils import _canvas_y_offset
+    h, w = img.shape[:2]
+    off = _canvas_y_offset
+    top = off + int((h - off) * SLOT_BAND_TOP)
+    bot = off + int((h - off) * SLOT_BAND_BOT)
+    mark = img.copy()
+    row_h = (bot - top) / SLOT_ROWS
+    col_w = w / SLOT_COLS
+    for r, slots in enumerate(rows):
+        y0 = int(top + r * row_h); y1 = int(top + (r + 1) * row_h)
+        color = (0, 255, 0) if r == 0 else (255, 0, 0)
+        cv2.rectangle(mark, (0, y0), (w - 1, y1), color, 2)
+        cv2.putText(mark, f"ROW{r}", (10, y0 + 24), cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
+        for s in slots:
+            x0 = int((s - 1) * col_w); x1 = int(s * col_w)
+            cv2.rectangle(mark, (x0, y0), (x1, y1), (0, 255, 255), 2)
+            cv2.putText(mark, str(s), (x0 + 10, y0 + 32), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2)
+    cv2.imwrite(out_path, mark)
+    return mark

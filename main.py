@@ -654,6 +654,15 @@ if __name__ == "__main__":
         if COMBAT_ENABLED:
             print("[+] 战斗策略: =秒杀等级自动追(贴0.5px), 更高避开(往怪少处跑), 更低不管")
         print("[!] 提醒: 请把回血花瓣(玫瑰/叶子)放在副槽(配置时勾选的槽位)——血量<10%%时插件自动切到主槽+防御跑路, 恢复后自动切回")
+        # 自动扫描回血花瓣槽位(粉=玫瑰/大丽花, 绿=叶子/丝兰, 橙=海星)
+        try:
+            from combat import scan_heal_slots, draw_heal_slots_mark
+            _rows = scan_heal_slots()
+            print(f"[扫描] 回血花瓣槽位  上行ROW0: {_rows[0] if _rows else '?'}  下行ROW1: {_rows[1] if len(_rows) > 1 else '?'}")
+            draw_heal_slots_mark(get_frame(), _rows, "_heal_slots.png")
+            print("[扫描] 已保存 _heal_slots.png（看哪个ROW是副槽，黄框=检出的回血花瓣槽位）")
+        except Exception as e:
+            print(f"[扫描] 失败: {e}")
 
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
