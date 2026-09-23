@@ -16,6 +16,7 @@ COMBAT_ENABLED = True  # 战斗模式总开关
 TRAIL_MAX = 800        # 撤退轨迹缓存长度
 MOVE_PROGRESS_TIMEOUT = 1.5  # 持续无有效进展多久才判定卡住
 PATH_CACHE = {"goal": None, "path": None}
+SHOW_MAP_WINDOW = True                  # 实时地图窗口: 红=路径 绿=玩家 蓝=巡逻点 黄=目标
 
 # ===== 人性化模拟（让脚本玩得像真人）=====
 HUMANIZE = True            # 总开关
@@ -389,6 +390,35 @@ def handle_danger(pos, near, ranks_map, trail, kill_rank):
     p2 = lazy_theta_star(binary, pos, goal)
     if p2:
         lazy_theta_execute_path(p2)
+def draw_overlay_window(patrol_points, pos=None):
+    """实时地图窗口: 红=寻路路径 绿=玩家 蓝=巡逻点 黄=当前目标(每0.3s刷新)"""
+    try:
+        import cv2
+        from utils import load_binary_map
+        binary = load_binary_map()
+        disp = cv2.cvtColor(binary, cv2.COLOR_GRAY2BGR)
+        for i, pt in enumerate(patrol_points, 1):
+            cv2.circle(disp, (int(pt[0]), int(pt[1])), 3, (255, 128, 0), -1)
+            cv2.putText(disp, str(i), (int(pt[0]) + 3, int(pt[1]) - 3),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 128, 0), 1)
+        path = PATH_CACHE.get("path")
+        if path:
+            for a, b in zip(path, path[1:]):
+                cv2.line(disp, (int(a[0]), int(a[1])), (int(b[0]), int(b[1])), (0, 0, 255), 1)
+        goal = PATH_CACHE.get("goal")
+        if goal:
+            cv2.circle(disp, (int(goal[0]), int(goal[1])), 4, (0, 255, 255), -1)
+        if pos is None:
+            pos = get_player_position()
+        if pos:
+            cv2.circle(disp, (int(pos[0]), int(pos[1])), 4, (0, 255, 0), -1)
+        big = cv2.resize(disp, (600, 600), interpolation=cv2.INTER_NEAREST)
+        cv2.imshow("florr 地图 (红=路径 绿=玩家 蓝=巡逻点 黄=目标)", big)
+        cv2.waitKey(1)
+    except Exception:
+        pass
+
+
 def dodge_proj(proj_screen):
     """飞行物来袭: 向远离它的垂直方向横向闪避 0.25s(像人走位躲导弹)"""
     from combat import get_screen_center
@@ -608,6 +638,7 @@ if __name__ == "__main__":
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
         trail = deque(maxlen=TRAIL_MAX)
+        last_map_win = 0
 
         print(f"[巡逻模式] 共 {len(patrol_points)} 个巡逻点，循环移动中...")
 
@@ -662,6 +693,11 @@ if __name__ == "__main__":
                 trail.append(pos)
 
             goal_pt = patrol_points[patrol_index]
+
+            # ===== 实时地图窗口(红线路径), 每0.3s刷新 =====
+            if SHOW_MAP_WINDOW and time.time() - last_map_win > 0.3:
+                draw_overlay_window(patrol_points, pos)
+                last_map_win = time.time()
 
             # ===== 低血量保命(任何模式, 最高优先级) =====
             from combat import get_hp_ratio, HP_FLEE
@@ -736,6 +772,11 @@ if __name__ == "__main__":
             mouse_running = False
         if 'defense_thread' in dir() and defense_thread:
             defense_thread.join(timeout=1.0)
+        try:
+            import cv2
+            cv2.destroyAllWindows()
+        except Exception:
+            pass
         reset_keyboard()
         get_window().right_button_up()
         print("[+] 右键防御已关闭")
