@@ -59,7 +59,7 @@ This project is **welcomed** to be used in any other florr.io projects.
 
 After I used `a*` pathing for a few months, I found this method caused a lot of time wasting on collision with florr's walls, I quickly turned to use `lazyθ*`. And here's the differences (Green for lazy_theta_star and Red for a_star)
 
-![](./compare.jpg)
+![](https://raw.githubusercontent.com/florrplayer/florr-auto-plugin/main/compare.jpg)
 
 ## Maps
 
