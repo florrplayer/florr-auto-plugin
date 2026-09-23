@@ -323,18 +323,14 @@ def abandon_game():
 
 
 def respawn():
-    """死亡后自动点击复活按钮(坐标按游戏画面实际尺寸比例缩放+画布偏移)"""
+    """死亡后按Enter复活(全键盘操作, 不用鼠标)"""
     w = get_window()
     print("[+] 等待死亡动画...")
     time.sleep(2.5)
-    frame = get_frame()
-    fh, fw = frame.shape[:2]
-    off = _canvas_y_offset
-    game_h = max(fh - off, 1)
-    rx, ry = int(960 * fw / 1920), off + int(620 * game_h / 1080)
-    ry = min(ry, fh - 1)
-    w.left_click(rx, ry)
-    print(f"[+] 已点击复活({rx},{ry})，等待加载...")
+    w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # Enter 复活
+    time.sleep(1.5)
+    w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # 再按一次(保险)
+    print("[+] 已按Enter复活，等待加载...")
     time.sleep(5)
 
 

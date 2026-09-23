@@ -687,17 +687,12 @@ if __name__ == "__main__":
                 respawn()
                 continue
             elif stage == "in_menu":
-                print("[!] 在菜单，自动点击开始...")
-                # 自动点击"开始"按钮(屏幕中央偏下, 按比例)
+                print("[!] 在菜单，按Enter开始(全键盘)...")
                 w = get_window()
-                frame = get_frame()
-                fh, fw = frame.shape[:2]
-                off = _canvas_y_offset
-                game_h = max(fh - off, 1)
-                bx, by = int(960 * fw / 1920), off + int(650 * game_h / 1080)
-                by = min(by, fh - 1)
-                w.left_click(bx, by)
-                print(f"[!] 已点击开始({bx},{by})，等待加载...")
+                w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # Enter 开始
+                time.sleep(1.5)
+                w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # 再按一次(进选图/确认)
+                print("[!] 已按Enter开始，等待加载...")
                 time.sleep(5)
                 continue
 
