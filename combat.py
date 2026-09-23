@@ -22,6 +22,9 @@ MYTHIC_HSV = ((85, 100, 100), (100, 255, 255))   # M 怪 青色
 ULTRA_HSV = ((162, 100, 100), (178, 255, 255))   # U 怪 粉色
 LEGENDARY_HSV = ((0, 100, 100), (8, 255, 255))     # 传奇 红 #DE1F1F (OpenCV H 0-4, 与青/粉不冲突)
 KILL_STOP = 0.5                          # 追击贴脸距离(地图像素, 用户要求 0.5)
+WARN_MARGIN = 10.0                       # 危险怪预警距离: 进入10px内提前绕开(人先躲远)
+CHASE_WARN = 8.0                         # 打怪中危险怪进入8px内停手逃跑
+KISS_SLOW = 3.0                          # 贴脸减速区: 3px内放慢试探(人犹豫贴脸)
 # 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
 # 精确色相(OpenCV H=真角度/2) + 高S/V防背景误检; 绿/黄/蓝按实测收紧(M/U已校准不动)
@@ -132,7 +135,8 @@ def escape_direction(ranks_map, player_map=None, sectors=8):
             if not m:
                 continue
             ang = math.degrees(math.atan2(m[1] - player_map[1], m[0] - player_map[0])) % 360
-            counts[int(ang / (360 / sectors)) % sectors] += 1
+            d = math.hypot(m[0] - player_map[0], m[1] - player_map[1])
+            counts[int(ang / (360 / sectors)) % sectors] += 1.0 / max(d, 2.0)   # 近怪权重大, 人逃命躲近的
     best = min(range(sectors), key=lambda k: counts[k])
     ang = math.radians((best + 0.5) * (360 / sectors))
     return math.cos(ang), math.sin(ang)

@@ -296,7 +296,8 @@ def screen_to_map_safe(pt, pos):
 
 def chase_target(patrol_goal, trail, kill_rank):
     """追击 =秒杀等级的怪(贴 KILL_STOP=0.5px); >秒杀贴近返回 'danger' 交主循环; 没了/超时 'done'"""
-    from combat import detect_all, choose_target, ultra_blocked, screen_to_map_safe, RANK_ORDER, KILL_STOP
+    from combat import (detect_all, choose_target, ultra_blocked, screen_to_map_safe,
+                        RANK_ORDER, KILL_STOP, CHASE_WARN, KISS_SLOW)
     w = get_window()
     start_time = time.time()
     idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
@@ -324,7 +325,7 @@ def chase_target(patrol_goal, trail, kill_rank):
             danger = []
             for r in RANK_ORDER[idx + 1:]:
                 danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
-            if ultra_blocked(danger, pos):
+            if ultra_blocked(danger, pos, margin=CHASE_WARN):
                 return "danger"
             prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
             t = choose_target(prey, patrol_goal, pos)
@@ -335,10 +336,18 @@ def chase_target(patrol_goal, trail, kill_rank):
             dist = math.hypot(dx, dy)
             keys = set()
             if dist > KILL_STOP:
-                if abs(dx) > 1.5:
-                    keys.add("d" if dx > 0 else "a")
-                if abs(dy) > 1.5:
-                    keys.add("s" if dy > 0 else "w")
+                if dist <= KISS_SLOW:
+                    # 贴脸减速: 间歇点按, 像人小心翼翼试探靠近
+                    if int(time.time() * 4) % 2 == 0:
+                        if abs(dx) > 1.5:
+                            keys.add("d" if dx > 0 else "a")
+                        if abs(dy) > 1.5:
+                            keys.add("s" if dy > 0 else "w")
+                else:
+                    if abs(dx) > 1.5:
+                        keys.add("d" if dx > 0 else "a")
+                    if abs(dy) > 1.5:
+                        keys.add("s" if dy > 0 else "w")
             set_k(keys)
             if int(time.time() * 2) % 6 == 0:
                 print(f"[战斗] 追击 {t}, 玩家 {pos}, dist={dist:.1f} {'(贴脸攻击)' if dist<=KILL_STOP else ''}")
@@ -369,8 +378,9 @@ def handle_danger(pos, near, ranks_map, trail, kill_rank):
     p2 = lazy_theta_star(binary, pos, goal)
     if p2:
         lazy_theta_execute_path(p2)
-    # 3) 直到危险怪脱离
+    # 3) 直到危险怪脱离(每0.6s重新看路变向, 像人边跑边躲)
     idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
+    last_escape = time.time()
     while True:
         pos = get_player_position()
         if pos is None:
@@ -386,6 +396,13 @@ def handle_danger(pos, near, ranks_map, trail, kill_rank):
         if not ultra_blocked(danger_now, pos):
             print("[危险] 已脱离，恢复正常巡逻")
             return True
+        if time.time() - last_escape > 0.6:
+            ex, ey = escape_direction(rmap, pos)
+            goal = calibrate_player(binary, (pos[0] + ex * 50, pos[1] + ey * 50))
+            p = lazy_theta_star(binary, pos, goal)
+            if p:
+                lazy_theta_execute_path(p)
+            last_escape = time.time()
         time.sleep(0.3)
 
 
@@ -561,13 +578,13 @@ if __name__ == "__main__":
                 pos = get_player_position(image=frame)
                 if pos is not None:
                     from combat import (detect_all, ultra_blocked, choose_target,
-                                        screen_to_map_safe, RANK_ORDER)
+                                        screen_to_map_safe, RANK_ORDER, WARN_MARGIN)
                     ranks_map = detect_all(frame)
                     idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
                     danger = []
                     for r in RANK_ORDER[idx + 1:]:
                         danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
-                    near = ultra_blocked(danger, pos)
+                    near = ultra_blocked(danger, pos, margin=WARN_MARGIN)
                     if near:
                         r = handle_danger(pos, near, ranks_map, trail, kill_rank)
                         if r in ("in_game_dead", "in_menu"):
