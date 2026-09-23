@@ -41,17 +41,25 @@ def save_config(cfg):
 
 
 def _ask(prompt, options, title):
-    """弹窗: 显示 prompt + 按钮, 返回选中的 key(关窗口/异常返回 None)"""
+    """问卷星风格单选: 选项列表鼠标点选(选中变蓝高亮), 底部[下一步]提交;
+    返回选中的 key(未选/关窗口返回 None)"""
     result = {"v": None}
     root = tk.Tk()
     root.title(title)
     root.attributes("-topmost", True)
-    tk.Label(root, text=prompt, font=("Microsoft YaHei UI", 12),
-             padx=24, pady=14, justify="left").pack()
+    tk.Label(root, text=prompt, font=("Microsoft YaHei UI", 12), padx=24, pady=14,
+             justify="left", wraplength=480).pack()
+    sel = {}
     for key, label in options:
-        tk.Button(root, text=label, font=("Microsoft YaHei UI", 11), width=22,
-                  command=lambda k=key: (result.update(v=k), root.destroy())[1]
-                  ).pack(pady=4, padx=24)
+        v = tk.BooleanVar(value=False)
+        b = tk.Label(root, text=label, font=("Microsoft YaHei UI", 11), padx=12, pady=6,
+                     bg="#ffffff", relief="groove", borderwidth=1, anchor="w", cursor="hand2")
+        b.pack(fill="x", padx=24, pady=3)
+        b.bind("<Button-1>", lambda e, k=key, vv=v, bb=b: _pick(sel, k, vv, bb, multi=False))
+        sel[key] = (v, b)
+    tk.Button(root, text="下一步", font=("Microsoft YaHei UI", 11), width=22,
+              command=lambda: (result.update(v=_submit(sel, multi=False)), root.destroy())[1]
+              ).pack(pady=12, padx=24)
     root.eval("tk::PlaceWindow . center")
     try:
         root.mainloop()
@@ -61,28 +69,53 @@ def _ask(prompt, options, title):
 
 
 def _ask_multi(prompt, options, title):
-    """弹窗: 复选(Checkbutton) + 确定, 返回选中的 key 列表(关窗口返回 [])"""
+    """问卷星风格多选: 选项列表鼠标点选切换(选中变蓝高亮+凹), 底部[下一步]提交;
+    返回选中的 key 列表(关窗口返回 [])"""
     result = {"v": []}
     root = tk.Tk()
     root.title(title)
     root.attributes("-topmost", True)
-    tk.Label(root, text=prompt, font=("Microsoft YaHei UI", 12),
-             padx=24, pady=14, justify="left").pack()
-    vars_ = []
+    tk.Label(root, text=prompt, font=("Microsoft YaHei UI", 12), padx=24, pady=14,
+             justify="left", wraplength=480).pack()
+    sel = {}
     for key, label in options:
-        v = tk.BooleanVar()
-        vars_.append((key, v))
-        tk.Checkbutton(root, text=label, variable=v, font=("Microsoft YaHei UI", 11),
-                       anchor="w", width=22).pack(pady=2, padx=24)
-    tk.Button(root, text="确定", font=("Microsoft YaHei UI", 11), width=22,
-              command=lambda: (result.update(v=[k for k, v in vars_ if v.get()]), root.destroy())[1]
-              ).pack(pady=10, padx=24)
+        v = tk.BooleanVar(value=False)
+        b = tk.Label(root, text=label, font=("Microsoft YaHei UI", 11), padx=12, pady=6,
+                     bg="#ffffff", relief="groove", borderwidth=1, anchor="w", cursor="hand2")
+        b.pack(fill="x", padx=24, pady=3)
+        b.bind("<Button-1>", lambda e, k=key, vv=v, bb=b: _pick(sel, k, vv, bb, multi=True))
+        sel[key] = (v, b)
+    tk.Button(root, text="下一步", font=("Microsoft YaHei UI", 11), width=22,
+              command=lambda: (result.update(v=_submit(sel, multi=True)), root.destroy())[1]
+              ).pack(pady=12, padx=24)
     root.eval("tk::PlaceWindow . center")
     try:
         root.mainloop()
     except Exception:
         pass
     return result["v"]
+
+
+def _pick(sel, key, vv, bb, multi):
+    """点选: 单选=先取消其他再选中(蓝底+凹), 多选=只切换自己"""
+    if not multi:
+        for k, (ov, ob) in sel.items():
+            if ov.get():
+                ov.set(False)
+                ob.configure(bg="#ffffff", relief="groove")
+    vv.set(not vv.get())
+    bb.configure(bg="#d6e4ff" if vv.get() else "#ffffff",
+                 relief="sunken" if vv.get() else "groove")
+
+
+def _submit(sel, multi):
+    """收集选中项: 单选返回第一个选中key(无则None), 多选返回列表"""
+    if multi:
+        return [k for k, (vv, _) in sel.items() if vv.get()]
+    for k, (vv, _) in sel.items():
+        if vv.get():
+            return k
+    return None
 
 
 def ask_update(cfg):
