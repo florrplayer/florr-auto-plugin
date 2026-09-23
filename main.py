@@ -327,6 +327,11 @@ def chase_target(patrol_goal, trail, kill_rank):
                 danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
             if ultra_blocked(danger, pos, margin=CHASE_WARN):
                 return "danger"
+            from combat import detect_projectiles
+            near_p = nearest_proj(detect_projectiles(frame))
+            if near_p:
+                print("[闪避] 打怪中闪避飞行物")
+                dodge_proj(near_p)
             prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
             t = choose_target(prey, patrol_goal, pos)
             if t is None:
@@ -354,6 +359,62 @@ def chase_target(patrol_goal, trail, kill_rank):
             time.sleep(0.05)
     finally:
         set_k(set())
+
+
+def handle_danger(pos, near, ranks_map, trail, kill_rank):
+    """>秒杀等级的危险怪: 先尝试绕开(5px设墙); 绕不开则往怪最少的方向跑, 直到脱离"""
+    from combat import (build_avoid_map, detect_all, screen_to_map_safe,
+                        RANK_ORDER, escape_direction)
+    binary = load_binary_map()
+    dx, dy = pos[0] - near[0], pos[1] - near[1]
+    nd = math.hypot(dx, dy) or 1.0
+    # 1) 尝试绕开
+    avoid = build_avoid_map(binary, [near], pos)
+    escape = calibrate_player(avoid, (pos[0] + dx / nd * 40, pos[1] + dy / nd * 40))
+    p = lazy_theta_star(avoid, pos, escape)
+    if p:
+        print("[危险] 尝试绕开...")
+        lazy_theta_execute_path(p)
+        return True
+    # 2) 绕不开：往怪最少的方向跑
+    print("[危险] 绕不开，往怪最少的方向跑")
+    ex, ey = escape_direction(ranks_map, pos, binary=binary)
+    goal = calibrate_player(binary, (pos[0] + ex * 50, pos[1] + ey * 50))
+    p2 = lazy_theta_star(binary, pos, goal)
+    if p2:
+        lazy_theta_execute_path(p2)
+def dodge_proj(proj_screen):
+    """飞行物来袭: 向远离它的垂直方向横向闪避 0.25s(像人走位躲导弹)"""
+    from combat import get_screen_center
+    cx, cy = get_screen_center()
+    dx, dy = proj_screen[0] - cx, proj_screen[1] - cy
+    nd = math.hypot(dx, dy) or 1.0
+    vx, vy = -dy / nd, dx / nd
+    ax, ay = cx + vx * 40, cy + vy * 40
+    bx, by = cx - vx * 40, cy - vy * 40
+    far = (ax, ay) if math.hypot(ax - proj_screen[0], ay - proj_screen[1]) > \
+          math.hypot(bx - proj_screen[0], by - proj_screen[1]) else (bx, by)
+    mvx, mvy = far[0] - cx, far[1] - cy
+    keys = set()
+    if abs(mvx) > 5:
+        keys.add("d" if mvx > 0 else "a")
+    if abs(mvy) > 5:
+        keys.add("s" if mvy > 0 else "w")
+    for k in keys:
+        keydown(k)
+    time.sleep(0.25)
+    for k in keys:
+        keyup(k)
+
+
+def nearest_proj(projs):
+    """玩家周围 PROJ_DODGE_R 内最近的飞行物(屏幕坐标)或 None"""
+    from combat import get_screen_center, PROJ_DODGE_R
+    if not projs:
+        return None
+    cx, cy = get_screen_center()
+    near = min(projs, key=lambda q: math.hypot(q[0] - cx, q[1] - cy))
+    return near if math.hypot(near[0] - cx, near[1] - cy) <= PROJ_DODGE_R else None
 
 
 def handle_danger(pos, near, ranks_map, trail, kill_rank):
@@ -589,6 +650,13 @@ if __name__ == "__main__":
                         r = handle_danger(pos, near, ranks_map, trail, kill_rank)
                         if r in ("in_game_dead", "in_menu"):
                             continue
+                        continue
+                    # 飞行物(导弹/螯针等): 靠近就横向闪避
+                    from combat import detect_projectiles
+                    near_p = nearest_proj(detect_projectiles(frame))
+                    if near_p:
+                        print("[闪避] 飞行物来袭，横向闪避")
+                        dodge_proj(near_p)
                         continue
                     prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
                     target = choose_target(prey, goal_pt, pos)

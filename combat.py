@@ -25,6 +25,9 @@ KILL_STOP = 0.5                          # 追击贴脸距离(地图像素, 用�
 WARN_MARGIN = 10.0                       # 危险怪预警距离: 进入10px内提前绕开(人先躲远)
 CHASE_WARN = 8.0                         # 打怪中危险怪进入8px内停手逃跑
 KISS_SLOW = 3.0                          # 贴脸减速区: 3px内放慢试探(人犹豫贴脸)
+PROJ_MIN_PX = 4                            # 飞行物最小尺寸(导弹/螯针比怪小)
+PROJ_MAX_PX = 16                           # 飞行物最大尺寸(降采样960宽基准)
+PROJ_DODGE_R = 120                         # 飞行物进入玩家周围120px内才闪避
 # 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
 # 精确色相(OpenCV H=真角度/2) + 高S/V防背景误检; 绿/黄/蓝按实测收紧(M/U已校准不动)
@@ -68,8 +71,10 @@ def calibrate_screen(frame=None):
     return w, h
 
 
-def _detect_color(hsv, hsv_range, exclude_center=True):
-    """按 HSV 区间找色块, 返回中心点列表(屏幕坐标)"""
+def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None):
+    """按 HSV 区间找色块, 返回中心点列表(屏幕坐标); min_px/max_px 可覆盖怪尺寸范围"""
+    lo = MIN_MOB_PX if min_px is None else min_px
+    hi = MAX_MOB_PX if max_px is None else max_px
     mask = cv2.inRange(hsv, np.array(hsv_range[0]), np.array(hsv_range[1]))
     if exclude_center:
         cx, cy = get_screen_center()
@@ -83,7 +88,7 @@ def _detect_color(hsv, hsv_range, exclude_center=True):
     for i in range(1, n):
         area = stats[i, cv2.CC_STAT_AREA]
         w, h = stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_HEIGHT]
-        if not (MIN_MOB_PX * MIN_MOB_PX / 4 <= area <= MAX_MOB_PX * MAX_MOB_PX):
+        if not (lo * lo / 4 <= area <= hi * hi):
             continue
         if w > MAX_MOB_PX * 1.5 or h > MAX_MOB_PX * 1.5:
             continue
@@ -153,6 +158,40 @@ def escape_direction(ranks_map, player_map=None, sectors=8, binary=None,
     best = min(range(sectors), key=lambda k: counts[k] + walls[k] * 2.5)
     ang = math.radians((best + 0.5) * (360 / sectors))
     return math.cos(ang), math.sin(ang)
+
+
+_PROJ_PREV = {"mask": None}
+
+
+def detect_projectiles(frame=None):
+    """检测飞行物(黄蜂/胡蜂导弹, 蝎子螯针等):
+    全稀有度色 + 小尺寸(4-16px) + 帧间差分(运动物体才算)"""
+    global _PROJ_PREV
+    if frame is None:
+        frame = get_frame()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    mask_all = np.zeros((hsv.shape[0], hsv.shape[1]), np.uint8)
+    for rng in RANK_HSV.values():
+        mask_all |= cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
+    cx, cy = get_screen_center()
+    cv2.circle(mask_all, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
+    det_w = 960
+    det_h = int(hsv.shape[0] / _downscale)
+    small = cv2.resize(mask_all, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
+    moving = []
+    if _PROJ_PREV["mask"] is not None and _PROJ_PREV["mask"].shape == small.shape:
+        diff = cv2.absdiff(small, _PROJ_PREV["mask"])
+        n, labels, stats, cents = cv2.connectedComponentsWithStats(diff, 8)
+        for i in range(1, n):
+            area = stats[i, cv2.CC_STAT_AREA]
+            w_, h_ = stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_HEIGHT]
+            if not (PROJ_MIN_PX * PROJ_MIN_PX / 4 <= area <= PROJ_MAX_PX * PROJ_MAX_PX):
+                continue
+            if w_ > PROJ_MAX_PX * 1.5 or h_ > PROJ_MAX_PX * 1.5:
+                continue
+            moving.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
+    _PROJ_PREV["mask"] = small.copy()
+    return moving
 
 
 def screen_to_map(screen_pt, player_map=None):
