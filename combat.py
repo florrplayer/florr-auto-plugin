@@ -124,11 +124,13 @@ def detect_all(frame=None):
     return out
 
 
-def escape_direction(ranks_map, player_map=None, sectors=8):
-    """把玩家周围分 8 个扇区, 返回怪最少的扇区方向(单位向量)"""
+def escape_direction(ranks_map, player_map=None, sectors=8, binary=None,
+                    look_ahead=15, wall_radius=3):
+    """分 8 个扇区, 返回"怪少且前方开阔"的扇区方向(单位向量); binary=地图灰度图(255可走/0墙)"""
     if player_map is None:
         player_map = get_player_position()
-    counts = [0] * sectors
+    counts = [0.0] * sectors
+    walls = [0.0] * sectors
     for pts in ranks_map.values():
         for p in (pts or []):
             m = screen_to_map(p, player_map)
@@ -137,7 +139,18 @@ def escape_direction(ranks_map, player_map=None, sectors=8):
             ang = math.degrees(math.atan2(m[1] - player_map[1], m[0] - player_map[0])) % 360
             d = math.hypot(m[0] - player_map[0], m[1] - player_map[1])
             counts[int(ang / (360 / sectors)) % sectors] += 1.0 / max(d, 2.0)   # 近怪权重大, 人逃命躲近的
-    best = min(range(sectors), key=lambda k: counts[k])
+    if binary is not None:
+        h, w = binary.shape
+        for s in range(sectors):
+            ang = math.radians((s + 0.5) * (360 / sectors))
+            tx = int(player_map[0] + math.cos(ang) * look_ahead)
+            ty = int(player_map[1] + math.sin(ang) * look_ahead)
+            x0, x1 = max(0, tx - wall_radius), min(w - 1, tx + wall_radius)
+            y0, y1 = max(0, ty - wall_radius), min(h - 1, ty + wall_radius)
+            region = binary[y0:y1 + 1, x0:x1 + 1]
+            walls[s] = 1.0 - float(region.mean()) / 255.0   # 1=全墙 0=全开阔
+    # 综合评分: 怪少优先, 前方墙多扣分(不往墙角跑)
+    best = min(range(sectors), key=lambda k: counts[k] + walls[k] * 2.5)
     ang = math.radians((best + 0.5) * (360 / sectors))
     return math.cos(ang), math.sin(ang)
 

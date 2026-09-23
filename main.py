@@ -373,7 +373,7 @@ def handle_danger(pos, near, ranks_map, trail, kill_rank):
         return True
     # 2) 绕不开：往怪最少的方向跑
     print("[危险] 绕不开，往怪最少的方向跑")
-    ex, ey = escape_direction(ranks_map, pos)
+    ex, ey = escape_direction(ranks_map, pos, binary=binary)
     goal = calibrate_player(binary, (pos[0] + ex * 50, pos[1] + ey * 50))
     p2 = lazy_theta_star(binary, pos, goal)
     if p2:
@@ -397,7 +397,7 @@ def handle_danger(pos, near, ranks_map, trail, kill_rank):
             print("[危险] 已脱离，恢复正常巡逻")
             return True
         if time.time() - last_escape > 0.6:
-            ex, ey = escape_direction(rmap, pos)
+            ex, ey = escape_direction(rmap, pos, binary=binary)
             goal = calibrate_player(binary, (pos[0] + ex * 50, pos[1] + ey * 50))
             p = lazy_theta_star(binary, pos, goal)
             if p:
