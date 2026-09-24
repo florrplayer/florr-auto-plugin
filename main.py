@@ -46,6 +46,25 @@ def human_ticks(w, goal):
         time.sleep(0.2 + random.random() * 0.4)
 
 
+# ===== 日志节流: 同一条消息 min_gap 秒内只打印一次(防刷屏) =====
+_last_log = {}
+def throttle_print(key, msg, min_gap=3.0):
+    import time as _t
+    now = _t.monotonic()
+    if now - _last_log.get(key, -999) > min_gap:
+        _last_log[key] = now
+        print(msg)
+
+
+# ===== 控制台标题实时状态(黑窗口标题显示当前在干嘛) =====
+def set_title(s):
+    try:
+        import ctypes
+        ctypes.windll.kernel32.SetConsoleTitleW("florr 挂机 - " + s)
+    except Exception:
+        pass
+
+
 def line_of_sight(map, n1, n2):
     x0, y0 = n1
     x1, y1 = n2
@@ -588,6 +607,7 @@ if __name__ == "__main__":
         print("[!] 请先打开浏览器，进入 florr.io，最大化窗口后再运行(无需F11全屏)")
         exit(1)
     get_window().move_offscreen()
+    set_title("运行中")
     print("[+] 脚本运行中... 按 Ctrl+C 停止（停止后窗口自动移回）")
 
     # ===== 后台防御线程：一直按住右键 =====
@@ -654,7 +674,19 @@ if __name__ == "__main__":
         apply_map(map_name)
         print(f"[+] 地图: {map_name}")
         from map_select import select_patrol_points
-        patrol_points = select_patrol_points(map_name)
+        if cfg.get("patrol_points") and cfg.get("patrol_points_map") == map_name:
+            from config import _ask
+            reuse = _ask("上次的巡逻点还在（这张地图），直接用吗？", [("y", "用上次的"), ("n", "重新设置")], "巡逻点")
+            if reuse == "y":
+                patrol_points = [tuple(p) for p in cfg["patrol_points"]]
+                print(f"[巡逻点] 使用上次设置: {patrol_points}")
+            else:
+                patrol_points = select_patrol_points(map_name)
+        else:
+            patrol_points = select_patrol_points(map_name)
+        cfg["patrol_points"] = [list(p) for p in patrol_points]
+        cfg["patrol_points_map"] = map_name
+        save_config(cfg)
         # 标定实际窗口客户区尺寸(兼容4K显示器/DPI缩放, 不再硬编码1920x1080)
         from combat import calibrate_screen
         try:
@@ -670,27 +702,30 @@ if __name__ == "__main__":
         if COMBAT_ENABLED:
             print("[+] 战斗策略: =秒杀等级自动追(贴0.5px), 更高避开(往怪少处跑), 更低不管")
         print("[!] 提醒: 请把回血花瓣(玫瑰/叶子)放在副槽(配置时勾选的槽位)——血量<10%%时插件自动切到主槽+防御跑路, 恢复后自动切回")
-        # 自动扫描回血花瓣槽位候选(颜色只是候选, 弹窗人工确认防误检)
-        try:
-            from combat import scan_heal_slots, draw_heal_slots_mark
-            _cand = scan_heal_slots()
-            if _cand:
-                _desc = "  ".join(f"ROW{r}槽{s}({c})" for r, s, c in _cand)
-                print(f"[扫描] 回血花瓣候选: {_desc}")
-                draw_heal_slots_mark(get_frame(), _cand, "_heal_slots.png")
-                print("[扫描] 已保存 _heal_slots.png 供核对")
-                from config import ask_heal_confirm, save_config
-                _picked = ask_heal_confirm(_cand)
-                if _picked:
-                    cfg["heal_slots"] = _picked
-                    save_config(cfg)
-                    print(f"[扫描] 已确认回血槽位: {_picked}（低血时自动切换）")
+        # 自动扫描回血花瓣槽位候选(颜色只是候选, 弹窗人工确认防误检); 已确认过则跳过
+        if cfg.get("heal_slots"):
+            print(f"[扫描] 已确认回血槽位 {cfg['heal_slots']}，跳过扫描（如需重新扫描请删除 config.json）")
+        else:
+            try:
+                from combat import scan_heal_slots, draw_heal_slots_mark
+                _cand = scan_heal_slots()
+                if _cand:
+                    _desc = "  ".join(f"ROW{r}槽{s}({c})" for r, s, c in _cand)
+                    print(f"[扫描] 回血花瓣候选: {_desc}")
+                    draw_heal_slots_mark(get_frame(), _cand, "_heal_slots.png")
+                    print("[扫描] 已保存 _heal_slots.png 供核对")
+                    from config import ask_heal_confirm, save_config
+                    _picked = ask_heal_confirm(_cand)
+                    if _picked:
+                        cfg["heal_slots"] = _picked
+                        save_config(cfg)
+                        print(f"[扫描] 已确认回血槽位: {_picked}（低血时自动切换）")
+                    else:
+                        print("[扫描] 未确认，使用原配置")
                 else:
-                    print("[扫描] 未确认，使用原配置")
-            else:
-                print("[扫描] 未检测到回血花瓣候选（如副槽有玫瑰请截图反馈）")
-        except Exception as e:
-            print(f"[扫描] 失败: {e}")
+                    print("[扫描] 未检测到回血花瓣候选（如副槽有玫瑰请截图反馈）")
+            except Exception as e:
+                print(f"[扫描] 失败: {e}")
 
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
@@ -706,16 +741,17 @@ if __name__ == "__main__":
             # 先检查状态
             stage = check_stage()
             if stage == "in_game_dead":
-                print("[!] 死亡，正在自动复活...")
+                set_title("死亡复活中")
+                throttle_print("dead", "[!] 死亡，正在自动复活...", 2.0)
                 respawn()
                 continue
             elif stage == "in_menu":
-                print("[!] 在菜单，按Enter开始(全键盘)...")
+                set_title("菜单等待")
+                throttle_print("menu", "[!] 在菜单，按Enter开始(全键盘)...", 3.0)
                 w = get_window()
                 w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # Enter 开始
                 time.sleep(1.5)
                 w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # 再按一次(进选图/确认)
-                print("[!] 已按Enter开始，等待加载...")
                 time.sleep(5)
                 continue
 
@@ -738,6 +774,7 @@ if __name__ == "__main__":
             from combat import get_hp_ratio, HP_FLEE
             hp = get_hp_ratio(get_frame())
             if hp is not None and hp < HP_FLEE:
+                set_title(f"低血逃跑! {hp*100:.0f}%")
                 print(f"[低血] 血量 {hp*100:.0f}%，跑路...")
                 r = flee_low_hp(trail, heal_slots=cfg.get("heal_slots", []))
                 if r in ("in_game_dead", "in_menu"):
@@ -775,6 +812,7 @@ if __name__ == "__main__":
                     if target is not None:
                         if HUMANIZE:
                             time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
+                        set_title("战斗中")
                         print(f"[战斗] 发现目标 {target}，追击...")
                         stop_dist = 2.0 if mode == "attack" else 0.5
                         r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist)
@@ -784,6 +822,7 @@ if __name__ == "__main__":
                         continue
 
             # ===== 正常巡逻（分段走，走一段回来看怪）=====
+            set_title(f"巡逻中 点{patrol_index+1}/{len(patrol_points)}")
             result = lazy_theta_pathing(goal_pt, dedicated_area, step=PATH_STEP if COMBAT_ENABLED else 0)
             if result is True:
                 print(f"[巡逻] 到达点 {patrol_index+1}，前往下一个点")
