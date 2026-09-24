@@ -30,6 +30,22 @@ HUMAN_MOUSE_MAX = 12
 HUMAN_RELEASE_CHANCE = 0.02  # 防御线程偶尔松手概率(模拟真人手抖)
 
 
+def human_ticks(w, goal):
+    '''人性化微操作(替代定时换卡防挂机):
+    - 微转向: 随机朝一个方向轻按 0.08-0.15s(像人看旁边), 路径规划会自动修正, 不影响到达
+    - 微停顿: 0.2-0.6s 随机犹豫
+    - 微抖动: 偶尔同向再点一下(模拟按键不干脆)
+    全部无副作用: 不切槽位、不丢输出、不打断战斗配置, 但制造不规则输入流抗挂机检测'''
+    r = random.random()
+    if r < 0.18:
+        k = random.choice(['a', 'd', 'w', 's'])
+        w.key_down(ord(k)); time.sleep(0.08 + random.random() * 0.07); w.key_up(ord(k))
+        if random.random() < 0.3:   # 偶尔同向再点一下(像人按键不干脆)
+            time.sleep(0.03); w.key_down(ord(k)); time.sleep(0.05); w.key_up(ord(k))
+    elif r < 0.30:
+        time.sleep(0.2 + random.random() * 0.4)
+
+
 def line_of_sight(map, n1, n2):
     x0, y0 = n1
     x1, y1 = n2
@@ -686,28 +702,7 @@ if __name__ == "__main__":
         # 主循环需要的 combat 函数(一次性import, 避免作用域内NameError)
         from combat import detect_mobs, screen_to_map, ultra_blocked, choose_target
 
-        # 防挂机: 定时切换花瓣槽位(slot)
-        last_slot_switch = time.time()
-        next_slot_interval = 60 + random.random() * 30  # 60-90秒
-
         while True:
-            # 防挂机: 定时切换槽位
-            now = time.time()
-            if now - last_slot_switch > next_slot_interval:
-                slot_key = random.choice(['1','2','3','4','5','6','7','8','9','0'])
-                print(f"[防挂机] 切换槽位 {slot_key}")
-                w = get_window()
-                vk = ord(slot_key)
-                w.key_down(vk)
-                time.sleep(0.05 + random.random() * 0.1)
-                w.key_up(vk)
-                time.sleep(0.05 + random.random() * 0.1)
-                w.key_down(vk)
-                time.sleep(0.05 + random.random() * 0.1)
-                w.key_up(vk)
-                last_slot_switch = now
-                next_slot_interval = 60 + random.random() * 30
-
             # 先检查状态
             stage = check_stage()
             if stage == "in_game_dead":
@@ -729,6 +724,10 @@ if __name__ == "__main__":
                 trail.append(pos)
 
             goal_pt = patrol_points[patrol_index]
+
+            # ===== 人性化微操作(防挂机, 无副作用): 微转向/微停顿/微抖动 =====
+            if HUMANIZE and pos is not None and random.random() < 0.35:
+                human_ticks(get_window(), goal_pt)
 
             # ===== 实时地图窗口(红线路径), 每0.3s刷新 =====
             if SHOW_MAP_WINDOW and time.time() - last_map_win > 0.3:
