@@ -8,7 +8,7 @@ import win32con
 from collections import deque
 from utils import *
 from window_ctrl import init_window, get_window
-from config import load_config, save_config, ask_config, ask_update, MODE_NAMES, RANK_NAMES
+from config import load_config, save_config, ask_config, ask_update, MODE_NAMES, RANK_NAMES, HEAL_TYPE_NAMES
 
 MAX_STUCK = 5   # 连续卡死/无路次数上限，超过则跳过当前巡逻点
 PATH_STEP = 40  # 巡逻分段长度(地图像素)：每走完一段回主循环检查战斗
@@ -719,6 +719,13 @@ if __name__ == "__main__":
     LEECH = cfg.get("leech", False) and mode != "none"
     if LEECH:
         print("[蹭掉落] 已开启：打不动的M/U怪在附近时打2.5s混掉落")
+    # 回血花瓣种类 -> 低血触发线(研究落地): 玫瑰20%爆发救急/大丽花30%/丝兰20%防御回/海星40%提前切
+    import combat
+    heal_type = cfg.get("heal_type", "rose")
+    _trigger = combat.HEAL_TRIGGER.get(heal_type, 0.20)
+    combat.HP_FLEE = _trigger
+    combat.HP_RECOVER = min(0.70, _trigger + 0.15)
+    print(f"[回血] 回血花瓣: {HEAL_TYPE_NAMES.get(heal_type, heal_type)} → 低血触发 {_trigger*100:.0f}%, 恢复 {combat.HP_RECOVER*100:.0f}%")
     print("[配置] 模式=" + MODE_NAMES.get(mode, mode) + ", 打怪=" + RANK_NAMES.get(kill_rank, kill_rank))
 
     # ===== 攻防线程(按玩家选择) =====
@@ -851,6 +858,7 @@ if __name__ == "__main__":
         patrol_index = 0
         trail = deque(maxlen=TRAIL_MAX)
         last_map_win = 0
+        _boss_pause_until = 0.0   # Bossbar 检测到 Super+ 后暂停追怪的时间戳(别送死)
 
         print(f"[巡逻模式] 共 {len(patrol_points)} 个巡逻点，循环移动中...")
 
@@ -890,6 +898,17 @@ if __name__ == "__main__":
                 draw_overlay_window(patrol_points, pos)
                 last_map_win = time.time()
 
+            # ===== Bossbar 检测(研究落地): Super/Eternal/Unique 专属顶部血条 =====
+            # 75级前且不足4个U花瓣时杀Super只掉Ultra -> 别蹲Boss送死, 暂停追怪10s
+            try:
+                from combat import detect_bossbar
+                if detect_bossbar(get_frame()):
+                    if _boss_pause_until < time.time():
+                        print("[Boss] 检测到Super+级Boss血条！75级前别蹲Super——暂停追怪10s，先回避")
+                    _boss_pause_until = time.time() + 10
+            except Exception:
+                pass
+
             # ===== 低血量保命(任何模式, 最高优先级) =====
             from combat import get_hp_ratio, HP_FLEE
             hp = get_hp_ratio(get_frame())
@@ -903,7 +922,9 @@ if __name__ == "__main__":
 
             # ===== 战斗检测（仅巡逻间隙/分段间执行）=====
             # 策略: =秒杀等级自动追(贴0.5px), >秒杀等级避开(往怪少处跑), <秒杀等级不管
-            if COMBAT_ENABLED and kill_rank != "none":
+            if time.time() < _boss_pause_until:
+                pass  # Boss在场: 本圈只巡逻不追怪
+            elif COMBAT_ENABLED and kill_rank != "none":
                 frame = get_frame()
                 pos = get_player_position(image=frame)
                 if pos is not None:

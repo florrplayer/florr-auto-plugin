@@ -5,12 +5,15 @@ import os
 import tkinter as tk
 
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "efficiency": False, "leech": False, "version": 7}
+DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "efficiency": False, "leech": False, "heal_type": "rose", "version": 8}
 
 MODE_NAMES = {"attack": "全程攻击", "defense": "全程防御", "none": "不弄(手动)"}
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
 RANK_NAMES = {"common": "普通(绿)", "unusual": "罕见(黄)", "rare": "稀有(蓝)", "epic": "史诗(紫)", "legendary": "传奇(红)", "mythic": "神话M(青)", "ultra": "究极U(粉)"}
 HEAL_NAMES = {1: "副槽1", 2: "副槽2", 3: "副槽3", 4: "副槽4", 5: "副槽5", 6: "副槽6", 7: "副槽7", 8: "副槽8", 9: "副槽9", 10: "副槽10(0键)"}
+HEAL_TYPE_NAMES = {"rose": "玫瑰Rose(爆发救急)", "dahlia": "大丽花Dahlia(稳定小回血)",
+                   "yucca": "丝兰Yucca(防御时回血)", "starfish": "海星Starfish(被动回血)",
+                   "leaf": "叶子Leaf(过渡用)"}
 # 旧配置兼容(1.x: M=只打神话, M+L=神话+传奇, none=纯巡逻)
 RANK_LEGACY = {"M": "mythic", "M+L": "legendary", "none": "none"}
 
@@ -137,30 +140,39 @@ def ask_update(cfg):
     mode = MODE_NAMES.get(cfg.get("mode", "defense"), "?")
     rank = RANK_NAMES.get(cfg.get("kill_rank", "M"), "?")
     heal = ", ".join(HEAL_NAMES.get(s, "?") for s in cfg.get("heal_slots", [])) or "不用(没带回血)"
-    ans = _ask("检测到已有设置：\n  模式：%s\n  打怪：%s\n  回血槽：%s\n\n要不要更新？" % (mode, rank, heal),
+    htype = HEAL_TYPE_NAMES.get(cfg.get("heal_type", "rose"), "?")
+    ans = _ask("检测到已有设置：\n  模式：%s\n  打怪：%s\n  回血槽：%s\n  回血花瓣：%s\n\n要不要更新？" % (mode, rank, heal, htype),
                [("yes", "更新设置"), ("no", "用旧设置继续")], "florr 挂机设置")
     return ans == "yes"
 
 
 def ask_config():
-    """首次/更新时调用: 依次问两个问题"""
+    """首次/更新时调用: 依次问配置问题"""
     m = _ask("你想全程攻击还是防御还是不弄？",
              [("attack", "全程攻击（按空格发射花瓣）"),
               ("defense", "全程防御（按住右键，花瓣绕身转）"),
-              ("none", "不弄（纯手动操作）")], "florr 挂机设置 ①/②")
+              ("none", "不弄（纯手动操作）")], "florr 挂机设置 ①/⑥")
     if m is None:
         m = "defense"
     r = _ask("你可以秒（<3秒）哪个等级的怪？\\n（=这级自动追贴脸打，更高避开，更低不管）",
-             [(k, RANK_NAMES[k]) for k in RANK_ORDER], "florr 挂机设置 ②/②")
+             [(k, RANK_NAMES[k]) for k in RANK_ORDER], "florr 挂机设置 ②/⑥")
     if r is None:
         r = "mythic"
-    hs = _ask_multi("血量<10%时，切哪些副槽的回血花瓣（玫瑰/叶子）？\n（勾选所有放了回血花瓣的副槽位置，可多选；恢复后自动切回）",
+    hs = _ask_multi("血量低时，切哪些副槽的回血花瓣（玫瑰/叶子）？\n（勾选所有放了回血花瓣的副槽位置，可多选；恢复后自动切回）",
                     [(i, HEAL_NAMES[i]) for i in range(1, 11)],
-                    "florr 挂机设置 ③/④")
+                    "florr 挂机设置 ③/⑥")
+    ht = _ask("你带的是哪种回血花瓣？（决定低血触发时机）\n玫瑰Rose=爆发救急(20%触发)\n大丽花Dahlia=稳定小回血(30%触发)\n丝兰Yucca=仅防御时回血(20%触发, 跑路保持防御)\n海星Starfish=血<75%被动回(提前40%触发)\n叶子Leaf=已淘汰, 建议换玫瑰/丝兰",
+              [("rose", "玫瑰 Rose（爆发救急，最常见）"),
+               ("dahlia", "大丽花 Dahlia（稳定小回血）"),
+               ("yucca", "丝兰 Yucca（防御时回血）"),
+               ("starfish", "海星 Starfish（被动回血）"),
+               ("leaf", "叶子 Leaf（过渡用）")], "florr 挂机设置 ④/⑥")
+    if ht is None:
+        ht = "rose"
     ef = _ask("刷怪效率模式？\n标准：更像人（更安全，效率约-8%）\n效率：少停顿少延迟（刷怪更快，挂机检测风险略升）",
-              [("no", "标准（更安全）"), ("yes", "效率（刷怪更快）")], "florr 挂机设置 ④/⑤")
+              [("no", "标准（更安全）"), ("yes", "效率（刷怪更快）")], "florr 挂机设置 ⑤/⑥")
     lc = False
     if m != "none":
         lc = _ask("要不要蹭高等级怪的掉落？\n（打不动的M/U怪在附近时，上去打2.5秒混伤害拿掉落，然后撤退）\n掉落机制：总伤害>1%就有资格分掉落（单人时杀怪必得）",
-                  [("no", "不蹭（更安全）"), ("yes", "蹭（掉落更多）")], "florr 挂机设置 ⑤/⑤") == "yes"
-    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "leech": lc, "version": 7}
+                  [("no", "不蹭（更安全）"), ("yes", "蹭（掉落更多）")], "florr 挂机设置 ⑥/⑥") == "yes"
+    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "leech": lc, "heal_type": ht, "version": 8}

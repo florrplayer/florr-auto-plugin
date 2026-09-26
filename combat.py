@@ -33,6 +33,8 @@ HP_BAR_H = 4                             # 血条半高(px)
 HP_BAR_W = 50                            # 血条半宽(px)
 HP_FLEE = 0.20                           # 血量低于20% 跑路(维基攻略建议提前切回血, 防秒杀)
 HP_RECOVER = 0.35                        # 血量恢复到35% 才回去继续
+# 回血花瓣种类 -> 低血触发线(研究落地: 玫瑰爆发20%救急/大丽花稳定30%/丝兰防御20%/海星被动40%提前切)
+HEAL_TRIGGER = {"rose": 0.20, "dahlia": 0.30, "yucca": 0.20, "starfish": 0.40, "leaf": 0.25}
 # 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
 # 精确色相(OpenCV H=真角度/2) + 高S/V防背景误检; 绿/黄/蓝按实测收紧(M/U已校准不动)
@@ -421,3 +423,34 @@ def rank_recommend(counts):
     idx = order.index(main)
     rec = order[max(0, idx - 1)] if idx > 0 else order[0]
     return main, rec
+
+
+# ===== Bossbar 检测(研究落地: Super/Eternal/Unique 专属, 顶部中央大血条) =====
+def detect_bossbar(frame=None):
+    """检测屏幕顶部中央的 Boss 血条(Super+ 才有; Ultra 自2024-04-07起不显示)
+    原理: 画布偏移之下的顶部区域, 中央 30%-70% 宽度内找横向连续红色长条(填充血)
+    返回 True/False。Bossbar 比聊天播报可靠: 进屏即显示, 不依赖设置开聊天"""
+    if frame is None:
+        frame = get_frame()
+    try:
+        from utils import _canvas_y_offset
+    except Exception:
+        _canvas_y_offset = 0
+    h, w = frame.shape[:2]
+    off = _canvas_y_offset
+    y0 = off + int((h - off) * 0.005)
+    y1 = off + int((h - off) * 0.075)
+    if y1 <= y0 + 2 or w < 200:
+        return False
+    reg = frame[y0:y1 + 1, :, :].astype(int)
+    r, g, b = reg[:, :, 2], reg[:, :, 1], reg[:, :, 0]
+    red = (r > 120) & (r - g > 50) & (r - b > 50)
+    xc0, xc1 = int(w * 0.30), int(w * 0.70)
+    col_red = red[:, xc0:xc1].sum(axis=0)
+    seg = 0; best = 0
+    for v in col_red:
+        if v > 2:
+            seg += 1; best = max(best, seg)
+        else:
+            seg = 0
+    return best > w * 0.10   # 连续红色段 > 屏宽10% 视为 Boss 血条
