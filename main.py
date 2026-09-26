@@ -899,10 +899,27 @@ if __name__ == "__main__":
                 last_map_win = time.time()
 
             # ===== Bossbar 检测(研究落地): Super/Eternal/Unique 专属顶部血条 =====
-            # 75级前且不足4个U花瓣时杀Super只掉Ultra -> 别蹲Boss送死, 暂停追怪10s
+            # 抢Super正确姿势(维基掉落机制): Super+分25人, 伤害>1%有资格 -> 开leech时蹭2.5s拿参与奖就走
+            # 别追着打(血量x28秒不掉, 死=清零掉落资格+掉花瓣); 75级前杀Super只掉Ultra档但仍白捡
             try:
-                from combat import detect_bossbar
+                from combat import detect_bossbar, detect_all, screen_to_map_safe, choose_target
                 if detect_bossbar(get_frame()):
+                    if LEECH:
+                        if _boss_pause_until < time.time():
+                            print("[Boss] Super+级Boss在场！蹭1%掉落(leech模式, 2.5s就走)...")
+                        _pb = pos or get_player_position()
+                        if _pb is not None:
+                            _rm = detect_all(get_frame())
+                            _sup = [m for m in (screen_to_map_safe(p, _pb) for p in (_rm.get("ultra") or []))
+                                    if m and math.hypot(m[0] - _pb[0], m[1] - _pb[1]) <= LEECH_RANGE]
+                            _t = choose_target(_sup, goal_pt, _pb) if _sup else None
+                            if _t is not None:
+                                set_title("抢Boss蹭掉落")
+                                leech_target(_t, trail)
+                                _boss_pause_until = time.time() + 8
+                                continue
+                        _boss_pause_until = time.time() + 5
+                        continue
                     if _boss_pause_until < time.time():
                         print("[Boss] 检测到Super+级Boss血条！75级前别蹲Super——暂停追怪10s，先回避")
                     _boss_pause_until = time.time() + 10
