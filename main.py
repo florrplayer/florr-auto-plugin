@@ -771,6 +771,23 @@ if __name__ == "__main__":
             except Exception as e:
                 print(f"[扫描] 失败: {e}")
 
+        # 扫描花瓣稀有度 -> 推荐可秒等级(按稀有度估算, 未考虑花瓣种类/怪种, 供参考)
+        try:
+            from combat import scan_petal_ranks, rank_recommend
+            from config import RANK_NAMES as _RN
+            _cnt, _slots = scan_petal_ranks()
+            if any(_cnt.values()):
+                _desc = "  ".join(f"{_RN.get(r, r)}{n}" for r, n in _cnt.items() if n)
+                print(f"[配置] 花瓣扫描: {_desc}")
+                _rec = rank_recommend(_cnt)
+                if _rec:
+                    _main, _low = _rec
+                    print(f"[配置] 主力={_RN.get(_main, _main)}级，推荐打 {_RN.get(_main, _main)}（若觉得慢可调低到 {_RN.get(_low, _low)}）")
+            else:
+                print("[配置] 未扫到花瓣（窗口需在游戏中且可见）")
+        except Exception as e:
+            print(f"[配置] 花瓣扫描失败: {e}")
+
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
         trail = deque(maxlen=TRAIL_MAX)

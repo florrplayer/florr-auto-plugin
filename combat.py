@@ -370,3 +370,51 @@ def draw_heal_slots_mark(img, found, out_path):
         cv2.putText(mark, f"{s}:{names}", (x0 + 6, y0 + 32), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 2)
     cv2.imwrite(out_path, mark)
     return mark
+
+
+
+# ===== 花瓣稀有度扫描(底部槽位两行) + 推荐可秒等级(按稀有度估算) =====
+RANK_SCORE = {"common": 1, "unusual": 2, "rare": 4, "epic": 8,
+              "legendary": 16, "mythic": 32, "ultra": 64}
+
+def scan_petal_ranks(img=None):
+    """扫描底部槽位区每格花瓣的稀有度颜色, 返回 (counts, per_slot)
+    counts: {rank: 数量}; per_slot: {(行,槽位): rank}
+    注意: 颜色只能判稀有度, 不能判花瓣种类(输出/防御/回血); U级粉色/普通绿在槽位里可能误判"""
+    if img is None:
+        img = get_frame()
+    from utils import _canvas_y_offset
+    h, w = img.shape[:2]
+    off = _canvas_y_offset
+    top = off + int((h - off) * SLOT_BAND_TOP)
+    bot = off + int((h - off) * SLOT_BAND_BOT)
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    row_h = (bot - top) / SLOT_ROWS
+    col_w = w / SLOT_COLS
+    counts = {r: 0 for r in RANK_HSV}
+    per_slot = {}
+    for r in range(SLOT_ROWS):
+        y0 = int(top + r * row_h); y1 = int(top + (r + 1) * row_h)
+        for i in range(SLOT_COLS):
+            x0 = int(i * col_w); x1 = int((i + 1) * col_w)
+            region = hsv[y0:y1, x0:x1]
+            best = None; best_n = 0
+            for rank, (lo, hi) in RANK_HSV.items():
+                n = cv2.countNonZero(cv2.inRange(region, np.array(lo), np.array(hi)))
+                if n > best_n:
+                    best_n, best = n, rank
+            if best and best_n > 25:
+                counts[best] += 1
+                per_slot[(r, i + 1)] = best
+    return counts, per_slot
+
+
+def rank_recommend(counts):
+    """按稀有度估算推荐可秒等级: 主力=分值最高且数量最多的档; 推荐=主力同级(打不动调低1档)"""
+    if not any(counts.values()):
+        return None
+    main = max((r for r, c in counts.items() if c), key=lambda r: (RANK_SCORE[r], counts[r]))
+    order = list(RANK_HSV.keys())
+    idx = order.index(main)
+    rec = order[max(0, idx - 1)] if idx > 0 else order[0]
+    return main, rec
