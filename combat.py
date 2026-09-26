@@ -411,7 +411,8 @@ def scan_petal_ranks(img=None):
 
 def rank_recommend(counts):
     """按稀有度估算推荐可秒等级:
-    稳定档=主力同级(必秒, 掉落稳); 练级档=主力+1(掉落高一档, 升级快但可能打不动)
+    稳定档=主力同级(必秒必拿掉落, 首选); 降档=打不动时的备选
+    维基生物表: 高一级血量 x3.6~46(神话->究极x46), 经验只多约x4~9 -> 秒不了的高一级绝对不划算
     注: 按稀有度估算, 未考虑花瓣种类/怪种, 实际以能3秒内秒杀为准"""
     if not any(counts.values()):
         return None
@@ -419,5 +420,4 @@ def rank_recommend(counts):
     order = list(RANK_HSV.keys())
     idx = order.index(main)
     rec = order[max(0, idx - 1)] if idx > 0 else order[0]
-    grind = order[min(len(order) - 1, idx + 1)] if idx < len(order) - 1 else order[idx]
-    return main, rec, grind
+    return main, rec

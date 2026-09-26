@@ -441,6 +441,61 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None):
         set_k(set())
 
 
+LEECH_RANGE = 25.0      # 蹭掉落触发范围(地图像素): 高等级怪距玩家10-25px时
+LEECH_APPROACH = 5.0    # 蹭掉落贴近距离: 走到5px内站定输出
+LEECH_TIME = 2.5        # 站定输出秒数(总伤害>1%即可分掉落)
+
+
+def leech_target(t, trail):
+    """朝高等级怪走到5px内, 站定2.5秒(攻击/防御线程自动输出>1%伤害混掉落), 期间低血/危险中断"""
+    from combat import HP_FLEE, get_hp_ratio
+    w = get_window()
+    t0 = time.time()
+    current_keys = set()
+    def set_k(keys):
+        nonlocal current_keys
+        for k in current_keys - keys:
+            keyup(k)
+        for k in keys - current_keys:
+            keydown(k)
+        current_keys = keys
+    try:
+        # 接近阶段(最多8秒)
+        while time.time() - t0 < 8:
+            pos = get_player_position()
+            if pos is None:
+                set_k(set()); time.sleep(0.3); continue
+            dx, dy = t[0] - pos[0], t[1] - pos[1]
+            dist = math.hypot(dx, dy)
+            if dist <= LEECH_APPROACH:
+                break
+            keys = set()
+            if abs(dx) > 1.5:
+                keys.add("d" if dx > 0 else "a")
+            if abs(dy) > 1.5:
+                keys.add("s" if dy > 0 else "w")
+            set_k(keys)
+            frame = get_frame()
+            hp = get_hp_ratio(frame)
+            if hp is not None and hp < HP_FLEE:
+                print("[蹭掉落] 接近中血量过低，中断")
+                return
+            time.sleep(0.05)
+        # 站定输出阶段
+        print(f"[蹭掉落] 到位, 站定输出 {LEECH_TIME}s 混掉落...")
+        end = time.time() + LEECH_TIME
+        while time.time() < end:
+            frame = get_frame()
+            hp = get_hp_ratio(frame)
+            if hp is not None and hp < HP_FLEE:
+                print("[蹭掉落] 输出中血量过低，中断")
+                return
+            time.sleep(0.2)
+        print("[蹭掉落] 输出完成，撤退")
+    finally:
+        set_k(set())
+
+
 def handle_danger(pos, near, ranks_map, trail, kill_rank):
     """>秒杀等级的危险怪: 先尝试绕开(5px设墙); 绕不开则往怪最少的方向跑, 直到脱离"""
     from combat import (build_avoid_map, detect_all, screen_to_map_safe,
@@ -661,6 +716,9 @@ if __name__ == "__main__":
     EFFICIENT = cfg.get("efficiency", False)
     if EFFICIENT:
         print("[效率] 效率模式已开启：少停顿少延迟，刷怪更快")
+    LEECH = cfg.get("leech", False) and mode != "none"
+    if LEECH:
+        print("[蹭掉落] 已开启：打不动的M/U怪在附近时打2.5s混掉落")
     print("[配置] 模式=" + MODE_NAMES.get(mode, mode) + ", 打怪=" + RANK_NAMES.get(kill_rank, kill_rank))
 
     # ===== 攻防线程(按玩家选择) =====
@@ -781,9 +839,9 @@ if __name__ == "__main__":
                 print(f"[配置] 花瓣扫描: {_desc}")
                 _rec = rank_recommend(_cnt)
                 if _rec:
-                    _main, _low, _grind = _rec
-                    print(f"[配置] 主力={_RN.get(_main, _main)}级 → 稳定打 {_RN.get(_main, _main)}（必秒必拿掉落）")
-                    print(f"[配置] 想练级更快可打 {_RN.get(_grind, _grind)}（掉落高一档；打不动就选稳定档）")
+                    _main, _low = _rec
+                    print(f"[配置] 主力={_RN.get(_main, _main)}级 → 推荐打 {_RN.get(_main, _main)}（必秒必拿掉落）")
+                    print(f"[配置] 若打不动可降到 {_RN.get(_low, _low)}；别打高一档（血量x3.6~46, 经验只多x4~9, 秒不了不划算）")
             else:
                 print("[配置] 未扫到花瓣（窗口需在游戏中且可见）")
         except Exception as e:
@@ -869,6 +927,18 @@ if __name__ == "__main__":
                         print("[闪避] 飞行物来袭，横向闪避")
                         dodge_proj(near_p)
                         continue
+                    # 蹭掉落: 打不动的更高等级怪在10-25px内 -> 打2.5s混掉落(总伤害>1%即可分掉落)
+                    if LEECH:
+                        far = []
+                        for r in RANK_ORDER[idx + 1:]:
+                            far += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
+                        leech_t = choose_target(far, goal_pt, pos)
+                        if leech_t is not None:
+                            d = math.hypot(leech_t[0] - pos[0], leech_t[1] - pos[1])
+                            if d <= LEECH_RANGE:
+                                set_title("蹭掉落")
+                                leech_target(leech_t, trail)
+                                continue
                     prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
                     target = choose_target(prey, goal_pt, pos)
                     if target is not None:

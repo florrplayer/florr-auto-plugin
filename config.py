@@ -5,7 +5,7 @@ import os
 import tkinter as tk
 
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "efficiency": False, "version": 6}
+DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "efficiency": False, "leech": False, "version": 7}
 
 MODE_NAMES = {"attack": "全程攻击", "defense": "全程防御", "none": "不弄(手动)"}
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
@@ -158,5 +158,9 @@ def ask_config():
                     [(i, HEAL_NAMES[i]) for i in range(1, 11)],
                     "florr 挂机设置 ③/④")
     ef = _ask("刷怪效率模式？\n标准：更像人（更安全，效率约-8%）\n效率：少停顿少延迟（刷怪更快，挂机检测风险略升）",
-              [("no", "标准（更安全）"), ("yes", "效率（刷怪更快）")], "florr 挂机设置 ④/④")
-    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "version": 6}
+              [("no", "标准（更安全）"), ("yes", "效率（刷怪更快）")], "florr 挂机设置 ④/⑤")
+    lc = False
+    if m != "none":
+        lc = _ask("要不要蹭高等级怪的掉落？\n（打不动的M/U怪在附近时，上去打2.5秒混伤害拿掉落，然后撤退）\n掉落机制：总伤害>1%就有资格分掉落（单人时杀怪必得）",
+                  [("no", "不蹭（更安全）"), ("yes", "蹭（掉落更多）")], "florr 挂机设置 ⑤/⑤") == "yes"
+    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "leech": lc, "version": 7}
