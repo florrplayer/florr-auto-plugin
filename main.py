@@ -658,6 +658,9 @@ if __name__ == "__main__":
         cfg = ask_config()
         save_config(cfg)
     mode, kill_rank = cfg["mode"], cfg["kill_rank"]
+    EFFICIENT = cfg.get("efficiency", False)
+    if EFFICIENT:
+        print("[效率] 效率模式已开启：少停顿少延迟，刷怪更快")
     print("[配置] 模式=" + MODE_NAMES.get(mode, mode) + ", 打怪=" + RANK_NAMES.get(kill_rank, kill_rank))
 
     # ===== 攻防线程(按玩家选择) =====
@@ -803,7 +806,7 @@ if __name__ == "__main__":
             goal_pt = patrol_points[patrol_index]
 
             # ===== 人性化微操作(防挂机, 无副作用): 微转向/微停顿/微抖动 =====
-            if HUMANIZE and pos is not None and random.random() < 0.35:
+            if HUMANIZE and pos is not None and random.random() < (0.15 if EFFICIENT else 0.35):
                 human_ticks(get_window(), goal_pt)
 
             # ===== 实时地图窗口(红线路径), 每0.3s刷新 =====
@@ -852,7 +855,10 @@ if __name__ == "__main__":
                     target = choose_target(prey, goal_pt, pos)
                     if target is not None:
                         if HUMANIZE:
-                            time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
+                            if EFFICIENT:
+                                time.sleep(0.05 + random.random() * 0.1)
+                            else:
+                                time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         set_title("战斗中")
                         print(f"[战斗] 发现目标 {target}，追击...")
                         stop_dist = 2.0 if mode == "attack" else 0.5
@@ -869,8 +875,8 @@ if __name__ == "__main__":
                 print(f"[巡逻] 到达点 {patrol_index+1}，前往下一个点")
                 patrol_index = (patrol_index + 1) % len(patrol_points)
                 PATH_CACHE.update(goal=None, path=None)
-                # 防挂机: 到达巡逻点后随机停顿 0.5-2.5 秒
-                pause = 0.5 + random.random() * 2.0
+                # 防挂机: 到达巡逻点后随机停顿(效率模式更短)
+                pause = (0.15 + random.random() * 0.4) if EFFICIENT else (0.5 + random.random() * 2.0)
                 print(f"[防挂机] 随机停顿 {pause:.1f}s")
                 time.sleep(pause)
             elif result == "step_done":

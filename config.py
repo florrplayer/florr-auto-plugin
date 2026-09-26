@@ -5,7 +5,7 @@ import os
 import tkinter as tk
 
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "version": 5}
+DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "efficiency": False, "version": 6}
 
 MODE_NAMES = {"attack": "全程攻击", "defense": "全程防御", "none": "不弄(手动)"}
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
@@ -156,5 +156,7 @@ def ask_config():
         r = "mythic"
     hs = _ask_multi("血量<10%时，切哪些副槽的回血花瓣（玫瑰/叶子）？\n（勾选所有放了回血花瓣的副槽位置，可多选；恢复后自动切回）",
                     [(i, HEAL_NAMES[i]) for i in range(1, 11)],
-                    "florr 挂机设置 ③/③")
-    return {"mode": m, "kill_rank": r, "heal_slots": hs, "version": 4}
+                    "florr 挂机设置 ③/④")
+    ef = _ask("刷怪效率模式？\n标准：更像人（更安全，效率约-8%）\n效率：少停顿少延迟（刷怪更快，挂机检测风险略升）",
+              [("no", "标准（更安全）"), ("yes", "效率（刷怪更快）")], "florr 挂机设置 ④/④")
+    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "version": 6}
