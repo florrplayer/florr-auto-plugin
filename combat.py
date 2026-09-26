@@ -31,7 +31,7 @@ PROJ_DODGE_R = 120                         # 飞行物进入玩家周围120px内
 HP_BAR_Y = 30                            # 玩家脚下血条位置: 中心下方30px(屏幕px, 默认HUD)
 HP_BAR_H = 4                             # 血条半高(px)
 HP_BAR_W = 50                            # 血条半宽(px)
-HP_FLEE = 0.10                           # 血量低于10% 跑路
+HP_FLEE = 0.20                           # 血量低于20% 跑路(维基攻略建议提前切回血, 防秒杀)
 HP_RECOVER = 0.35                        # 血量恢复到35% 才回去继续
 # 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
@@ -410,11 +410,14 @@ def scan_petal_ranks(img=None):
 
 
 def rank_recommend(counts):
-    """按稀有度估算推荐可秒等级: 主力=分值最高且数量最多的档; 推荐=主力同级(打不动调低1档)"""
+    """按稀有度估算推荐可秒等级:
+    稳定档=主力同级(必秒, 掉落稳); 练级档=主力+1(掉落高一档, 升级快但可能打不动)
+    注: 按稀有度估算, 未考虑花瓣种类/怪种, 实际以能3秒内秒杀为准"""
     if not any(counts.values()):
         return None
     main = max((r for r, c in counts.items() if c), key=lambda r: (RANK_SCORE[r], counts[r]))
     order = list(RANK_HSV.keys())
     idx = order.index(main)
     rec = order[max(0, idx - 1)] if idx > 0 else order[0]
-    return main, rec
+    grind = order[min(len(order) - 1, idx + 1)] if idx < len(order) - 1 else order[idx]
+    return main, rec, grind

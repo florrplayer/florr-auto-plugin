@@ -781,8 +781,9 @@ if __name__ == "__main__":
                 print(f"[配置] 花瓣扫描: {_desc}")
                 _rec = rank_recommend(_cnt)
                 if _rec:
-                    _main, _low = _rec
-                    print(f"[配置] 主力={_RN.get(_main, _main)}级，推荐打 {_RN.get(_main, _main)}（若觉得慢可调低到 {_RN.get(_low, _low)}）")
+                    _main, _low, _grind = _rec
+                    print(f"[配置] 主力={_RN.get(_main, _main)}级 → 稳定打 {_RN.get(_main, _main)}（必秒必拿掉落）")
+                    print(f"[配置] 想练级更快可打 {_RN.get(_grind, _grind)}（掉落高一档；打不动就选稳定档）")
             else:
                 print("[配置] 未扫到花瓣（窗口需在游戏中且可见）")
         except Exception as e:
