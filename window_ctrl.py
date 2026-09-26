@@ -145,6 +145,22 @@ class WindowController:
             wc.SWP_NOACTIVATE | wc.SWP_NOSIZE | wc.SWP_SHOWWINDOW,
         )
 
+    def restore_visible(self):
+        """最小化/不可见时恢复: 还原+最大化+置顶(强制恢复渲染, 防画面冻结卡死)"""
+        if not self.hwnd:
+            return
+        import win32con as wc
+        import time
+        win32gui.ShowWindow(self.hwnd, wc.SW_RESTORE)
+        time.sleep(0.3)
+        win32gui.ShowWindow(self.hwnd, wc.SW_MAXIMIZE)
+        time.sleep(0.3)
+        win32gui.SetWindowPos(
+            self.hwnd, wc.HWND_TOP,
+            0, 0, 0, 0,
+            wc.SWP_NOACTIVATE | wc.SWP_NOSIZE | wc.SWP_NOMOVE | wc.SWP_SHOWWINDOW,
+        )
+
     def capture(self, region=None):
         """截取窗口客户区，返回 BGR numpy 数组
         用 PIL ImageGrab 截全屏然后裁剪(PrintWindow对Edge截到旧缓存, BitBlt全黑)

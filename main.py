@@ -65,6 +65,44 @@ def set_title(s):
         pass
 
 
+# ===== 画面冻结监测: 窗口被最小化/遮挡导致画面全黑或静止时, 自动恢复窗口强制渲染 =====
+_freeze_watch = {"count": 0, "last": None}
+def freeze_watchdog():
+    while True:
+        time.sleep(4)
+        try:
+            f = get_frame()
+            gray = cv2.cvtColor(f, cv2.COLOR_BGR2GRAY)
+            mean = float(gray.mean())
+            abnormal = False
+            if mean < 8:
+                abnormal = True                       # 全黑: 窗口不可见(最小化/移出屏幕)
+            elif _freeze_watch["last"] is not None:
+                if float(cv2.absdiff(gray, _freeze_watch["last"]).mean()) < 1.0:
+                    abnormal = True                   # 画面完全静止: 渲染被暂停(Edge后台节流)
+            _freeze_watch["last"] = gray
+            if abnormal:
+                _freeze_watch["count"] += 1
+            else:
+                _freeze_watch["count"] = 0
+            if _freeze_watch["count"] >= 3:           # 连续约12秒异常
+                try:
+                    stage = check_stage()
+                except Exception:
+                    stage = None
+                if stage in ("in_menu", "in_game_dead"):
+                    _freeze_watch["count"] = 0        # 菜单/死亡本来就静止, 不误判
+                    continue
+                print("[画面] 窗口不可见/渲染停止，自动恢复窗口...")
+                get_window().restore_visible()
+                set_title("已自动恢复窗口")
+                _freeze_watch["count"] = 0
+                _freeze_watch["last"] = None
+                time.sleep(3)
+        except Exception:
+            pass
+
+
 def line_of_sight(map, n1, n2):
     x0, y0 = n1
     x1, y1 = n2
@@ -609,6 +647,9 @@ if __name__ == "__main__":
     get_window().move_offscreen()
     set_title("运行中")
     print("[+] 脚本运行中... 按 Ctrl+C 停止（停止后窗口自动移回）")
+    # 画面冻结监测: 最小化/遮挡时自动恢复窗口(Edge最小化会暂停渲染, 截图会失明)
+    threading.Thread(target=freeze_watchdog, daemon=True).start()
+    print("[+] 画面冻结监测已开启（窗口被最小化/遮挡会自动恢复）")
 
     # ===== 后台防御线程：一直按住右键 =====
     # ===== 交互配置(弹窗让玩家选, 存档后只问要不要更新) =====
