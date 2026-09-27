@@ -918,6 +918,10 @@ if __name__ == "__main__":
         from combat import detect_mobs, screen_to_map, ultra_blocked, choose_target
 
         while True:
+            # ===== 运行统计(每5分钟打印一次) =====
+            if time.time() - _STATS["report"] > 300:
+                _STATS["report"] = time.time()
+                print(f"[统计] 已运行 {int((time.time() - _STATS['t0']) / 60)} 分钟 | 战斗 {_STATS['fights']} 次 | 拾取掉落 {_STATS['pickups']} 次")
             # 先检查状态
             stage = check_stage()
             if stage == "in_game_dead":
@@ -1064,7 +1068,32 @@ if __name__ == "__main__":
                         if r in ("danger", "lowhp"):
                             continue
                         print("[战斗] 结束，继续巡逻")
+                        _STATS["fights"] += 1
                         continue
+
+            # ===== 怪潮预警: 屏幕怪太多且无目标可打(被围) -> 往怪群反方向走 =====
+            if SWARM_WARN and target is None:
+                total_mobs = sum(len(v) for v in ranks_map.values())
+                if total_mobs > SWARM_COUNT:
+                    swarm_c = [m for m in (screen_to_map_safe(p, pos) for v in ranks_map.values() for p in v) if m]
+                    if swarm_c:
+                        avgx = sum(m[0] for m in swarm_c) / len(swarm_c)
+                        avgy = sum(m[1] for m in swarm_c) / len(swarm_c)
+                        if math.hypot(avgx - pos[0], avgy - pos[1]) < SWARM_RADIUS:
+                            dx, dy = pos[0] - avgx, pos[1] - avgy
+                            keys = set()
+                            if abs(dx) > 1.5:
+                                keys.add("d" if dx > 0 else "a")
+                            if abs(dy) > 1.5:
+                                keys.add("s" if dy > 0 else "w")
+                            print(f"[怪潮] 屏幕 {total_mobs} 只怪围住，往怪少处走...")
+                            set_title("怪潮躲避")
+                            for k in keys:
+                                keydown(k)
+                            time.sleep(1.2)
+                            for k in keys:
+                                keyup(k)
+                            continue
 
             # ===== 掉落自动拾取（顺路捡，战斗/危险优先；只捡近的，不影响巡逻主线）=====
             if PICKUP_DROPS:
@@ -1089,7 +1118,8 @@ if __name__ == "__main__":
             result = lazy_theta_pathing(goal_pt, dedicated_area, step=PATH_STEP if COMBAT_ENABLED else 0)
             if result is True:
                 print(f"[巡逻] 到达点 {patrol_index+1}，前往下一个点")
-                patrol_index = (patrol_index + 1) % len(patrol_points)
+                # 巡逻顺序随机化(像人不固定路线, 兼防挂机): 随机选非当前点
+                patrol_index = random.choice([i for i in range(len(patrol_points)) if i != patrol_index])
                 PATH_CACHE.update(goal=None, path=None)
                 # 防挂机: 到达巡逻点后随机停顿(效率模式更短)
                 pause = (0.15 + random.random() * 0.4) if EFFICIENT else (0.5 + random.random() * 2.0)
@@ -1098,8 +1128,8 @@ if __name__ == "__main__":
             elif result == "step_done":
                 continue
             elif result == "stuck_loop":
-                print(f"[巡逻] 点 {patrol_index+1} 反复卡住，跳过该点")
-                patrol_index = (patrol_index + 1) % len(patrol_points)
+                print(f"[巡逻] 点 {patrol_index+1} 反复卡住，绕路失败换点")
+                patrol_index = random.choice([i for i in range(len(patrol_points)) if i != patrol_index])
             # result 为 False 说明死了或回菜单，循环回去处理
     except KeyboardInterrupt:
         print("\n[!] 用户中断")
