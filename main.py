@@ -415,6 +415,10 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
             if fixed_target is not None:
                 # 固定目标模式(特殊稀有生物): 不按颜色重新选, 一路追到它消失/超时
                 t = fixed_target
+            elif kill_rank == "random":
+                # 随机打怪: 追击中每次随机挑一只非U怪(目标消失就换一只)
+                prey = [m for m in (screen_to_map_safe(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
+                t = random.choice(prey) if prey else None
             else:
                 prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
                 t = choose_target(prey, patrol_goal, pos)
@@ -1062,8 +1066,13 @@ if __name__ == "__main__":
                                 set_title("蹭掉落")
                                 leech_target(leech_t, trail)
                                 continue
-                    prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
-                    target = choose_target(prey, goal_pt, pos)
+                    if kill_rank == "random":
+                        # 随机打怪模式: 屏幕内任意非U怪随机挑一只打(避开U级, 防止送死循环)
+                        prey_all = [m for m in (screen_to_map_safe(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
+                        target = random.choice(prey_all) if prey_all else None
+                    else:
+                        prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
+                        target = choose_target(prey, goal_pt, pos)
                     if target is not None:
                         if HUMANIZE:
                             if EFFICIENT:

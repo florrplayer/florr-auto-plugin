@@ -9,7 +9,7 @@ DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_
 
 MODE_NAMES = {"attack": "全程攻击", "defense": "全程防御", "none": "不弄(手动)"}
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
-RANK_NAMES = {"common": "普通(绿)", "unusual": "罕见(黄)", "rare": "稀有(蓝)", "epic": "史诗(紫)", "legendary": "传奇(红)", "mythic": "神话M(青)", "ultra": "究极U(粉)"}
+RANK_NAMES = {"common": "普通(绿)", "unusual": "罕见(黄)", "rare": "稀有(蓝)", "epic": "史诗(紫)", "legendary": "传奇(红)", "mythic": "神话M(青)", "ultra": "究极U(粉)", "random": "随机打怪"}
 HEAL_NAMES = {1: "副槽1", 2: "副槽2", 3: "副槽3", 4: "副槽4", 5: "副槽5", 6: "副槽6", 7: "副槽7", 8: "副槽8", 9: "副槽9", 10: "副槽10(0键)"}
 HEAL_TYPE_NAMES = {"rose": "玫瑰Rose(爆发救急)", "dahlia": "大丽花Dahlia(稳定小回血)",
                    "yucca": "丝兰Yucca(防御时回血)", "starfish": "海星Starfish(被动回血)",
@@ -259,7 +259,7 @@ def ask_config(map_name="desert"):
     if m is None:
         m = "defense"
     r = _ask("你可以秒（<3秒）哪个等级的怪？\\n（=这级自动追贴脸打，更高避开，更低不管）",
-             [(k, RANK_NAMES[k]) for k in RANK_ORDER], "florr 挂机设置 ②/⑥")
+             [(k, RANK_NAMES[k]) for k in RANK_ORDER] + [("random", "随机打怪（碰到什么打什么，避开U级）")], "florr 挂机设置 ②/⑦")
     if r is None:
         r = "mythic"
     hs = _ask_multi("血量低时，切哪些副槽的回血花瓣（玫瑰/叶子）？\n（勾选所有放了回血花瓣的副槽位置，可多选；恢复后自动切回）",
