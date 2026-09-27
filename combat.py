@@ -57,6 +57,77 @@ EXCLUDE_CENTER_R = 40                            # 排除玩家自身区域半�
 ULTRA_AVOID = 5.0                                # 避开 U 距离(地图像素)
 ULTRA_KISS = 0.5                                 # 贴脸距离(地图像素)
 DEVIATION = 30.0                                 # 打 M 不偏离巡逻点超过该距离(地图像素)
+# ===== 特殊稀有生物优先打(用户点名) =====
+# 正方形(亮黄方形/10血100%掉正方形花瓣) / shiny闪亮(白亮高光, 如闪亮瓢虫掉Yggdrasil)
+# 金叶虫(金黄, 仅丛林, Ultra+才掉黄金之叶) / 潜水兵蚁(蓝灰, 仅海洋)
+# 颜色为初版估计(依据维基外观描述), 地图/形状过滤防误检; 实测误检漏检截图后可精调(同玩家点#F9DD64校准)
+SPECIAL_MOBS = [
+    # (名称, HSV区间, 地图白名单(仅这些图检测), 形状判定)
+    # 形状: "square"=矩形度>0.85(方) / "nonround"=矩形度<0.85(非圆, 叶虫形) / None=不限
+    ("square",          ((20, 140, 150), (36, 255, 255)), None,       "square"),
+    ("shiny",           ((0, 0, 190),    (180, 70, 255)), None,       None),
+    ("golden_leafbug",  ((18, 140, 130), (30, 255, 255)), ("jungle",), "nonround"),
+    ("diver_ant",       ((95, 60, 80),   (135, 255, 255)), ("ocean",), None),
+]
+SPECIAL_PRIORITY_ORDER = ["square", "shiny", "golden_leafbug", "diver_ant"]
+SPECIAL_DEVIATION = 60.0          # 特殊怪放宽偏离巡逻点限制(稀有生物值得追)
+SPECIAL_MIN_PX = 10
+SPECIAL_MAX_PX = 260
+
+
+def _rectangularity(area, w, h):
+    """矩形度(连通域面积/外接矩形面积): 正方形≈1.0, 圆形≈0.785, 长条≈0.5"""
+    if w <= 0 or h <= 0:
+        return 0.0
+    return area / float(w * h)
+
+
+def detect_special(frame=None, map_name=None, exclude_center=True):
+    """检测特殊稀有生物, 返回 {名称: [屏幕坐标]}
+    square=亮黄方形(矩形度>0.88), shiny=白亮高光, golden_leafbug=金黄(仅丛林), diver_ant=蓝灰(仅海洋)"""
+    if frame is None:
+        frame = get_frame()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    det_w = 960
+    det_h = int(hsv.shape[0] / _downscale)
+    cx, cy = get_screen_center()
+    out = {}
+    for name, (lo, hi), maps, shape in SPECIAL_MOBS:
+        if maps and (map_name is None or map_name not in maps):
+            continue
+        mask = cv2.inRange(hsv, np.array(lo), np.array(hi))
+        if exclude_center:
+            cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
+        small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
+        n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
+        pts = []
+        for i in range(1, n):
+            area = stats[i, cv2.CC_STAT_AREA]
+            w, h = stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_HEIGHT]
+            if not (SPECIAL_MIN_PX * SPECIAL_MIN_PX / 4 <= area <= SPECIAL_MAX_PX * SPECIAL_MAX_PX):
+                continue
+            if w > SPECIAL_MAX_PX * 1.5 or h > SPECIAL_MAX_PX * 1.5:
+                continue
+            if w * 4 < h or h * 4 < w:
+                continue
+            if shape == "square":
+                # 方形判定: 面积/外接矩形≈1.0 是方形, 圆形≈0.785, 排除圆形怪
+                if _rectangularity(area, w, h) < 0.85:
+                    continue
+            elif shape == "nonround":
+                # 非圆判定: 圆度=面积/外接圆面积(圆≈0.98, 椭圆≈0.5-0.8, 方>1)
+                # 金叶虫=金色叶虫形(非圆), 罕见黄怪=圆形 -> 圆度>0.9 排除
+                if area <= 0:
+                    continue
+                r2 = (max(w, h) / 2.0) ** 2
+                if area / (3.14159265 * r2) > 0.9:
+                    continue
+            pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
+        if pts:
+            out[name] = pts
+    return out
+
+
 
 
 def get_screen_center():
@@ -252,18 +323,20 @@ def map_to_screen(map_pt, player_map=None):
             int(cy + dy_map * WORLD_PER_MAPUNIT / SCALE_PX_PER_UNIT))
 
 
-def choose_target(mythics_map, patrol_goal, player_map=None):
-    """从 M 怪里挑: 距离最近 且 不偏离巡逻点
+def choose_target(mythics_map, patrol_goal, player_map=None, dev_limit=None):
+    """从候选目标里挑: 距离最近 且 不偏离巡逻点
 
     偏离容忍 = DEVIATION + 玩家到巡逻点的距离(走路途中顺路打, 快到了不乱跑)
+    dev_limit 可覆盖(特殊稀有生物放宽限制)
     patrol_goal: 当前巡逻目标点(地图坐标)。返回目标地图坐标或 None
     """
     if player_map is None:
         player_map = get_player_position()
     if player_map is None or not mythics_map:
         return None
-    dev_limit = DEVIATION + math.hypot(player_map[0] - patrol_goal[0],
-                                       player_map[1] - patrol_goal[1])
+    if dev_limit is None:
+        dev_limit = DEVIATION + math.hypot(player_map[0] - patrol_goal[0],
+                                           player_map[1] - patrol_goal[1])
     best, best_d = None, float("inf")
     for m in mythics_map:
         d = math.hypot(m[0] - player_map[0], m[1] - player_map[1])

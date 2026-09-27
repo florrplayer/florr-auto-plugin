@@ -368,7 +368,7 @@ def screen_to_map_safe(pt, pos):
         return None
 
 
-def chase_target(patrol_goal, trail, kill_rank, stop_dist=None):
+def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=None):
     """追击 =秒杀等级的怪; 攻击模式停 2px, 防御模式贴 0.5px; >秒杀贴近返回 'danger'; 低血返回 'lowhp'"""
     from combat import (detect_all, choose_target, ultra_blocked, screen_to_map_safe,
                         RANK_ORDER, KILL_STOP, CHASE_WARN, KISS_SLOW,
@@ -412,8 +412,12 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None):
             if near_p:
                 print("[闪避] 打怪中闪避飞行物")
                 dodge_proj(near_p)
-            prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
-            t = choose_target(prey, patrol_goal, pos)
+            if fixed_target is not None:
+                # 固定目标模式(特殊稀有生物): 不按颜色重新选, 一路追到它消失/超时
+                t = fixed_target
+            else:
+                prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
+                t = choose_target(prey, patrol_goal, pos)
             if t is None:
                 print("[战斗] 目标消失，结束追击")
                 return "done"
@@ -964,6 +968,26 @@ if __name__ == "__main__":
                     if near_p:
                         print("[闪避] 飞行物来袭，横向闪避")
                         dodge_proj(near_p)
+                        continue
+                    # 特殊稀有生物最优先(正方形>shiny>金叶虫>潜水兵蚁): 放宽巡逻偏离限制追
+                    from combat import detect_special, SPECIAL_PRIORITY_ORDER, SPECIAL_DEVIATION
+                    sp_map = detect_special(frame, map_name)
+                    sp_target, sp_name = None, None
+                    if sp_map:
+                        for sname in SPECIAL_PRIORITY_ORDER:
+                            cand = [m for m in (screen_to_map_safe(p, pos) for p in (sp_map.get(sname) or [])) if m]
+                            t = choose_target(cand, goal_pt, pos, dev_limit=SPECIAL_DEVIATION)
+                            if t is not None:
+                                sp_target, sp_name = t, sname
+                                break
+                    if sp_target is not None:
+                        set_title("战斗中(稀有)")
+                        print(f"[稀有] 优先打 {sp_name} {sp_target}...")
+                        stop_dist = 2.0 if mode == "attack" else 0.5
+                        r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist, fixed_target=sp_target)
+                        if r in ("danger", "lowhp"):
+                            continue
+                        print(f"[稀有] {sp_name} 结束，继续巡逻")
                         continue
                     # 蹭掉落: 打不动的更高等级怪在10-25px内 -> 打2.5s混掉落(总伤害>1%即可分掉落)
                     if LEECH:
