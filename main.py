@@ -914,6 +914,8 @@ if __name__ == "__main__":
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
         trail = deque(maxlen=TRAIL_MAX)
+        _afk_hits = 0          # AFK弹窗连续命中计数(>=4触发点击)
+        _afk_last_mean = None  # 上一帧中心灰度均值(判静止)
         last_map_win = 0
         _boss_pause_until = 0.0   # Bossbar 检测到 Super+ 后暂停追怪的时间戳(别送死)
 
@@ -927,6 +929,21 @@ if __name__ == "__main__":
             if time.time() - _STATS["report"] > 300:
                 _STATS["report"] = time.time()
                 print(f"[统计] 已运行 {int((time.time() - _STATS['t0']) / 60)} 分钟 | 战斗 {_STATS['fights']} 次 | 拾取掉落 {_STATS['pickups']} 次")
+            # ===== AFK Check 弹窗("Are you here?", 60秒不点踢下线): 中心暗+静止连续4帧 -> 点Yes =====
+            from combat import detect_afk_check
+            _cdf = get_frame()
+            _cdark, _cstatic, _cmean = detect_afk_check(_cdf, _afk_last_mean)
+            _afk_last_mean = _cmean
+            if _cdark and _cstatic:
+                _afk_hits += 1
+            else:
+                _afk_hits = 0
+            if _afk_hits >= 4:
+                _ccx, _ccy = get_screen_center()
+                print(f"[AFK] 检测到 AFK Check 弹窗(中心灰度{_cmean:.0f})，点击 Yes 按钮...")
+                get_window().left_click(_ccx, _ccy + 60)   # 按钮位置估算(弹窗中央偏下), 实测不准可校准
+                _afk_hits = 0
+                time.sleep(2)
             # 先检查状态
             stage = check_stage()
             if stage == "in_game_dead":
@@ -1027,6 +1044,24 @@ if __name__ == "__main__":
                         if r in ("in_game_dead", "in_menu"):
                             continue
                         continue
+                    # Super 薄荷绿怪: leech开则蹭1%掉落(Super分25人), 否则避开(75级前杀Super只掉究极档)
+                    from combat import detect_super
+                    sup = detect_super(frame)
+                    if sup:
+                        sup_m = [m for m in (screen_to_map_safe(p, pos) for p in sup) if m]
+                        near_s = ultra_blocked(sup_m, pos, margin=WARN_MARGIN)
+                        if near_s:
+                            if LEECH:
+                                _st = choose_target(sup_m, goal_pt, pos)
+                                if _st is not None and math.hypot(_st[0] - pos[0], _st[1] - pos[1]) <= LEECH_RANGE:
+                                    set_title("蹭Super")
+                                    leech_target(_st, trail)
+                                    continue
+                            print("[Super] 薄荷绿Super级怪在场，避开(75级前杀Super只掉究极档)")
+                            r = handle_danger(pos, near_s, ranks_map, trail, kill_rank)
+                            if r in ("in_game_dead", "in_menu"):
+                                continue
+                            continue
                     # 飞行物(导弹/螯针等): 靠近就横向闪避
                     from combat import detect_projectiles
                     near_p = nearest_proj(detect_projectiles(frame))
@@ -1047,6 +1082,8 @@ if __name__ == "__main__":
                                 break
                     if sp_target is not None:
                         set_title("战斗中(稀有)")
+                        if sp_name == "golden_leafbug":
+                            print("[稀有] ⚠️ 金叶虫: 请确保未装备魔法球再打(否则不掉黄金之叶)!")
                         print(f"[稀有] 优先打 {sp_name} {sp_target}...")
                         stop_dist = 2.0 if mode == "attack" else 0.5
                         r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist, fixed_target=sp_target)

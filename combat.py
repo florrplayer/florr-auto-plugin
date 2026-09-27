@@ -64,12 +64,15 @@ DEVIATION = 30.0                                 # 打 M 不偏离巡逻点超�
 SPECIAL_MOBS = [
     # (名称, HSV区间, 地图白名单(仅这些图检测), 形状判定)
     # 形状: "square"=矩形度>0.85(方) / "nonround"=矩形度<0.85(非圆, 叶虫形) / None=不限
-    ("square",          ((20, 140, 150), (36, 255, 255)), None,       "square"),
-    ("shiny",           ((0, 0, 190),    (180, 70, 255)), None,       None),
     ("golden_leafbug",  ((18, 140, 130), (30, 255, 255)), ("jungle",), "nonround"),
+    ("shiny_ladybug",   ((22, 140, 180), (28, 255, 255)), ("desert",), None),
+    ("shiny",           ((0, 0, 190),    (180, 70, 255)), None,       None),
     ("diver_ant",       ((95, 60, 80),   (135, 255, 255)), ("ocean",), None),
+    ("square",          ((20, 140, 150), (36, 255, 255)), None,       "square"),
 ]
-SPECIAL_PRIORITY_ORDER = ["square", "shiny", "golden_leafbug", "diver_ant"]
+# 优先级按挂机价值: 金叶虫(黄金之叶) > 黄瓢虫(Yggdrasil) > shiny(白亮) > 潜水兵蚁 > 正方形(0.0001%几乎遇不到)
+# ⚠️ 黄瓢虫与罕见黄怪同黄色段, 初版仅靠"沙漠+尺寸"过滤, 实测误检可截图精调(同玩家点校准)
+SPECIAL_PRIORITY_ORDER = ["golden_leafbug", "shiny_ladybug", "shiny", "diver_ant", "square"]
 SPECIAL_DEVIATION = 60.0          # 特殊怪放宽偏离巡逻点限制(稀有生物值得追)
 SPECIAL_MIN_PX = 10
 SPECIAL_MAX_PX = 260
@@ -210,6 +213,37 @@ def detect_drops(frame=None, exclude_center=True):
             continue
         pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
     return pts
+
+
+# Super 超级怪: 薄荷绿描边 #2BFFA3(UI色, 博客园配色表2023-04-05); 精确身体色需游戏截图实测
+SUPER_HSV = ((72, 120, 150), (82, 255, 255))   # 实测 #2BFFA3 -> HSV(77,212,255)
+AFK_DARK_MEAN = 70      # AFK弹窗: 屏幕中心区域灰度均值低于该值视为暗遮罩
+
+
+def detect_super(frame=None):
+    """检测 Super 级怪(薄荷绿), 返回屏幕坐标列表"""
+    if frame is None:
+        frame = get_frame()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    return _detect_color(hsv, SUPER_HSV)
+
+
+def detect_afk_check(frame, prev_gray_center=None):
+    """检测 AFK Check 弹窗("Are you here?", 60秒不点踢下线):
+    特征=屏幕中心大区域暗色遮罩(mean<AFK_DARK_MEAN)且画面静止(与上帧中心均值差<5)
+    返回 (中心是否暗, 画面是否静止, 中心灰度均值)"""
+    try:
+        h, w = frame.shape[:2]
+        cx, cy = get_screen_center()
+        rw, rh = int(w * 0.30), int(h * 0.30)
+        x0, x1 = max(0, cx - rw), min(w, cx + rw)
+        y0, y1 = max(0, cy - rh), min(h, cy + rh)
+        gray = cv2.cvtColor(frame[y0:y1, x0:x1], cv2.COLOR_BGR2GRAY)
+        m = float(gray.mean())
+        static = prev_gray_center is not None and abs(m - prev_gray_center) < 5
+        return m < AFK_DARK_MEAN, static, m
+    except Exception:
+        return False, False, 999.0
 
 
 def detect_mobs(frame=None):
