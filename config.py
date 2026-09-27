@@ -5,7 +5,7 @@ import os
 import tkinter as tk
 
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "efficiency": False, "leech": False, "heal_type": "rose", "version": 8}
+DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "region": "", "region_map": "", "efficiency": False, "leech": False, "heal_type": "rose", "version": 9}
 
 MODE_NAMES = {"attack": "全程攻击", "defense": "全程防御", "none": "不弄(手动)"}
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
@@ -16,6 +16,108 @@ HEAL_TYPE_NAMES = {"rose": "玫瑰Rose(爆发救急)", "dahlia": "大丽花Dahli
                    "leaf": "叶子Leaf(过渡用)"}
 # 旧配置兼容(1.x: M=只打神话, M+L=神话+传奇, none=纯巡逻)
 RANK_LEGACY = {"M": "mythic", "M+L": "legendary", "none": "none"}
+
+
+
+# ===== 刷怪区域系统 =====
+# 每图区域: (key, 显示名, 推荐秒杀档(kill_rank自动匹配用), 中心百分比(x,y) [地图像素=百分比x300], 巡逻半径百分比)
+# ⚠️ 坐标为初版估算(依据研究手册分区描述)，实测位置不对时截图/报坐标给我精调；
+#    也可在"要不要重新设置巡逻点"时选"重新设置"手动点选校准。
+REGION_TABLE = {
+    "garden": [
+        ("ladybug", "出生点/瓢虫区（绿黄怪，新手）", ("common", "unusual"), (0.50, 0.78), 0.10),
+        ("bee", "蜜蜂区（蓝紫怪）", ("rare", "epic"), (0.62, 0.58), 0.10),
+        ("mini_spiral", "Mini Spiral（Mythic区）", ("legendary", "mythic"), (0.42, 0.35), 0.08),
+        ("spiral", "Spiral（最深Ultra区，Super集中）", ("ultra",), (0.28, 0.22), 0.08),
+    ],
+    "desert": [
+        ("entry", "入口区（绿→蓝怪，效率≈花园10倍）", ("common", "unusual", "rare"), (0.68, 0.62), 0.12),
+        ("ss", "ss区（Legendary沙尘暴）", ("legendary",), (0.32, 0.55), 0.08),
+        ("tunnel", "Tunnel（Mythic）", ("mythic",), (0.42, 0.25), 0.08),
+        ("box", "Box（Ultra区，Super集中）", ("ultra",), (0.85, 0.15), 0.08),
+    ],
+    "anthell": [
+        ("normal", "常规区（普通罕见）", ("common", "unusual"), (0.55, 0.70), 0.10),
+        ("secret", "机密区（史诗传奇，密道左走）", ("epic", "legendary"), (0.35, 0.45), 0.08),
+        ("top_secret", "绝密区（传奇+，概率刷Super）", ("mythic", "ultra"), (0.20, 0.30), 0.08),
+    ],
+    "ocean": [
+        ("o1_3", "浅水区O1-3（蓝紫怪）", ("common", "unusual", "rare"), (0.50, 0.75), 0.10),
+        ("o4_5", "中部O4-5（螃蟹王国，紫红怪）", ("epic", "legendary"), (0.55, 0.50), 0.08),
+        ("o6_9", "深水区O6-9（水蛭/水母/海星，青粉怪）", ("mythic", "ultra"), (0.60, 0.20), 0.10),
+    ],
+    "jungle": [
+        ("entry", "入口区（绿黄怪）", ("common", "unusual"), (0.50, 0.75), 0.10),
+        ("deep", "丛林深处（紫红青怪，金叶虫出没）", ("legendary", "mythic", "ultra"), (0.45, 0.35), 0.10),
+    ],
+    "sewers": [
+        ("entry", "入口区（绿黄怪）", ("common", "unusual"), (0.55, 0.72), 0.10),
+        ("garbage", "垃圾袋区（传奇神话，S花瓣主刷）", ("legendary", "mythic"), (0.40, 0.45), 0.08),
+        ("box", "Box（Ultra区，Super集中）", ("ultra",), (0.75, 0.15), 0.08),
+    ],
+    "factory": [
+        ("mecha", "左上Mecha区（史诗传奇神话）", ("epic", "legendary", "mythic"), (0.15, 0.15), 0.10),
+        ("center", "中央区（全档混刷）", ("rare", "epic"), (0.50, 0.50), 0.10),
+    ],
+    "crystal_room": [
+        ("safe", "水晶室（无战斗怪，安全区）", ("none",), (0.50, 0.50), 0.20),
+    ],
+    "training_grounds": [
+        ("train", "训练场（新手教程）", ("common",), (0.50, 0.50), 0.20),
+    ],
+    "hel": [
+        ("pvp", "地狱（PvP向，挂机别去）", ("ultra",), (0.50, 0.50), 0.10),
+    ],
+}
+
+# 秒杀档 -> 推荐区域名映射(自动模式): 每图按 REGION_TABLE 的推荐档匹配, 无匹配回退第一个
+RANK_LEVEL = {"common": 0, "unusual": 1, "rare": 2, "epic": 3, "legendary": 4, "mythic": 5, "ultra": 6, "none": 99}
+
+
+def region_options(map_name):
+    """弹窗选项: (key, label)；第一个为自动(按秒杀等级推荐)"""
+    opts = [("auto", "自动（按秒杀等级推荐刷怪区）")]
+    for key, label, _, _, _ in REGION_TABLE.get(map_name, []):
+        opts.append((key, label))
+    return opts
+
+
+def pick_region(map_name, kill_rank):
+    """自动模式: 按秒杀等级匹配区域 key；无匹配回退第一个"""
+    rows = REGION_TABLE.get(map_name, [])
+    if not rows:
+        return None
+    lv = RANK_LEVEL.get(kill_rank, 99)
+    # 找推荐档包含该等级的最近区域
+    best, best_d = rows[0][0], 10 ** 9
+    for key, _, ranks, _, _ in rows:
+        for r in ranks:
+            d = abs(RANK_LEVEL.get(r, 99) - lv)
+            if d < best_d:
+                best, best_d = key, d
+    return best
+
+
+def region_patrol_points(map_name, region_key, kill_rank):
+    """生成区域巡逻点: 中心 + 4 个偏差点(菱形)。返回 (区域名, 巡逻点列表)"""
+    rows = REGION_TABLE.get(map_name, [])
+    key = region_key
+    if key == "auto":
+        key = pick_region(map_name, kill_rank)
+    label = "自动(按秒杀等级)"
+    cx, cy, radius = 0.5, 0.5, 0.10
+    for k, lb, _, (px, py), pr in rows:
+        if k == key:
+            label, cx, cy, radius = lb, px, py, pr
+            break
+    S = 300  # 地图统一 300x300
+    cxp, cyp = int(cx * S), int(cy * S)
+    rp = max(6, int(radius * S))
+    pts = [(cxp, cyp), (cxp + rp // 2, cyp), (cxp - rp // 2, cyp),
+           (cxp, cyp + rp // 2), (cxp, cyp - rp // 2)]
+    # 越界裁剪
+    pts = [(min(295, max(2, x)), min(295, max(2, y))) for x, y in pts]
+    return label, pts
 
 
 def load_config():
@@ -141,13 +243,15 @@ def ask_update(cfg):
     rank = RANK_NAMES.get(cfg.get("kill_rank", "M"), "?")
     heal = ", ".join(HEAL_NAMES.get(s, "?") for s in cfg.get("heal_slots", [])) or "不用(没带回血)"
     htype = HEAL_TYPE_NAMES.get(cfg.get("heal_type", "rose"), "?")
-    ans = _ask("检测到已有设置：\n  模式：%s\n  打怪：%s\n  回血槽：%s\n  回血花瓣：%s\n\n要不要更新？" % (mode, rank, heal, htype),
+    reg = cfg.get("region", "")
+    reg_s = {"auto": "自动(按秒杀等级)"}.get(reg, reg) or "未设"
+    ans = _ask("检测到已有设置：\n  模式：%s\n  打怪：%s\n  回血槽：%s\n  回血花瓣：%s\n  刷怪区域：%s\n\n要不要更新？" % (mode, rank, heal, htype, reg_s),
                [("yes", "更新设置"), ("no", "用旧设置继续")], "florr 挂机设置")
     return ans == "yes"
 
 
-def ask_config():
-    """首次/更新时调用: 依次问配置问题"""
+def ask_config(map_name="desert"):
+    """首次/更新时调用: 依次问配置问题；map_name 用于列出刷怪区域"""
     m = _ask("你想全程攻击还是防御还是不弄？",
              [("attack", "全程攻击（按空格发射花瓣）"),
               ("defense", "全程防御（按住右键，花瓣绕身转）"),
@@ -174,5 +278,9 @@ def ask_config():
     lc = False
     if m != "none":
         lc = _ask("要不要蹭高等级怪的掉落？\n（打不动的M/U怪在附近时，上去打2.5秒混伤害拿掉落，然后撤退）\n掉落机制：总伤害>1%就有资格分掉落（单人时杀怪必得）",
-                  [("no", "不蹭（更安全）"), ("yes", "蹭（掉落更多）")], "florr 挂机设置 ⑥/⑥") == "yes"
-    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "leech": lc, "heal_type": ht, "version": 8}
+                  [("no", "不蹭（更安全）"), ("yes", "蹭（掉落更多）")], "florr 挂机设置 ⑥/⑦") == "yes"
+    rg = _ask("刷怪区域？（决定巡逻点，替代手动点选）\n自动=按你的秒杀等级推荐对应稀有度的区域\n手动=直接选这张图的区域\n（游戏里按 Alt 可看各区域稀有度，辅助选择）",
+              region_options(map_name), "florr 挂机设置 ⑦/⑦")
+    if rg is None:
+        rg = "auto"
+    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "leech": lc, "heal_type": ht, "region": rg, "region_map": map_name, "version": 9}

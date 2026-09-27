@@ -448,6 +448,48 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
 LEECH_RANGE = 25.0      # 蹭掉落触发范围(地图像素): 高等级怪距玩家10-25px时
 LEECH_APPROACH = 5.0    # 蹭掉落贴近距离: 走到5px内站定输出
 LEECH_TIME = 2.5        # 站定输出秒数(总伤害>1%即可分掉落)
+PICKUP_DROPS = True     # 掉落自动拾取(顺路捡: 只捡距玩家<=PICKUP_RANGE的掉落)
+PICKUP_ARRIVE = 4.0     # 走到多近算"碰到"(玩家本体碰撞即拾取)
+
+
+def walk_to_pickup(t, trail):
+    """直线走向掉落(本体碰撞即拾取), 最多走10s; 低血中断; 到达停1.5s等拾取动画"""
+    from combat import HP_FLEE, get_hp_ratio
+    t0 = time.time()
+    current_keys = set()
+    def set_k(keys):
+        nonlocal current_keys
+        for k in current_keys - keys:
+            keyup(k)
+        for k in keys - current_keys:
+            keydown(k)
+        current_keys = keys
+    try:
+        while time.time() - t0 < 10:
+            pos = get_player_position()
+            if pos is None:
+                set_k(set()); time.sleep(0.3); continue
+            trail.append(pos)
+            dx, dy = t[0] - pos[0], t[1] - pos[1]
+            dist = math.hypot(dx, dy)
+            if dist <= PICKUP_ARRIVE:
+                set_k(set())
+                time.sleep(1.5)
+                return True
+            keys = set()
+            if abs(dx) > 1.5:
+                keys.add("d" if dx > 0 else "a")
+            if abs(dy) > 1.5:
+                keys.add("s" if dy > 0 else "w")
+            set_k(keys)
+            hp = get_hp_ratio(get_frame())
+            if hp is not None and hp < HP_FLEE:
+                print("[拾取] 走位中血量过低，中断")
+                return "lowhp"
+            time.sleep(0.05)
+        return True
+    finally:
+        set_k(set())
 
 
 def leech_target(t, trail):
@@ -714,7 +756,7 @@ if __name__ == "__main__":
     # ===== 交互配置(弹窗让玩家选, 存档后只问要不要更新) =====
     cfg = load_config()
     if cfg is None or ask_update(cfg):
-        cfg = ask_config()
+        cfg = ask_config(map_name)
         save_config(cfg)
     mode, kill_rank = cfg["mode"], cfg["kill_rank"]
     EFFICIENT = cfg.get("efficiency", False)
@@ -787,9 +829,15 @@ if __name__ == "__main__":
         apply_map(map_name)
         print(f"[+] 地图: {map_name}")
         from map_select import select_patrol_points
-        if cfg.get("patrol_points") and cfg.get("patrol_points_map") == map_name:
+        from config import region_patrol_points, region_options
+        # 新: 区域系统(按秒杀等级推荐/手动选区域) -> 自动生成巡逻点, 不用点选
+        region_key = cfg.get("region", "") if cfg.get("region_map") == map_name else ""
+        if region_key in [k for k, _ in region_options(map_name)]:
+            region_label, patrol_points = region_patrol_points(map_name, region_key, kill_rank)
+            print(f"[区域] {region_label} -> 巡逻点 {patrol_points}（坐标为估算，实测不对可截图校准）")
+        elif cfg.get("patrol_points") and cfg.get("patrol_points_map") == map_name:
             from config import _ask
-            reuse = _ask("上次的巡逻点还在（这张地图），直接用吗？", [("y", "用上次的"), ("n", "重新设置")], "巡逻点")
+            reuse = _ask("上次的巡逻点还在（这张地图），直接用吗？\n（新：想用刷怪区域就选“重新设置”）", [("y", "用上次的"), ("n", "重新设置")], "巡逻点")
             if reuse == "y":
                 patrol_points = [tuple(p) for p in cfg["patrol_points"]]
                 print(f"[巡逻点] 使用上次设置: {patrol_points}")
@@ -1016,6 +1064,24 @@ if __name__ == "__main__":
                         if r in ("danger", "lowhp"):
                             continue
                         print("[战斗] 结束，继续巡逻")
+                        continue
+
+            # ===== 掉落自动拾取（顺路捡，战斗/危险优先；只捡近的，不影响巡逻主线）=====
+            if PICKUP_DROPS:
+                frame = get_frame()
+                pos = get_player_position(image=frame)
+                if pos is not None:
+                    from combat import detect_drops
+                    drops = [m for m in (screen_to_map_safe(p, pos) for p in detect_drops(frame)) if m]
+                    drops = [d for d in drops if math.hypot(d[0] - pos[0], d[1] - pos[1]) <= PICKUP_RANGE]
+                    dtarget = choose_target(drops, goal_pt, pos) if drops else None
+                    if dtarget is not None:
+                        set_title("捡掉落")
+                        print(f"[拾取] 发现掉落 {dtarget}，走过去捡...")
+                        r = walk_to_pickup(dtarget, trail)
+                        if r in ("in_game_dead", "in_menu"):
+                            continue
+                        print("[拾取] 结束，继续巡逻")
                         continue
 
             # ===== 正常巡逻（分段走，走一段回来看怪）=====

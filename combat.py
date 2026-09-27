@@ -178,6 +178,40 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None)
     return pts
 
 
+DROP_MIN_PX = 3          # 掉落花瓣最小屏幕尺寸(px)
+DROP_MAX_PX = 11         # 掉落最大尺寸: 怪最小MIN_MOB_PX=12, 两者互补
+PICKUP_RANGE = 30.0      # 掉落距玩家地图像素<=该值才去捡(只顺路捡近的)
+
+
+def detect_drops(frame=None, exclude_center=True):
+    """检测掉落花瓣: 小尺寸(3-11px)的稀有度彩色块(怪最小12px, 互补不冲突)
+    排除中心玩家本体区域; 返回屏幕坐标列表"""
+    if frame is None:
+        frame = get_frame()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    mask = np.zeros(hsv.shape[:2], np.uint8)
+    for rng in RANK_HSV.values():
+        m = cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
+        mask = cv2.bitwise_or(mask, m)
+    if exclude_center:
+        cx, cy = get_screen_center()
+        cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
+    det_w = 960
+    det_h = int(hsv.shape[0] / _downscale)
+    small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
+    n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
+    pts = []
+    for i in range(1, n):
+        area = stats[i, cv2.CC_STAT_AREA]
+        w, h = stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_HEIGHT]
+        if not (DROP_MIN_PX * DROP_MIN_PX / 4 <= area <= DROP_MAX_PX * DROP_MAX_PX):
+            continue
+        if w * 4 < h or h * 4 < w:
+            continue
+        pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
+    return pts
+
+
 def detect_mobs(frame=None):
     """检测 M/U 怪, 返回 (mythics, ultras) 屏幕坐标列表"""
     if frame is None:
