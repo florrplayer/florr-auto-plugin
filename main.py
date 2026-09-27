@@ -830,11 +830,12 @@ if __name__ == "__main__":
         print(f"[+] 地图: {map_name}")
         from map_select import select_patrol_points
         from config import region_patrol_points, region_options
-        # 新: 区域系统(按秒杀等级推荐/手动选区域) -> 自动生成巡逻点, 不用点选
+        # 新: 区域系统(按秒杀等级推荐/手动选区域) -> 区域内随机游走, 不用点选
+        region_box = None
         region_key = cfg.get("region", "") if cfg.get("region_map") == map_name else ""
         if region_key in [k for k, _ in region_options(map_name)]:
-            region_label, patrol_points = region_patrol_points(map_name, region_key, kill_rank)
-            print(f"[区域] {region_label} -> 巡逻点 {patrol_points}（坐标为估算，实测不对可截图校准）")
+            region_label, patrol_points, region_box = region_patrol_points(map_name, region_key, kill_rank)
+            print(f"[区域] {region_label} 中心{region_box[:2]} 半径{region_box[2]} -> 区域内随机游走（坐标为估算，实测不对可截图校准）")
         elif cfg.get("patrol_points") and cfg.get("patrol_points_map") == map_name:
             from config import _ask
             reuse = _ask("上次的巡逻点还在（这张地图），直接用吗？\n（新：想用刷怪区域就选“重新设置”）", [("y", "用上次的"), ("n", "重新设置")], "巡逻点")
@@ -943,7 +944,15 @@ if __name__ == "__main__":
             if pos is not None:
                 trail.append(pos)
 
-            goal_pt = patrol_points[patrol_index]
+            # 区域模式: 每次在区域内随机取一个点(随机游走, 覆盖全区域); 旧巡逻点模式: 按点循环
+            if region_box is not None:
+                _ang = random.random() * 2 * math.pi
+                _rr = region_box[2] * math.sqrt(random.random())
+                goal_pt = (int(region_box[0] + _rr * math.cos(_ang)),
+                           int(region_box[1] + _rr * math.sin(_ang)))
+                goal_pt = (min(297, max(2, goal_pt[0])), min(297, max(2, goal_pt[1])))
+            else:
+                goal_pt = patrol_points[patrol_index]
 
             # ===== 人性化微操作(防挂机, 无副作用): 微转向/微停顿/微抖动 =====
             if HUMANIZE and pos is not None and random.random() < (0.15 if EFFICIENT else 0.35):
@@ -1117,19 +1126,25 @@ if __name__ == "__main__":
             set_title(f"巡逻中 点{patrol_index+1}/{len(patrol_points)}")
             result = lazy_theta_pathing(goal_pt, dedicated_area, step=PATH_STEP if COMBAT_ENABLED else 0)
             if result is True:
-                print(f"[巡逻] 到达点 {patrol_index+1}，前往下一个点")
-                # 巡逻顺序随机化(像人不固定路线, 兼防挂机): 随机选非当前点
-                patrol_index = random.choice([i for i in range(len(patrol_points)) if i != patrol_index])
+                if region_box is not None:
+                    print("[区域] 到达随机点，区域内继续游走")
+                else:
+                    print(f"[巡逻] 到达点 {patrol_index+1}，前往下一个点")
+                    # 巡逻顺序随机化(像人不固定路线, 兼防挂机): 随机选非当前点
+                    patrol_index = random.choice([i for i in range(len(patrol_points)) if i != patrol_index])
                 PATH_CACHE.update(goal=None, path=None)
-                # 防挂机: 到达巡逻点后随机停顿(效率模式更短)
+                # 防挂机: 到达后随机停顿(效率模式更短)
                 pause = (0.15 + random.random() * 0.4) if EFFICIENT else (0.5 + random.random() * 2.0)
                 print(f"[防挂机] 随机停顿 {pause:.1f}s")
                 time.sleep(pause)
             elif result == "step_done":
                 continue
             elif result == "stuck_loop":
-                print(f"[巡逻] 点 {patrol_index+1} 反复卡住，绕路失败换点")
-                patrol_index = random.choice([i for i in range(len(patrol_points)) if i != patrol_index])
+                if region_box is not None:
+                    print("[区域] 目标点反复卡住，换个随机点再走")
+                else:
+                    print(f"[巡逻] 点 {patrol_index+1} 反复卡住，绕路失败换点")
+                    patrol_index = random.choice([i for i in range(len(patrol_points)) if i != patrol_index])
             # result 为 False 说明死了或回菜单，循环回去处理
     except KeyboardInterrupt:
         print("\n[!] 用户中断")

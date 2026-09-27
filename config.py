@@ -99,7 +99,8 @@ def pick_region(map_name, kill_rank):
 
 
 def region_patrol_points(map_name, region_key, kill_rank):
-    """生成区域巡逻点: 中心 + 4 个偏差点(菱形)。返回 (区域名, 巡逻点列表)"""
+    """生成区域信息: 区域圆(中心+半径)。返回 (区域名, 锚点列表, 区域圆(cx,cy,r))
+    巡逻时在区域内随机取点(随机游走), 锚点仅供地图窗口显示"""
     rows = REGION_TABLE.get(map_name, [])
     key = region_key
     if key == "auto":
@@ -115,9 +116,8 @@ def region_patrol_points(map_name, region_key, kill_rank):
     rp = max(6, int(radius * S))
     pts = [(cxp, cyp), (cxp + rp // 2, cyp), (cxp - rp // 2, cyp),
            (cxp, cyp + rp // 2), (cxp, cyp - rp // 2)]
-    # 越界裁剪
     pts = [(min(295, max(2, x)), min(295, max(2, y))) for x, y in pts]
-    return label, pts
+    return label, pts, (cxp, cyp, rp)
 
 
 def load_config():
