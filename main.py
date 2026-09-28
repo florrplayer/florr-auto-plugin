@@ -868,6 +868,14 @@ if __name__ == "__main__":
     try:
         apply_map(map_name)
         print(f"[+] 地图: {map_name}")
+        # v1.7.2 天赋推荐(官方 cost 数据, 洗点免费随便试)
+        print("[天赋] 挂机加点推荐(每级1TP, 2024-06起洗点免费):")
+        print("         1. Loadout 槽位点满10槽  (共45TP)")
+        print("         2. Reload 到 Mythic     (reload6, -58%冷却, 共66TP, 提升最大)")
+        print("         3. Health 到 Epic       (health4, 血x2.86)")
+        print("         4. Medic 到 Legendary   (medic5, 回血x2.01)")
+        print("         5. Magnetism            (+1000拾取, 省磁铁槽, 需先点满Loadout)")
+        print("         6. 剩余点 Luck          (2025-10起影响刷怪稀有度)")
         from map_select import select_patrol_points
         from config import region_patrol_points, region_options
         # 新: 区域系统(按秒杀等级推荐/手动选区域) -> 区域内随机游走, 不用点选
