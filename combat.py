@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """战斗模式: 只打 M 怪(Mythic 青), 避 U 怪(Ultra 粉) 5px, 贴脸 0.5px 后沿原路撤退
 
 识别原理: florr 怪物本体颜色 = 稀有度颜色
@@ -77,7 +77,7 @@ def _load_drops():
     if _DROP_CACHE["raw"] is not None:
         return _DROP_CACHE
     import json, os
-    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "florr_dropchance.json")
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "florr_dropchance.json")
     try:
         raw = json.loads(open(p, encoding="utf-8").read())
     except Exception:

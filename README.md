@@ -1,4 +1,4 @@
-# florr-auto-pathing
+﻿# florr-auto-pathing
 
 ## 📥 直接下载（小白版，双击即用，无需装 Python）
 
@@ -139,3 +139,13 @@ if __name__ == "__main__":
             break
     print("Pathing Done")
 ```
+
+## 目录结构
+
+- `docs/`：全部研究报告与速查表（怪血量/掉落概率/稀有生物/地图与Boss机制等 12 份）
+- `data/`：官方游戏数据（73 怪 / 118 花瓣 / 96 天赋 / 3.6万 wasm 字符串 / 332 条掉率实测 / 1px 换算表）
+- `maps/`：全地图图片 + Tiled 地图源文件（*.tmj/*.tsj）
+- `releases/`：小白版打包
+- 根目录：插件源码（main.py / combat.py / utils.py …）
+
+官方数据来源：通过浏览器 JS 调游戏 wasm 导出接口（`_Util_GetMobs`/`_Util_GetPetals`/`_Util_GetTalents`/`_Util_CalculateDropChance`）实测导出。
