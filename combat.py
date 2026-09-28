@@ -22,6 +22,8 @@ MYTHIC_HSV = ((85, 100, 100), (100, 255, 255))   # M 怪 青色
 ULTRA_HSV = ((162, 100, 100), (178, 255, 255))   # U 怪 粉色
 LEGENDARY_HSV = ((0, 100, 100), (8, 255, 255))     # 传奇 红 #DE1F1F (OpenCV H 0-4, 与青/粉不冲突)
 KILL_STOP = 0.5                          # 追击贴脸距离(地图像素, 用户要求 0.5)
+BODY_CLEAR = 2.5                         # 打怪: 目标点外移到 怪半径+2.5 地图单位(停在碰撞箱外, 不撞上去)
+LEECH_CLEAR = 5.5                        # 蹭掉落: 站定点外移到 怪半径+5.5 (高稀有度大怪更远站定, 不撞身体)
 WARN_MARGIN = 10.0                       # 危险怪预警距离: 进入10px内提前绕开(人先躲远)
 CHASE_WARN = 8.0                         # 打怪中危险怪进入8px内停手逃跑
 KISS_SLOW = 3.0                          # 贴脸减速区: 3px内放慢试探(人犹豫贴脸)
@@ -85,8 +87,8 @@ def _rectangularity(area, w, h):
     return area / float(w * h)
 
 
-def detect_special(frame=None, map_name=None, exclude_center=True):
-    """检测特殊稀有生物, 返回 {名称: [屏幕坐标]}
+def detect_special(frame=None, map_name=None, exclude_center=True, with_size=False):
+    """检测特殊稀有生物, 返回 {名称: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)
     square=亮黄方形(矩形度>0.88), shiny=白亮高光, golden_leafbug=金黄(仅丛林), diver_ant=蓝灰(仅海洋)"""
     if frame is None:
         frame = get_frame()
@@ -125,7 +127,11 @@ def detect_special(frame=None, map_name=None, exclude_center=True):
                 r2 = (max(w, h) / 2.0) ** 2
                 if area / (3.14159265 * r2) > 0.9:
                     continue
-            pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
+            if with_size:
+                pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale),
+                            round(0.25 * (w + h) * _downscale, 2)))
+            else:
+                pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
         if pts:
             out[name] = pts
     return out
@@ -152,8 +158,9 @@ def calibrate_screen(frame=None):
     return w, h
 
 
-def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None):
-    """按 HSV 区间找色块, 返回中心点列表(屏幕坐标); min_px/max_px 可覆盖怪尺寸范围"""
+def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None, with_size=False):
+    """按 HSV 区间找色块, 返回中心点列表(屏幕坐标); min_px/max_px 可覆盖怪尺寸范围
+    with_size=True 时每点加近似半径(屏幕像素, 怪碰撞箱参考): (x, y, r)"""
     lo = MIN_MOB_PX if min_px is None else min_px
     hi = MAX_MOB_PX if max_px is None else max_px
     mask = cv2.inRange(hsv, np.array(hsv_range[0]), np.array(hsv_range[1]))
@@ -177,7 +184,12 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None)
             continue
         # 怪近似圆形, 长条色块(草丛/水纹/墙影)滤掉
         cx_s, cy_s = cents[i]
-        pts.append((int(cx_s * _downscale), int(cy_s * _downscale)))   # 还原全分辨率坐标
+        if with_size:
+            # 近似半径 = 外接矩形半宽高均值(降采样尺寸乘回全分辨率)
+            r_screen = round(0.25 * (w + h) * _downscale, 2)
+            pts.append((int(cx_s * _downscale), int(cy_s * _downscale), r_screen))
+        else:
+            pts.append((int(cx_s * _downscale), int(cy_s * _downscale)))   # 还原全分辨率坐标
     return pts
 
 
@@ -220,12 +232,17 @@ SUPER_HSV = ((72, 120, 150), (82, 255, 255))   # 实测 #2BFFA3 -> HSV(77,212,25
 AFK_DARK_MEAN = 70      # AFK弹窗: 屏幕中心区域灰度均值低于该值视为暗遮罩
 
 
-def detect_super(frame=None):
-    """检测 Super 级怪(薄荷绿), 返回屏幕坐标列表"""
+def detect_super(frame=None, with_size=False):
+    """检测 Super 级怪(薄荷绿), 返回屏幕坐标列表; with_size=True 时每点为 (x, y, r)"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    return _detect_color(hsv, SUPER_HSV)
+    return _detect_color(hsv, SUPER_HSV, with_size=with_size)
+
+
+def screen_r_to_map(r_screen):
+    """屏幕像素半径 -> 地图单位半径(怪碰撞箱在追停点里用的单位)"""
+    return r_screen * SCALE_PX_PER_UNIT / WORLD_PER_MAPUNIT
 
 
 def detect_afk_check(frame, prev_gray_center=None):
@@ -264,14 +281,14 @@ def detect_legendary(frame=None):
     return _detect_color(hsv, LEGENDARY_HSV)
 
 
-def detect_all(frame=None):
-    """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}"""
+def detect_all(frame=None, with_size=False):
+    """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     out = {}
     for rank, rng in RANK_HSV.items():
-        out[rank] = _detect_color(hsv, rng)
+        out[rank] = _detect_color(hsv, rng, with_size=with_size)
     return out
 
 

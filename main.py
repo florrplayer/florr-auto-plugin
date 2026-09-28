@@ -368,6 +368,17 @@ def screen_to_map_safe(pt, pos):
         return None
 
 
+def screen_to_map_keep_r(p, pos):
+    """屏幕点->地图点, 若带半径则一并换算成地图单位半径(碰撞箱); 返回 (x,y) 或 (x,y,r)"""
+    m = screen_to_map_safe(p, pos)
+    if m is None:
+        return None
+    if len(p) >= 3:
+        from combat import screen_r_to_map
+        return (m[0], m[1], screen_r_to_map(p[2]))
+    return m
+
+
 def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=None):
     """追击 =秒杀等级的怪; 攻击模式停 2px, 防御模式贴 0.5px; >秒杀贴近返回 'danger'; 低血返回 'lowhp'"""
     from combat import (detect_all, choose_target, ultra_blocked, screen_to_map_safe,
@@ -397,7 +408,7 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
                 continue
             trail.append(pos)
             frame = get_frame()
-            ranks_map = detect_all(frame)
+            ranks_map = detect_all(frame, with_size=True)
             danger = []
             for r in RANK_ORDER[idx + 1:]:
                 danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
@@ -417,14 +428,20 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
                 t = fixed_target
             elif kill_rank == "random":
                 # 随机打怪: 追击中每次随机挑一只非U怪(目标消失就换一只)
-                prey = [m for m in (screen_to_map_safe(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
+                prey = [m for m in (screen_to_map_keep_r(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
                 t = random.choice(prey) if prey else None
             else:
-                prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
+                prey = [m for m in (screen_to_map_keep_r(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
                 t = choose_target(prey, patrol_goal, pos)
             if t is None:
                 print("[战斗] 目标消失，结束追击")
                 return "done"
+            # 碰撞箱: 目标点外移到 怪半径+安全距 外(停在怪身体外打, 不撞上去)
+            if len(t) >= 3 and t[2]:
+                from combat import BODY_CLEAR
+                _d = math.hypot(t[0] - pos[0], t[1] - pos[1]) or 1.0
+                _off = float(t[2]) + BODY_CLEAR
+                t = (t[0] - (t[0] - pos[0]) / _d * _off, t[1] - (t[1] - pos[1]) / _d * _off)
             dx, dy = t[0] - pos[0], t[1] - pos[1]
             dist = math.hypot(dx, dy)
             keys = set()
@@ -515,6 +532,12 @@ def leech_target(t, trail):
             pos = get_player_position()
             if pos is None:
                 set_k(set()); time.sleep(0.3); continue
+            # 碰撞箱: 站定点外移到 怪半径+安全距 外(高稀有度大怪不撞身体)
+            if len(t) >= 3 and t[2]:
+                from combat import LEECH_CLEAR
+                _d = math.hypot(t[0] - pos[0], t[1] - pos[1]) or 1.0
+                _off = float(t[2]) + LEECH_CLEAR
+                t = (t[0] - (t[0] - pos[0]) / _d * _off, t[1] - (t[1] - pos[1]) / _d * _off)
             dx, dy = t[0] - pos[0], t[1] - pos[1]
             dist = math.hypot(dx, dy)
             if dist <= LEECH_APPROACH:
@@ -1033,7 +1056,7 @@ if __name__ == "__main__":
                 if pos is not None:
                     from combat import (detect_all, ultra_blocked, choose_target,
                                         screen_to_map_safe, RANK_ORDER, WARN_MARGIN)
-                    ranks_map = detect_all(frame)
+                    ranks_map = detect_all(frame, with_size=True)
                     idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
                     danger = []
                     for r in RANK_ORDER[idx + 1:]:
@@ -1046,9 +1069,9 @@ if __name__ == "__main__":
                         continue
                     # Super 薄荷绿怪: leech开则蹭1%掉落(Super分25人), 否则避开(75级前杀Super只掉究极档)
                     from combat import detect_super
-                    sup = detect_super(frame)
+                    sup = detect_super(frame, with_size=True)
                     if sup:
-                        sup_m = [m for m in (screen_to_map_safe(p, pos) for p in sup) if m]
+                        sup_m = [m for m in (screen_to_map_keep_r(p, pos) for p in sup) if m]
                         near_s = ultra_blocked(sup_m, pos, margin=WARN_MARGIN)
                         if near_s:
                             if LEECH:
@@ -1071,11 +1094,11 @@ if __name__ == "__main__":
                         continue
                     # 特殊稀有生物最优先(正方形>shiny>金叶虫>潜水兵蚁): 放宽巡逻偏离限制追
                     from combat import detect_special, SPECIAL_PRIORITY_ORDER, SPECIAL_DEVIATION
-                    sp_map = detect_special(frame, map_name)
+                    sp_map = detect_special(frame, map_name, with_size=True)
                     sp_target, sp_name = None, None
                     if sp_map:
                         for sname in SPECIAL_PRIORITY_ORDER:
-                            cand = [m for m in (screen_to_map_safe(p, pos) for p in (sp_map.get(sname) or [])) if m]
+                            cand = [m for m in (screen_to_map_keep_r(p, pos) for p in (sp_map.get(sname) or [])) if m]
                             t = choose_target(cand, goal_pt, pos, dev_limit=SPECIAL_DEVIATION)
                             if t is not None:
                                 sp_target, sp_name = t, sname
@@ -1095,7 +1118,7 @@ if __name__ == "__main__":
                     if LEECH:
                         far = []
                         for r in RANK_ORDER[idx + 1:]:
-                            far += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
+                            far += [m for m in (screen_to_map_keep_r(p, pos) for p in (ranks_map.get(r) or [])) if m]
                         leech_t = choose_target(far, goal_pt, pos)
                         if leech_t is not None:
                             d = math.hypot(leech_t[0] - pos[0], leech_t[1] - pos[1])
@@ -1105,10 +1128,10 @@ if __name__ == "__main__":
                                 continue
                     if kill_rank == "random":
                         # 随机打怪模式: 屏幕内任意非U怪随机挑一只打(避开U级, 防止送死循环)
-                        prey_all = [m for m in (screen_to_map_safe(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
+                        prey_all = [m for m in (screen_to_map_keep_r(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
                         target = random.choice(prey_all) if prey_all else None
                     else:
-                        prey = [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
+                        prey = [m for m in (screen_to_map_keep_r(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
                         target = choose_target(prey, goal_pt, pos)
                     if target is not None:
                         if HUMANIZE:
