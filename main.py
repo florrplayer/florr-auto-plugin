@@ -379,6 +379,18 @@ def screen_to_map_keep_r(p, pos):
     return m
 
 
+def screen_to_map_keep_sid(p, pos):
+    """屏幕点->地图点, 保留半径(地图单位)与怪种 sid(v1.5.0 怪种识别);
+    返回 (x, y, r, sid) 或 None"""
+    m = screen_to_map_safe(p, pos)
+    if m is None:
+        return None
+    if len(p) >= 3:
+        from combat import screen_r_to_map
+        return (m[0], m[1], screen_r_to_map(p[2]), p[3] if len(p) >= 4 else None)
+    return m
+
+
 def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=None):
     """追击 =秒杀等级的怪; 攻击模式停 2px, 防御模式贴 0.5px; >秒杀贴近返回 'danger'; 低血返回 'lowhp'"""
     from combat import (detect_all, choose_target, ultra_blocked, screen_to_map_safe,
@@ -1056,7 +1068,7 @@ if __name__ == "__main__":
                 if pos is not None:
                     from combat import (detect_all, ultra_blocked, choose_target,
                                         screen_to_map_safe, RANK_ORDER, WARN_MARGIN)
-                    ranks_map = detect_all(frame, with_size=True)
+                    ranks_map = detect_all(frame, with_size=True, with_sid=True)
                     idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
                     danger = []
                     for r in RANK_ORDER[idx + 1:]:
@@ -1128,10 +1140,10 @@ if __name__ == "__main__":
                                 continue
                     if kill_rank == "random":
                         # 随机打怪模式: 屏幕内任意非U怪随机挑一只打(避开U级, 防止送死循环)
-                        prey_all = [m for m in (screen_to_map_keep_r(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
+                        prey_all = [m for m in (screen_to_map_keep_sid(p, pos) for r in RANK_ORDER[:-1] for p in (ranks_map.get(r) or [])) if m]
                         target = random.choice(prey_all) if prey_all else None
                     else:
-                        prey = [m for m in (screen_to_map_keep_r(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
+                        prey = [m for m in (screen_to_map_keep_sid(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
                         target = choose_target(prey, goal_pt, pos)
                     if target is not None:
                         if HUMANIZE:
@@ -1140,7 +1152,9 @@ if __name__ == "__main__":
                             else:
                                 time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         set_title("战斗中")
-                        print(f"[战斗] 发现目标 {target}，追击...")
+                        from combat import mob_name
+                        _tname = mob_name(target[3]) if len(target) >= 4 and target[3] else "未知"
+                        print(f"[战斗] 发现目标 {_tname}({kill_rank}) {target}，追击...")
                         stop_dist = 2.0 if mode == "attack" else 0.5
                         r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist)
                         if r in ("danger", "lowhp"):

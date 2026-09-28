@@ -12,6 +12,59 @@ import math
 import numpy as np
 import cv2
 from utils import get_frame, get_player_position, ARRIVE, set_screen_center
+from mob_table import MOB_CN
+
+# ===== v1.5.0 怪种识别 =====
+# 官方体型缩放表(相对 Common, Unofficial Florr Data Spreadsheet): Unusual x1.1 / Rare x1.3 / Epic x1.5 / Mythic x3 / Super x10
+# Legendary(表未列, 按趋势插值~x2) / Ultra(表未列, Mythic~Super 之间估 x6) -> 标注估算
+RARITY_SIZE_FACTOR = {
+    "common": 1.0, "unusual": 1.1, "rare": 1.3, "epic": 1.5,
+    "legendary": 2.0,   # 估算
+    "mythic": 3.0, "ultra": 6.0,   # ultra 估算(官方表未列)
+    "super": 10.0,
+}
+# 形状分类树(按 Common 基准半径 + 宽高比 + 矩形度 -> 怪种 sid)
+# 阈值基于官方图形知识初版, 实测误判可截图校准(同玩家点校准法)
+
+
+def classify_mob(r_common, aspect, rect):
+    """怪种识别 v1: 用官方体型缩放把屏幕半径换算回 Common 基准, 按大小+形状分类
+    返回 sid(未识别返回 None)"""
+    aspect = max(aspect, 1.0)
+    if aspect > 2.4:
+        # 长条 -> 蜈蚣系
+        return "centipede" if r_common < 60 else "centipede_desert"
+    if rect > 0.86 and aspect < 1.3:
+        return "square"                     # 方方正正 -> 正方形
+    if aspect <= 1.35:
+        # 圆形系
+        if r_common < 11:
+            return "rock"                   # 最小圆 -> 岩石
+        if r_common < 19:
+            return "bee"                    # 小圆 -> 蜜蜂
+        if r_common < 30:
+            return "ladybug"                # 中圆 -> 瓢虫
+        if r_common < 48:
+            return "beetle"                 # 大圆 -> 甲虫
+        return "ant_hole"                   # 超大圆 -> 蚁穴
+    else:
+        # 椭圆系
+        if r_common < 13:
+            return "ant_baby"               # 极小椭圆 -> 幼蚁
+        if r_common < 24:
+            return "ant_worker"             # 小椭圆 -> 工蚁
+        if r_common < 38:
+            return "ant_soldier"            # 中椭圆 -> 兵蚁
+        if r_common < 60:
+            return "hornet"                 # 大椭圆 -> 黄蜂
+        return "ant_queen"                  # 超大椭圆 -> 蚁后
+
+
+def mob_name(sid):
+    """怪种 sid -> 中文名(官方 73 sid 映射, 未收录显示原 sid)"""
+    if not sid:
+        return "未知"
+    return MOB_CN.get(sid, sid)
 
 # ===== 参数(可调) =====
 # HSV 阈值(OpenCV 尺度: H 0-179 = 度数/2, S/V 0-255)
@@ -165,9 +218,12 @@ def calibrate_screen(frame=None):
     return w, h
 
 
-def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None, with_size=False):
+def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None, with_size=False,
+                    with_sid=False, rank=None):
     """按 HSV 区间找色块, 返回中心点列表(屏幕坐标); min_px/max_px 可覆盖怪尺寸范围
-    with_size=True 时每点加近似半径(屏幕像素, 怪碰撞箱参考): (x, y, r)"""
+    with_size=True 时每点加近似半径(屏幕像素, 怪碰撞箱参考): (x, y, r)
+    with_sid=True 时每点为 (x, y, r, sid): 按官方体型缩放表换算 Common 基准半径 + 形状特征分类怪种
+      (rank='mythic' 等稀有度键, 决定体型缩放系数)"""
     lo = MIN_MOB_PX if min_px is None else min_px
     hi = MAX_MOB_PX if max_px is None else max_px
     mask = cv2.inRange(hsv, np.array(hsv_range[0]), np.array(hsv_range[1]))
@@ -200,7 +256,17 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None,
                 r_screen = round(float(r_c) * _downscale, 2)
             else:
                 r_screen = round(0.25 * (w + h) * _downscale, 2)
-            pts.append((int(cx_s * _downscale), int(cy_s * _downscale), r_screen))
+            if with_sid:
+                # 怪种识别: 基准半径 = 屏幕半径 / 官方体型缩放; 形状特征(宽高比/矩形度)用降采样图统计
+                factor = RARITY_SIZE_FACTOR.get(rank or "", 1.0)
+                r_common = r_screen / factor if factor else r_screen
+                rw, rh = float(w), float(h)
+                aspect = max(rw, rh) / max(min(rw, rh), 1e-6)
+                rect = area / float(w * h) if w * h > 0 else 0.0
+                pts.append((int(cx_s * _downscale), int(cy_s * _downscale),
+                            r_screen, classify_mob(r_common, aspect, rect)))
+            else:
+                pts.append((int(cx_s * _downscale), int(cy_s * _downscale), r_screen))
         else:
             pts.append((int(cx_s * _downscale), int(cy_s * _downscale)))   # 还原全分辨率坐标
     return pts
@@ -303,14 +369,31 @@ def detect_legendary(frame=None):
     return _detect_color(hsv, LEGENDARY_HSV)
 
 
-def detect_all(frame=None, with_size=False):
-    """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)"""
+def detect_all(frame=None, with_size=False, with_sid=False):
+    """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)
+    with_sid=True 时每点为 (x, y, r, sid): 怪种识别(按官方体型缩放+形状分类, 稀有度缩放系数内置)"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     out = {}
     for rank, rng in RANK_HSV.items():
-        out[rank] = _detect_color(hsv, rng, with_size=with_size)
+        out[rank] = _detect_color(hsv, rng, with_size=with_size or with_sid,
+                                  with_sid=with_sid, rank=rank)
+    return out
+
+
+def detect_mobs_classified(frame=None):
+    """检测 M/U/Super 怪并识别怪种, 返回 dict:
+    {"mythic": [(x, y, r, sid)...], "ultra": [...], "super": [...]}
+    主循环战斗日志用, 显示怪种中文名"""
+    if frame is None:
+        frame = get_frame()
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    out = {}
+    out["mythic"] = _detect_color(hsv, MYTHIC_HSV, with_size=True, with_sid=True, rank="mythic")
+    out["ultra"] = _detect_color(hsv, ULTRA_HSV, with_size=True, with_sid=True, rank="ultra")
+    out["super"] = [p for p in _detect_color(hsv, SUPER_HSV, with_size=True, with_sid=True, rank="super")
+                    if p[2] >= SUPER_MIN_R_PX * _downscale]
     return out
 
 
