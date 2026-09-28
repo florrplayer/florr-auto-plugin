@@ -420,7 +420,8 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
                 continue
             trail.append(pos)
             frame = get_frame()
-            ranks_map = detect_all(frame, with_size=True)
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+            ranks_map = detect_all(frame, with_size=True, hsv=hsv)
             danger = []
             for r in RANK_ORDER[idx + 1:]:
                 danger += [m for m in (screen_to_map_safe(p, pos) for p in (ranks_map.get(r) or [])) if m]
@@ -431,7 +432,7 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
                 print("[低血] 追击中血量过低，中断逃跑")
                 return "lowhp"
             from combat import detect_projectiles
-            near_p = nearest_proj(detect_projectiles(frame))
+            near_p = nearest_proj(detect_projectiles(frame, hsv=hsv))
             if near_p:
                 print("[闪避] 打怪中闪避飞行物")
                 dodge_proj(near_p)
@@ -459,12 +460,11 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
             keys = set()
             if dist > stop:
                 if dist <= KISS_SLOW:
-                    # 贴脸减速: 间歇点按, 像人小心翼翼试探靠近
-                    if int(time.time() * 4) % 2 == 0:
-                        if abs(dx) > 1.5:
-                            keys.add("d" if dx > 0 else "a")
-                        if abs(dy) > 1.5:
-                            keys.add("s" if dy > 0 else "w")
+                    # v1.6.0 不要犹豫: 贴脸直接连续走(停在怪碰撞箱外, 不会撞上)
+                    if abs(dx) > 1.5:
+                        keys.add("d" if dx > 0 else "a")
+                    if abs(dy) > 1.5:
+                        keys.add("s" if dy > 0 else "w")
                 else:
                     if abs(dx) > 1.5:
                         keys.add("d" if dx > 0 else "a")
@@ -515,7 +515,7 @@ def walk_to_pickup(t, trail):
             if abs(dy) > 1.5:
                 keys.add("s" if dy > 0 else "w")
             set_k(keys)
-            hp = get_hp_ratio(get_frame())
+            hp = get_hp_ratio(frame)
             if hp is not None and hp < HP_FLEE:
                 print("[拾取] 走位中血量过低，中断")
                 return "lowhp"
@@ -949,6 +949,8 @@ if __name__ == "__main__":
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
         trail = deque(maxlen=TRAIL_MAX)
+        _last_special = 0.0
+        _last_drops = 0.0
         _afk_hits = 0          # AFK弹窗连续命中计数(>=4触发点击)
         _afk_last_mean = None  # 上一帧中心灰度均值(判静止)
         last_map_win = 0
@@ -1000,6 +1002,10 @@ if __name__ == "__main__":
             if pos is not None:
                 trail.append(pos)
 
+            # v1.6.0 性能: 本圈共享一次 frame + HSV 转换(原每检测函数各转一次全图, 每圈4-5次cvtColor)
+            frame = get_frame()
+            hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+
             # 区域模式: 每次在区域内随机取一个点(随机游走, 覆盖全区域); 旧巡逻点模式: 按点循环
             if region_box is not None:
                 _ang = random.random() * 2 * math.pi
@@ -1030,7 +1036,7 @@ if __name__ == "__main__":
                             print("[Boss] Super+级Boss在场！蹭1%掉落(leech模式, 2.5s就走)...")
                         _pb = pos or get_player_position()
                         if _pb is not None:
-                            _rm = detect_all(get_frame())
+                            _rm = detect_all(frame, hsv=hsv)
                             _sup = [m for m in (screen_to_map_safe(p, _pb) for p in (_rm.get("ultra") or []))
                                     if m and math.hypot(m[0] - _pb[0], m[1] - _pb[1]) <= LEECH_RANGE]
                             _t = choose_target(_sup, goal_pt, _pb) if _sup else None
@@ -1063,12 +1069,11 @@ if __name__ == "__main__":
             if time.time() < _boss_pause_until:
                 pass  # Boss在场: 本圈只巡逻不追怪
             elif COMBAT_ENABLED and kill_rank != "none":
-                frame = get_frame()
                 pos = get_player_position(image=frame)
                 if pos is not None:
                     from combat import (detect_all, ultra_blocked, choose_target,
                                         screen_to_map_safe, RANK_ORDER, WARN_MARGIN)
-                    ranks_map = detect_all(frame, with_size=True, with_sid=True)
+                    ranks_map = detect_all(frame, with_size=True, with_sid=True, hsv=hsv)
                     idx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
                     danger = []
                     for r in RANK_ORDER[idx + 1:]:
@@ -1081,7 +1086,7 @@ if __name__ == "__main__":
                         continue
                     # Super 薄荷绿怪: leech开则蹭1%掉落(Super分25人), 否则避开(75级前杀Super只掉究极档)
                     from combat import detect_super
-                    sup = detect_super(frame, with_size=True)
+                    sup = detect_super(frame, with_size=True, hsv=hsv)
                     if sup:
                         sup_m = [m for m in (screen_to_map_keep_r(p, pos) for p in sup) if m]
                         near_s = ultra_blocked(sup_m, pos, margin=WARN_MARGIN)
@@ -1099,14 +1104,19 @@ if __name__ == "__main__":
                             continue
                     # 飞行物(导弹/螯针等): 靠近就横向闪避
                     from combat import detect_projectiles
-                    near_p = nearest_proj(detect_projectiles(frame))
+                    near_p = nearest_proj(detect_projectiles(frame, hsv=hsv))
                     if near_p:
                         print("[闪避] 飞行物来袭，横向闪避")
                         dodge_proj(near_p)
                         continue
                     # 特殊稀有生物最优先(正方形>shiny>金叶虫>潜水兵蚁): 放宽巡逻偏离限制追
+                    # v1.6.0 降频: 特殊怪极稀有, 每0.4s才检测一次(省一次全图5色inRange)
                     from combat import detect_special, SPECIAL_PRIORITY_ORDER, SPECIAL_DEVIATION
-                    sp_map = detect_special(frame, map_name, with_size=True)
+                    if time.time() - _last_special > 0.4:
+                        sp_map = detect_special(frame, map_name, with_size=True, hsv=hsv)
+                        _last_special = time.time()
+                    else:
+                        sp_map = {}
                     sp_target, sp_name = None, None
                     if sp_map:
                         for sname in SPECIAL_PRIORITY_ORDER:
@@ -1201,7 +1211,10 @@ if __name__ == "__main__":
                 pos = get_player_position(image=frame)
                 if pos is not None:
                     from combat import detect_drops
-                    drops = [m for m in (screen_to_map_safe(p, pos) for p in detect_drops(frame)) if m]
+                    if time.time() - _last_drops > 0.3:
+                        _drops_px = detect_drops(frame, hsv=hsv)
+                        _last_drops = time.time()
+                    drops = [m for m in (screen_to_map_safe(p, pos) for p in _drops_px) if m]
                     drops = [d for d in drops if math.hypot(d[0] - pos[0], d[1] - pos[1]) <= PICKUP_RANGE]
                     dtarget = choose_target(drops, goal_pt, pos) if drops else None
                     if dtarget is not None:

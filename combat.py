@@ -224,12 +224,14 @@ def _rectangularity(area, w, h):
     return area / float(w * h)
 
 
-def detect_special(frame=None, map_name=None, exclude_center=True, with_size=False):
+def detect_special(frame=None, map_name=None, exclude_center=True, with_size=False, hsv=None):
     """检测特殊稀有生物, 返回 {名称: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)
-    square=亮黄方形(矩形度>0.88), shiny=白亮高光, golden_leafbug=金黄(仅丛林), diver_ant=蓝灰(仅海洋)"""
+    square=亮黄方形(矩形度>0.88), shiny=白亮高光, golden_leafbug=金黄(仅丛林), diver_ant=蓝灰(仅海洋)
+    hsv 可传入已转换的HSV图(主循环共享一次cvtColor, 提速)"""
     if frame is None:
         frame = get_frame()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    if hsv is None:
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     det_w = 960
     det_h = int(hsv.shape[0] / _downscale)
     cx, cy = get_screen_center()
@@ -361,12 +363,13 @@ DROP_MAX_PX = 11         # 掉落最大尺寸: 怪最小MIN_MOB_PX=12, 两者互
 PICKUP_RANGE = 30.0      # 掉落距玩家地图像素<=该值才去捡(只顺路捡近的)
 
 
-def detect_drops(frame=None, exclude_center=True):
+def detect_drops(frame=None, exclude_center=True, hsv=None):
     """检测掉落花瓣: 小尺寸(3-11px)的稀有度彩色块(怪最小12px, 互补不冲突)
-    排除中心玩家本体区域; 返回屏幕坐标列表"""
+    排除中心玩家本体区域; 返回屏幕坐标列表; hsv 可传入已转换HSV图"""
     if frame is None:
         frame = get_frame()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    if hsv is None:
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask = np.zeros(hsv.shape[:2], np.uint8)
     for rng in RANK_HSV.values():
         m = cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
@@ -400,12 +403,13 @@ SUPER_MIN_R_PX = 18.0
 AFK_DARK_MEAN = 70      # AFK弹窗: 屏幕中心区域灰度均值低于该值视为暗遮罩
 
 
-def detect_super(frame=None, with_size=False):
+def detect_super(frame=None, with_size=False, hsv=None):
     """检测 Super 级怪(薄荷绿), 返回屏幕坐标列表; with_size=True 时每点为 (x, y, r)
-    官方体型: Super=Common x10 -> 薄荷绿小色块(半径<下限)直接忽略, 防误检"""
+    官方体型: Super=Common x10 -> 薄荷绿小色块(半径<下限)直接忽略, 防误检; hsv 可传入已转换HSV图"""
     if frame is None:
         frame = get_frame()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    if hsv is None:
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     pts = _detect_color(hsv, SUPER_HSV, with_size=with_size)
     if with_size:
         return [p for p in pts if p[2] >= SUPER_MIN_R_PX * _downscale]
@@ -453,16 +457,66 @@ def detect_legendary(frame=None):
     return _detect_color(hsv, LEGENDARY_HSV)
 
 
-def detect_all(frame=None, with_size=False, with_sid=False):
+def detect_all(frame=None, with_size=False, with_sid=False, hsv=None):
     """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)
-    with_sid=True 时每点为 (x, y, r, sid): 怪种识别(按官方体型缩放+形状分类, 稀有度缩放系数内置)"""
+    with_sid=True 时每点为 (x, y, r, sid): 怪种识别(按官方体型缩放+形状分类, 稀有度缩放系数内置)
+    hsv 可传入已转换HSV图(主循环共享一次cvtColor, 提速)
+    v1.6.0: 7档合并为1次连通域分析, 连通域中心单像素判档(原每档各跑一次全图CC, 快~3倍)"""
     if frame is None:
         frame = get_frame()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    out = {}
-    for rank, rng in RANK_HSV.items():
-        out[rank] = _detect_color(hsv, rng, with_size=with_size or with_sid,
-                                  with_sid=with_sid, rank=rank)
+    if hsv is None:
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    h, w = hsv.shape[:2]
+    mask = np.zeros((h, w), np.uint8)
+    for rng in RANK_HSV.values():
+        mask |= cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
+    cx, cy = get_screen_center()
+    cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
+    det_w = 960
+    det_h = int(h / _downscale)
+    small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
+    n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
+    out = {rk: [] for rk in RANK_HSV}
+    for i in range(1, n):
+        area = stats[i, cv2.CC_STAT_AREA]
+        cw, ch = stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_HEIGHT]
+        if not (MIN_MOB_PX * MIN_MOB_PX / 4 <= area <= MAX_MOB_PX * MAX_MOB_PX):
+            continue
+        if cw > MAX_MOB_PX * 1.5 or ch > MAX_MOB_PX * 1.5:
+            continue
+        if cw * 4 < ch or ch * 4 < cw:
+            continue
+        px = int(cents[i][0] * _downscale)
+        py = int(cents[i][1] * _downscale)
+        if py >= h or px >= w:
+            continue
+        hh, ss, vv = hsv[min(py, h - 1), min(px, w - 1)]
+        rank = None
+        for rk, (lo, hi) in RANK_HSV.items():
+            if lo[0] <= hh <= hi[0] and lo[1] <= ss <= hi[1] and lo[2] <= vv <= hi[2]:
+                rank = rk
+                break
+        if rank is None:
+            continue
+        if with_size or with_sid:
+            ys, xs = np.nonzero(labels == i)
+            if len(xs) >= 3:
+                (_, _), r_c = cv2.minEnclosingCircle(
+                    np.column_stack((xs, ys)).astype(np.float32))
+                r_screen = round(float(r_c) * _downscale, 2)
+            else:
+                r_screen = round(0.25 * (cw + ch) * _downscale, 2)
+            if with_sid:
+                factor = RARITY_SIZE_FACTOR.get(rank or "", 1.0)
+                r_common = r_screen / factor if factor else r_screen
+                rw, rh = float(cw), float(ch)
+                aspect = max(rw, rh) / max(min(rw, rh), 1e-6)
+                rect = area / float(cw * ch) if cw * ch > 0 else 0.0
+                out[rank].append((px, py, r_screen, classify_mob(r_common, aspect, rect)))
+            else:
+                out[rank].append((px, py, r_screen))
+        else:
+            out[rank].append((px, py))
     return out
 
 
@@ -515,13 +569,14 @@ def escape_direction(ranks_map, player_map=None, sectors=8, binary=None,
 _PROJ_PREV = {"mask": None}
 
 
-def detect_projectiles(frame=None):
+def detect_projectiles(frame=None, hsv=None):
     """检测飞行物(黄蜂/胡蜂导弹, 蝎子螯针等):
-    全稀有度色 + 小尺寸(4-16px) + 帧间差分(运动物体才算)"""
+    全稀有度色 + 小尺寸(4-16px) + 帧间差分(运动物体才算); hsv 可传入已转换HSV图"""
     global _PROJ_PREV
     if frame is None:
         frame = get_frame()
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    if hsv is None:
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mask_all = np.zeros((hsv.shape[0], hsv.shape[1]), np.uint8)
     for rng in RANK_HSV.values():
         mask_all |= cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))

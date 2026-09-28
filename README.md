@@ -149,3 +149,10 @@ if __name__ == "__main__":
 - 根目录：插件源码（main.py / combat.py / utils.py …）
 
 官方数据来源：通过浏览器 JS 调游戏 wasm 导出接口（`_Util_GetMobs`/`_Util_GetPetals`/`_Util_GetTalents`/`_Util_CalculateDropChance`）实测导出。
+## 性能优化（v1.6.0）
+
+- **每圈共享一次 HSV 转换**：主循环一次 `cvtColor` 供 detect_all/detect_super/detect_projectiles/detect_drops 复用（原每检测函数各转一次全图）
+- **detect_all 合并连通域分析**：7 个稀有度档合并为 1 次 CC + 连通域中心单像素判档（原每档各跑一次全图连通域，快 2.5-5 倍）
+- **低频检测闸门**：特殊稀有生物每 0.4s 检测一次、掉落每 0.3s 一次（极稀有/非战斗核心，不必每帧跑）
+- **贴脸不再犹豫**：追击贴脸由"间歇点按试探"改为直接连续走（停在怪碰撞箱外，不会撞上）
+- 实测：整圈四检测 300ms+ → 126ms
