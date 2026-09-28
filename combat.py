@@ -13,6 +13,7 @@ import numpy as np
 import cv2
 from utils import get_frame, get_player_position, ARRIVE, set_screen_center
 from mob_table import MOB_CN
+from drop_table import mob_id2sid, petal_id2sid
 
 # ===== v1.5.0 怪种识别 =====
 # 官方体型缩放表(相对 Common, Unofficial Florr Data Spreadsheet): Unusual x1.1 / Rare x1.3 / Epic x1.5 / Mythic x3 / Super x10
@@ -65,6 +66,57 @@ def mob_name(sid):
     if not sid:
         return "未知"
     return MOB_CN.get(sid, sid)
+
+
+_DROP_CACHE = {"raw": None, "idx": None}
+
+
+def _load_drops():
+    """懒加载官方掉率表(florr_dropchance.json, _Util_CalculateDropChance 实测 332 条)
+    -> idx[(mob_id, rarity)] = [(chance, petal_sid)...]"""
+    if _DROP_CACHE["raw"] is not None:
+        return _DROP_CACHE
+    import json, os
+    p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "florr_dropchance.json")
+    try:
+        raw = json.loads(open(p, encoding="utf-8").read())
+    except Exception:
+        raw = {}
+    idx = {}
+    for k, v in raw.items():
+        mid, pid, r = k.split("|")
+        psid = petal_id2sid.get(int(pid), "?")
+        idx.setdefault((int(mid), int(r)), []).append((v, psid))
+    for g in idx.values():
+        g.sort(reverse=True)
+    _DROP_CACHE["raw"] = raw
+    _DROP_CACHE["idx"] = idx
+    return _DROP_CACHE
+
+
+def drop_hint(sid, rarity=5):
+    """目标怪掉落提示(v1.5.1): 返回 "rose 8.9% / stinger 94.1%" 之类短句
+    rarity: 5=Mythic 6=Ultra; 无数据返回空串"""
+    if not sid:
+        return ""
+    mid = None
+    for k, v in mob_id2sid.items():
+        if v == sid:
+            mid = k
+            break
+    if mid is None:
+        return ""
+    idx = _load_drops()["idx"]
+    items = idx.get((int(mid), int(rarity)))
+    if not items:
+        return ""
+    parts = []
+    for c, psid in items[:4]:
+        if c <= 0 or c < 0.0005:
+            parts.append(f"{mob_name(psid)}<0.1%")
+        else:
+            parts.append(f"{mob_name(psid)} {c*100:.1f}%")
+    return " ".join(parts)
 
 # ===== 参数(可调) =====
 # HSV 阈值(OpenCV 尺度: H 0-179 = 度数/2, S/V 0-255)

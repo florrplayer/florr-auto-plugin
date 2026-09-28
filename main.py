@@ -1152,9 +1152,10 @@ if __name__ == "__main__":
                             else:
                                 time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         set_title("战斗中")
-                        from combat import mob_name
+                        from combat import mob_name, drop_hint
                         _tname = mob_name(target[3]) if len(target) >= 4 and target[3] else "未知"
-                        print(f"[战斗] 发现目标 {_tname}({kill_rank}) {target}，追击...")
+                        _drop = drop_hint(target[3], rarity=5) if len(target) >= 4 and target[3] else ""
+                        print(f"[战斗] 发现目标 {_tname}({kill_rank}) {target}，追击..." + (f"  | M档掉落: {_drop}" if _drop else ""))
                         stop_dist = 2.0 if mode == "attack" else 0.5
                         r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist)
                         if r in ("danger", "lowhp"):
