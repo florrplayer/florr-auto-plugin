@@ -242,15 +242,24 @@ def detect_drops(frame=None, exclude_center=True):
 
 # Super 超级怪: 薄荷绿描边 #2BFFA3(UI色, 博客园配色表2023-04-05); 精确身体色需游戏截图实测
 SUPER_HSV = ((72, 120, 150), (82, 255, 255))   # 实测 #2BFFA3 -> HSV(77,212,255)
+# 官方体型缩放表(Unofficial Florr Data Spreadsheet, 游戏数据): 怪体型相对 Common
+#   Unusual x1.1 / Rare x1.3 / Epic x1.5 / Mythic x3 / Super x10
+# Super 怪 = 普通怪 10 倍体型(比 M 怪大 3.3 倍) -> 用最小半径过滤薄荷绿小色块误检
+# SUPER_MIN_R_PX: 960宽基准下的最小半径(自动乘降采样还原), Super 至少 M 怪最小尺寸的 3 倍
+SUPER_MIN_R_PX = 18.0
 AFK_DARK_MEAN = 70      # AFK弹窗: 屏幕中心区域灰度均值低于该值视为暗遮罩
 
 
 def detect_super(frame=None, with_size=False):
-    """检测 Super 级怪(薄荷绿), 返回屏幕坐标列表; with_size=True 时每点为 (x, y, r)"""
+    """检测 Super 级怪(薄荷绿), 返回屏幕坐标列表; with_size=True 时每点为 (x, y, r)
+    官方体型: Super=Common x10 -> 薄荷绿小色块(半径<下限)直接忽略, 防误检"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    return _detect_color(hsv, SUPER_HSV, with_size=with_size)
+    pts = _detect_color(hsv, SUPER_HSV, with_size=with_size)
+    if with_size:
+        return [p for p in pts if p[2] >= SUPER_MIN_R_PX * _downscale]
+    return pts
 
 
 def screen_r_to_map(r_screen):
