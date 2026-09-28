@@ -1,4 +1,6 @@
-﻿# florr-auto-pathing
+﻿
+> 最新小白版下载: [florr-auto-v1.7.0-win64.zip](https://github.com/florrplayer/florr-auto-plugin/releases/download/v1.7.0/florr-auto-v1.7.0-win64.zip) (解压后双击 启动.bat 即用, 无需装 Python)
+# florr-auto-pathing
 
 ## 📥 直接下载（小白版，双击即用，无需装 Python）
 
