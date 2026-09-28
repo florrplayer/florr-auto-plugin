@@ -94,6 +94,38 @@ def _load_drops():
     return _DROP_CACHE
 
 
+_HP_CACHE = {"data": None}
+
+
+def _fmt_hp(v):
+    """数字 -> 中文缩写显示: 157950 -> 15.8万, 218700000 -> 2.19亿"""
+    if v >= 100000000:
+        return "%.2f亿" % (v / 100000000.0)
+    if v >= 10000:
+        return "%.1f万" % (v / 10000.0)
+    return str(int(v))
+
+
+def mob_hp(sid, rarity=5):
+    """目标怪官方血量(v1.5.2, data/mob_hp.json): 返回 "15.8万" 或 None"""
+    if not sid:
+        return None
+    if _HP_CACHE["data"] is None:
+        import json, os
+        p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "mob_hp.json")
+        try:
+            _HP_CACHE["data"] = json.loads(open(p, encoding="utf-8").read())
+        except Exception:
+            _HP_CACHE["data"] = {}
+    hp = _HP_CACHE["data"].get(sid, {}).get(str(rarity))
+    if not hp:
+        return None
+    lo, hi = hp
+    if lo == hi:
+        return _fmt_hp(lo)
+    return f"{_fmt_hp(lo)}-{_fmt_hp(hi)}"
+
+
 def drop_hint(sid, rarity=5):
     """目标怪掉落提示(v1.5.1): 返回 "rose 8.9% / stinger 94.1%" 之类短句
     rarity: 5=Mythic 6=Ultra; 无数据返回空串"""

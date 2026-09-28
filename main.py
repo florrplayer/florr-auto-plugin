@@ -1152,15 +1152,22 @@ if __name__ == "__main__":
                             else:
                                 time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         set_title("战斗中")
-                        from combat import mob_name, drop_hint
+                        from combat import mob_name, drop_hint, mob_hp
                         _tname = mob_name(target[3]) if len(target) >= 4 and target[3] else "未知"
                         _drop = drop_hint(target[3], rarity=5) if len(target) >= 4 and target[3] else ""
-                        print(f"[战斗] 发现目标 {_tname}({kill_rank}) {target}，追击..." + (f"  | M档掉落: {_drop}" if _drop else ""))
+                        _kidx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
+                        _hp = mob_hp(target[3], _kidx) if len(target) >= 4 and target[3] else None
+                        print(f"[战斗] 发现目标 {_tname}({kill_rank}) HP {_hp or '?'} {target}，追击..." + (f"  | M档掉落: {_drop}" if _drop else ""))
+                        _t0 = time.time()
                         stop_dist = 2.0 if mode == "attack" else 0.5
                         r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist)
                         if r in ("danger", "lowhp"):
                             continue
-                        print("[战斗] 结束，继续巡逻")
+                        _el = time.time() - _t0
+                        _warn = ""
+                        if _el > 10:
+                            _warn = f"  ⚠️ 击杀耗时{_el:.0f}s>10s, 打得慢! 建议降档打更低的怪(目标HP {_hp or '?'})"
+                        print(f"[战斗] 结束(耗时{_el:.0f}s)，继续巡逻{_warn}")
                         _STATS["fights"] += 1
                         continue
 
