@@ -481,7 +481,7 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
 LEECH_RANGE = 25.0      # 蹭掉落触发范围(地图像素): 高等级怪距玩家10-25px时
 LEECH_APPROACH = 5.0    # 蹭掉落贴近距离: 走到5px内站定输出
 LEECH_TIME = 2.5        # 站定输出秒数(总伤害>1%即可分掉落)
-PICKUP_DROPS = True     # 掉落自动拾取(顺路捡: 只捡距玩家<=PICKUP_RANGE的掉落)
+PICKUP_DROPS = False   # 掉落自动拾取(顺路捡: 只捡距玩家<=PICKUP_RANGE的掉落); 装了磁铁花瓣建议关(磁铁自动吸附近掉落, 跑过去捡反而浪费时间)
 PICKUP_MIN_RANK = 3      # v1.7.0 掉落价值筛选: 只捡稀有度权重>=此值的掉落(3=Epic, 垃圾掉落不浪费时间)
 PICKUP_ARRIVE = 4.0     # 走到多近算"碰到"(玩家本体碰撞即拾取)
 
