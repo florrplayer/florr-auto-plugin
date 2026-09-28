@@ -128,8 +128,15 @@ def detect_special(frame=None, map_name=None, exclude_center=True, with_size=Fal
                 if area / (3.14159265 * r2) > 0.9:
                     continue
             if with_size:
-                pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale),
-                            round(0.25 * (w + h) * _downscale, 2)))
+                # 实际碰撞箱: 轮廓最小外接圆半径(圆形怪=真实图形半径)
+                ys, xs = np.nonzero(labels == i)
+                if len(xs) >= 3:
+                    (_, _), r_c = cv2.minEnclosingCircle(
+                        np.column_stack((xs, ys)).astype(np.float32))
+                    r_screen = round(float(r_c) * _downscale, 2)
+                else:
+                    r_screen = round(0.25 * (w + h) * _downscale, 2)
+                pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale), r_screen))
             else:
                 pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
         if pts:
@@ -185,8 +192,14 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None,
         # 怪近似圆形, 长条色块(草丛/水纹/墙影)滤掉
         cx_s, cy_s = cents[i]
         if with_size:
-            # 近似半径 = 外接矩形半宽高均值(降采样尺寸乘回全分辨率)
-            r_screen = round(0.25 * (w + h) * _downscale, 2)
+            # 实际碰撞箱: florr 碰撞检测=圆形hitbox, 半径=轮廓最小外接圆(圆形怪=真实图形半径)
+            ys, xs = np.nonzero(labels == i)
+            if len(xs) >= 3:
+                (_, _), r_c = cv2.minEnclosingCircle(
+                    np.column_stack((xs, ys)).astype(np.float32))
+                r_screen = round(float(r_c) * _downscale, 2)
+            else:
+                r_screen = round(0.25 * (w + h) * _downscale, 2)
             pts.append((int(cx_s * _downscale), int(cy_s * _downscale), r_screen))
         else:
             pts.append((int(cx_s * _downscale), int(cy_s * _downscale)))   # 还原全分辨率坐标
