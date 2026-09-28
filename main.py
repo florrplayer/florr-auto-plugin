@@ -482,6 +482,7 @@ LEECH_RANGE = 25.0      # 蹭掉落触发范围(地图像素): 高等级怪距�
 LEECH_APPROACH = 5.0    # 蹭掉落贴近距离: 走到5px内站定输出
 LEECH_TIME = 2.5        # 站定输出秒数(总伤害>1%即可分掉落)
 PICKUP_DROPS = True     # 掉落自动拾取(顺路捡: 只捡距玩家<=PICKUP_RANGE的掉落)
+PICKUP_MIN_RANK = 3      # v1.7.0 掉落价值筛选: 只捡稀有度权重>=此值的掉落(3=Epic, 垃圾掉落不浪费时间)
 PICKUP_ARRIVE = 4.0     # 走到多近算"碰到"(玩家本体碰撞即拾取)
 
 
@@ -1167,7 +1168,10 @@ if __name__ == "__main__":
                         _drop = drop_hint(target[3], rarity=5) if len(target) >= 4 and target[3] else ""
                         _kidx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5
                         _hp = mob_hp(target[3], _kidx) if len(target) >= 4 and target[3] else None
-                        print(f"[战斗] 发现目标 {_tname}({kill_rank}) HP {_hp or '?'} {target}，追击..." + (f"  | M档掉落: {_drop}" if _drop else ""))
+                        _thr = threat_hint(target[3], RANK_ORDER.index(kill_rank)) if len(target) >= 4 and target[3] else ""
+                        print(f"[战斗] 发现目标 {_tname}({kill_rank}) HP {_hp or '?'} {target}，追击..." +
+                              (f"  | {_thr}" if _thr else "") +
+                              (f"  | M档掉落: {_drop}" if _drop else ""))
                         _t0 = time.time()
                         stop_dist = 2.0 if mode == "attack" else 0.5
                         r = chase_target(goal_pt, trail, kill_rank, stop_dist=stop_dist)
@@ -1212,9 +1216,11 @@ if __name__ == "__main__":
                 if pos is not None:
                     from combat import detect_drops
                     if time.time() - _last_drops > 0.3:
-                        _drops_px = detect_drops(frame, hsv=hsv)
+                        _drops_px = detect_drops(frame, hsv=hsv, with_rank=True)
                         _last_drops = time.time()
-                    drops = [m for m in (screen_to_map_safe(p, pos) for p in _drops_px) if m]
+                    # v1.7.0 只捡值钱的掉落(稀有度权重>=PICKUP_MIN_RANK)
+                    drops = [m for m in (screen_to_map_safe(p, pos) for p in _drops_px
+                                         if p[2] and RANK_W.get(p[2], 0) >= PICKUP_MIN_RANK) if m]
                     drops = [d for d in drops if math.hypot(d[0] - pos[0], d[1] - pos[1]) <= PICKUP_RANGE]
                     dtarget = choose_target(drops, goal_pt, pos) if drops else None
                     if dtarget is not None:

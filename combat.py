@@ -9,6 +9,8 @@
 """
 import time
 import math
+import os
+import json
 import numpy as np
 import cv2
 from utils import get_frame, get_player_position, ARRIVE, set_screen_center
@@ -363,9 +365,10 @@ DROP_MAX_PX = 11         # 掉落最大尺寸: 怪最小MIN_MOB_PX=12, 两者互
 PICKUP_RANGE = 30.0      # 掉落距玩家地图像素<=该值才去捡(只顺路捡近的)
 
 
-def detect_drops(frame=None, exclude_center=True, hsv=None):
+def detect_drops(frame=None, exclude_center=True, hsv=None, with_rank=False):
     """检测掉落花瓣: 小尺寸(3-11px)的稀有度彩色块(怪最小12px, 互补不冲突)
-    排除中心玩家本体区域; 返回屏幕坐标列表; hsv 可传入已转换HSV图"""
+    排除中心玩家本体区域; 返回屏幕坐标列表; with_rank=True 时每点为 (x, y, rank)
+    v1.7.0: 连通域中心像素判稀有度(掉落价值筛选用); hsv 可传入已转换HSV图"""
     if frame is None:
         frame = get_frame()
     if hsv is None:
@@ -381,6 +384,7 @@ def detect_drops(frame=None, exclude_center=True, hsv=None):
     det_h = int(hsv.shape[0] / _downscale)
     small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
     n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
+    sh, sw = hsv.shape[:2]
     pts = []
     for i in range(1, n):
         area = stats[i, cv2.CC_STAT_AREA]
@@ -389,7 +393,20 @@ def detect_drops(frame=None, exclude_center=True, hsv=None):
             continue
         if w * 4 < h or h * 4 < w:
             continue
-        pts.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
+        px = int(cents[i][0] * _downscale)
+        py = int(cents[i][1] * _downscale)
+        if with_rank:
+            if py >= sh or px >= sw:
+                continue
+            hh, ss, vv = hsv[min(py, sh - 1), min(px, sw - 1)]
+            rank = None
+            for rk, (lo, hi) in RANK_HSV.items():
+                if lo[0] <= hh <= hi[0] and lo[1] <= ss <= hi[1] and lo[2] <= vv <= hi[2]:
+                    rank = rk
+                    break
+            pts.append((px, py, rank))
+        else:
+            pts.append((px, py))
     return pts
 
 
@@ -602,6 +619,38 @@ def detect_projectiles(frame=None, hsv=None):
 
 
 _HP_MAX = {"v": 0}
+
+
+_THREAT = None
+_RANK_ORDER7 = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
+
+
+def threat_load():
+    """懒加载官方怪威胁表 data/mob_threat.json (73怪 7档 伤害/血量/护甲/exp/掉落)"""
+    global _THREAT
+    if _THREAT is None:
+        try:
+            _p = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                              "data", "mob_threat.json")
+            _THREAT = json.load(open(_p, encoding="utf-8"))
+        except Exception:
+            _THREAT = {}
+    return _THREAT
+
+
+def threat_hint(sid, rank_idx=5):
+    """目标怪威胁提示: 官方伤害/血量, rank_idx 对应 RANK_ORDER7 下标(默认5=Mythic)"""
+    t = threat_load().get(sid)
+    if not t:
+        return ""
+    try:
+        return f"伤害{t['dmg'][rank_idx]}/血{t['hp'][rank_idx]}"
+    except Exception:
+        return ""
+
+
+RANK_W = {"common": 0, "unusual": 1, "rare": 2, "epic": 3,
+          "legendary": 4, "mythic": 5, "ultra": 6}
 
 
 def get_hp_ratio(frame=None):
