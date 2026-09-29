@@ -1,0 +1,29 @@
+﻿类型: 181个
+函数: 6531个
+code段: 4.8MB
+反汇编 6531 个函数...
+提取到 3865 个含浮点数/调用的函数
+
+含可能碰撞箱半径(3-80)的函数: 102个
+  func[942] radius~25.0, calls=[481, 481]
+  func[1067] radius~50.0, calls=[375]
+  func[1261] radius~50.0, calls=[365]
+  func[1983] radius~20.0, calls=[375, 445, 440, 407, 372]
+  func[2310] radius~5.0, calls=[368, 55, 420]
+  func[2964] radius~55.0, calls=[34, 32]
+  func[3092] radius~5.0, calls=[]
+  func[3215] radius~51.0, calls=[]
+  func[3243] radius~16.0, calls=[33]
+  func[5405] radius~25.0, calls=[1303, 1303, 33, 365, 32]
+  func[5698] radius~15.0, calls=[378, 418, 418, 411, 411]
+  func[5979] radius~40.0, calls=[365, 65, 365, 55, 32]
+  func[5983] radius~20.0, calls=[365, 32, 365, 55, 32]
+  func[6141] radius~10.0, calls=[]
+  func[6171] radius~5.0, calls=[]
+  func[6403] radius~12.0, calls=[368, 55, 420]
+  func[6404] radius~12.0, calls=[368, 55, 420]
+  func[6405] radius~10.0, calls=[368, 55, 420]
+  func[6406] radius~5.0, calls=[368, 55, 420]
+  func[6407] radius~10.0, calls=[368, 55, 420]
+
+已保存前500个函数到 wasm_dump/disasm.json
