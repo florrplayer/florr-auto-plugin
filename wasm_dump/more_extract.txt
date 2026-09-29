@@ -1,0 +1,1019 @@
+﻿=== 传送门/坐标 ===
+  Petal/Attribute/SpawnNoRarity
+  Petal/Attribute/SpawnRarity
+  extra_spawn_delay
+  spawnManaCost
+  Petal/Attribute/SpawnManaCost
+  warp_point
+  Respawn area must be a rect
+  spawn_drops
+  spawn_mobs
+  spawn_drops invalid petal type %s
+  warp
+  <map> [targets] - Warp to a specific map
+  Petal/Attribute/Spawn
+  warp_destination
+  You will respawn next wave
+  spawn_drops missing type value
+  Invalid mob preset "%.*s" in map spawning zone
+  Invalid mob sid "%.*s" in map spawning zone
+  spawn-sacrifice
+  spawn-mob
+  <type> <rarity> [team] - Spawns a sacrifice mob
+  <type> <rarity> <normal drops? y/n> [team] [num] [global? y/n] - Spawns a mob
+  respawn_area
+  Achievements/54/Description=Spawn a friendly mob.
+  Achievements/55/Description=Spawn {0} friendly mobs.
+  Achievements/56/Description=Spawn {0} friendly mobs.
+  Achievements/57/Description=Spawn {0} friendly mobs.
+  Achievements/70/Description=Spawn a friendly Termite.
+  Petal/Attribute/Spawn={#Petal/Attribute/Spawn{0:1orN}}
+  Petal/Attribute/SpawnNoRarity={#Petal/Attribute/SpawnNoRarity{0:1orN}}
+  Petal/Attribute/SpawnNoRarity1=<c val="{#Colors/generic}">Spawn:</c> {#Mobs/{1}/Name}
+  Petal/Attribute/SpawnNoRarityN=<c val="{#Colors/generic}">Spawn:</c> {0}x {#Mobs/{1}/Name}
+  Petal/Attribute/SpawnRarity={#Petal/Attribute/SpawnRarity{0:1orN}}
+  - Luck now affects mob spawns again, increasing the rarity of mobs that spawn in that area.
+  - Eggs now only spawn mobs when they break.
+  - Super mobs are no longer more likely to spawn the longer an Ultra mob has gone unkilled.
+  - Ultra+ spawn frequency is back to before the Dec 25th update.
+  - Supers are now more likely to spawn for mobs whose ultras aren't destroyed very often.
+  - Ultras now spawn about 10x more frequently, with 3-4x lower drop rate.
+  - Super mob spawns are now announced to all the players in all maps in the region.
+  Chat/MobSpawnedHere={#Chat/MobSpawnedHere/Special/{1}#Mobs/{0:base}/Spawn#Chat/MobSpawnedHere/Text}
+  Chat/MobSpawnedHere/Text={#Mobs/AnnouncementPrefix:0} has spawned!
+  Chat/MobSpawnedSomewhere/Text={#Mobs/AnnouncementPrefix:0} has spawned somewhere!
+  Chat/MobSpawnedHere/Special/sacrifice={#Mobs/AnnouncementPrefix:0} has been summoned!
+  Mobs/rock/Spawn=Something mountain-like appears in the distance...
+  Mobs/cactus/Spawn=A tower of thorns rises from the sands...
+  Mobs/hornet/Spawn=A big yellow spot shows up in the distance...
+  Mobs/jellyfish/Spawn=You hear lightning strikes coming from a far distance...
+  Mobs/firefly/Spawn=There's a bright light in the horizon...
+  Mobs/beetle_hel/Description=Scourge that spawns in the other plane.
+  Mobs/beetle_hel/Spawn=You sense ominous vibrations coming from a different realm...
+  Mobs/spider_hel/Description=Scourge that spawns in the other plane.
+  Mobs/spider_hel/Spawn=You sense ominous vibrations coming from a different realm...
+  Mobs/centipede_hel/Description=Scourge that spawns in the other plane.
+  Mobs/centipede_hel/Spawn=You sense ominous vibrations coming from a different realm...
+  Mobs/centipede_hel_body/Description=Scourge that spawns in the other plane.
+  Mobs/centipede_hel_body/Spawn=You sense ominous vibrations coming from a different realm...
+  Mobs/wasp_hel/Description=Scourge that spawns in the other plane.
+  Mobs/wasp_hel/Spawn=You sense ominous vibrations coming from a different realm...
+  Mobs/gambler/Spawn=You hear someone whisper faintly... "just... one more game..."
+  Petals/rice/Description=Spawns very quickly, but not very strong.
+  Petals/corn/Description=Takes a long time to spawn, but has a lot of health.
+  Petal/Attribute/Spawn={#Petal/Attribute/Spawn{0:1orN}}
+  Petal/Attribute/Spawn1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnNoRarity={#Petal/Attribute/SpawnNoRarity{0:1orN}}
+  Petal/Attribute/SpawnNoRarity1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnNoRarityN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnRarity={#Petal/Attribute/SpawnRarity{0:1orN}}
+  Petal/Attribute/SpawnRarity1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnRarityN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnManaCost=<c val="{#Colors/generic}">
+  Chat/MobSpawnedHere={#Chat/MobSpawnedHere/Special/{1}#Mobs/{0:base}/Spawn#Chat/MobSpawnedHere/Text}
+  Chat/MobSpawnedHere/Text={#Mobs/AnnouncementPrefix:0}
+  Chat/MobSpawnedSomewhere/Text={#Mobs/AnnouncementPrefix:0}
+  Chat/MobSpawnedHere/Special/sacrifice={#Mobs/AnnouncementPrefix:0}
+  Chat/MobSpawnedSomewhere/Special/sacrifice={#Mobs/AnnouncementPrefix:0} 
+  Mobs/rock/Spawn=
+  Mobs/cactus/Spawn=
+  Mobs/hornet/Spawn=
+  Mobs/jellyfish/Spawn=
+  Mobs/firefly/Spawn=
+  Mobs/beetle_hel/Spawn=
+  Mobs/spider_hel/Spawn=
+  Mobs/centipede_hel/Spawn=
+  Mobs/centipede_hel_body/Spawn=
+  Mobs/wasp_hel/Spawn=
+  Mobs/gambler/Spawn=
+  Achievements/103/Description=Spawne e mate um Inimigo {#Rarities/{0}/Male/Name} sem se mover.
+  Achievements/104/Description=Spawne e mate um Inimigo {#Rarities/{0}/Male/Name} sem se mover.
+  Petal/Attribute/Spawn={#Petal/Attribute/Spawn{0:1orN}}
+  Petal/Attribute/SpawnNoRarity={#Petal/Attribute/SpawnNoRarity{0:1orN}}
+  Petal/Attribute/SpawnNoRarity1=<c val="{#Colors/generic}">Invoca:</c> {#Mobs/{1}/Name}
+  Petal/Attribute/SpawnNoRarityN=<c val="{#Colors/generic}">Invoca:</c> {0}x {#Mobs/{1}/Name}
+  Petal/Attribute/SpawnRarity={#Petal/Attribute/SpawnRarity{0:1orN}}
+  Petal/Attribute/SpawnManaCost=<c val="{#Colors/generic}">Custo de invoca
+  - Super mobs are no longer more likely to spawn the longer an Ultra mob has gone unkilled.
+  - Ultra+ spawn frequency is back to before the Dec 25th update.
+  - Supers are now more likely to spawn for mobs whose ultras aren't destroyed very often.
+  - Ultras now spawn about 10x more frequently, with 3-4x lower drop rate.
+  - Super mob spawns are now announced to all the players in all maps in the region.
+  Chat/MobSpawnedHere={#Chat/MobSpawnedHere/Special/{1}#Mobs/{0:base}/Spawn#Chat/MobSpawnedHere/Text}
+  Chat/MobSpawnedHere/Text={#Mobs/AnnouncementPrefix:0} apareceu!
+  Chat/MobSpawnedSomewhere/Text={#Mobs/AnnouncementPrefix:0} apareceu em algum lugar!
+  Mobs/rock/Spawn=Algo parecido como uma montanha aparece na dist
+  Mobs/cactus/Spawn=Uma torre de espinhos emerge da areia...
+  Mobs/hornet/Spawn=Um grande ponto amarelo surge a uma longa dist
+  Mobs/jellyfish/Spawn=Voc
+  Mobs/fly/Spawn=Voc
+  Mobs/firefly/Spawn=Tem uma luz brilhante vindo do horizonte...
+  Mobs/beetle_hel/Spawn=Voc
+  Mobs/spider_hel/Spawn=Voc
+  Mobs/centipede_hel/Spawn=Voc
+  Mobs/centipede_hel_body/Spawn=Voc
+  Mobs/wasp_hel/Spawn=Voc
+  Mobs/gambler/Spawn=Voc
+  Petal/Attribute/Spawn={#Petal/Attribute/Spawn/{1:base}/{0}}
+  Petal/Attribute/Spawn/beetle_mummy/1=<c val="{#Colors/generic}">
+  Petal/Attribute/Spawn/sandstorm/1=<c val="{#Colors/generic}">
+  Petal/Attribute/Spawn/sandstorm/2=<c val="{#Colors/generic}">
+  Petal/Attribute/Spawn/sandstorm/4={#Petal/Attribute/Spawn/sandstorm/2}
+  Petal/Attribute/SpawnNoRarity={#Petal/Attribute/SpawnNoRarity{0:1orN}}
+  Petal/Attribute/SpawnNoRarity1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnNoRarityN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnRarity={#Petal/Attribute/SpawnRarity{0:1orN}}
+  Petal/Attribute/SpawnRarity1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnRarityN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnManaCost=<c val="{#Colors/generic}">
+  - Super mobs are no longer more likely to spawn the longer an Ultra mob has gone unkilled.
+  - Ultra+ spawn frequency is back to before the Dec 25th update.
+  - Supers are now more likely to spawn for mobs whose ultras aren't destroyed very often.
+  - Ultras now spawn about 10x more frequently, with 3-4x lower drop rate.
+  - Super mob spawns are now announced to all the players in all maps in the region.
+  Chat/MobSpawnedHere/Male=
+  Chat/MobSpawnedHere/Female=
+  Chat/MobSpawnedHere/Neuter=
+  Chat/MobSpawnedHere/Plural=
+  Chat/MobSpawnedSomewhere/Male=
+  Chat/MobSpawnedSomewhere/Female=
+  Chat/MobSpawnedSomewhere/Neuter=
+  Chat/MobSpawnedSomewhere/Plural=
+  Chat/MobSpawnedHere/Special/sacrifice/Male=
+  Chat/MobSpawnedHere/Special/sacrifice/Female=
+  Chat/MobSpawnedHere/Special/sacrifice/Neuter=
+  Chat/MobSpawnedHere/Special/sacrifice/Plural=
+  Chat/MobSpawnedSomewhere/Special/sacrifice/Male=
+  Chat/MobSpawnedSomewhere/Special/sacrifice/Female=
+  Chat/MobSpawnedSomewhere/Special/sacrifice/Neuter=
+  Chat/MobSpawnedSomewhere/Special/sacrifice/Plural=
+  Mobs/rock/Spawn=
+  Mobs/cactus/Spawn=
+  Mobs/hornet/Spawn=
+  Mobs/jellyfish/Spawn=
+  Mobs/firefly/Spawn=
+  Mobs/beetle_hel/Spawn=
+  Mobs/spider_hel/Spawn=
+  Mobs/centipede_hel/Spawn=
+  Mobs/centipede_hel_body/Spawn=
+  Mobs/wasp_hel/Spawn=
+  Mobs/gambler/Spawn=
+  Petal/Attribute/Spawn=<c val="{#Colors/generic}">Tri
+  Petal/Attribute/SpawnNoRarity=<c val="{#Colors/generic}">Tri
+  Petal/Attribute/SpawnRarity={#Petal/Attribute/SpawnRarity{0:1orN}}
+  Petal/Attribute/SpawnRarity1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnRarityN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnManaCost=<c val="{#Colors/generic}">Chi Ph
+  Chat/MobSpawnedHere={#Chat/MobSpawnedHere/Special/{1}#Mobs/{0:base}/Spawn#Chat/MobSpawnedHere/Text}
+  Chat/MobSpawnedHere/Text={#Mobs/AnnouncementPrefix:0} v
+  Chat/MobSpawnedSomewhere/Text={#Mobs/AnnouncementPrefix:0} v
+  Chat/MobSpawnedHere/Special/sacrifice={#Mobs/AnnouncementPrefix:0} v
+  Chat/MobSpawnedSomewhere/Special/sacrifice={#Mobs/AnnouncementPrefix:0} v
+  Mobs/rock/Spawn=C
+  Mobs/cactus/Spawn=M
+  Mobs/hornet/Spawn=M
+  Mobs/jellyfish/Spawn=B
+  Mobs/firefly/Spawn=C
+  Mobs/beetle_hel/Spawn=B
+  Mobs/spider_hel/Spawn=B
+  Mobs/centipede_hel/Spawn=B
+  Mobs/centipede_hel_body/Spawn=B
+  Mobs/wasp_hel/Spawn=B
+  Mobs/gambler/Spawn=M
+  Petal/Attribute/Spawn={#Petal/Attribute/Spawn{0:1orN}}
+  Petal/Attribute/Spawn1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnNoRarity={#Petal/Attribute/SpawnNoRarity{0:1orN}}
+  Petal/Attribute/SpawnNoRarity1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnNoRarityN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnRarity={#Petal/Attribute/SpawnRarity{0:1orN}}
+  Petal/Attribute/SpawnRarity1=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnRarityN=<c val="{#Colors/generic}">
+  Petal/Attribute/SpawnManaCost=<c val="{#Colors/generic}">
+  Chat/MobSpawnedHere={#Chat/MobSpawnedHere/Special/{1}#Mobs/{0:base}/Spawn#Chat/MobSpawnedHere/Text}
+  Chat/MobSpawnedHere/Text={#Mobs/AnnouncementPrefix:0}
+  Chat/MobSpawnedSomewhere/Text={#Mobs/AnnouncementPrefix:0}
+  Chat/MobSpawnedHere/Special/sacrifice={#Mobs/AnnouncementPrefix:0}
+  Chat/MobSpawnedSomewhere/Special/sacrifice={#Mobs/AnnouncementPrefix:0}
+  Chat/Command/spawn-mob/Args=<type> <rarity> <normal drops? y/n> <enemy? y/n> [num] [global? y/n]
+  Chat/Command/spawn-mob/Description=Spawns a mob
+  Chat/Command/warp/Args=<map>
+  Chat/Command/warp/Description=Warp to a specific map
+  Chat/Command/warp-everyone/Args=<map>
+  Chat/Command/warp-everyone/Description=Warp everyone to a specific map
+  Mobs/rock/Spawn=
+  Mobs/cactus/Spawn=
+  Mobs/hornet/Spawn=
+  Mobs/jellyfish/Spawn=
+  Mobs/firefly/Spawn=
+  Mobs/beetle_hel/Spawn=
+  Mobs/spider_hel/Spawn=
+  Mobs/centipede_hel/Spawn=
+  Mobs/centipede_hel_body/Spawn=
+  Mobs/wasp_hel/Spawn=
+  Mobs/gambler/Spawn=
+           "name":"respawn",
+                   "type":"respawn_area",
+                   "type":"respawn_area",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+           "name":"respawn",
+                   "type":"respawn_area",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+           "name":"warps",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_drops",
+                   "type":"warp_destination",
+                   "type":"spawn_drops",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"warp_destination",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"respawn_area",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"respawn_area",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"warp_destination",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_drops",
+           "name":"warps",
+                   "type":"respawn_area",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"respawn_area",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                           "name":"extra_spawn_delay",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                   "type":"respawn_area",
+                           "name":"warp_point",
+                   "type":"warp",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"spawn_mobs",
+                   "type":"respawn_area",
+           "name":"warps",
+                           "name":"warp_point",
+                   "type":"warp",
+
+=== 配置常量 ===
+  max_rarity
+  force_minimap_collisions
+  concentrated_poison
+  max_interval
+  min_interval
+  termite_overmind
+  cached_account_data
+
+=== 聊天命令 ===
+  /BC=
+  /#AC
+  /#AC
+  /#ACB`YAC
+  /OAC
+  /#AC
+  /j!4 
+  / 4 
+  /dev/urandom
+  /v2/project/
+  /payment/item/
+  /findEach/
+  /reply 
+  /whisper 
+  /map 
+  /local 
+  /guild 
+  /squad 
+  /pdG
+  /*RV
+  /help
+  /squad
+  /help
+  /3).
+  /squad
+  /help
+  //js2svg: {
+  //},
+  //"removeXMLNS",
+  //"removeDoctype",
+  //"mergeStyles",
+  //"inlineStyles",
+  //"minifyStyles",
+  //"moveGroupAttrsToElems",
+  //"mergePaths",
+  /P8i
+  /yQA
+
+=== 物品/drops ===
+  <petal:rarity> [n] [anyone/self] - Creates a drop above you
+  i18n/ru_RU/drops.txt
+  i18n/en_US/drops.txt
+  i18n/pt_BR/drops.txt
+  i18n/ja_JP/drops.txt
+  i18n/vi_VN/drops.txt
+  i18n/zh_CN/drops.txt
+  spawn_drops
+  UI/Settings/EquipDrops
+  spawn_drops invalid petal type %s
+  create-drop
+  Drops/map
+  spawn_drops missing type value
+  droppable
+  Num drops: %d
+  <drops? y/n> [radius] - Kills every mob
+  <type> <rarity> <normal drops? y/n> [team] [num] [global? y/n] - Spawns a mob
+  SDL_DROPTEXT
+  SDL_DROPBEGIN
+  SDL_DROPCOMPLETE
+  SDL_DROPFILE
+  Achievements/94/Description=Acquire {0} drops within {1:time}.
+  - Adjusted drop rates for ultra+ mobs.
+  - Approximately doubled Ultra (but not Super) mob drops.
+  - Ultras now spawn about 10x more frequently, with 3-4x lower drop rate.
+  - Drop rate has been slightly reduced to compensate.
+  - Decreased drop chance of higher rarities a bit.
+  - Mobs can now only drop petals of at most their own rarity.
+  - Tweaked petal drop rate to compensate.
+  - Mobs can now only drop petals up to 1 rarity level above themselves.
+  Drops/map=Map
+  UI/Bonus/Instructions=Earn bonus drops
+  UI/Bonus/Instructions2=For the first hour you play each day, you get extra drops.
+  UI/Settings/EquipDrops=Equip drops
+  Drops/map=
+  UI/Settings/EquipDrops=
+  o seus inimigos. Destruir eles tem chance de dropar novar p
+   que dropem uma p
+  Achievements/94/Description=Obtenha {0} drops em {1:time}.
+  - Adjusted drop rates for ultra+ mobs.
+  - Approximately doubled Ultra (but not Super) mob drops.
+  - Ultras now spawn about 10x more frequently, with 3-4x lower drop rate.
+  - Drop rate has been slightly reduced to compensate.
+  - Decreased drop chance of higher rarities a bit.
+  - Mobs can now only drop petals of at most their own rarity.
+  - Tweaked petal drop rate to compensate.
+  - Mobs can now only drop petals up to 1 rarity level above themselves.
+  Drops/map=Mapa
+  UI/Bonus/Instructions=Ganhe drops extras
+   recebe drops extras.
+  UI/Settings/EquipDrops=Equipar drops
+  - Adjusted drop rates for ultra+ mobs.
+  - Approximately doubled Ultra (but not Super) mob drops.
+  - Ultras now spawn about 10x more frequently, with 3-4x lower drop rate.
+  Drops/map=
+  UI/Settings/EquipDrops=
+  Drops/map=B
+  UI/Settings/EquipDrops=T
+  Chat/Command/spawn-mob/Args=<type> <rarity> <normal drops? y/n> <enemy? y/n> [num] [global? y/n]
+  Chat/Command/kill-mobs/Args=<drops? y/n>
+  Drops/map=
+  UI/Settings/EquipDrops=
+           "name":"drops",
+                   "type":"spawn_drops",
+                   "type":"spawn_drops",
+           "name":"drops",
+                   "type":"spawn_drops",

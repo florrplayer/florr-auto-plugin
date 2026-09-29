@@ -1,0 +1,23 @@
+{
+  "mob_spawn_chats": {
+    "rock": "Something mountain-like appears in the distance...",
+    "cactus": "A tower of thorns rises from the sands...",
+    "hornet": "A big yellow spot shows up in the distance...",
+    "jellyfish": "You hear lightning strikes coming from a far distance...",
+    "firefly": "There's a bright light in the horizon...",
+    "beetle_hel": "You sense ominous vibrations coming from a different realm...",
+    "spider_hel": "You sense ominous vibrations coming from a different realm...",
+    "centipede_hel": "You sense ominous vibrations coming from a different realm...",
+    "wasp_hel": "You sense ominous vibrations coming from a different realm...",
+    "gambler": "You hear someone whisper faintly... just... one more game..."
+  },
+  "spawn_mechanics": {
+    "luck_affects_rarity": true,
+    "super_random_replace": "Super是Ultra怪极低概率随机替换",
+    "ultra_freq": "Ultra生成频率约10倍提升,掉率3-4倍降低",
+    "super_announced": "Super生成会全服聊天广播",
+    "eggs_hatch_on_break": "蛋只有打破时才孵化",
+    "super_not_time_based": "Super不是超时刷的"
+  },
+  "source": "client.wasm changelog字符串"
+}
