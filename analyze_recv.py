@@ -1,42 +1,52 @@
-import json, zlib
+import json, lz4.block, zlib
 
 with open('data/recv_late.json', 'r') as f:
     packets = json.load(f)
 
 d = packets[0]['d']
-print(f'包大小: {len(d)}B')
-print(f'前16字节: {d[:16]}')
+print(f'包0: {len(d)}B, 首字节=0x{d[0]:02x}')
 
-# 试各种解压
-print('\n--- zlib ---')
-try:
-    r = zlib.decompress(bytes(d))
-    print(f'成功! {len(r)}B: {r[:100]}')
-except Exception as e:
-    print(f'失败: {e}')
-
-print('\n--- zlib raw (wbits=-15) ---')
-try:
-    r = zlib.decompress(bytes(d), -15)
-    print(f'成功! {len(r)}B: {r[:100]}')
-except Exception as e:
-    print(f'失败: {e}')
-
-print('\n--- gzip ---')
-try:
-    r = zlib.decompress(bytes(d), 31)
-    print(f'成功! {len(r)}B: {r[:100]}')
-except Exception as e:
-    print(f'失败: {e}')
-
-# 试跳过前N字节zlib raw
-for skip in range(0, 10):
-    try:
-        r = zlib.decompress(bytes(d[skip:]), -15)
-        print(f'skip={skip}: 成功! {len(r)}B')
-        print(r[:200])
-        break
-    except:
-        pass
+# 试跳过前1字节(LZ4 block)
+for skip in [0, 1, 2, 3, 4]:
+    for usize in [2000, 5000, 10000, 50000]:
+        try:
+            r = lz4.block.decompress(bytes(d[skip:]), uncompressed_size=usize)
+            print(f'LZ4 skip={skip} usize={usize}: 成功! {len(r)}B')
+            print('前200字节:', r[:200])
+            break
+        except Exception as e:
+            pass
+    else:
+        continue
+    break
 else:
-    print('都失败')
+    print('LZ4 都失败')
+
+# 试 zstd
+try:
+    import zstandard as zstd
+    print('\n试zstd...')
+    for skip in range(5):
+        try:
+            dctx = zstd.ZstdDecompressor()
+            r = dctx.decompress(bytes(d[skip:]), max_output_size=100000)
+            print(f'zstd skip={skip}: {len(r)}B: {r[:200]}')
+            break
+        except:
+            pass
+except ImportError:
+    print('无zstd')
+
+# 试 brotli
+try:
+    import brotli
+    print('\n试brotli...')
+    for skip in range(5):
+        try:
+            r = brotli.decompress(bytes(d[skip:]))
+            print(f'brotli skip={skip}: {len(r)}B: {r[:200]}')
+            break
+        except:
+            pass
+except ImportError:
+    print('无brotli')

@@ -457,14 +457,15 @@ def detect_afk_check(frame, prev_gray_center=None):
 
 
 def solve_afk_drag(frame=None):
-    """自动解决挂机检测拖动验证(支持直线/L形/曲线/Z形任意路径):
-    找亮绿色圆点(起点) -> BFS沿灰色路径走到最远点 -> 分段拖动
+    """自动解决挂机检测拖动验证(路径颜色随机/形状随机):
+    找亮绿色圆点(起点) -> BFS沿任意亮色路径走到最远点 -> 分段拖动
     返回 (True, sx, sy, path_points) 或 (False,...)"""
     try:
         if frame is None:
             frame = get_frame()
         h, w = frame.shape[:2]
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        # 亮绿色起点
         gmask = cv2.inRange(hsv, (45, 150, 150), (85, 255, 255))
         gmask[:h//5, :] = 0; gmask[4*h//5:, :] = 0
         gmask[:, :w//5] = 0; gmask[:, 4*w//5:] = 0
@@ -474,8 +475,10 @@ def solve_afk_drag(frame=None):
         best = max(range(1, n), key=lambda i: stats[i, cv2.CC_STAT_AREA])
         sx = int(stats[best, cv2.CC_STAT_LEFT] + stats[best, cv2.CC_STAT_WIDTH] / 2)
         sy = int(stats[best, cv2.CC_STAT_TOP] + stats[best, cv2.CC_STAT_HEIGHT] / 2)
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        pathmask = cv2.inRange(gray, 50, 190)
+        # 路径: 任意亮色(饱和度>40, 亮度>80) = 路径线
+        pathmask = cv2.inRange(hsv, (0, 40, 80), (180, 255, 255))
+        # 排除绿色起点本身(绿色在pathmask里)
+        pathmask = pathmask & (~gmask)
         pathmask[:h//5, :] = 0; pathmask[4*h//5:, :] = 0
         pathmask[:, :w//5] = 0; pathmask[:, 4*w//5:] = 0
         from collections import deque
@@ -486,10 +489,12 @@ def solve_afk_drag(frame=None):
             x, y = q.popleft()
             d = ((x-sx)**2 + (y-sy)**2)**0.5
             if d > maxd: maxd = d; end = (x, y)
-            for dx, dy in [(1,0),(-1,0),(0,1),(0,-1)]:
+            for dx, dy in [(2,0),(-2,0),(0,2),(0,-2),(1,1),(-1,-1),(1,-1),(-1,1)]:
                 nx, ny = x+dx, y+dy
                 if 0<=nx<w and 0<=ny<h and not visited[ny,nx] and pathmask[ny,nx]>0:
                     visited[ny,nx] = True; q.append((nx,ny))
+        if maxd < 20:
+            return False, 0, 0, []
         path_points = []
         for t in range(11):
             path_points.append((int(sx+(end[0]-sx)*t/10), int(sy+(end[1]-sy)*t/10)))
