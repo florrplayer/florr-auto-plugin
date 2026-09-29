@@ -6,7 +6,7 @@
   "content_scripts": [
     {
       "matches": ["*://florr.io/*"],
-      "js": ["content.js"],
+      "js": ["content.js", "bridge.js"],
       "run_at": "document_start",
       "world": "MAIN"
     }
