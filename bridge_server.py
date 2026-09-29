@@ -16,6 +16,14 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
 
+    def do_GET(self):
+        # 其他进程从这里拉最新数据
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(get_latest()).encode())
+
     def do_POST(self):
         length = int(self.headers.get('Content-Length', 0))
         body = self.rfile.read(length)
