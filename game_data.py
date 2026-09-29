@@ -66,3 +66,35 @@ MARK_DESC = "Dark mark that binds to a fallen soul."
 
 # 值得优先打的稀有怪
 PRIORITY_MOBS = ['square', 'ladybug_shiny', 'centipede_evil', 'golden_leafbug', 'diver_ant']
+
+# 游戏颜色代码(从wasm确认)
+COLORS = {
+    'damage': '#ff6666',
+    'heal': '#ff94c9',
+    'health': '#66ff66',
+    'armor': '#666666',
+    'mythic': '#1fdbde',
+    'ultra': '#ff2b75',
+}
+
+# 重要机制(从changelog)
+MECHANICS = {
+    'heal_nerf': '所有治疗被砍50%',
+    'poison_dps': '毒伤害15/s(从9/s)',
+    'refund_cost': '洗点要5级代价',
+    'drop_rule': '怪只能掉比自己高1档的花瓣',
+    'web_slow': 'Web移速debuff -50%',
+    'starfish': '血量<75%时被动回血',
+    'plank': '对投射物/花瓣20倍伤害',
+    'ultra_freq': 'Ultra生成频率x10,掉率÷3-4',
+}
+
+# NPC位置和对话
+NPCS = {
+    'trader': {'desc': '商人,沙漠游荡,1花瓣换同稀有度Coin', 'dialog': "I'm looking to expand my collection..."},
+    'oracle': {'desc': '神使,海洋,必成合成', 'dialog': "The cost of certainty"},
+    'gambler': {'desc': '赌徒,PVP向,腐化花瓣'},
+}
+
+# 天赋树(已知前缀)
+TALENT_TREES = ['body_damage', 'health', 'reload', 'magnetism', 'luck', 'medic', 'loadout', 'damage']
