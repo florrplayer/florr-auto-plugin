@@ -988,16 +988,15 @@ if __name__ == "__main__":
                 _ccx, _ccy = get_screen_center()
                 # 先尝试挂机检测拖动验证(找亮绿点)
                 from combat import solve_afk_drag
-                ok, sx, sy, ex, ey = solve_afk_drag(_cdf)
+                ok, sx, sy, path_pts = solve_afk_drag(_cdf)
                 if ok:
+                    ex, ey = path_pts[-1]
                     print(f"[AFK] 拖动验证: 绿点({sx},{sy})->终点({ex},{ey})")
                     import win32api, win32con
                     def _lp(x, y): return (y << 16) | (x & 0xFFFF)
                     win32api.PostMessage(get_window().hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, _lp(sx, sy))
                     time.sleep(0.2)
-                    for i in range(1, 11):
-                        ix = int(sx + (ex - sx) * i / 10)
-                        iy = int(sy + (ey - sy) * i / 10)
+                    for i, (ix, iy) in enumerate(path_pts):
                         win32api.PostMessage(get_window().hwnd, win32con.WM_MOUSEMOVE, win32con.MK_LBUTTON, _lp(ix, iy))
                         time.sleep(0.06)
                     time.sleep(0.2)

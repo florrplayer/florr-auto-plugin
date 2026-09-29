@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"><style>
+body{width:300px;font-family:system-ui;padding:10px;background:#1a1a2e;color:#eee}
+h3{margin:0 0 8px;color:#0ff}
+.stat{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #333}
+button{width:100%;padding:8px;margin-top:8px;background:#0ff;color:#000;border:none;border-radius:4px;cursor:pointer;font-weight:bold}
+pre{max-height:200px;overflow:auto;font-size:10px;background:#111;padding:6px;border-radius:4px;white-space:pre-wrap;word-break:break-all}
+</style></head>
+<body>
+<h3>Florr WS Hook</h3>
+<div class="stat"><span>Recv 包数</span><b id="rc">-</b></div>
+<div class="stat"><span>Send 包数</span><b id="sc">-</b></div>
+<div class="stat"><span>Recv 总字节</span><b id="rb">-</b></div>
+<button onclick="dump()">导出最后10个recv</button>
+<pre id="out"></pre>
+<script src="popup.js"></script>
+</body>
+</html>

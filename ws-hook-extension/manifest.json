@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Florr WS Hook",
+  "version": "1.1",
+  "description": "Hook WebSocket to capture recv packets",
+  "content_scripts": [
+    {
+      "matches": ["*://florr.io/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    }
+  ],
+  "permissions": ["scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
