@@ -986,10 +986,28 @@ if __name__ == "__main__":
                 _afk_hits = 0
             if _afk_hits >= 4:
                 _ccx, _ccy = get_screen_center()
-                print(f"[AFK] 检测到 AFK Check 弹窗(中心灰度{_cmean:.0f})，点击 Yes 按钮...")
-                get_window().left_click(_ccx, _ccy + 60)   # 按钮位置估算(弹窗中央偏下), 实测不准可校准
+                # 先尝试挂机检测拖动验证(找亮绿点)
+                from combat import solve_afk_drag
+                ok, sx, sy, ex, ey = solve_afk_drag(_cdf)
+                if ok:
+                    print(f"[AFK] 拖动验证: 绿点({sx},{sy})->终点({ex},{ey})")
+                    import win32api, win32con
+                    def _lp(x, y): return (y << 16) | (x & 0xFFFF)
+                    win32api.PostMessage(get_window().hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, _lp(sx, sy))
+                    time.sleep(0.2)
+                    for i in range(1, 11):
+                        ix = int(sx + (ex - sx) * i / 10)
+                        iy = int(sy + (ey - sy) * i / 10)
+                        win32api.PostMessage(get_window().hwnd, win32con.WM_MOUSEMOVE, win32con.MK_LBUTTON, _lp(ix, iy))
+                        time.sleep(0.06)
+                    time.sleep(0.2)
+                    win32api.PostMessage(get_window().hwnd, win32con.WM_LBUTTONUP, 0, _lp(ex, ey))
+                    time.sleep(1.5)
+                else:
+                    print(f"[AFK] 检测到 AFK Check 弹窗(中心灰度{_cmean:.0f})，点击 Yes 按钮...")
+                    get_window().left_click(_ccx, _ccy + 60)
+                    time.sleep(2)
                 _afk_hits = 0
-                time.sleep(2)
             # 先检查状态
             stage = check_stage()
             if stage == "in_game_dead":

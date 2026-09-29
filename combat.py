@@ -456,6 +456,45 @@ def detect_afk_check(frame, prev_gray_center=None):
         return False, False, 999.0
 
 
+def solve_afk_drag(frame=None):
+    """自动解决挂机检测拖动验证("将圆球拖动到终点"):
+    找亮绿色圆点(起点) + 灰色圆圈(终点), 鼠标沿路径拖过去
+    返回 True=已检测到并拖动, False=未检测到弹窗"""
+    try:
+        if frame is None:
+            frame = get_frame()
+        h, w = frame.shape[:2]
+        cx, cy = w // 2, h // 2
+        # 亮绿色圆点 HSV (弹窗绿点 #00FF00 附近)
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        gmask = cv2.inRange(hsv, (45, 180, 180), (80, 255, 255))
+        # 只在中心区域找(弹窗在屏幕中央)
+        gmask[:h//4, :] = 0; gmask[3*h//4:, :] = 0; gmask[:, :w//4] = 0; gmask[:, 3*w//4:] = 0
+        n, labels, stats, _ = cv2.connectedComponentsWithStats(gmask)
+        if n < 2:
+            return False
+        # 最大绿色 blob = 起点
+        best = max(range(1, n), key=lambda i: stats[i, cv2.CC_STAT_AREA])
+        sx = int(stats[best, cv2.CC_STAT_LEFT] + stats[best, cv2.CC_STAT_WIDTH] / 2)
+        sy = int(stats[best, cv2.CC_STAT_TOP] + stats[best, cv2.CC_STAT_HEIGHT] / 2)
+        # 找灰色终点圆圈: 在绿点附近找灰色 blob
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        gmask2 = cv2.inRange(frame, (70, 70, 70), (170, 170, 170))
+        gmask2[:h//4, :] = 0; gmask2[3*h//4:, :] = 0; gmask2[:, :w//4] = 0; gmask2[:, 3*w//4:] = 0
+        n2, _, st2, _ = cv2.connectedComponentsWithStats(gmask2)
+        ex, ey = sx, sy
+        for i in range(1, n2):
+            bx = st2[i, cv2.CC_STAT_LEFT] + st2[i, cv2.CC_STAT_WIDTH] / 2
+            by = st2[i, cv2.CC_STAT_TOP] + st2[i, cv2.CC_STAT_HEIGHT] / 2
+            d = ((bx - sx) ** 2 + (by - sy) ** 2) ** 0.5
+            if d > 20 and d < 200:  # 终点在绿点附近
+                ex, ey = int(bx), int(by)
+        print(f"[AFK-DRAG] 绿点({sx},{sy}) -> 终点({ex},{ey})")
+        return True, sx, sy, ex, ey
+    except Exception:
+        return False, 0, 0, 0, 0
+
+
 def detect_mobs(frame=None):
     """检测 M/U 怪, 返回 (mythics, ultras) 屏幕坐标列表"""
     if frame is None:
