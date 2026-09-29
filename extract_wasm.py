@@ -1,31 +1,27 @@
-import re, json
+import re
 
 with open('wasm_dump/client.wasm', 'rb') as f:
     data = f.read()
 
-strings = re.findall(rb'[\x20-\x7e]{4,}', data)
+strings = re.findall(rb'[\x20-\x7e]{3,}', data)
 strings = [s.decode('ascii', errors='ignore') for s in strings]
 
-# 找所有传送门/坐标相关
-print("=== 传送门/坐标 ===")
+# 找 ygg, mark, death, revive, spawn 相关
+print("=== ygg/mark/death/revive ===")
 for s in strings:
-    if ('portal' in s.lower() or 'teleport' in s.lower() or 'spawn' in s.lower() or 'warp' in s.lower()) and len(s) < 100:
-        print(f"  {s}")
-
-# 找所有配置/常量
-print("\n=== 配置常量 ===")
-for s in strings:
-    if re.match(r'^[a-z_]+_[a-z_]+$', s) and any(k in s for k in ['speed','health','damage','radius','size','range','time','count','max','min','rate','cost','cd','cooldown']):
-        print(f"  {s}")
+    sl = s.lower()
+    if any(k in sl for k in ['ygg', 'mark', 'revive', 'death', 'dead', 'respawn', 'corpse', 'graveyard', 'ghost']):
+        if len(s) < 150:
+            print(f"  {s}")
 
 # 找聊天命令
-print("\n=== 聊天命令 ===")
+print("\n=== 聊天/命令 ===")
 for s in strings:
-    if s.startswith('/') and len(s) < 50:
+    if s.startswith('/') and len(s) < 60:
         print(f"  {s}")
 
-# 找所有物品/掉落
-print("\n=== 物品/drops ===")
+# 找出生点/spawn点
+print("\n=== spawn点 ===")
 for s in strings:
-    if 'drop' in s.lower() and len(s) < 100 and 'Petal' not in s:
+    if 'spawn' in s.lower() and len(s) < 80 and ('point' in s.lower() or 'location' in s.lower() or 'pos' in s.lower() or 'zone' in s.lower()):
         print(f"  {s}")
