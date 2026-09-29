@@ -1,0 +1,40 @@
+﻿client.js 大小: 125689 chars
+
+=== WebSocket/网络 ===
+  ]&&(L="image/svg+xml");E.src=window.URL.createObjectURL(new Blob([lc],{type:L}))}else E.src=wb;ta[vb]=E;break;case 72:let nc
+  =d(),Ua=ta[nc];0==Ua.src.indexOf("blob:")&&window.URL.revokeObjectURL(Ua.src);Ua.onload=null;Ua.on
+  throw"failed to load wasm binary file at '"+ma+"'";return a.arrayBuffer()}).catch(function(){return rc(ma)})}function tc(a){this.na
+  al "+a;Hh(a,f=>{f||fa('Loading data file "'+a+'" failed (no arrayBuffer).');
+  "arraybuffer";L&&(n=z(L),C.overrideMimeType(n));if(h)for(;;){u=B[h>>2];i
+  tScript&&(ua=document.currentScript.src);ua=0!==ua.indexOf("blob:")?ua.substr(0,ua.replace(/[?#].*/,"").lastIndexOf("/")+1):
+  var d=new XMLHttpRequest;d.open("GET",a,!0);d.responseType="arraybuffer";d.onload=()=>{200==d.status||0==d.status&&d.response?b(d.r
+  )=>"https:"==location.protocol,4401469:a=>{a=z(a);var b=new WebSocket(a);(new URL(a)).hostname!=(new URL(b.url)).hostname&&(docum
+  ",document.getElementById("canvas").style.display="none");b.binaryType="arraybuffer";b.vh=[];b.onopen=function(){b.vh.push([2,0,0]
+  0,0]);Sa()};b.onclose=function(){b.vh.push([4,0,0]);Sa()};b.onmessage=function(c){c=new Uint8Array(c.data);var d=ba(c.length);Z.s
+  ,a;na.push(b);return na.length-1},4402222:a=>{var b=na[a];b.onopen=b.onclose=b.onmessage=b.onerror=function(){};for(var c=0;c<
+  (b)+1);b=Fa(b,d,0,d.length);g.write(a,d,0,b,F,c.fl)}else if(ArrayBuffer.isView(b))g.write(a,b,0,b.byteLength,F,c.fl);else throw Err
+  !r.Sl){r.Sl=!0;try{r.Ni=!0}catch(c){r.Ni=!1,ea("warning: no blob constructor, cannot create blobs with mimetypes")}r.BlobBui
+  lder="undefined"!=typeof MozBlobBuilder?MozBlobBuilder:"undefined"!=typeof WebKitBlobBuilder?
+  WebKitBlobBuilder:r.Ni?null:ea("warning: no BlobBuilder");r.Hi="undefined"!=typeof window?window.URL?window.
+  t(c)},handle:function(c,d,e,f){var h=null;if(r.Ni)try{h=new Blob([c],{type:r.uj(d)}),h.size!==c.length&&(h=new Blob([(new Ui
+  {type:r.uj(d)}))}catch(u){La("Blob constructor present but fails: "+u+"; falling back to blob 
+  builder")}h||(h=new r.BlobBuilder,h.append((new Uint8Array(c)).buffer),h=h.getBlob());
+  {q||(q=!0,new Audio,f&&f())}var q=!1;if(r.Ni){try{var u=new Blob([c],{type:r.uj(d)})}catch(A){return n()}u=r.Hi.createObject
+  f);ea("falling back to ArrayBuffer instantiation");return c(b)})})})();return{}})();l.___wasm_
+
+=== 怪物/HP/damage ===
+  oid")||-1!=navigator.userAgent.indexOf("Mobile")||-1!=navigator.userAgent.indexOf("Tablet"),4395980:()=
+  w URL(window.location);c.hash="";c.searchParams.set("cp6_web_hash",b);window.location=c},500)},4397226
+  1:()=>S((new URL(window.location)).searchParams.get("state")),
+  3:()=>S((new URL(window.location)).searchParams.get("code")),4402944:a=>{a=new URL(z(a));var b=new URL
+  (window.location),c=!1;a.searchParams.forEach(function(d,e){-1==b.searchParams.getAll(e).ind
+  y{var a=new URL(window.location);a.searchParams.delete("state");a.searchParams.delete("code");a.search
+  .apply(null,arguments)};l._Util_GenerateMobImage=function(){return(l._Util_GenerateMobImage=
+  m.gg).apply(null,arguments)};l._Util_GetMobs=function(){return(l._Util_GetMobs=l.asm.hg).apply(null,arg
+
+=== 聊天/消息 ===
+  ate=function(d){c.push(d);postMessage("setimmediate","*")}}r.Gg.Eh=function(){setImmediate(r.Gg.Z
+  {b.vh.push([4,0,0]);Sa()};b.onmessage=function(c){c=new Uint8Array(c.data);var d=ba(c.length);Z.s
+  =na[a];b.onopen=b.onclose=b.onmessage=b.onerror=function(){};for(var c=0;c<b.vh.length;++c)wa(b.v
+  p=!0,window.addEventListener("message",function(e){e.source==window.xsolla_window&&console.log("R
+  arguments)};l._webRTCProxyMessage=function(){return(l._webRTCProxyMessage=l.asm.Sf).apply(nul
