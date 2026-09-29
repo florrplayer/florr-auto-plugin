@@ -1,0 +1,253 @@
+﻿总唯一字符串: 40945
+
+=== chat_commands (52) ===
+  / 4 
+  /#AC
+  /#ACB`YAC
+  /)I
+  /*RV
+  //"inlineStyles",
+  //"mergePaths",
+  //"mergeStyles",
+  //"minifyStyles",
+  //"moveGroupAttrsToElems",
+  //"removeDoctype",
+  //"removeXMLNS",
+  //js2svg: {
+  //},
+  /3).
+  /3G
+  /9a
+  /BC=
+  /OA
+  /OAC
+  /OO
+  /P8i
+  /dev/urandom
+  /findEach/
+  /guild 
+  /help
+  /j 
+  /j!
+  /j!4 
+  /j"
+
+=== i18n_keys (6356) ===
+  Chat/Alone=
+  Chat/Alone=Kh
+  Chat/Alone=Ningu
+  Chat/Alone=No one is around to hear you.
+  Chat/BadChannel=
+  Chat/BadChannel=B
+  Chat/BadChannel=Voc
+  Chat/BadChannel=You can't do that
+  Chat/Banned=
+  Chat/Banned=B
+  Chat/Banned=No momento voc
+  Chat/Banned=You're currently banned so you will not be able to play.
+  Chat/Channel/Global
+  Chat/Channel/Global=
+  Chat/Channel/Global=Global
+  Chat/Channel/Global=To
+  Chat/Channel/Guild
+  Chat/Channel/Guild=
+  Chat/Channel/Guild=Cl
+  Chat/Channel/Guild=Guild
+  Chat/Channel/Guild=H
+  Chat/Channel/Local
+  Chat/Channel/Local=
+  Chat/Channel/Local=L
+  Chat/Channel/Local=Local
+  Chat/Channel/Map
+  Chat/Channel/Map=
+  Chat/Channel/Map=Khu v
+  Chat/Channel/Map=Map
+  Chat/Channel/Map=Mapa
+
+=== petal_names (0) ===
+
+=== mob_names (0) ===
+
+=== map_tiles (274) ===
+           "image":"anthole.svg",
+           "image":"bridge_c_0.svg",
+           "image":"bridge_c_1.svg",
+           "image":"bridge_r_0.svg",
+           "image":"bush_c_0.svg",
+           "image":"bush_t_0.svg",
+           "image":"bush_tl_0.svg",
+           "image":"bush_tri_0.svg",
+           "image":"castle_c_0.svg",
+           "image":"castle_l_0.svg",
+           "image":"castle_tl_0.svg",
+           "image":"castle_tri_0.svg",
+           "image":"cellar_door.svg",
+           "image":"cobblestone_c_0.svg",
+           "image":"coral_c_0.svg",
+           "image":"coral_t_0.svg",
+           "image":"coral_tl_0.svg",
+           "image":"coral_tri_0.svg",
+           "image":"desert_b_0.svg",
+           "image":"desert_c_0.svg",
+           "image":"desert_c_1.svg",
+           "image":"desert_c_2.svg",
+           "image":"desert_c_3.svg",
+           "image":"desert_c_4.svg",
+           "image":"desert_l_0.svg",
+           "image":"desert_r_0.svg",
+           "image":"desert_t_0.svg",
+           "image":"dirt2_c_0.svg",
+           "image":"dirt2_c_1.svg",
+           "image":"dirt_c_0.svg",
+
+=== achievements (1326) ===
+  Achievements/0/Description=
+  Achievements/0/Description=Di chuy
+  Achievements/0/Description=Mova-se um pouco
+  Achievements/0/Description=Move a little bit.
+  Achievements/0/ExtraDescription=
+  Achievements/0/ExtraDescription=S
+  Achievements/0/ExtraDescription=Use seu mouse para se mover. Sua flor vai automaticamente seguir sua seta.<n />Voc
+  Achievements/0/ExtraDescription=Use your mouse to move. Your flower will automatically follow your cursor.<n/>You can ch
+  Achievements/0/Name=
+  Achievements/0/Name=H
+  Achievements/0/Name=Tutorial
+  Achievements/0/Py=jiaocheng
+  Achievements/1/Description=
+  Achievements/1/Description=Kill a mob.
+  Achievements/1/Description=Mate um bicho.
+  Achievements/1/Description=Ti
+  Achievements/1/ExtraDescription=
+  Achievements/1/ExtraDescription=Esses bichos s
+  Achievements/1/ExtraDescription=Nh
+  Achievements/1/ExtraDescription=Those insects are your enemies. Destroying them has a chance of dropping new petals.<n/>
+  Achievements/1/Name=
+  Achievements/1/Name=H
+  Achievements/1/Name=Tutorial
+  Achievements/1/Py=jiaocheng
+  Achievements/10/Description=
+  Achievements/10/Description=Ch
+  Achievements/10/Description=Combine uma p
+  Achievements/10/Description=Craft {#Rarities/{0}/Article} {#Rarities/{0}/Name} petal.
+  Achievements/10/Description={#Rarities/{0}/Name}
+  Achievements/10/Name=
+
+=== talents (0) ===
+
+=== errors (47) ===
+   (timestamp=%u touchid=%lld gestureid=%lld numfingers=%u error=%f x=%f y=%f)
+  %s (call to %s failed, reporting an error of %s)
+  %s:%d: fatal error: "Requested capacity is too large."
+  %s:%d: fatal error: "check(%s)"
+  %s:%d: fatal error: "unknown segType"
+  Connection error
+  EGL_KHR_create_context_no_error
+  ERROR
+  ERROR: NumPoints = %i
+  Error reading from datastream
+  Error seeking in datastream
+  Error writing to datastream
+  Invalid RWops
+  Invalid args to trim(): startT and stopT must be in [0,1]
+  Invalid library handle %p
+  Invalid mob preset "%.*s" in map spawning zone
+  Invalid mob sid "%.*s" in map spawning zone
+  Invalid sprite gid %zu
+  Invalid window
+  JSON parsing error: 
+  Parameter '%s' is invalid
+  [MultiText] Parsing error: %.*s
+  [SVGImage] Parsing error
+  [i18n] Language is missing key: %.*s
+  [m28n] FindServerByID server is missing properties: %s
+  [m28n] FindServers server in region %s is missing properties: %s
+  glGetError
+  glInvalidateFramebuffer
+  glInvalidateSubFramebuffer
+  invalid bit length repeat
+
+=== changelog (54) ===
+  - A few more petals got added and stuff.
+  - A lot of changes were made in the past week but we were too lazy to put them in the changelog.
+  - Added Apple ID login. Note that it doesn't merge Apple ID accounts with Discord accounts. If you already logged in usi
+  - Added Factory. There's still more things that need to be added, but it's at a point where players can start playing it
+  - Added a couple new talents.
+  - Added a craft all button to mobile (still not fully supported, but this will fix a pain point).
+  - Added a new map section to Centralia Fields, East Waters and South Desert.
+  - Added a new section to Ant Hell.
+  - Added a new section to Centralia Fields.
+  - Added two new petals.
+  - All healing has been nerfed by 50%.
+  - As a reminder, we'll be adding more things to spend TP on as time goes on.
+  - By default a chat message is only seen by people around you. To send it to your squad members regardless of where they
+  - Craft chances have been changed.
+  - Due to popular demand, the change mentioned in the previous changelog was changed to today.
+  - Due to some changes in the talent tree, we've reset everyone's talents and refunded all TP.
+  - Killing mobs no longer awards XP. We have reset everyone's levels back to 1 as this update significantly changes how l
+  - Mobile users can now tap and hold a petal on the crafting screen to add many at a time.
+  - Mobs missile health now scale like petal health instead of mob health. Their base health has been buffed to compensate
+  - More achievements will be added soon.
+  - Note that it's still fairly small, we plan to add more areas soon.
+  - Petal tooltips values now update correctly to match values after taking talents into account.
+  - PvP map size changes based on how many players are in game.
+  - Rebalanced a couple of petals.
+  - Rebalanced a lot of petals. They're now separated in offensive and defensive types, which changes how their damage and
+  - Rebalanced late game waves. They're now significantly shorter than before.
+  - Recipe for Ultra petals has changed.
+  - Since many people have spent their TP without realizing how permanent they are, we will be doing a future update (in l
+  - Since many people have spent their TP without realizing how permanent they are, we will be doing a future update (in l
+  - Since wave difficulty was changed significantly, we're resetting everyone's highest wave beaten back to 0.
+
+=== urls (16) ===
+  https://accounts.google.com/o/oauth2/v2/auth
+  https://api.n.m28.io/endpoint/
+  https://api.n.m28.io/server/
+  https://appleid.apple.com/auth/authorize
+  https://appleid.apple.com/auth/token
+  https://discord.com/api/oauth2/authorize
+  https://discord.com/api/oauth2/token
+  https://discord.com/invite/TRMtDSE
+  https://florr.io/?oauth2=appleid
+  https://florr.io/?oauth2=discord
+  https://florr.io/?oauth2=google
+  https://oauth2.florr.io/callback?oauth2=appleid
+  https://oauth2.googleapis.com/token
+  https://qm.qq.com/q/5dMiUwLocg
+  https://secure.xsolla.com/paystation3/?access_token=
+  https://store.xsolla.com/api
+
+=== colors (63) ===
+  # $-
+  # .A
+  # <B
+  # ? H-
+  # Helpers
+  # h p-
+  # ~ 
+  #!X 
+  #!^ 
+  #",
+  #"2C
+  #"8
+  #&%
+  #(%
+  #.zf
+  #<C
+  #B"
+  #BC
+  #BCTt
+  #]F
+  #bML"
+  #canvas
+  #j 
+  #j -/
+  #j <(
+  #j <)
+  #j A(
+  #j!
+  #j!> 
+  #j!? 
+
+=== other_useful (0) ===
+
+完整字符串已保存到 wasm_dump/all_strings.txt
