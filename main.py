@@ -396,6 +396,7 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
     from combat import (detect_all, choose_target, ultra_blocked, screen_to_map_safe,
                         RANK_ORDER, KILL_STOP, CHASE_WARN, KISS_SLOW,
                         get_hp_ratio, HP_FLEE)
+    from smart_combat import choose_target_smart, get_attack_distance
     stop = KILL_STOP if stop_dist is None else stop_dist
     w = get_window()
     start_time = time.time()
@@ -445,15 +446,17 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
                 t = random.choice(prey) if prey else None
             else:
                 prey = [m for m in (screen_to_map_keep_r(p, pos) for p in (ranks_map.get(kill_rank) or [])) if m]
-                t = choose_target(prey, patrol_goal, pos)
+                t = choose_target_smart(prey, patrol_goal, pos)
             if t is None:
                 print("[战斗] 目标消失，结束追击")
                 return "done"
-            # 碰撞箱: 目标点外移到 怪半径+安全距 外(停在怪身体外打, 不撞上去)
+            # 碰撞箱: 目标点外移到 怪半径+怪种专属距离 外
             if len(t) >= 3 and t[2]:
                 from combat import BODY_CLEAR
+                sid = t[3] if len(t) > 3 else None
+                _extra = get_attack_distance(sid)  # v1.10: 怪种专属距离
                 _d = math.hypot(t[0] - pos[0], t[1] - pos[1]) or 1.0
-                _off = float(t[2]) + BODY_CLEAR
+                _off = float(t[2]) + BODY_CLEAR + _extra
                 t = (t[0] - (t[0] - pos[0]) / _d * _off, t[1] - (t[1] - pos[1]) / _d * _off)
             dx, dy = t[0] - pos[0], t[1] - pos[1]
             dist = math.hypot(dx, dy)

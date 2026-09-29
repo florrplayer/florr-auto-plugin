@@ -1,0 +1,17 @@
+﻿wasm大小: 9.0MB
+magic: b'\x00asm', version: 1
+  section  1 type        :      1,448 bytes
+  section  2 import      :      2,475 bytes
+  section  3 function    :      6,586 bytes
+  section  4 table       :          7 bytes
+  section  5 memory      :          6 bytes
+  section  6 global      :          9 bytes
+  section  7 export      :        275 bytes
+  section  9 elem        :     14,264 bytes
+  section 10 code        :  5,026,796 bytes
+  section 11 data        :  4,358,635 bytes
+
+=== 解析导出函数 ===
+导出数量: 46
+
+=== 解析自定义段(函数名映射) ===
