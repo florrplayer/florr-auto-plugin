@@ -457,8 +457,8 @@ def detect_afk_check(frame, prev_gray_center=None):
 
 
 def solve_afk_drag(frame=None):
-    """自动解决挂机检测拖动验证(路径颜色随机/形状随机):
-    找亮绿色圆点(起点) -> BFS沿任意亮色路径走到最远点 -> 分段拖动
+    """自动解决挂机检测拖动验证(随机迷宫路径):
+    找亮绿色圆点(起点) -> BFS在亮色路径上寻路到终点 -> 回溯实际路径拖动
     返回 (True, sx, sy, path_points) 或 (False,...)"""
     try:
         if frame is None:
@@ -475,30 +475,43 @@ def solve_afk_drag(frame=None):
         best = max(range(1, n), key=lambda i: stats[i, cv2.CC_STAT_AREA])
         sx = int(stats[best, cv2.CC_STAT_LEFT] + stats[best, cv2.CC_STAT_WIDTH] / 2)
         sy = int(stats[best, cv2.CC_STAT_TOP] + stats[best, cv2.CC_STAT_HEIGHT] / 2)
-        # 路径: 任意亮色(饱和度>40, 亮度>80) = 路径线
-        pathmask = cv2.inRange(hsv, (0, 40, 80), (180, 255, 255))
-        # 排除绿色起点本身(绿色在pathmask里)
-        pathmask = pathmask & (~gmask)
+        # 路径: 高饱和度亮色 = 可走路径(排除暗色墙/背景)
+        pathmask = cv2.inRange(hsv, (0, 50, 100), (180, 255, 255))
+        pathmask = pathmask & (~gmask)  # 排除起点
         pathmask[:h//5, :] = 0; pathmask[4*h//5:, :] = 0
         pathmask[:, :w//5] = 0; pathmask[:, 4*w//5:] = 0
+        # 膨胀路径3px让BFS不卡墙缝
+        pathmask = cv2.dilate(pathmask, np.ones((5,5), np.uint8), iterations=1)
         from collections import deque
         visited = np.zeros((h, w), dtype=bool)
+        parent = {}
         q = deque([(sx, sy)]); visited[sy, sx] = True
         end = (sx, sy); maxd = 0
         while q:
             x, y = q.popleft()
             d = ((x-sx)**2 + (y-sy)**2)**0.5
             if d > maxd: maxd = d; end = (x, y)
-            for dx, dy in [(2,0),(-2,0),(0,2),(0,-2),(1,1),(-1,-1),(1,-1),(-1,1)]:
+            for dx, dy in [(1,0),(-1,0),(0,1),(0,-1)]:
                 nx, ny = x+dx, y+dy
                 if 0<=nx<w and 0<=ny<h and not visited[ny,nx] and pathmask[ny,nx]>0:
-                    visited[ny,nx] = True; q.append((nx,ny))
+                    visited[ny,nx] = True
+                    parent[(nx,ny)] = (x,y)
+                    q.append((nx,ny))
         if maxd < 20:
             return False, 0, 0, []
-        path_points = []
-        for t in range(11):
-            path_points.append((int(sx+(end[0]-sx)*t/10), int(sy+(end[1]-sy)*t/10)))
-        print(f"[AFK-DRAG] 绿点({sx},{sy})->终点({end[0]},{end[1]}) 路径{len(path_points)}点")
+        # 回溯实际路径
+        rev = []
+        cur = end
+        while cur in parent:
+            rev.append(cur)
+            cur = parent[cur]
+        rev.append((sx, sy))
+        rev.reverse()
+        # 采样路径点(每5个取一个,减少拖动步数)
+        path_points = rev[::5]
+        if path_points[-1] != end:
+            path_points.append(end)
+        print(f"[AFK-DRAG] 绿点({sx},{sy})->终点({end[0]},{end[1]}) 迷宫路径{len(path_points)}点")
         return True, sx, sy, path_points
     except Exception as e:
         print(f"[AFK-DRAG] 异常: {e}")
