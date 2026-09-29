@@ -474,9 +474,11 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
                     if abs(dy) > 1.5:
                         keys.add("s" if dy > 0 else "w")
             set_k(keys)
-            if int(time.time() * 2) % 6 == 0:
-                print(f"[战斗] 追击 {t}, 玩家 {pos}, dist={dist:.1f} {'(停住攻击)' if dist<=stop else ''}")
-            time.sleep(0.05)
+            # v1.10.2: 每步打印+人类化随机延迟
+            if dist > stop:
+                sid_name = t[3] if len(t)>3 else '?'
+                print(f"[移动] ->{sid_name} d={dist:.0f} keys={''.join(sorted(keys)) or '停'}")
+            time.sleep(0.04 + random.random() * 0.03)  # 40-70ms随机,像人
     finally:
         set_k(set())
 
