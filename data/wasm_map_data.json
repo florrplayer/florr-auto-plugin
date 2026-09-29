@@ -1,0 +1,26 @@
+{
+  "maps": {
+    "garden": {"portals": ["to_desert", "to_ocean", "to_jungle", "to_ant_hell"]},
+    "desert": {"portals": ["to_garden"], "mobs": {"cactus": 1, "beetle": 0.5, "sandstorm": 0.5, "ladybug_shiny": 0.025}},
+    "ocean": {"portals": ["to_garden"], "mobs": {"crab": 1, "jellyfish": 1, "leech": 1, "shell": 1, "sponge": 1}},
+    "jungle": {"portals": ["to_garden", "to_ant_hell"], "mobs": {"leafbug": 1, "firefly": 0.1, "wasp": 0.5, "mantis": 1, "centipede_evil": 0.025}},
+    "anthell": {"portals": ["to_garden", "to_desert"], "mobs": {"ant_soldier": 10, "ant_worker": 5, "ant_queen": 1, "worm": 0.3}},
+    "sewers": {"mobs": {"spider": 1, "moth": 0.25, "silverfish": 0.3, "garbage": 0.3}}
+  },
+  "secret_routes": {
+    "ocean": ["to_br_ocean_1", "to_br_ocean_2", "to_br_ocean_3"],
+    "anthell": ["to_br_ant_hell_1", "to_br_ant_hell_2", "to_br_ant_hell_3"],
+    "from_garden": "br/ocean, br/ant_hell"
+  },
+  "special_mobs": {
+    "ladybug_shiny": "0.025概率, 闪光瓢虫",
+    "centipede_evil": "0.025概率, 邪恶蜈蚣",
+    "fire_ant_queen": "火蚁女王",
+    "termite_overmind": "白蚁超心智",
+    "titan": "Titan Boss",
+    "beetle_mummy": "甲虫木乃伊",
+    "sandstorm": "沙漠沙尘暴"
+  },
+  "source": "client.wasm (9.2MB) 字符串提取",
+  "version_note": "怪物HP/伤害是编译后浮点数据,需反编译wasm才能提取;地图传送门和生成率已确认"
+}
