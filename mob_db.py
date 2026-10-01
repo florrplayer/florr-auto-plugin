@@ -406,8 +406,13 @@ def assess_mob(sid, hp, player_dps, dist=None):
     else:
         action = 'fight' if max_hp < 500 else 'ignore'
     # 危险怪: 秒不了的才避开(能秒的走 oneshot 追击)
+    # v1.20.1: Super专属机制怪(水母/萤火虫/冥界甲虫等)有突破点打法(BREAKTHROUGH表),
+    #   不回避 -> 落到下方 leech 蹭伤(收获大), 突破点距离由战斗模块执行
     if sid in DANGER_SIDS and action != 'oneshot':
-        return 'danger', -1000, None, cn(sid)
+        if sid in SUPER_SPECIAL_SIDS and rarity in ('Super', 'Unique', 'Eternal'):
+            pass  # 突破点智取: 能秒打秒, 打不动 leech 蹭 1% 参与奖
+        else:
+            return 'danger', -1000, None, cn(sid)
     # v1.20.1: Super专属机制怪不再回避(收获大) - 突破点打法见 BREAKTHROUGH 表,
     # 打不动的Super机制怪走下方 leech 蹭伤(1%参与奖), 带突破点距离由战斗模块执行
     if sid in SUPER_SPECIAL_SIDS and rarity in ('Super', 'Unique', 'Eternal'):
