@@ -1,0 +1,3310 @@
+{
+ "ant_soldier": {
+  "Common": [
+   {
+    "petal": "glass",
+    "rarity": "Unusual",
+    "rate": 0.333
+   },
+   {
+    "petal": "glass",
+    "rarity": "Common",
+    "rate": 0.667
+   },
+   {
+    "petal": "wing",
+    "rarity": "Unusual",
+    "rate": 0.125
+   },
+   {
+    "petal": "wing",
+    "rarity": "Common",
+    "rate": 0.875
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "glass",
+    "rarity": "Unusual",
+    "rate": 0.333
+   },
+   {
+    "petal": "glass",
+    "rarity": "Common",
+    "rate": 0.667
+   },
+   {
+    "petal": "wing",
+    "rarity": "Unusual",
+    "rate": 0.125
+   },
+   {
+    "petal": "wing",
+    "rarity": "Common",
+    "rate": 0.875
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "glass",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "glass",
+    "rarity": "Unusual",
+    "rate": 0.492
+   },
+   {
+    "petal": "glass",
+    "rarity": "Common",
+    "rate": 0.457
+   },
+   {
+    "petal": "wing",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "wing",
+    "rarity": "Unusual",
+    "rate": 0.7
+   },
+   {
+    "petal": "wing",
+    "rarity": "Common",
+    "rate": 0.249
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "glass",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "glass",
+    "rarity": "Rare",
+    "rate": 0.487
+   },
+   {
+    "petal": "glass",
+    "rarity": "Unusual",
+    "rate": 0.483
+   },
+   {
+    "petal": "wing",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "wing",
+    "rarity": "Rare",
+    "rate": 0.695
+   },
+   {
+    "petal": "wing",
+    "rarity": "Unusual",
+    "rate": 0.275
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "glass",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "glass",
+    "rarity": "Epic",
+    "rate": 0.482
+   },
+   {
+    "petal": "glass",
+    "rarity": "Rare",
+    "rate": 0.508
+   },
+   {
+    "petal": "wing",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "wing",
+    "rarity": "Epic",
+    "rate": 0.69
+   },
+   {
+    "petal": "wing",
+    "rarity": "Rare",
+    "rate": 0.3
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "glass",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "glass",
+    "rarity": "Legendary",
+    "rate": 0.479
+   },
+   {
+    "petal": "glass",
+    "rarity": "Epic",
+    "rate": 0.518
+   },
+   {
+    "petal": "wing",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "wing",
+    "rarity": "Legendary",
+    "rate": 0.687
+   },
+   {
+    "petal": "wing",
+    "rarity": "Epic",
+    "rate": 0.31
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "glass",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "glass",
+    "rarity": "Mythic",
+    "rate": 0.4655
+   },
+   {
+    "petal": "glass",
+    "rarity": "Legendary",
+    "rate": 0.534
+   },
+   {
+    "petal": "wing",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "wing",
+    "rarity": "Mythic",
+    "rate": 0.6735
+   },
+   {
+    "petal": "wing",
+    "rarity": "Legendary",
+    "rate": 0.326
+   }
+  ],
+  "Super": [
+   {
+    "petal": "glass",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "glass",
+    "rarity": "Ultra",
+    "rate": 0.464992
+   },
+   {
+    "petal": "glass",
+    "rarity": "Mythic",
+    "rate": 0.535
+   },
+   {
+    "petal": "wing",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "wing",
+    "rarity": "Ultra",
+    "rate": 0.672992
+   },
+   {
+    "petal": "wing",
+    "rarity": "Mythic",
+    "rate": 0.327
+   }
+  ]
+ },
+ "rock": {
+  "Common": [
+   {
+    "petal": "rock",
+    "rarity": "Unusual",
+    "rate": 0.101
+   },
+   {
+    "petal": "rock",
+    "rarity": "Common",
+    "rate": 0.455
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "rock",
+    "rarity": "Unusual",
+    "rate": 0.348
+   },
+   {
+    "petal": "rock",
+    "rarity": "Common",
+    "rate": 0.613
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "heavy",
+    "rarity": "Rare",
+    "rate": 0.035
+   },
+   {
+    "petal": "rock",
+    "rarity": "Rare",
+    "rate": 0.103
+   },
+   {
+    "petal": "rock",
+    "rarity": "Unusual",
+    "rate": 0.883
+   },
+   {
+    "petal": "rock",
+    "rarity": "Common",
+    "rate": 0.014
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "heavy",
+    "rarity": "Epic",
+    "rate": 0.026
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Rare",
+    "rate": 0.392
+   },
+   {
+    "petal": "rock",
+    "rarity": "Epic",
+    "rate": 0.076
+   },
+   {
+    "petal": "rock",
+    "rarity": "Rare",
+    "rate": 0.727
+   },
+   {
+    "petal": "rock",
+    "rarity": "Unusual",
+    "rate": 0.197
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "heavy",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Epic",
+    "rate": 0.399
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Rare",
+    "rate": 0.591
+   },
+   {
+    "petal": "rock",
+    "rarity": "Legendary",
+    "rate": 0.031
+   },
+   {
+    "petal": "rock",
+    "rarity": "Epic",
+    "rate": 0.763
+   },
+   {
+    "petal": "rock",
+    "rarity": "Rare",
+    "rate": 0.207
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "heavy",
+    "rarity": "Mythic",
+    "rate": 0.002
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Legendary",
+    "rate": 0.402
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Epic",
+    "rate": 0.596
+   },
+   {
+    "petal": "rock",
+    "rarity": "Mythic",
+    "rate": 0.005
+   },
+   {
+    "petal": "rock",
+    "rarity": "Legendary",
+    "rate": 0.783
+   },
+   {
+    "petal": "rock",
+    "rarity": "Epic",
+    "rate": 0.212
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "heavy",
+    "rarity": "Ultra",
+    "rate": 0.0001
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Mythic",
+    "rate": 0.03
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Legendary",
+    "rate": 0.969
+   },
+   {
+    "petal": "moon",
+    "rarity": "Ultra",
+    "rate": 1e-05
+   },
+   {
+    "petal": "rock",
+    "rarity": "Ultra",
+    "rate": 0.0003
+   },
+   {
+    "petal": "rock",
+    "rarity": "Mythic",
+    "rate": 0.089
+   },
+   {
+    "petal": "rock",
+    "rarity": "Legendary",
+    "rate": 0.918
+   }
+  ],
+  "Super": [
+   {
+    "petal": "heavy",
+    "rarity": "Ultra",
+    "rate": 0.05
+   },
+   {
+    "petal": "heavy",
+    "rarity": "Mythic",
+    "rate": 0.95
+   },
+   {
+    "petal": "moon",
+    "rarity": "Ultra",
+    "rate": 0.005
+   },
+   {
+    "petal": "rock",
+    "rarity": "Ultra",
+    "rate": 0.143
+   },
+   {
+    "petal": "rock",
+    "rarity": "Mythic",
+    "rate": 0.857
+   }
+  ]
+ },
+ "ladybug": {
+  "Common": [
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.44
+   },
+   {
+    "petal": "light",
+    "rarity": "Common",
+    "rate": 0.56
+   },
+   {
+    "petal": "rose",
+    "rarity": "Unusual",
+    "rate": 0.333
+   },
+   {
+    "petal": "rose",
+    "rarity": "Common",
+    "rate": 0.667
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.44
+   },
+   {
+    "petal": "light",
+    "rarity": "Common",
+    "rate": 0.56
+   },
+   {
+    "petal": "rose",
+    "rarity": "Unusual",
+    "rate": 0.333
+   },
+   {
+    "petal": "rose",
+    "rarity": "Common",
+    "rate": 0.667
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "light",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.385
+   },
+   {
+    "petal": "light",
+    "rarity": "Common",
+    "rate": 0.564
+   },
+   {
+    "petal": "rose",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "rose",
+    "rarity": "Unusual",
+    "rate": 0.492
+   },
+   {
+    "petal": "rose",
+    "rarity": "Common",
+    "rate": 0.457
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "light",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "light",
+    "rarity": "Rare",
+    "rate": 0.38
+   },
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.59
+   },
+   {
+    "petal": "rose",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "rose",
+    "rarity": "Rare",
+    "rate": 0.487
+   },
+   {
+    "petal": "rose",
+    "rarity": "Unusual",
+    "rate": 0.483
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "light",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "light",
+    "rarity": "Epic",
+    "rate": 0.375
+   },
+   {
+    "petal": "light",
+    "rarity": "Rare",
+    "rate": 0.615
+   },
+   {
+    "petal": "rose",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "rose",
+    "rarity": "Epic",
+    "rate": 0.482
+   },
+   {
+    "petal": "rose",
+    "rarity": "Rare",
+    "rate": 0.508
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "light",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "light",
+    "rarity": "Legendary",
+    "rate": 0.372
+   },
+   {
+    "petal": "light",
+    "rarity": "Epic",
+    "rate": 0.625
+   },
+   {
+    "petal": "rose",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "rose",
+    "rarity": "Legendary",
+    "rate": 0.479
+   },
+   {
+    "petal": "rose",
+    "rarity": "Epic",
+    "rate": 0.518
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "light",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "light",
+    "rarity": "Mythic",
+    "rate": 0.3585
+   },
+   {
+    "petal": "light",
+    "rarity": "Legendary",
+    "rate": 0.641
+   },
+   {
+    "petal": "rose",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "rose",
+    "rarity": "Mythic",
+    "rate": 0.4655
+   },
+   {
+    "petal": "rose",
+    "rarity": "Legendary",
+    "rate": 0.534
+   }
+  ],
+  "Super": [
+   {
+    "petal": "light",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "light",
+    "rarity": "Ultra",
+    "rate": 0.357992
+   },
+   {
+    "petal": "light",
+    "rarity": "Mythic",
+    "rate": 0.642
+   },
+   {
+    "petal": "rose",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "rose",
+    "rarity": "Ultra",
+    "rate": 0.464992
+   },
+   {
+    "petal": "rose",
+    "rarity": "Mythic",
+    "rate": 0.535
+   }
+  ]
+ },
+ "bee": {
+  "Common": [
+   {
+    "petal": "pollen",
+    "rarity": "Unusual",
+    "rate": 0.069
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Unusual",
+    "rate": 0.164
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Common",
+    "rate": 0.598
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "pollen",
+    "rarity": "Unusual",
+    "rate": 0.247
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Unusual",
+    "rate": 0.512
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Common",
+    "rate": 0.485
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "honey",
+    "rarity": "Rare",
+    "rate": 0.07
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Rare",
+    "rate": 0.07
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Unusual",
+    "rate": 0.872
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Rare",
+    "rate": 0.165
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Unusual",
+    "rate": 0.834
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "honey",
+    "rarity": "Epic",
+    "rate": 0.051
+   },
+   {
+    "petal": "honey",
+    "rarity": "Rare",
+    "rate": 0.61
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Epic",
+    "rate": 0.051
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Rare",
+    "rate": 0.61
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Unusual",
+    "rate": 0.338
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Epic",
+    "rate": 0.123
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Rare",
+    "rate": 0.81
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Unusual",
+    "rate": 0.067
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "honey",
+    "rarity": "Legendary",
+    "rate": 0.02
+   },
+   {
+    "petal": "honey",
+    "rarity": "Epic",
+    "rate": 0.63
+   },
+   {
+    "petal": "honey",
+    "rarity": "Rare",
+    "rate": 0.349
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Legendary",
+    "rate": 0.02
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Epic",
+    "rate": 0.63
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Rare",
+    "rate": 0.349
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Legendary",
+    "rate": 0.05
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Epic",
+    "rate": 0.877
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Rare",
+    "rate": 0.072
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "honey",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "honey",
+    "rarity": "Legendary",
+    "rate": 0.641
+   },
+   {
+    "petal": "honey",
+    "rarity": "Epic",
+    "rate": 0.356
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Legendary",
+    "rate": 0.641
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Epic",
+    "rate": 0.356
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Mythic",
+    "rate": 0.008
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Legendary",
+    "rate": 0.917
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Epic",
+    "rate": 0.075
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "honey",
+    "rarity": "Ultra",
+    "rate": 0.002
+   },
+   {
+    "petal": "honey",
+    "rarity": "Mythic",
+    "rate": 0.46
+   },
+   {
+    "petal": "honey",
+    "rarity": "Legendary",
+    "rate": 0.538
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Ultra",
+    "rate": 0.002
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Mythic",
+    "rate": 0.46
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Legendary",
+    "rate": 0.538
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Ultra",
+    "rate": 0.005
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Mythic",
+    "rate": 0.783
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Legendary",
+    "rate": 0.212
+   }
+  ],
+  "Super": [
+   {
+    "petal": "honey",
+    "rarity": "Ultra",
+    "rate": 0.338
+   },
+   {
+    "petal": "honey",
+    "rarity": "Mythic",
+    "rate": 0.662
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Ultra",
+    "rate": 0.338
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Mythic",
+    "rate": 0.662
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Ultra",
+    "rate": 0.644
+   },
+   {
+    "petal": "stinger",
+    "rarity": "Mythic",
+    "rate": 0.356
+   }
+  ]
+ },
+ "ant_worker": {
+  "Common": [
+   {
+    "petal": "corn",
+    "rarity": "Unusual",
+    "rate": 0.101
+   },
+   {
+    "petal": "corn",
+    "rarity": "Common",
+    "rate": 0.455
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.101
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "corn",
+    "rarity": "Unusual",
+    "rate": 0.348
+   },
+   {
+    "petal": "corn",
+    "rarity": "Common",
+    "rate": 0.613
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.348
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "corn",
+    "rarity": "Rare",
+    "rate": 0.103
+   },
+   {
+    "petal": "corn",
+    "rarity": "Unusual",
+    "rate": 0.883
+   },
+   {
+    "petal": "corn",
+    "rarity": "Common",
+    "rate": 0.014
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.103
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.883
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "corn",
+    "rarity": "Epic",
+    "rate": 0.076
+   },
+   {
+    "petal": "corn",
+    "rarity": "Rare",
+    "rate": 0.727
+   },
+   {
+    "petal": "corn",
+    "rarity": "Unusual",
+    "rate": 0.197
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.076
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.727
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.197
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "corn",
+    "rarity": "Legendary",
+    "rate": 0.031
+   },
+   {
+    "petal": "corn",
+    "rarity": "Epic",
+    "rate": 0.763
+   },
+   {
+    "petal": "corn",
+    "rarity": "Rare",
+    "rate": 0.207
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.031
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.763
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.207
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "corn",
+    "rarity": "Mythic",
+    "rate": 0.005
+   },
+   {
+    "petal": "corn",
+    "rarity": "Legendary",
+    "rate": 0.783
+   },
+   {
+    "petal": "corn",
+    "rarity": "Epic",
+    "rate": 0.212
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.005
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.783
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.212
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "corn",
+    "rarity": "Ultra",
+    "rate": 0.003
+   },
+   {
+    "petal": "corn",
+    "rarity": "Mythic",
+    "rate": 0.603
+   },
+   {
+    "petal": "corn",
+    "rarity": "Legendary",
+    "rate": 0.394
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Ultra",
+    "rate": 0.003
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.603
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.394
+   }
+  ],
+  "Super": [
+   {
+    "petal": "corn",
+    "rarity": "Ultra",
+    "rate": 0.462
+   },
+   {
+    "petal": "corn",
+    "rarity": "Mythic",
+    "rate": 0.538
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Ultra",
+    "rate": 0.462
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.538
+   }
+  ]
+ },
+ "leaf_piece": {
+  "Common": [
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.048
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Common",
+    "rate": 0.352
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.092571
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Common",
+    "rate": 0.393143
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.137143
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.434286
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.181714
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.475429
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.226286
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.516571
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.270857
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.557714
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "leaf",
+    "rarity": "Ultra",
+    "rate": 0.315429
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.598857
+   }
+  ],
+  "Super": [
+   {
+    "petal": "leaf",
+    "rarity": "Ultra",
+    "rate": 0.36
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.64
+   }
+  ]
+ },
+ "ant_baby": {
+  "Common": [
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.101
+   },
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.164
+   },
+   {
+    "petal": "light",
+    "rarity": "Common",
+    "rate": 0.598
+   },
+   {
+    "petal": "rice",
+    "rarity": "Unusual",
+    "rate": 0.306
+   },
+   {
+    "petal": "rice",
+    "rarity": "Common",
+    "rate": 0.662
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.348
+   },
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.512
+   },
+   {
+    "petal": "light",
+    "rarity": "Common",
+    "rate": 0.485
+   },
+   {
+    "petal": "rice",
+    "rarity": "Unusual",
+    "rate": 0.768
+   },
+   {
+    "petal": "rice",
+    "rarity": "Common",
+    "rate": 0.232
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.103
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.883
+   },
+   {
+    "petal": "light",
+    "rarity": "Rare",
+    "rate": 0.165
+   },
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.834
+   },
+   {
+    "petal": "rice",
+    "rarity": "Rare",
+    "rate": 0.303
+   },
+   {
+    "petal": "rice",
+    "rarity": "Unusual",
+    "rate": 0.697
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.076
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.727
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Unusual",
+    "rate": 0.197
+   },
+   {
+    "petal": "light",
+    "rarity": "Epic",
+    "rate": 0.123
+   },
+   {
+    "petal": "light",
+    "rarity": "Rare",
+    "rate": 0.81
+   },
+   {
+    "petal": "light",
+    "rarity": "Unusual",
+    "rate": 0.067
+   },
+   {
+    "petal": "rice",
+    "rarity": "Epic",
+    "rate": 0.231
+   },
+   {
+    "petal": "rice",
+    "rarity": "Rare",
+    "rate": 0.764
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.031
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.763
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Rare",
+    "rate": 0.207
+   },
+   {
+    "petal": "light",
+    "rarity": "Legendary",
+    "rate": 0.05
+   },
+   {
+    "petal": "light",
+    "rarity": "Epic",
+    "rate": 0.877
+   },
+   {
+    "petal": "light",
+    "rarity": "Rare",
+    "rate": 0.072
+   },
+   {
+    "petal": "rice",
+    "rarity": "Legendary",
+    "rate": 0.098
+   },
+   {
+    "petal": "rice",
+    "rarity": "Epic",
+    "rate": 0.897
+   },
+   {
+    "petal": "rice",
+    "rarity": "Rare",
+    "rate": 0.005
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.005
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.783
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Epic",
+    "rate": 0.212
+   },
+   {
+    "petal": "light",
+    "rarity": "Mythic",
+    "rate": 0.008
+   },
+   {
+    "petal": "light",
+    "rarity": "Legendary",
+    "rate": 0.917
+   },
+   {
+    "petal": "light",
+    "rarity": "Epic",
+    "rate": 0.075
+   },
+   {
+    "petal": "rice",
+    "rarity": "Mythic",
+    "rate": 0.015
+   },
+   {
+    "petal": "rice",
+    "rarity": "Legendary",
+    "rate": 0.979
+   },
+   {
+    "petal": "rice",
+    "rarity": "Epic",
+    "rate": 0.006
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "leaf",
+    "rarity": "Ultra",
+    "rate": 0.003
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.603
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Legendary",
+    "rate": 0.394
+   },
+   {
+    "petal": "light",
+    "rarity": "Ultra",
+    "rate": 0.005
+   },
+   {
+    "petal": "light",
+    "rarity": "Mythic",
+    "rate": 0.783
+   },
+   {
+    "petal": "light",
+    "rarity": "Legendary",
+    "rate": 0.212
+   },
+   {
+    "petal": "rice",
+    "rarity": "Ultra",
+    "rate": 0.01
+   },
+   {
+    "petal": "rice",
+    "rarity": "Mythic",
+    "rate": 0.945
+   },
+   {
+    "petal": "rice",
+    "rarity": "Legendary",
+    "rate": 0.045
+   }
+  ],
+  "Super": [
+   {
+    "petal": "leaf",
+    "rarity": "Ultra",
+    "rate": 0.462
+   },
+   {
+    "petal": "leaf",
+    "rarity": "Mythic",
+    "rate": 0.538
+   },
+   {
+    "petal": "light",
+    "rarity": "Ultra",
+    "rate": 0.644
+   },
+   {
+    "petal": "light",
+    "rarity": "Mythic",
+    "rate": 0.356
+   },
+   {
+    "petal": "rice",
+    "rarity": "Ultra",
+    "rate": 0.873
+   },
+   {
+    "petal": "rice",
+    "rarity": "Mythic",
+    "rate": 0.127
+   }
+  ]
+ },
+ "ant_queen": {
+  "Common": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Unusual",
+    "rate": 0.306
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Common",
+    "rate": 0.662
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Unusual",
+    "rate": 0.768
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Common",
+    "rate": 0.232
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Rare",
+    "rate": 0.303
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Unusual",
+    "rate": 0.697
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Epic",
+    "rate": 0.231
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Rare",
+    "rate": 0.764
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Legendary",
+    "rate": 0.098
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Epic",
+    "rate": 0.897
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Rare",
+    "rate": 0.005
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Mythic",
+    "rate": 0.015
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Legendary",
+    "rate": 0.979
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Epic",
+    "rate": 0.006
+   },
+   {
+    "petal": "basil",
+    "rarity": "Mythic",
+    "rate": 0.009
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Ultra",
+    "rate": 0.01
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Mythic",
+    "rate": 0.945
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Legendary",
+    "rate": 0.045
+   },
+   {
+    "petal": "basil",
+    "rarity": "Ultra",
+    "rate": 0.006
+   },
+   {
+    "petal": "basil",
+    "rarity": "Mythic",
+    "rate": 0.838
+   },
+   {
+    "petal": "broken_egg",
+    "rarity": "Ultra",
+    "rate": 0.0057
+   }
+  ],
+  "Super": [
+   {
+    "petal": "ant_egg",
+    "rarity": "Ultra",
+    "rate": 0.873
+   },
+   {
+    "petal": "ant_egg",
+    "rarity": "Mythic",
+    "rate": 0.127
+   },
+   {
+    "petal": "basil",
+    "rarity": "Ultra",
+    "rate": 0.71
+   },
+   {
+    "petal": "basil",
+    "rarity": "Mythic",
+    "rate": 0.29
+   },
+   {
+    "petal": "broken_egg",
+    "rarity": "Ultra",
+    "rate": 0.6745
+   }
+  ]
+ },
+ "ant_hole": {
+  "Common": [
+   {
+    "petal": "shovel",
+    "rarity": "Unusual",
+    "rate": 0.133
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Common",
+    "rate": 0.539
+   },
+   {
+    "petal": "soil",
+    "rarity": "Unusual",
+    "rate": 0.164
+   },
+   {
+    "petal": "soil",
+    "rarity": "Common",
+    "rate": 0.598
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "shovel",
+    "rarity": "Unusual",
+    "rate": 0.436
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Common",
+    "rate": 0.553
+   },
+   {
+    "petal": "soil",
+    "rarity": "Unusual",
+    "rate": 0.512
+   },
+   {
+    "petal": "soil",
+    "rarity": "Common",
+    "rate": 0.485
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "shovel",
+    "rarity": "Rare",
+    "rate": 0.135
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Unusual",
+    "rate": 0.862
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Common",
+    "rate": 0.003
+   },
+   {
+    "petal": "soil",
+    "rarity": "Rare",
+    "rate": 0.165
+   },
+   {
+    "petal": "soil",
+    "rarity": "Unusual",
+    "rate": 0.834
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "shovel",
+    "rarity": "Epic",
+    "rate": 0.1
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Rare",
+    "rate": 0.786
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Unusual",
+    "rate": 0.114
+   },
+   {
+    "petal": "soil",
+    "rarity": "Epic",
+    "rate": 0.123
+   },
+   {
+    "petal": "soil",
+    "rarity": "Rare",
+    "rate": 0.81
+   },
+   {
+    "petal": "soil",
+    "rarity": "Unusual",
+    "rate": 0.067
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "shovel",
+    "rarity": "Legendary",
+    "rate": 0.041
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Epic",
+    "rate": 0.837
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Rare",
+    "rate": 0.122
+   },
+   {
+    "petal": "soil",
+    "rarity": "Legendary",
+    "rate": 0.05
+   },
+   {
+    "petal": "soil",
+    "rarity": "Epic",
+    "rate": 0.877
+   },
+   {
+    "petal": "soil",
+    "rarity": "Rare",
+    "rate": 0.072
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "shovel",
+    "rarity": "Mythic",
+    "rate": 0.006
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Legendary",
+    "rate": 0.867
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Epic",
+    "rate": 0.126
+   },
+   {
+    "petal": "soil",
+    "rarity": "Mythic",
+    "rate": 0.008
+   },
+   {
+    "petal": "soil",
+    "rarity": "Legendary",
+    "rate": 0.917
+   },
+   {
+    "petal": "soil",
+    "rarity": "Epic",
+    "rate": 0.075
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "shovel",
+    "rarity": "Ultra",
+    "rate": 0.0004
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Mythic",
+    "rate": 0.116
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Legendary",
+    "rate": 0.883
+   },
+   {
+    "petal": "soil",
+    "rarity": "Ultra",
+    "rate": 0.005
+   },
+   {
+    "petal": "soil",
+    "rarity": "Mythic",
+    "rate": 0.783
+   },
+   {
+    "petal": "soil",
+    "rarity": "Legendary",
+    "rate": 0.212
+   }
+  ],
+  "Super": [
+   {
+    "petal": "shovel",
+    "rarity": "Ultra",
+    "rate": 0.186
+   },
+   {
+    "petal": "shovel",
+    "rarity": "Mythic",
+    "rate": 0.812
+   },
+   {
+    "petal": "soil",
+    "rarity": "Ultra",
+    "rate": 0.644
+   },
+   {
+    "petal": "soil",
+    "rarity": "Mythic",
+    "rate": 0.356
+   }
+  ]
+ },
+ "bumble_bee": {
+  "Common": [
+   {
+    "petal": "pollen",
+    "rarity": "Unusual",
+    "rate": 0.472
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "pollen",
+    "rarity": "Unusual",
+    "rate": 0.922
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "honey",
+    "rarity": "Rare",
+    "rate": 0.135
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Rare",
+    "rate": 0.459
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Unusual",
+    "rate": 0.541
+   },
+   {
+    "petal": "wax",
+    "rarity": "Rare",
+    "rate": 0.328
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "honey",
+    "rarity": "Epic",
+    "rate": 0.1
+   },
+   {
+    "petal": "honey",
+    "rarity": "Rare",
+    "rate": 0.786
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Epic",
+    "rate": 0.36
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Rare",
+    "rate": 0.64
+   },
+   {
+    "petal": "wax",
+    "rarity": "Epic",
+    "rate": 0.251
+   },
+   {
+    "petal": "wax",
+    "rarity": "Rare",
+    "rate": 0.746
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "honey",
+    "rarity": "Legendary",
+    "rate": 0.041
+   },
+   {
+    "petal": "honey",
+    "rarity": "Epic",
+    "rate": 0.837
+   },
+   {
+    "petal": "honey",
+    "rarity": "Rare",
+    "rate": 0.122
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Legendary",
+    "rate": 0.161
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Epic",
+    "rate": 0.839
+   },
+   {
+    "petal": "wax",
+    "rarity": "Legendary",
+    "rate": 0.107
+   },
+   {
+    "petal": "wax",
+    "rarity": "Epic",
+    "rate": 0.889
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "honey",
+    "rarity": "Mythic",
+    "rate": 0.006
+   },
+   {
+    "petal": "honey",
+    "rarity": "Legendary",
+    "rate": 0.867
+   },
+   {
+    "petal": "honey",
+    "rarity": "Epic",
+    "rate": 0.126
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Mythic",
+    "rate": 0.026
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Legendary",
+    "rate": 0.974
+   },
+   {
+    "petal": "wax",
+    "rarity": "Mythic",
+    "rate": 0.017
+   },
+   {
+    "petal": "wax",
+    "rarity": "Legendary",
+    "rate": 0.98
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "honey",
+    "rarity": "Ultra",
+    "rate": 0.004
+   },
+   {
+    "petal": "honey",
+    "rarity": "Mythic",
+    "rate": 0.707
+   },
+   {
+    "petal": "honey",
+    "rarity": "Legendary",
+    "rate": 0.289
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Ultra",
+    "rate": 0.017
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Mythic",
+    "rate": 0.977
+   },
+   {
+    "petal": "wax",
+    "rarity": "Ultra",
+    "rate": 0.011
+   },
+   {
+    "petal": "wax",
+    "rarity": "Mythic",
+    "rate": 0.956
+   },
+   {
+    "petal": "wax",
+    "rarity": "Legendary",
+    "rate": 0.033
+   }
+  ],
+  "Super": [
+   {
+    "petal": "honey",
+    "rarity": "Ultra",
+    "rate": 0.562
+   },
+   {
+    "petal": "honey",
+    "rarity": "Mythic",
+    "rate": 0.438
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Ultra",
+    "rate": 0.97
+   },
+   {
+    "petal": "pollen",
+    "rarity": "Mythic",
+    "rate": 0.03
+   },
+   {
+    "petal": "wax",
+    "rarity": "Ultra",
+    "rate": 0.897
+   },
+   {
+    "petal": "wax",
+    "rarity": "Mythic",
+    "rate": 0.103
+   }
+  ]
+ },
+ "spider": {
+  "Common": [
+   {
+    "petal": "faster",
+    "rarity": "Unusual",
+    "rate": 0.164
+   },
+   {
+    "petal": "faster",
+    "rarity": "Common",
+    "rate": 0.598
+   },
+   {
+    "petal": "web",
+    "rarity": "Unusual",
+    "rate": 0.164
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "faster",
+    "rarity": "Unusual",
+    "rate": 0.512
+   },
+   {
+    "petal": "faster",
+    "rarity": "Common",
+    "rate": 0.485
+   },
+   {
+    "petal": "web",
+    "rarity": "Unusual",
+    "rate": 0.512
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "faster",
+    "rarity": "Rare",
+    "rate": 0.165
+   },
+   {
+    "petal": "faster",
+    "rarity": "Unusual",
+    "rate": 0.834
+   },
+   {
+    "petal": "web",
+    "rarity": "Rare",
+    "rate": 0.165
+   },
+   {
+    "petal": "web",
+    "rarity": "Unusual",
+    "rate": 0.834
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "faster",
+    "rarity": "Epic",
+    "rate": 0.123
+   },
+   {
+    "petal": "faster",
+    "rarity": "Rare",
+    "rate": 0.81
+   },
+   {
+    "petal": "faster",
+    "rarity": "Unusual",
+    "rate": 0.067
+   },
+   {
+    "petal": "web",
+    "rarity": "Epic",
+    "rate": 0.123
+   },
+   {
+    "petal": "web",
+    "rarity": "Rare",
+    "rate": 0.81
+   },
+   {
+    "petal": "web",
+    "rarity": "Unusual",
+    "rate": 0.067
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "faster",
+    "rarity": "Legendary",
+    "rate": 0.05
+   },
+   {
+    "petal": "faster",
+    "rarity": "Epic",
+    "rate": 0.877
+   },
+   {
+    "petal": "faster",
+    "rarity": "Rare",
+    "rate": 0.072
+   },
+   {
+    "petal": "web",
+    "rarity": "Legendary",
+    "rate": 0.05
+   },
+   {
+    "petal": "web",
+    "rarity": "Epic",
+    "rate": 0.877
+   },
+   {
+    "petal": "web",
+    "rarity": "Rare",
+    "rate": 0.072
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "faster",
+    "rarity": "Mythic",
+    "rate": 0.008
+   },
+   {
+    "petal": "faster",
+    "rarity": "Legendary",
+    "rate": 0.917
+   },
+   {
+    "petal": "faster",
+    "rarity": "Epic",
+    "rate": 0.075
+   },
+   {
+    "petal": "third_eye",
+    "rarity": "Mythic",
+    "rate": 0.0003
+   },
+   {
+    "petal": "web",
+    "rarity": "Mythic",
+    "rate": 0.008
+   },
+   {
+    "petal": "web",
+    "rarity": "Legendary",
+    "rate": 0.917
+   },
+   {
+    "petal": "web",
+    "rarity": "Epic",
+    "rate": 0.075
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "faster",
+    "rarity": "Ultra",
+    "rate": 0.005
+   },
+   {
+    "petal": "faster",
+    "rarity": "Mythic",
+    "rate": 0.783
+   },
+   {
+    "petal": "faster",
+    "rarity": "Legendary",
+    "rate": 0.212
+   },
+   {
+    "petal": "third_eye",
+    "rarity": "Ultra",
+    "rate": 0.0002
+   },
+   {
+    "petal": "third_eye",
+    "rarity": "Mythic",
+    "rate": 0.06
+   },
+   {
+    "petal": "web",
+    "rarity": "Ultra",
+    "rate": 0.005
+   },
+   {
+    "petal": "web",
+    "rarity": "Mythic",
+    "rate": 0.783
+   },
+   {
+    "petal": "web",
+    "rarity": "Legendary",
+    "rate": 0.212
+   }
+  ],
+  "Super": [
+   {
+    "petal": "faster",
+    "rarity": "Ultra",
+    "rate": 0.644
+   },
+   {
+    "petal": "faster",
+    "rarity": "Mythic",
+    "rate": 0.356
+   },
+   {
+    "petal": "third_eye",
+    "rarity": "Ultra",
+    "rate": 0.04
+   },
+   {
+    "petal": "third_eye",
+    "rarity": "Mythic",
+    "rate": 0.96
+   },
+   {
+    "petal": "web",
+    "rarity": "Ultra",
+    "rate": 0.644
+   },
+   {
+    "petal": "web",
+    "rarity": "Mythic",
+    "rate": 0.356
+   }
+  ]
+ },
+ "hornet": {
+  "Common": [
+   {
+    "petal": "missile",
+    "rarity": "Unusual",
+    "rate": 0.129892
+   },
+   {
+    "petal": "missile",
+    "rarity": "Common",
+    "rate": 0.870108
+   },
+   {
+    "petal": "orange",
+    "rarity": "Unusual",
+    "rate": 0.164
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "missile",
+    "rarity": "Unusual",
+    "rate": 0.129892
+   },
+   {
+    "petal": "missile",
+    "rarity": "Common",
+    "rate": 0.870108
+   },
+   {
+    "petal": "orange",
+    "rarity": "Unusual",
+    "rate": 0.512
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "antennae",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "missile",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "missile",
+    "rarity": "Unusual",
+    "rate": 0.695108
+   },
+   {
+    "petal": "missile",
+    "rarity": "Common",
+    "rate": 0.253892
+   },
+   {
+    "petal": "orange",
+    "rarity": "Rare",
+    "rate": 0.165
+   },
+   {
+    "petal": "orange",
+    "rarity": "Unusual",
+    "rate": 0.834
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "antennae",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Rare",
+    "rate": 0.354008
+   },
+   {
+    "petal": "missile",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "missile",
+    "rarity": "Rare",
+    "rate": 0.690108
+   },
+   {
+    "petal": "missile",
+    "rarity": "Unusual",
+    "rate": 0.279892
+   },
+   {
+    "petal": "orange",
+    "rarity": "Epic",
+    "rate": 0.123
+   },
+   {
+    "petal": "orange",
+    "rarity": "Rare",
+    "rate": 0.81
+   },
+   {
+    "petal": "orange",
+    "rarity": "Unusual",
+    "rate": 0.067
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "antennae",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Epic",
+    "rate": 0.349008
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Rare",
+    "rate": 0.640992
+   },
+   {
+    "petal": "missile",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "missile",
+    "rarity": "Epic",
+    "rate": 0.685108
+   },
+   {
+    "petal": "missile",
+    "rarity": "Rare",
+    "rate": 0.304892
+   },
+   {
+    "petal": "orange",
+    "rarity": "Legendary",
+    "rate": 0.05
+   },
+   {
+    "petal": "orange",
+    "rarity": "Epic",
+    "rate": 0.877
+   },
+   {
+    "petal": "orange",
+    "rarity": "Rare",
+    "rate": 0.072
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "antennae",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Legendary",
+    "rate": 0.346008
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Epic",
+    "rate": 0.650992
+   },
+   {
+    "petal": "missile",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "missile",
+    "rarity": "Legendary",
+    "rate": 0.682108
+   },
+   {
+    "petal": "missile",
+    "rarity": "Epic",
+    "rate": 0.314892
+   },
+   {
+    "petal": "orange",
+    "rarity": "Mythic",
+    "rate": 0.008
+   },
+   {
+    "petal": "orange",
+    "rarity": "Legendary",
+    "rate": 0.917
+   },
+   {
+    "petal": "orange",
+    "rarity": "Epic",
+    "rate": 0.075
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "antennae",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Mythic",
+    "rate": 0.332508
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Legendary",
+    "rate": 0.666992
+   },
+   {
+    "petal": "missile",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "missile",
+    "rarity": "Mythic",
+    "rate": 0.668608
+   },
+   {
+    "petal": "missile",
+    "rarity": "Legendary",
+    "rate": 0.330892
+   },
+   {
+    "petal": "orange",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "orange",
+    "rarity": "Mythic",
+    "rate": 0.143
+   },
+   {
+    "petal": "orange",
+    "rarity": "Legendary",
+    "rate": 0.856
+   }
+  ],
+  "Super": [
+   {
+    "petal": "antennae",
+    "rarity": "Super",
+    "rate": 2e-06
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Ultra",
+    "rate": 0.332
+   },
+   {
+    "petal": "antennae",
+    "rarity": "Mythic",
+    "rate": 0.667998
+   },
+   {
+    "petal": "missile",
+    "rarity": "Super",
+    "rate": 1e-05
+   },
+   {
+    "petal": "missile",
+    "rarity": "Ultra",
+    "rate": 0.6681
+   },
+   {
+    "petal": "missile",
+    "rarity": "Mythic",
+    "rate": 0.33189
+   },
+   {
+    "petal": "orange",
+    "rarity": "Ultra",
+    "rate": 0.227
+   },
+   {
+    "petal": "orange",
+    "rarity": "Mythic",
+    "rate": 0.773
+   }
+  ]
+ },
+ "dandelion": {
+  "Common": [
+   {
+    "petal": "dandelion",
+    "rarity": "Unusual",
+    "rate": 0.129892
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Common",
+    "rate": 0.870108
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "dandelion",
+    "rarity": "Unusual",
+    "rate": 0.129892
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Common",
+    "rate": 0.870108
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "dandelion",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Unusual",
+    "rate": 0.695108
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Common",
+    "rate": 0.253892
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "dandelion",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Rare",
+    "rate": 0.690108
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Unusual",
+    "rate": 0.279892
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "dandelion",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Epic",
+    "rate": 0.685108
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Rare",
+    "rate": 0.304892
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "dandelion",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Legendary",
+    "rate": 0.682108
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Epic",
+    "rate": 0.314892
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "dandelion",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Mythic",
+    "rate": 0.668608
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Legendary",
+    "rate": 0.330892
+   }
+  ],
+  "Super": [
+   {
+    "petal": "dandelion",
+    "rarity": "Super",
+    "rate": 1e-05
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Ultra",
+    "rate": 0.6681
+   },
+   {
+    "petal": "dandelion",
+    "rarity": "Mythic",
+    "rate": 0.33189
+   }
+  ]
+ },
+ "bandage_beetle": {
+  "Common": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.2
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Common",
+    "rate": 0.8
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.435
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Common",
+    "rate": 0.565
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.625
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Common",
+    "rate": 0.324
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Rare",
+    "rate": 0.62
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.35
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Epic",
+    "rate": 0.615
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Rare",
+    "rate": 0.375
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Legendary",
+    "rate": 0.612
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Epic",
+    "rate": 0.385
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Mythic",
+    "rate": 0.5985
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Legendary",
+    "rate": 0.401
+   }
+  ],
+  "Super": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Ultra",
+    "rate": 0.597992
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Mythic",
+    "rate": 0.402
+   }
+  ]
+ },
+ "beetle": {
+  "Common": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.333
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Common",
+    "rate": 0.667
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.453
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Common",
+    "rate": 0.547
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.492
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Common",
+    "rate": 0.457
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Rare",
+    "rate": 0.487
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Unusual",
+    "rate": 0.483
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Epic",
+    "rate": 0.482
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Rare",
+    "rate": 0.508
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Legendary",
+    "rate": 0.479
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Epic",
+    "rate": 0.518
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Mythic",
+    "rate": 0.4655
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Legendary",
+    "rate": 0.534
+   }
+  ],
+  "Super": [
+   {
+    "petal": "beetle_egg",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Ultra",
+    "rate": 0.464992
+   },
+   {
+    "petal": "beetle_egg",
+    "rarity": "Mythic",
+    "rate": 0.535
+   }
+  ]
+ },
+ "leafcutter_soldier": {
+  "Common": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Unusual",
+    "rate": 0.333
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Common",
+    "rate": 0.667
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Unusual",
+    "rate": 0.125
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Common",
+    "rate": 0.875
+   }
+  ],
+  "Unusual": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Unusual",
+    "rate": 0.333
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Common",
+    "rate": 0.667
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Unusual",
+    "rate": 0.125
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Common",
+    "rate": 0.875
+   }
+  ],
+  "Rare": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Unusual",
+    "rate": 0.492
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Common",
+    "rate": 0.457
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Rare",
+    "rate": 0.051
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Unusual",
+    "rate": 0.7
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Common",
+    "rate": 0.249
+   }
+  ],
+  "Epic": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Rare",
+    "rate": 0.487
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Unusual",
+    "rate": 0.483
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Epic",
+    "rate": 0.03
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Rare",
+    "rate": 0.695
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Unusual",
+    "rate": 0.275
+   }
+  ],
+  "Legendary": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Epic",
+    "rate": 0.482
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Rare",
+    "rate": 0.508
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Legendary",
+    "rate": 0.01
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Epic",
+    "rate": 0.69
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Rare",
+    "rate": 0.3
+   }
+  ],
+  "Mythic": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Legendary",
+    "rate": 0.479
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Epic",
+    "rate": 0.518
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Mythic",
+    "rate": 0.003
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Legendary",
+    "rate": 0.687
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Epic",
+    "rate": 0.31
+   }
+  ],
+  "Ultra": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Mythic",
+    "rate": 0.4655
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Legendary",
+    "rate": 0.534
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Ultra",
+    "rate": 0.0005
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Mythic",
+    "rate": 0.6735
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Legendary",
+    "rate": 0.326
+   }
+  ],
+  "Super": [
+   {
+    "petal": "black_fungus",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Ultra",
+    "rate": 0.464992
+   },
+   {
+    "petal": "black_fungus",
+    "rarity": "Mythic",
+    "rate": 0.535
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Super",
+    "rate": 8e-06
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Ultra",
+    "rate": 0.672992
+   },
+   {
+    "petal": "white_fungus",
+    "rarity": "Mythic",
+    "rate": 0.327
+   }
+  ]
+ }
+}

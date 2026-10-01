@@ -256,6 +256,47 @@ def drop_value(sid):
         total += chance * 50  # 掉落价值基础分(有掉落的怪更值得打)
     return total
 
+# ================= 真源掉率表 (FlorrBt私服 drop_rate.h 转译, v1.19.0) =================
+_DROP_V2 = None
+def _load_drop_v2():
+    global _DROP_V2
+    if _DROP_V2 is None:
+        _DROP_V2 = _load_json('florr_dropchance_v2.json') or {}
+    return _DROP_V2
+
+def drop_rates(sid, rarity=None):
+    """真源掉率: sid -> {稀有度档 -> [{petal, rarity, rate}]}
+    无数据返回 {} (该怪掉率未知时回退旧表)"""
+    tbl = _load_drop_v2()
+    m = tbl.get(sid)
+    if not m:
+        return {} if rarity is None else []
+    if rarity is None:
+        return m
+    return m.get(rarity, [])
+
+def drop_hint(sid, rarity):
+    """战斗提示: 该档位最值得掉的 3 种花瓣 (按概率x稀有度权重)"""
+    rows = drop_rates(sid, rarity)
+    if not rows:
+        return ''
+    _RV = {"Common":1,"Unusual":2,"Rare":4,"Epic":8,"Legendary":16,"Mythic":40,"Ultra":120,"Super":400}
+    rows = sorted(rows, key=lambda r: -(r.get('rate', 0) * _RV.get(r.get('rarity', 'Common'), 1)))
+    parts = []
+    seen = set()
+    for r in rows:
+        p = r.get('petal')
+        if p in seen:
+            continue
+        seen.add(p)
+        rate = r.get('rate', 0)
+        if rate < 0.0005:
+            continue
+        parts.append(f"{petal_cn(p) or p} {rate*100:.1f}%")
+        if len(parts) >= 3:
+            break
+    return '、'.join(parts)
+
 def assess_mob(sid, hp, player_dps, dist=None):
     """综合评估一只怪: 返回 (action, score, rarity, name_cn)
     action: 'oneshot'(秒杀追) / 'fight'(可打) / 'flee'(避开) / 'ignore'(不管) / 'danger'(危险逃跑)
@@ -285,6 +326,12 @@ def assess_mob(sid, hp, player_dps, dist=None):
     if sid in PRIORITY_SIDS:
         score += 5000.0
     score += drop_value(sid) * 10.0
+    # v1.19.0 真源掉率加分: 有高稀有度掉落的怪更值得打 (drop_rate.h 转译表)
+    v2 = drop_rates(sid)
+    if v2:
+        hi = sum(1 for rar, rows in v2.items() if rar in ('Ultra', 'Super') and rows)
+        score += hi * 800.0
+        score += len(v2) * 15.0
     # 源码级危险修正: 追得上的怪(≥1.0倍速)危险加倍 - 必须秒杀或立即风筝
     spd = get_aggro_speed(sid)
     if spd >= 1.0:
