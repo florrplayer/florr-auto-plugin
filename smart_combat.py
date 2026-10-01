@@ -127,9 +127,13 @@ def get_mob_radius(sid, rarity='Common'):
 
 
 def get_attack_distance(sid, rarity='Common'):
-    """根据怪种+稀有度返回最佳攻击距离(停在怪真实碰撞箱外)"""
+    """根据怪种+稀有度+追击速度返回最佳攻击距离(停在怪真实碰撞箱外)
+    v1.19.8: 追得上的怪(aggro_speed>=1.0, 蝎子/蜘蛛/沙漠蜈蚣)保持更大距离防接触伤害"""
     r = get_mob_radius(sid, rarity)
-    # 小近身怪贴脸,远程怪保持距离
+    spd = mob_db.get_aggro_speed(_norm_sid(sid))
+    # 追得上的高威胁怪: 保持距离(远程/冲撞都别贴脸)
+    if spd >= 1.0:
+        return r + 6  # 追击速度≥1.0(追得上玩家) - 保持6px, 蹭完就撤
     if sid in ('hornet', 'wasp', 'scorpion'):
         return r + 5  # 远程怪多保持5px
     if sid in ('centipede', 'centipede_evil', 'centipede_desert', 'centipede_hel'):
