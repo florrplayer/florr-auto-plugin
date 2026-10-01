@@ -107,6 +107,11 @@ DANGER_SIDS = {"ant_queen", "ant_hole", "fire_ant_burrow", "hornet", "wasp", "ce
                "gambler", "mecha_flower", "wasp_mecha", "spider_mecha", "crab_mecha", "termite_overmind",
                "beetle_mummy", "beetle_pharaoh", "assembler", "ghost"}
 
+# Super专属机制怪 (florr_SuperEternalUnique名单:220): Super稀有度有吸人/瞬移/连锁闪电/高毒,
+# 碰到切回避不硬刚 (rock/cactus平时安全, Super形态机制质变)
+SUPER_SPECIAL_SIDS = {"rock", "cactus", "hornet", "jellyfish", "firefly",
+                      "beetle_hel", "spider_hel", "centipede_hel", "wasp_hel", "gambler"}
+
 # wasm反汇编真实碰撞箱 (Common基准, 地图像素)
 # gardn Collision.cc 验证: 碰撞判定 = 圆碰撞(半径和), 玩家撞怪被质量比击退(_deal_knockback,
 # 花侧_cancel_movement 硬顶), 接触伤害 DamageType::kContact 双向结算, Web 减速 speed_ratio=0.5
@@ -378,6 +383,9 @@ def assess_mob(sid, hp, player_dps, dist=None):
     # 危险怪: 秒不了的才避开(能秒的走 oneshot 追击)
     if sid in DANGER_SIDS and action != 'oneshot':
         return 'danger', -1000, None, cn(sid)
+    # v1.19.9: Super专属机制怪(吸人/瞬移/连锁闪电/高毒) - Super稀有度直接回避, 秒杀也不硬刚
+    if sid in SUPER_SPECIAL_SIDS and rarity in ('Super', 'Unique', 'Eternal'):
+        return 'danger', -2000, None, cn(sid)
     # 评分: 秒杀优先 + 特殊怪加成 + 掉落价值 + 距离
     score = 0.0
     if action == 'oneshot':
