@@ -342,12 +342,17 @@ def drop_value(sid):
         return 0.0
     return sum(d.get('baseChance', 0) * 50 for d in m.get('drops', []))
 
-# ================= 真源掉率表 (FlorrBt私服 drop_rate.h 转译, v1.19.0) =================
+# ================= 真源掉率表 (FlorrBt私服 drop_rate.h + florr_clone mob_drops.json, v1.21.0) =================
+# v3 = 63怪(16怪FlorrBt矩阵 + 47怪clone补缺), 覆盖蝎子/仙人掌/蜈蚣/水母/shiny变体/冥界怪/金叶虫等
 _DROP_V2 = None
 def _load_drop_v2():
     global _DROP_V2
     if _DROP_V2 is None:
-        _DROP_V2 = _load_json('florr_dropchance_v2.json') or {}
+        d = _load_json('florr_dropchance_v3.json') or _load_json('florr_dropchance_v2.json') or {}
+        # v3 带 {source, mobs} 包装层, 解包成直接映射
+        if 'mobs' in d and isinstance(d['mobs'], dict):
+            d = d['mobs']
+        _DROP_V2 = d
     return _DROP_V2
 
 def drop_rates(sid, rarity=None):

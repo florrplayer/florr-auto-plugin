@@ -1,0 +1,640 @@
+{
+ "source": "florr_clone src/mob_drops.json (53怪)",
+ "mobs": {
+  "bee": {
+   "guaranteed": true,
+   "drops": {
+    "stinger": {
+     "common": 0.3
+    },
+    "faster": {
+     "common": 0.5
+    },
+    "pollen": {
+     "common": 0.8
+    }
+   }
+  },
+  "ladybug": {
+   "guaranteed": true,
+   "drops": {
+    "rose": {
+     "common": 0.5
+    },
+    "light": {
+     "common": 0.5
+    }
+   }
+  },
+  "soldier_ant": {
+   "guaranteed": true,
+   "drops": {
+    "glass": {
+     "common": 0.8
+    },
+    "clover": {
+     "common": 0.1
+    }
+   }
+  },
+  "worker_ant": {
+   "guaranteed": true,
+   "drops": {
+    "corn": {
+     "common": 0.4
+    },
+    "leaf": {
+     "common": 0.4
+    }
+   }
+  },
+  "baby_ant": {
+   "guaranteed": true,
+   "drops": {
+    "light": {
+     "common": 0.4
+    },
+    "leaf": {
+     "common": 0.4
+    },
+    "rice": {
+     "common": 0.23
+    }
+   }
+  },
+  "ant_hole": {
+   "guaranteed": true,
+   "drops": {
+    "soil": {
+     "uncommon": 0.5
+    },
+    "soldier_ant_egg": {
+     "common": 0.4
+    }
+   }
+  },
+  "fire_ant_hole": {
+   "guaranteed": true,
+   "drops": {
+    "magnet": {
+     "common": 0.4
+    }
+   }
+  },
+  "rock": {
+   "guaranteed": true,
+   "drops": {
+    "rock": {
+     "common": 0.4
+    }
+   }
+  },
+  "dandelion": {
+   "guaranteed": true,
+   "drops": {
+    "dandelion": {
+     "uncommon": 0.4
+    }
+   }
+  },
+  "soldier_fire_ant": {
+   "guaranteed": true,
+   "drops": {
+    "bone": {
+     "common": 0.4
+    },
+    "yucca": {
+     "common": 0.4
+    }
+   }
+  },
+  "shiny_ladybug": {
+   "guaranteed": true,
+   "drops": {
+    "yggdrasil": {
+     "common": 0.4
+    },
+    "rose": {
+     "uncommon": 0.2
+    },
+    "azalea": {
+     "common": 0.1
+    },
+    "dahlia": {
+     "common": 0.5
+    }
+   }
+  },
+  "dark_ladybug": {
+   "guaranteed": true,
+   "drops": {
+    "dahlia": {
+     "common": 0.4
+    },
+    "yin_yang": {
+     "common": 0.1
+    }
+   }
+  },
+  "sandstorm": {
+   "guaranteed": true,
+   "drops": {
+    "sand": {
+     "common": 0.4,
+     "uncommon": 0.2
+    },
+    "rock": {
+     "common": 0.6
+    },
+    "stick": {
+     "common": 0.25
+    }
+   }
+  },
+  "cactus": {
+   "guaranteed": true,
+   "drops": {
+    "cactus": {
+     "common": 0.7
+    },
+    "poison_cactus": {
+     "common": 0.3
+    }
+   }
+  },
+  "scorpion": {
+   "guaranteed": true,
+   "drops": {
+    "pincer": {
+     "common": 0.5,
+     "uncommon": 0.15
+    },
+    "iris": {
+     "common": 0.35
+    },
+    "sand": {
+     "common": 0.3
+    }
+   }
+  },
+  "beetle": {
+   "guaranteed": true,
+   "drops": {
+    "lentil": {
+     "common": 0.2,
+     "uncommon": 0.8
+    },
+    "iris": {
+     "common": 0.5,
+     "uncommon": 0.1
+    },
+    "salt": {
+     "common": 0.3
+    }
+   }
+  },
+  "hel_beetle": {
+   "guaranteed": true,
+   "drops": {
+    "bone": {
+     "common": 0.3
+    },
+    "blood_leaf": {
+     "common": 0.2
+    }
+   }
+  },
+  "jellyfish": {
+   "guaranteed": true,
+   "drops": {
+    "lightning": {
+     "common": 0.43
+    },
+    "jelly": {
+     "common": 0.41
+    }
+   }
+  },
+  "bubble": {
+   "guaranteed": true,
+   "drops": {
+    "bubble": {
+     "common": 0.5
+    },
+    "air": {
+     "uncommon": 0.9
+    }
+   }
+  },
+  "starfish": {
+   "guaranteed": true,
+   "drops": {
+    "starfish": {
+     "common": 0.67
+    },
+    "sand": {
+     "common": 0.7
+    },
+    "salt": {
+     "common": 0.5
+    }
+   }
+  },
+  "sponge_1": {
+   "guaranteed": true,
+   "drops": {
+    "sponge": {
+     "common": 0.75
+    },
+    "coral": {
+     "common": 0.05
+    }
+   }
+  },
+  "sponge_2": {
+   "guaranteed": true,
+   "drops": {
+    "sponge": {
+     "common": 1
+    },
+    "coral": {
+     "common": 0.05
+    }
+   }
+  },
+  "hornet": {
+   "guaranteed": true,
+   "drops": {
+    "missile": {
+     "common": 0.87
+    },
+    "antennae": {
+     "common": 0.5
+    },
+    "orange": {
+     "common": 0.87
+    }
+   }
+  },
+  "leafbug": {
+   "guaranteed": true,
+   "drops": {
+    "leaf": {
+     "common": 1
+    },
+    "root": {
+     "common": 0.5
+    }
+   }
+  },
+  "golden_leafbug": {
+   "guaranteed": true,
+   "drops": {
+    "golden_leaf": {
+     "common": 0.08
+    },
+    "root": {
+     "common": 0.86
+    }
+   }
+  },
+  "bush": {
+   "guaranteed": true,
+   "drops": {
+    "cotton": {
+     "common": 0.5
+    },
+    "raindrop": {
+     "common": 0.4
+    }
+   }
+  },
+  "mantis": {
+   "guaranteed": true,
+   "drops": {
+    "peas": {
+     "common": 1
+    },
+    "bur": {
+     "common": 1
+    }
+   }
+  },
+  "firefly": {
+   "guaranteed": true,
+   "drops": {
+    "wing": {
+     "common": 0.5
+    },
+    "bulb": {
+     "common": 0.5
+    },
+    "battery": {
+     "common": 0.1
+    }
+   }
+  },
+  "magic_firefly": {
+   "guaranteed": true,
+   "drops": {
+    "battery": {
+     "common": 0.8
+    },
+    "magic_orb": {
+     "common": 0.2
+    }
+   }
+  },
+  "wasp": {
+   "guaranteed": true,
+   "drops": {
+    "antennae": {
+     "common": 1
+    },
+    "missile": {
+     "common": 1
+    }
+   }
+  },
+  "fly": {
+   "guaranteed": true,
+   "drops": {
+    "wing": {
+     "common": 0.5
+    },
+    "poo": {
+     "common": 0.7
+    },
+    "talisman": {
+     "common": 0.08
+    }
+   }
+  },
+  "moth": {
+   "guaranteed": true,
+   "drops": {
+    "wing": {
+     "common": 0.5
+    },
+    "bulb": {
+     "uncommon": 0.5
+    }
+   }
+  },
+  "target_dummy": {
+   "guaranteed": true,
+   "drops": {
+    "square": {
+     "common": 1
+    }
+   }
+  },
+  "garbage": {
+   "guaranteed": true,
+   "drops": {
+    "random": {
+     "common": 0.002
+    },
+    "gas": {
+     "uncommon": 0.5
+    }
+   }
+  },
+  "roach": {
+   "guaranteed": true,
+   "drops": {
+    "antennae": {
+     "common": 0.16
+    },
+    "lotus": {
+     "common": 0.27
+    }
+   }
+  },
+  "spider": {
+   "guaranteed": true,
+   "drops": {
+    "third_eye": {
+     "common": 0.05
+    },
+    "faster": {
+     "common": 0.5
+    },
+    "web": {
+     "common": 0.37
+    }
+   }
+  },
+  "javascript": {
+   "guaranteed": true,
+   "drops": {
+    "javascript": {
+     "common": 1
+    },
+    "bomb": {
+     "common": 0.5
+    }
+   }
+  },
+  "glitch": {
+   "guaranteed": true,
+   "drops": {
+    "glitch": {
+     "common": 1
+    },
+    "random": {
+     "common": 0.0005
+    }
+   }
+  },
+  "glitch_flower": {
+   "guaranteed": true,
+   "drops": {
+    "glitch": {
+     "common": 1
+    },
+    "javascript": {
+     "common": 0.4
+    },
+    "bomb": {
+     "common": 0.4
+    },
+    "glass": {
+     "common": 0.4
+    }
+   }
+  },
+  "server": {
+   "guaranteed": true,
+   "drops": {
+    "capacitor": {
+     "common": 0.04
+    },
+    "javascript": {
+     "common": 0.95
+    },
+    "bomb": {
+     "common": 0.47
+    }
+   }
+  },
+  "desert_centipede": {
+   "guaranteed": false,
+   "drops": {
+    "powder": {
+     "common": 0.5
+    },
+    "salt": {
+     "common": 0.25
+    }
+   }
+  },
+  "desert_centipede_body": {
+   "guaranteed": true,
+   "drops": {
+    "powder": {
+     "common": 0.5
+    },
+    "salt": {
+     "common": 0.25
+    }
+   }
+  },
+  "centipede": {
+   "guaranteed": true,
+   "drops": {
+    "peas": {
+     "common": 0.5
+    }
+   }
+  },
+  "centipede_body": {
+   "guaranteed": true,
+   "drops": {
+    "peas": {
+     "common": 0.5
+    }
+   }
+  },
+  "sun": {
+   "guaranteed": true,
+   "drops": {
+    "glass": {
+     "common": 1
+    },
+    "rock": {
+     "uncommon": 0.5
+    },
+    "sand": {
+     "uncommon": 0.5
+    },
+    "pollen": {
+     "uncommon": 0.5
+    }
+   }
+  },
+  "shell": {
+   "guaranteed": true,
+   "drops": {
+    "magnet": {
+     "common": 0.8
+    },
+    "shell": {
+     "common": 0.6
+    },
+    "pearl": {
+     "common": 0.57
+    }
+   }
+  },
+  "evil_centipede": {
+   "guaranteed": true,
+   "drops": {
+    "blue_iris": {
+     "common": 0.35
+    },
+    "iris": {
+     "common": 0.5
+    },
+    "grapes": {
+     "common": 0.5
+    }
+   }
+  },
+  "evil_centipede_body": {
+   "guaranteed": true,
+   "drops": {
+    "blue_iris": {
+     "common": 0.2
+    },
+    "iris": {
+     "common": 0.5
+    },
+    "grapes": {
+     "common": 0.5
+    }
+   }
+  },
+  "queen_ant": {
+   "guaranteed": true,
+   "drops": {
+    "wing": {
+     "common": 0.5
+    },
+    "iris": {
+     "common": 0.5
+    },
+    "stinger": {
+     "common": 0.4
+    }
+   }
+  },
+  "digger": {
+   "guaranteed": true,
+   "drops": {
+    "uranium": {
+     "common": 0.5
+    },
+    "cutter": {
+     "common": 0.15
+    }
+   }
+  },
+  "leech": {
+   "guaranteed": true,
+   "drops": {
+    "fang": {
+     "common": 0.87
+    },
+    "faster": {
+     "common": 0.47
+    }
+   }
+  },
+  "crab": {
+   "guaranteed": true,
+   "drops": {
+    "sand": {
+     "common": 0.87
+    },
+    "claw": {
+     "common": 0.47
+    }
+   }
+  },
+  "bumble_bee": {
+   "guaranteed": true,
+   "drops": {
+    "honey": {
+     "common": 0.95
+    },
+    "pollen": {
+     "common": 0.68
+    },
+    "wax": {
+     "common": 0.87
+    }
+   }
+  }
+ }
+}
