@@ -1,0 +1,145 @@
+{
+ "source": "florr_clone map_bundle.ts (世界坐标=插件memory模式坐标系)",
+ "portals": [
+  {
+   "x": 18089,
+   "y": 18195,
+   "targetMap": "world",
+   "targetSpawn": null,
+   "to": [
+    29479,
+    38705
+   ]
+  },
+  {
+   "x": 29509,
+   "y": 38695,
+   "targetMap": "world",
+   "targetSpawn": null,
+   "to": [
+    19000,
+    19000
+   ]
+  },
+  {
+   "x": 1519,
+   "y": 59615,
+   "targetMap": "sewers",
+   "targetSpawn": "sewers_entrance",
+   "to": null
+  },
+  {
+   "x": 11629,
+   "y": 9995,
+   "targetMap": "world",
+   "targetSpawn": null,
+   "to": [
+    1500,
+    59000
+   ]
+  },
+  {
+   "x": 32649,
+   "y": 14145,
+   "targetMap": "world",
+   "targetSpawn": null,
+   "to": [
+    37479,
+    42872
+   ]
+  },
+  {
+   "x": 37859,
+   "y": 43175,
+   "targetMap": "world",
+   "targetSpawn": null,
+   "to": [
+    32459,
+    13810
+   ]
+  },
+  {
+   "x": 17688,
+   "y": 47690,
+   "targetMap": "world",
+   "targetSpawn": null,
+   "to": [
+    27500,
+    54998
+   ]
+  },
+  {
+   "x": 27708,
+   "y": 55230,
+   "targetMap": "world",
+   "targetSpawn": null,
+   "to": [
+    17688,
+    47690
+   ]
+  },
+  {
+   "x": 6450,
+   "y": 6750,
+   "targetMap": "garden_1",
+   "targetSpawn": "garden_1",
+   "to": null
+  },
+  {
+   "x": 37650,
+   "y": 14850,
+   "targetMap": "desert_1",
+   "targetSpawn": "desert_1",
+   "to": null
+  },
+  {
+   "x": 48450,
+   "y": 7650,
+   "targetMap": "hel_1",
+   "targetSpawn": "hel_1",
+   "to": null
+  },
+  {
+   "x": 9750,
+   "y": 28650,
+   "targetMap": "ocean_1",
+   "targetSpawn": "ocean_1",
+   "to": null
+  },
+  {
+   "x": 29250,
+   "y": 31650,
+   "targetMap": "ant_hell_1",
+   "targetSpawn": "ant_hell_1",
+   "to": null
+  },
+  {
+   "x": 50250,
+   "y": 28650,
+   "targetMap": "jungle_1",
+   "targetSpawn": "jungle_1",
+   "to": null
+  },
+  {
+   "x": 1350,
+   "y": 48750,
+   "targetMap": "sewers_1",
+   "targetSpawn": "sewers_1",
+   "to": null
+  },
+  {
+   "x": 31050,
+   "y": 48450,
+   "targetMap": "computer_1",
+   "targetSpawn": "computer_1",
+   "to": null
+  },
+  {
+   "x": 48450,
+   "y": 48450,
+   "targetMap": "unknown_1",
+   "targetSpawn": "unknown_1",
+   "to": null
+  }
+ ]
+}
