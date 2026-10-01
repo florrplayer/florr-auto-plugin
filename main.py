@@ -790,9 +790,23 @@ if __name__ == "__main__":
     if not init_window("florr.io"):
         print("[!] 请先打开浏览器，进入 florr.io，最大化窗口后再运行(无需F11全屏)")
         exit(1)
+
+    # ===== 内存战斗模式: py main.py 地图 --memory (直接读wasm内存, 不用截图) =====
+    if "--memory" in sys.argv:
+        import memory_battle
+        print("[+] 内存战斗模式: 直接读游戏内存(玩家坐标/怪物HP/类型ID)")
+        print("[+] 无需截图, 窗口最小化/后台都行! 但必须开着bridge_server(先跑 py bridge_server.py)")
+        try:
+            memory_battle.run_memory_battle(get_window())
+        except KeyboardInterrupt:
+            pass
+        get_window().move_onscreen()
+        exit(0)
+
     get_window().move_offscreen()
     set_title("运行中")
     print("[+] 脚本运行中... 按 Ctrl+C 停止（停止后窗口自动移回）")
+
     # 画面冻结监测: 最小化/遮挡时自动恢复窗口(Edge最小化会暂停渲染, 截图会失明)
     threading.Thread(target=freeze_watchdog, daemon=True).start()
     print("[+] 画面冻结监测已开启（窗口被最小化/遮挡会自动恢复）")
@@ -972,6 +986,14 @@ if __name__ == "__main__":
 
         print(f"[巡逻模式] 共 {len(patrol_points)} 个巡逻点，循环移动中...")
 
+        # ===== 聊天挑战监控(防封号: M28会发消息挑战, 只解AFK不回消息可能封号) =====
+        try:
+            from chat_solver import ChatSolver
+            _chat = ChatSolver(get_window(), get_frame)
+            _chat.start()
+        except Exception as e:
+            print(f"[聊天] 监控启动失败(忽略): {e}")
+
         # 主循环需要的 combat 函数(一次性import, 避免作用域内NameError)
         from combat import detect_mobs, screen_to_map, ultra_blocked, choose_target
 
@@ -990,27 +1012,30 @@ if __name__ == "__main__":
             else:
                 _afk_hits = 0
             if _afk_hits >= 4:
-                _ccx, _ccy = get_screen_center()
-                # 先尝试挂机检测拖动验证(找亮绿点)
-                from combat import solve_afk_drag
-                ok, sx, sy, path_pts = solve_afk_drag(_cdf)
-                if ok:
-                    ex, ey = path_pts[-1]
-                    print(f"[AFK] 拖动验证: 绿点({sx},{sy})->终点({ex},{ey})")
-                    import win32api, win32con
-                    def _lp(x, y): return (y << 16) | (x & 0xFFFF)
-                    win32api.PostMessage(get_window().hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, _lp(sx, sy))
-                    time.sleep(0.2)
-                    for i, (ix, iy) in enumerate(path_pts):
-                        win32api.PostMessage(get_window().hwnd, win32con.WM_MOUSEMOVE, win32con.MK_LBUTTON, _lp(ix, iy))
-                        time.sleep(0.06)
-                    time.sleep(0.2)
-                    win32api.PostMessage(get_window().hwnd, win32con.WM_LBUTTONUP, 0, _lp(ex, ey))
-                    time.sleep(1.5)
-                else:
-                    print(f"[AFK] 检测到 AFK Check 弹窗(中心灰度{_cmean:.0f})，点击 Yes 按钮...")
-                    get_window().left_click(_ccx, _ccy + 60)
-                    time.sleep(2)
+                # 先尝试挂机检测拖动验证(v2完整版: 8色起点+灰色路径+Dijkstra最宽路径)
+                from afk_solver import try_solve_and_drag
+                _solved = try_solve_and_drag(get_window(), _cdf)
+                if not _solved:
+                    # 兜底: 简版(绿点BFS)再试一次
+                    from combat import solve_afk_drag
+                    ok, sx, sy, path_pts = solve_afk_drag(_cdf)
+                    if ok:
+                        ex, ey = path_pts[-1]
+                        print(f"[AFK] 拖动验证(v1): 绿点({sx},{sy})->终点({ex},{ey})")
+                        import win32api, win32con
+                        def _lp(x, y): return (y << 16) | (x & 0xFFFF)
+                        win32api.PostMessage(get_window().hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, _lp(sx, sy))
+                        time.sleep(0.2)
+                        for i, (ix, iy) in enumerate(path_pts):
+                            win32api.PostMessage(get_window().hwnd, win32con.WM_MOUSEMOVE, win32con.MK_LBUTTON, _lp(ix, iy))
+                            time.sleep(0.06)
+                        time.sleep(0.2)
+                        win32api.PostMessage(get_window().hwnd, win32con.WM_LBUTTONUP, 0, _lp(ex, ey))
+                        time.sleep(1.5)
+                    else:
+                        print(f"[AFK] 检测到 AFK Check 弹窗(中心灰度{_cmean:.0f})，点击 Yes 按钮...")
+                        get_window().left_click(_ccx, _ccy + 60)
+                        time.sleep(2)
                 _afk_hits = 0
             # 先检查状态
             stage = check_stage()

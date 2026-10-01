@@ -64,6 +64,10 @@ if __name__ == '__main__':
             d = get_latest()
             if d.get('_recv_time'):
                 age = time.time() - d['_recv_time']
-                print(f"[桥接] 最近数据 {age:.1f}s前, mobData长度={len(d.get('mobData',''))}")
+                mobs = d.get('mobs', [])
+                mobdata = d.get('mobData', '')
+                print(f"[桥接] 最近数据 {age:.1f}s前, mobs={len(mobs)}, mobData长度={len(mobdata)}")
+            else:
+                print("[桥接] 等待中... (浏览器还没发数据)")
     except KeyboardInterrupt:
         print("\n退出")

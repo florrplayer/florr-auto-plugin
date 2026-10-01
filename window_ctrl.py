@@ -105,11 +105,21 @@ class WindowController:
         def cb(hwnd, results):
             if win32gui.IsWindowVisible(hwnd):
                 t = win32gui.GetWindowText(hwnd)
-                if self.title_keyword.lower() in t.lower():
+                # 优先: 标题以 florr.io 开头 = 游戏标签页 (排除 GitHub 仓库页等)
+                if t.strip().lower().startswith("florr.io"):
                     results.append((hwnd, t))
             return True
         results = []
         win32gui.EnumWindows(cb, results)
+        if not results:
+            # 退回: 标题任意位置含 florr.io (老逻辑)
+            def cb2(hwnd, results2):
+                if win32gui.IsWindowVisible(hwnd):
+                    t = win32gui.GetWindowText(hwnd)
+                    if self.title_keyword.lower() in t.lower():
+                        results2.append((hwnd, t))
+                return True
+            win32gui.EnumWindows(cb2, results)
         if not results:
             print(f"[!] 未找到标题含 '{self.title_keyword}' 的窗口")
             return False
@@ -227,12 +237,17 @@ class WindowController:
     def key_down(self, vk):
         if not self.hwnd:
             return
-        win32api.PostMessage(self.hwnd, win32con.WM_KEYDOWN, vk, 0)
+        # 完整lParam: 重复计数1 + 扫描码(16-23位), 否则游戏可能解析错键
+        scan = win32api.MapVirtualKey(vk, 0)
+        lparam = (1) | (scan << 16)
+        win32api.PostMessage(self.hwnd, win32con.WM_KEYDOWN, vk, lparam)
 
     def key_up(self, vk):
         if not self.hwnd:
             return
-        win32api.PostMessage(self.hwnd, win32con.WM_KEYUP, vk, 0)
+        scan = win32api.MapVirtualKey(vk, 0)
+        lparam = (1) | (scan << 16) | (1 << 30)  # 先前按下 + 释放
+        win32api.PostMessage(self.hwnd, win32con.WM_KEYUP, vk, lparam)
 
     def press(self, vk, delay=0.05):
         import time
