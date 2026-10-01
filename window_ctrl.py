@@ -255,6 +255,35 @@ class WindowController:
         time.sleep(delay)
         self.key_up(vk)
 
+    # ===== 移动方式支持 (v1.18.1): 鼠标模式/键盘模式都能动 =====
+    def is_foreground(self):
+        """窗口是否前台(鼠标模式要求前台可见; 键盘模式后台也行)"""
+        if not self.hwnd:
+            return False
+        try:
+            return win32gui.GetForegroundWindow() == self.hwnd
+        except Exception:
+            return False
+
+    def client_center(self):
+        """窗口客户区中心(屏幕坐标) - 鼠标模式控制方向用"""
+        if not self.hwnd:
+            return None
+        try:
+            l, t, r, b = win32gui.GetClientRect(self.hwnd)
+            sl, st = win32gui.ClientToScreen(self.hwnd, (0, 0))
+            return (sl + (r - l) // 2, st + (b - t) // 2,
+                    max(1, r - l), max(1, b - t))
+        except Exception:
+            return None
+
+    def mouse_to_screen(self, sx, sy):
+        """把真实鼠标移到屏幕坐标(游戏读鼠标相对窗口位置 -> 角色朝鼠标走)"""
+        try:
+            win32api.SetCursorPos((int(sx), int(sy)))
+        except Exception:
+            pass
+
 
 _inst = None
 

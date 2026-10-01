@@ -190,8 +190,11 @@ def reset_keyboard():
 
 
 def go_direction(start, end):
-    """朝 end 移动，用 WASD 键盘控制；改为带迟滞的平滑走路，降低抖动和来回切键。"""
+    """朝 end 移动；带迟滞平滑走路，降低抖动和来回切键。
+    v1.18.1: 支持鼠标模式(角色朝鼠标走, 原作者方式) / 键盘模式(后台WASD) / 自动"""
     w = get_window()
+    from movement import get_mover
+    mover = get_mover()
     last_dist, min_dist = 1e9, 1e9
     last_progress = time.monotonic()
     current_keys = set()
@@ -212,12 +215,20 @@ def go_direction(start, end):
             d = distance(pos, end)
             if d <= ARRIVE:
                 set_keys(set())
+                mover.stop()
                 return True
 
             stage = check_stage()
             if stage in ("in_game_dead", "in_menu"):
                 set_keys(set())
+                mover.stop()
                 return stage
+
+            # ===== 鼠标模式(v1.18.1): 角色朝鼠标位置走, 不需要键盘 =====
+            if mover.effective() == 'mouse':
+                mover.move_towards(pos[0], pos[1], end[0], end[1])
+                time.sleep(0.05)
+                continue
 
             # 只在“明显后退/明显无推进”时判定为卡住；允许 1~2px 误差，不要因抖动突然停止
             previous_min = min_dist
@@ -254,6 +265,8 @@ def go_direction(start, end):
             time.sleep(0.05)
     finally:
         set_keys(set())
+        try: mover.stop()
+        except: pass
 
 
 def lazy_theta_execute_path(path):
@@ -818,6 +831,13 @@ if __name__ == "__main__":
         cfg = ask_config(map_name)
         save_config(cfg)
     mode, kill_rank = cfg["mode"], cfg["kill_rank"]
+    # 移动方式 (v1.18.1): 鼠标/键盘/自动 -> movement 模块
+    from movement import get_mover
+    get_mover().set_mode(cfg.get("move_mode", "auto"))
+    if get_mover().mode != 'auto':
+        print(f"[移动] 移动方式: {get_mover().mode} (auto=前台鼠标/后台键盘)")
+    else:
+        print("[移动] 移动方式: 自动(前台鼠标控制方向, 后台/最小化自动切键盘)")
     EFFICIENT = cfg.get("efficiency", False)
     if EFFICIENT:
         print("[效率] 效率模式已开启：少停顿少延迟，刷怪更快")

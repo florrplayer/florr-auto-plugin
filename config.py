@@ -5,7 +5,7 @@ import os
 import tkinter as tk
 
 CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "config.json")
-DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "region": "", "region_map": "", "efficiency": False, "leech": False, "heal_type": "rose", "version": 9}
+DEFAULTS = {"mode": "defense", "kill_rank": "mythic", "heal_slots": [], "patrol_points": [], "patrol_points_map": "", "region": "", "region_map": "", "efficiency": False, "leech": False, "heal_type": "rose", "move_mode": "auto", "version": 10}
 
 MODE_NAMES = {"attack": "全程攻击", "defense": "全程防御", "none": "不弄(手动)"}
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
@@ -280,7 +280,13 @@ def ask_config(map_name="desert"):
         lc = _ask("要不要蹭高等级怪的掉落？\n（打不动的M/U怪在附近时，上去打2.5秒混伤害拿掉落，然后撤退）\n掉落机制：总伤害>1%就有资格分掉落（单人时杀怪必得）",
                   [("no", "不蹭（更安全）"), ("yes", "蹭（掉落更多）")], "florr 挂机设置 ⑥/⑦") == "yes"
     rg = _ask("刷怪区域？（决定巡逻点，替代手动点选）\n自动=按你的秒杀等级推荐对应稀有度的区域\n手动=直接选这张图的区域\n（游戏里按 Alt 可看各区域稀有度，辅助选择）",
-              region_options(map_name), "florr 挂机设置 ⑦/⑦")
+              region_options(map_name), "florr 挂机设置 ⑦/⑧")
     if rg is None:
         rg = "auto"
-    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "leech": lc, "heal_type": ht, "region": rg, "region_map": map_name, "version": 9}
+    mv = _ask("移动方式？（原作者的 florr 角色朝鼠标位置走）\n自动=窗口在前台用鼠标控制方向(更快更稳)，后台/最小化自动切键盘\n纯键盘=WASD 模拟按键(后台最小化也能跑)\n纯鼠标=鼠标控制方向(需要窗口在前台，否则失灵)",
+              [("auto", "自动（推荐：前台鼠标/后台键盘）"),
+               ("keyboard", "纯键盘（后台稳）"),
+               ("mouse", "纯鼠标（前台准）")], "florr 挂机设置 ⑧/⑧")
+    if mv is None:
+        mv = "auto"
+    return {"mode": m, "kill_rank": r, "heal_slots": hs, "efficiency": ef == "yes", "leech": lc, "heal_type": ht, "region": rg, "region_map": map_name, "move_mode": mv, "version": 10}
