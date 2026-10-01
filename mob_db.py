@@ -239,6 +239,54 @@ def get_aggro(sid):
 def cn(sid):
     return MOB_CN.get(sid, sid)
 
+# ================= 官方汉化映射 (FlorrTranslate-zh_CN, GPL-3.0) =================
+# 地图名官方中文 (汉化包): map key -> 中文名
+MAP_CN = {
+    "garden": "后花园", "desert": "南部沙漠", "ocean": "东部水域", "jungle": "丛林",
+    "anthell": "蚂蚁地狱", "hel": "冥界", "pyramid": "金字塔", "rift": "裂隙",
+    # Centralia 系列(后花园)
+    "Centralia Fields 1": "后花园 1 (石头)", "Centralia Fields 2": "后花园 2",
+    "Centralia Fields 3": "后花园 3 (瓢虫)", "Centralia Fields 4": "后花园 4",
+    "Centralia Fields 5": "后花园 5 (蜈蚣)", "Centralia Fields 6": "后花园 6 (黄蜂)",
+    "Centralia Fields 7": "后花园 7 (蒲公英)", "Centralia Maze": "后花园迷宫",
+    "Centralia Sewers 1": "后花园下水道 1 (飞蛾)", "Centralia Sewers 2": "后花园下水道 2 (蟑螂)",
+    "Centralia Sewers 3": "后花园下水道 3 (苍蝇)", "Centralia Sewers 4": "后花园下水道 4 (蜘蛛)",
+    "Centralia Beach": "后花园海滩",
+    # 沙漠
+    "South Desert 1": "南部沙漠 1 (沙尘暴)", "South Desert 2": "南部沙漠 2",
+    "South Desert 3": "南部沙漠 3 (仙人掌)", "South Desert 4": "南部沙漠 4 (闪亮瓢虫)",
+    "South Desert 5": "南部沙漠 5 (甲虫)",
+    # 水域
+    "East Waters 1": "东部水域 1", "East Waters 2": "东部水域 2",
+    "East Waters 3": "东部水域 3", "East Waters 4": "东部水域 4 (贝壳)",
+    "East Waters 6": "东部水域 6 (水蛭)", "Jellyfish Fields": "水母之地 (水母)",
+    "Crab Kingdom": "螃蟹王国 (泡泡&螃蟹)",
+    # 蚂蚁地狱
+    "Ant Hell 1": "火蚁地狱 (火蚁后)", "Ant Hell 2": "黑蚁地狱 (黑蚁后)",
+    "Ant Hell 3": "白蚁地狱 (白蚁领主)",
+}
+
+_I18N = None
+def i18n(text):
+    """官方汉化查询: 返回 text 的中文翻译(若有), 否则原样返回"""
+    global _I18N
+    if _I18N is None:
+        try:
+            import json as _json
+            _I18N = _json.load(open(os.path.join(_DATA_DIR, 'florr_i18n_zh.json'), encoding='utf-8'))
+        except Exception:
+            _I18N = {}
+    return _I18N.get(text, text)
+
+def map_cn(key):
+    """地图中文名(支持 alias): key 小写匹配 MAP_CN, 否则 i18n"""
+    if not key:
+        return key
+    k = str(key).lower()
+    if k in MAP_CN:
+        return MAP_CN[k]
+    return i18n(key)
+
 def type_id_to_sid(tid):
     return TYPE_ID_TO_SID.get(tid)
 
