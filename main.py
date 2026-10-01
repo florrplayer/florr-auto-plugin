@@ -982,6 +982,7 @@ if __name__ == "__main__":
         trail = deque(maxlen=TRAIL_MAX)
         _last_special = 0.0
         _last_drops = 0.0
+        _HP_ETA = []          # v1.22.1: 血量ETA预测历史 [(t, hp), ...] 3s窗口
         _afk_hits = 0          # AFK弹窗连续命中计数(>=4触发点击)
         _afk_last_mean = None  # 上一帧中心灰度均值(判静止)
         last_map_win = 0
@@ -1119,6 +1120,9 @@ if __name__ == "__main__":
             # ===== 低血量保命(任何模式, 最高优先级) =====
             from combat import get_hp_ratio, HP_FLEE
             hp = get_hp_ratio(get_frame())
+            _eta_now = time.time()
+            _HP_ETA.append((_eta_now, hp))
+            _HP_ETA[:] = [(t, h) for t, h in _HP_ETA if _eta_now - t < 3.0]
             if hp is not None and hp < HP_FLEE:
                 set_title(f"低血逃跑! {hp*100:.0f}%")
                 print(f"[低血] 血量 {hp*100:.0f}%，跑路...")
@@ -1126,6 +1130,17 @@ if __name__ == "__main__":
                 if r in ("in_game_dead", "in_menu"):
                     continue
                 continue
+            # v1.22.1: 血量ETA预测(sponge扩展机制) - 血量快速下降(3s内掉>=25%且当前<35%)提前跑路
+            if hp is not None and len(_HP_ETA) >= 2:
+                _t0, _h0 = _HP_ETA[0]
+                _dt = _eta_now - _t0
+                if hp < 0.35 and _h0 - hp >= 0.25 and _dt >= 0.5:
+                    _drop = (_h0 - hp) / max(_dt, 0.001)  # 每秒掉血
+                    print(f"[低血ETA] 血速{-_drop*100:.0f}%/s 当前{hp*100:.0f}%, 提前跑路(海绵机制)")
+                    r = flee_low_hp(trail, heal_slots=cfg.get("heal_slots", []))
+                    if r in ("in_game_dead", "in_menu"):
+                        continue
+                    continue
 
             # ===== 战斗检测（仅巡逻间隙/分段间执行）=====
             # 策略: =秒杀等级自动追(贴0.5px), >秒杀等级避开(往怪少处跑), <秒杀等级不管
