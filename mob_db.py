@@ -78,6 +78,10 @@ MOB_CN = {
     "garbage":"垃圾","ant_soldier_diver":"潜水兵蚁","ghost":"幽灵",
 }
 
+# 野怪 team 值 (FlorrBt mob.h:290 m_team=2; 玩家召唤物=owner队 petals_behavior.h:1528)
+# 协议实体 team==WILD_TEAM 才算野怪可打, 其他(玩家/召唤物/友方)跳过
+WILD_TEAM = 2
+
 # 花瓣 sid -> 中文名 (all_petals.json)
 PETAL_CN = {
     "basic":"基础","light":"轻","rose":"玫瑰","dahlia":"大丽花","yucca":"丝兰","starfish":"海星",

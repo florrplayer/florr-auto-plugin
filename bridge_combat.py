@@ -71,7 +71,9 @@ def get_player():
 
 def get_nearby_mobs(max_dist=3000):
     """获取玩家附近怪物, 返回 (怪物列表, 玩家)
-    附: sid/稀有度(HP反推)/真实碰撞箱/追击范围"""
+    附: sid/稀有度(HP反推)/真实碰撞箱/追击范围
+    v1.19.7: 协议实体带 team 字段时只认野怪(team==WILD_TEAM), 玩家召唤物/友方(其他team)跳过不追
+    内存模式(无team字段)保持原逻辑"""
     d = _fetch_latest()
     mobs = d.get('mobs', [])
     player = None
@@ -83,6 +85,10 @@ def get_nearby_mobs(max_dist=3000):
         t = m.get('t', 0)
         # 只认真怪 (t 1-83), 排除玩家(t=1)
         if t < 1 or t > 83 or t == 1:
+            continue
+        # v1.19.7: team 过滤 - 有 team 字段且非野怪(召唤物/友方)不追
+        tm = m.get('team')
+        if tm is not None and tm != mob_db.WILD_TEAM:
             continue
         hp = m.get('hp', 0)
         # 排除太弱的噪音
