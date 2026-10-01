@@ -135,11 +135,12 @@ def get_attack_distance(sid, rarity='Common'):
     return r + 1.5
 
 
-def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000):
+def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000, force_sid=None):
     """综合评分找最佳目标 (mob_db决策 + AI研究报告规则):
     秒杀优先(能秒的贴脸追) > 特殊稀有怪5倍 > 掉落价值 > 距离近
     危险怪/打不动的/不打清单(NO_FIGHT)自动跳过
-    海星半血会逃 -> 一旦发现立即秒"""
+    海星半血会逃 -> 一旦发现立即秒
+    v1.21.2: force_sid=Super雷达猎杀目标(公告给怪名时只追它, 哪怕打不动也冲过去蹭)"""
     mobs, _ = get_nearby_mobs(max_dist=max_dist)
     best = None
     best_score = -999
@@ -148,12 +149,18 @@ def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000):
         if dist > max_dist:
             continue
         sid, hp = m.get('sid'), m.get('hp', 0)
+        # Super雷达: 只追公告的怪
+        if force_sid and sid != force_sid:
+            continue
         # AI规则: 不打卵/苍蝇/沙尘暴
         if sid in NO_FIGHT_SIDS:
             continue
         action, score, rarity, _ = mob_db.assess_mob(sid, hp, can_kill_hp, dist)
         if action in ('danger', 'ignore'):
             continue
+        # Super雷达猎杀: 目标怪权重拉满(抢Super)
+        if force_sid and sid == force_sid:
+            score += 500000.0
         # 海星半血逃跑 -> 权重拉满必须秒
         if sid == 'starfish':
             hi = mob_db.hp_range(sid, rarity)

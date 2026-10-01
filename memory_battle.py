@@ -84,6 +84,12 @@ class MemoryBattle:
         try: self.w.key_down(VK_RBUTTON)
         except: pass
         last_move = time.time()
+        # v1.21.2: Super出生公告雷达 (bridge聊天 -> 全图扫Super)
+        try:
+            from super_ping import SuperPing
+            self.super_ping = SuperPing()
+        except Exception:
+            self.super_ping = None
         while self.running:
             try:
                 # 读玩家 (camera = 精确世界坐标)
@@ -108,6 +114,32 @@ class MemoryBattle:
 
                 # 选目标: mob_db综合评分 (秒杀优先+特殊怪5倍+掉落价值+距离)
                 target = find_best_target(px, py, can_kill_hp=CAN_KILL_HP, max_dist=MAX_TARGET_DIST)
+
+                # v1.21.2: Super公告雷达 - 每帧喂bridge聊天, 命中公告开启全图扫Super
+                if self.super_ping is not None:
+                    try:
+                        bd = bridge_combat._fetch_latest()
+                        chat = bd.get('chat') or []
+                        for msg in chat[-3:]:
+                            hit = self.super_ping.feed(msg)
+                            if hit:
+                                sid, cn, pos = hit
+                                print(f"[Super雷达] 公告: {cn} Super 已出生! {'公告位置:'+str(pos) if pos else '全图扫120s'} (去抢!)")
+                    except Exception:
+                        pass
+                    if self.super_ping.is_hunting():
+                        # 猎杀期: 扩大目标距离+提高Super目标权重
+                        hunt = self.super_ping.super_hunt_sid
+                        if hunt and target and target.get('sid') != hunt:
+                            t2 = find_best_target(px, py, can_kill_hp=CAN_KILL_HP,
+                                                  max_dist=MAX_TARGET_DIST * 3, force_sid=hunt)
+                            if t2:
+                                target = t2
+                        elif not target:
+                            t2 = find_best_target(px, py, can_kill_hp=CAN_KILL_HP,
+                                                  max_dist=MAX_TARGET_DIST * 3, force_sid=hunt)
+                            if t2:
+                                target = t2
 
                 # AI规则-波末: 同屏<=4只时全体怪冲玩家, 停手原地防御接怪
                 if target is None:
