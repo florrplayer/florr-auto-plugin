@@ -18,6 +18,7 @@ def _load(name):
 
 _ZONES = _load('florr_zones.json')
 _PORTALS = _load('florr_portals.json')
+_TERRAIN = _load('florr_terrain.json')
 
 # diff -> 稀有度档(对齐config秒杀等级)
 DIFF_RARITY = [(0, 'common'), (15, 'unusual'), (30, 'rare'), (53, 'epic'),
@@ -91,6 +92,46 @@ def portal_near(x, y, radius=300):
 
 def map_names():
     return sorted((_ZONES.get('maps') or {}).keys())
+
+
+# ===== 地形 (florr_clone tmj 地形层, v1.21.0) =====
+def terrain_cell(map_name, x, y):
+    """游戏坐标 -> (瓦片x, 瓦片y, 是否水域)"""
+    t = (_TERRAIN.get('maps') or {}).get(map_name)
+    if not t:
+        return None
+    ts = t['tile_size']
+    w = t['grid'][0]
+    tx, ty = int(x // ts), int(y // ts)
+    water = (tx, ty) in t.get('_water_set', set())
+    return (tx, ty, water)
+
+
+def is_water(map_name, x, y, margin=0):
+    """该坐标是否水域(不可通行区), margin=瓦片数缓冲"""
+    t = (_TERRAIN.get('maps') or {}).get(map_name)
+    if not t:
+        return False
+    ws = t.get('_water_set')
+    if ws is None:
+        ws = set((c[0], c[1]) for c in t.get('water', []))
+        t['_water_set'] = ws
+    ts = t['tile_size']
+    tx, ty = int(x // ts), int(y // ts)
+    if (tx, ty) in ws:
+        return True
+    if margin:
+        for dx in range(-margin, margin + 1):
+            for dy in range(-margin, margin + 1):
+                if (tx + dx, ty + dy) in ws:
+                    return True
+    return False
+
+
+def water_summary():
+    """各图水域占比"""
+    return {k: {'water_cells': v.get('water_cells'), 'pct': round(100.0 * v['water_cells'] / (v['grid'][0] * v['grid'][1]), 1)}
+            for k, v in (_TERRAIN.get('maps') or {}).items()}
 
 
 if __name__ == '__main__':
