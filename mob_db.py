@@ -104,6 +104,8 @@ DANGER_SIDS = {"ant_queen", "ant_hole", "fire_ant_burrow", "hornet", "wasp", "ce
                "beetle_mummy", "beetle_pharaoh", "assembler", "ghost"}
 
 # wasm反汇编真实碰撞箱 (Common基准, 地图像素)
+# gardn Collision.cc 验证: 碰撞判定 = 圆碰撞(半径和), 玩家撞怪被质量比击退(_deal_knockback,
+# 花侧_cancel_movement 硬顶), 接触伤害 DamageType::kContact 双向结算, Web 减速 speed_ratio=0.5
 WASM_RADII = {
     "rock":12.0,"cactus":12.0,"ladybug":10.0,"bee":5.0,"ant_baby":10.0,"ant_worker":12.0,
     "ant_soldier":25.0,"ant_queen":10.0,"ant_hole":10.0,"beetle":10.0,"hornet":16.0,
