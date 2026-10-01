@@ -207,7 +207,7 @@ def get_escape_dist(sid):
 
 # ================= 怪物属性 =================
 def mobs():
-    m = _load_json('mob_stats_full.json')
+    m = _load_json('mob_stats_v2.json') or _load_json('mob_stats_full.json')
     if not m:
         return {}
     return {x['sid']: x for x in m}

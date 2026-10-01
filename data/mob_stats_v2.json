@@ -1,0 +1,9323 @@
+[
+{
+"sid": "ant_baby",
+"drops": [
+{
+"baseChance": 0.5,
+"type": 24
+},
+{
+"baseChance": 0.25,
+"type": 2
+},
+{
+"baseChance": 0.15,
+"type": 22
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 93.75,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 9,
+"Health": 337.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 67,
+"Health": 1350,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 615,
+"Health": 8100,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 8164,
+"Health": 78975,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 345862,
+"Health": 3645000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 19893553,
+"Health": 109350000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ant_egg",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 51
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 150,
+"Damage": 3,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 562.5,
+"Damage": 9,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 2025,
+"Damage": 27,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 21,
+"Health": 8100,
+"Damage": 81,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 190,
+"Health": 48600,
+"Damage": 243,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 2614,
+"Health": 473850,
+"Damage": 729,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 106740,
+"Health": 21870000,
+"Damage": 2187,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 6475563,
+"Health": 656099968,
+"Damage": 6561,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ant_hole",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 41
+},
+{
+"baseChance": 0.2,
+"type": 73
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 750,
+"Damage": 15,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 2812.5,
+"Damage": 45,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 10125,
+"Damage": 135,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 39,
+"Health": 40500,
+"Damage": 405,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 356,
+"Health": 243000,
+"Damage": 1215,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4980,
+"Health": 2369250,
+"Damage": 3645,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 197906,
+"Health": 109350000,
+"Damage": 10935,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 12142438,
+"Health": 3280499968,
+"Damage": 32805,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ant_queen",
+"drops": [
+{
+"baseChance": 0.5,
+"type": 51
+},
+{
+"baseChance": 0.3,
+"type": 49
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 250,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 937.5,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 3375,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 31,
+"Health": 13500,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 287,
+"Health": 81000,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4425,
+"Health": 789750,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 285763,
+"Health": 36450000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 15878612,
+"Health": 1093500032,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ant_soldier",
+"drops": [
+{
+"baseChance": 0.3,
+"type": 79
+},
+{
+"baseChance": 0.25,
+"type": 46
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 6,
+"Health": 1350,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 44,
+"Health": 5400,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 400,
+"Health": 32400,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 5437,
+"Health": 315900,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 227398,
+"Health": 14580000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 13608888,
+"Health": 437400000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ant_soldier_diver",
+"drops": [
+{
+"baseChance": 1,
+"type": 114
+},
+{
+"baseChance": 1,
+"type": 13
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 375,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 6,
+"Health": 1350,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 47,
+"Health": 5400,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 455,
+"Health": 32400,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 8049,
+"Health": 315900,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 498655,
+"Health": 14580000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 19681955,
+"Health": 437400000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ant_worker",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 22
+},
+{
+"baseChance": 0.15,
+"type": 25
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 225,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 810,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 31,
+"Health": 3240,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 279,
+"Health": 19440,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4105,
+"Health": 189540,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 147030,
+"Health": 8748000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 9345409,
+"Health": 262440000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "assembler",
+"drops": [],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 0,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 375,
+"Damage": 0,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 0,
+"Health": 1350,
+"Damage": 0,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 0,
+"Health": 5400,
+"Damage": 0,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 0,
+"Health": 32400,
+"Damage": 0,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 0,
+"Health": 315900,
+"Damage": 0,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 0,
+"Health": 14580000,
+"Damage": 0,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 0,
+"Health": 437400000,
+"Damage": 0,
+"Armor": 583
+}
+]
+},
+{
+"sid": "baby_ant",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+25,
+25
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 6,
+"HealthRange": [
+75,
+75
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 60,
+"HealthRange": [
+225,
+225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 540,
+"HealthRange": [
+675,
+675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 2800,
+"HealthRange": [
+2025,
+2025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 64000,
+"HealthRange": [
+6075,
+6075
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 300000,
+"HealthRange": [
+18225,
+18225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 2400000,
+"HealthRange": [
+54675,
+54675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 13600000,
+"HealthRange": [
+164025,
+164025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Baby Ant",
+"source": "florr_clone"
+},
+{
+"sid": "baby_fire_ant",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+25,
+25
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+75,
+75
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 30,
+"HealthRange": [
+225,
+225
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 270,
+"HealthRange": [
+675,
+675
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1400,
+"HealthRange": [
+2025,
+2025
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 32000,
+"HealthRange": [
+6075,
+6075
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 150000,
+"HealthRange": [
+18225,
+18225
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1200000,
+"HealthRange": [
+54675,
+54675
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+164025,
+164025
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Baby Fire Ant",
+"source": "florr_clone"
+},
+{
+"sid": "barrel",
+"drops": [
+{
+"baseChance": 1,
+"type": 94
+},
+{
+"baseChance": 0.35,
+"type": 39
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 4,
+"Armor": 1,
+"PoisonPerSecond": 15
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 187.5,
+"Damage": 12,
+"Armor": 2,
+"PoisonPerSecond": 45
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 675,
+"Damage": 36,
+"Armor": 7,
+"PoisonPerSecond": 135
+},
+{
+"rarity": "Epic",
+"exp": 25,
+"Health": 2700,
+"Damage": 108,
+"Armor": 22,
+"PoisonPerSecond": 405
+},
+{
+"rarity": "Legendary",
+"exp": 231,
+"Health": 16200,
+"Damage": 324,
+"Armor": 65,
+"PoisonPerSecond": 1215
+},
+{
+"rarity": "Mythic",
+"exp": 3008,
+"Health": 157950,
+"Damage": 972,
+"Armor": 194,
+"PoisonPerSecond": 3645
+},
+{
+"rarity": "Ultra",
+"exp": 133263,
+"Health": 7290000,
+"Damage": 2916,
+"Armor": 583,
+"PoisonPerSecond": 10935
+},
+{
+"rarity": "Super",
+"exp": 7668299,
+"Health": 218700000,
+"Damage": 8748,
+"Armor": 583,
+"PoisonPerSecond": 32805
+}
+]
+},
+{
+"sid": "bee",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 6
+},
+{
+"baseChance": 0.1,
+"type": 21
+},
+{
+"baseChance": 0.1,
+"type": 14
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 35,
+"Damage": 50,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 131.25,
+"Damage": 150,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 472.5,
+"Damage": 450,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 44,
+"Health": 1890,
+"Damage": 1350,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 405,
+"Health": 11340,
+"Damage": 4050,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 5870,
+"Health": 110565,
+"Damage": 12150,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 213236,
+"Health": 5103000,
+"Damage": 36450,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 13376259,
+"Health": 153090000,
+"Damage": 109350,
+"Armor": 583
+}
+]
+},
+{
+"sid": "beetle",
+"drops": [
+{
+"baseChance": 0.5,
+"type": 78
+},
+{
+"baseChance": 0.25,
+"type": 16
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 30,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 90,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 7,
+"Health": 1350,
+"Damage": 270,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 52,
+"Health": 5400,
+"Damage": 810,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 476,
+"Health": 32400,
+"Damage": 2430,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 6112,
+"Health": 315900,
+"Damage": 7290,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 272347,
+"Health": 14580000,
+"Damage": 21870,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 15220849,
+"Health": 437400000,
+"Damage": 65610,
+"Armor": 583
+}
+]
+},
+{
+"sid": "beetle_hel",
+"drops": [
+{
+"baseChance": 0.1,
+"type": 67
+},
+{
+"baseChance": 0.02,
+"type": 16
+},
+{
+"baseChance": 0.01,
+"type": 61
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 150,
+"Damage": 30,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 562.5,
+"Damage": 90,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 2025,
+"Damage": 270,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 18,
+"Health": 8100,
+"Damage": 810,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 165,
+"Health": 48600,
+"Damage": 2430,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 2461,
+"Health": 473850,
+"Damage": 7290,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 74802,
+"Health": 21870000,
+"Damage": 21870,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 4836146,
+"Health": 656099968,
+"Damage": 65610,
+"Armor": 583
+}
+]
+},
+{
+"sid": "beetle_mummy",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 66
+},
+{
+"baseChance": 0.15,
+"type": 103
+},
+{
+"baseChance": 0.05,
+"type": 113
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 70,
+"Damage": 30,
+"Armor": 1,
+"UndeadDuration": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 262.5,
+"Damage": 90,
+"Armor": 2,
+"UndeadDuration": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 945,
+"Damage": 270,
+"Armor": 7,
+"UndeadDuration": 3
+},
+{
+"rarity": "Epic",
+"exp": 28,
+"Health": 3780,
+"Damage": 810,
+"Armor": 22,
+"UndeadDuration": 4
+},
+{
+"rarity": "Legendary",
+"exp": 256,
+"Health": 22680,
+"Damage": 2430,
+"Armor": 65,
+"UndeadDuration": 5
+},
+{
+"rarity": "Mythic",
+"exp": 4098,
+"Health": 221130,
+"Damage": 7290,
+"Armor": 194,
+"UndeadDuration": 6
+},
+{
+"rarity": "Ultra",
+"exp": 208944,
+"Health": 10206000,
+"Damage": 21870,
+"Armor": 583,
+"UndeadDuration": 7
+},
+{
+"rarity": "Super",
+"exp": 13095895,
+"Health": 306180000,
+"Damage": 65610,
+"Armor": 583,
+"UndeadDuration": 8
+}
+]
+},
+{
+"sid": "beetle_nazar",
+"drops": [
+{
+"baseChance": 1,
+"type": 117
+},
+{
+"baseChance": 0.04,
+"type": 66
+},
+{
+"baseChance": 0.01,
+"type": 92
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 30,
+"Armor": 1,
+"Charges": 3,
+"Interval": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 187.5,
+"Damage": 90,
+"Armor": 2,
+"Charges": 3,
+"Interval": 1
+},
+{
+"rarity": "Super",
+"exp": 7,
+"Health": 675,
+"Damage": 270,
+"Armor": 7,
+"Charges": 3,
+"Interval": 1
+},
+{
+"rarity": "Epic",
+"exp": 54,
+"Health": 2700,
+"Damage": 810,
+"Armor": 22,
+"Charges": 3,
+"Interval": 1
+},
+{
+"rarity": "Legendary",
+"exp": 522,
+"Health": 16200,
+"Damage": 2430,
+"Armor": 65,
+"Charges": 3,
+"Interval": 1
+},
+{
+"rarity": "Mythic",
+"exp": 5959,
+"Health": 157950,
+"Damage": 7290,
+"Armor": 194,
+"Charges": 3,
+"Interval": 1
+},
+{
+"rarity": "Ultra",
+"exp": 275484,
+"Health": 7290000,
+"Damage": 21870,
+"Armor": 583,
+"Charges": 3,
+"Interval": 1
+},
+{
+"rarity": "Super",
+"exp": 11853780,
+"Health": 218700000,
+"Damage": 65610,
+"Armor": 583,
+"Charges": 15,
+"Interval": 1
+}
+]
+},
+{
+"sid": "beetle_pharaoh",
+"drops": [
+{
+"baseChance": 1,
+"type": 66
+},
+{
+"baseChance": 1,
+"type": 103
+},
+{
+"baseChance": 1,
+"type": 104
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 30,
+"Armor": 1,
+"UndeadDuration": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 375,
+"Damage": 90,
+"Armor": 2,
+"UndeadDuration": 2
+},
+{
+"rarity": "Super",
+"exp": 6,
+"Health": 1350,
+"Damage": 270,
+"Armor": 7,
+"UndeadDuration": 3
+},
+{
+"rarity": "Epic",
+"exp": 47,
+"Health": 5400,
+"Damage": 810,
+"Armor": 22,
+"UndeadDuration": 4
+},
+{
+"rarity": "Legendary",
+"exp": 455,
+"Health": 32400,
+"Damage": 2430,
+"Armor": 65,
+"UndeadDuration": 5
+},
+{
+"rarity": "Mythic",
+"exp": 8049,
+"Health": 315900,
+"Damage": 7290,
+"Armor": 194,
+"UndeadDuration": 6
+},
+{
+"rarity": "Ultra",
+"exp": 498655,
+"Health": 14580000,
+"Damage": 21870,
+"Armor": 583,
+"UndeadDuration": 7
+},
+{
+"rarity": "Super",
+"exp": 19681955,
+"Health": 437400000,
+"Damage": 65610,
+"Armor": 583,
+"UndeadDuration": 8
+}
+]
+},
+{
+"sid": "bubble",
+"drops": [
+{
+"baseChance": 1,
+"type": 48
+},
+{
+"baseChance": 0.25,
+"type": 13
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 1,
+"Damage": 5,
+"Armor": 6
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 3.75,
+"Damage": 15,
+"Armor": 17
+},
+{
+"rarity": "Super",
+"exp": 9,
+"Health": 13.5,
+"Damage": 45,
+"Armor": 52
+},
+{
+"rarity": "Epic",
+"exp": 68,
+"Health": 54,
+"Damage": 135,
+"Armor": 157
+},
+{
+"rarity": "Legendary",
+"exp": 645,
+"Health": 324,
+"Damage": 405,
+"Armor": 470
+},
+{
+"rarity": "Mythic",
+"exp": 7608,
+"Health": 3159,
+"Damage": 1215,
+"Armor": 1409
+},
+{
+"rarity": "Ultra",
+"exp": 356077,
+"Health": 145800,
+"Damage": 3645,
+"Armor": 4228
+},
+{
+"rarity": "Super",
+"exp": 16316540,
+"Health": 4374000,
+"Damage": 10935,
+"Armor": 11518
+}
+]
+},
+{
+"sid": "bumble_bee",
+"drops": [
+{
+"baseChance": 0.85,
+"type": 14
+},
+{
+"baseChance": 0.55,
+"type": 96
+},
+{
+"baseChance": 0.2,
+"type": 21
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 20,
+"Armor": 1,
+"PollenHealth": 5,
+"PollenDamage": 10
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 93.75,
+"Damage": 60,
+"Armor": 2,
+"PollenHealth": 25,
+"PollenDamage": 30
+},
+{
+"rarity": "Super",
+"exp": 10,
+"Health": 337.5,
+"Damage": 180,
+"Armor": 7,
+"PollenHealth": 125,
+"PollenDamage": 90
+},
+{
+"rarity": "Epic",
+"exp": 93,
+"Health": 1350,
+"Damage": 540,
+"Armor": 22,
+"PollenHealth": 625,
+"PollenDamage": 270
+},
+{
+"rarity": "Legendary",
+"exp": 877,
+"Health": 8100,
+"Damage": 1620,
+"Armor": 65,
+"PollenHealth": 3125,
+"PollenDamage": 810
+},
+{
+"rarity": "Mythic",
+"exp": 10568,
+"Health": 78975,
+"Damage": 4860,
+"Armor": 194,
+"PollenHealth": 15625,
+"PollenDamage": 2430
+},
+{
+"rarity": "Ultra",
+"exp": 492262,
+"Health": 3645000,
+"Damage": 14580,
+"Armor": 583,
+"PollenHealth": 78125,
+"PollenDamage": 7290
+},
+{
+"rarity": "Super",
+"exp": 24350794,
+"Health": 109350000,
+"Damage": 43740,
+"Armor": 583,
+"PollenHealth": 390625,
+"PollenDamage": 21870
+}
+]
+},
+{
+"sid": "bush",
+"drops": [
+{
+"baseChance": 0.5,
+"type": 56
+},
+{
+"baseChance": 0.25,
+"type": 99
+},
+{
+"baseChance": 0.005,
+"type": 97
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+25,
+50
+],
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"HealthRange": [
+93.75,
+187.5
+],
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"HealthRange": [
+337.5,
+675
+],
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 31,
+"HealthRange": [
+1350,
+2700
+],
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 387,
+"HealthRange": [
+8100,
+16200
+],
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 6105,
+"HealthRange": [
+78975,
+157950
+],
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 273112,
+"HealthRange": [
+3645000,
+7290000
+],
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 15425233,
+"HealthRange": [
+109350000,
+218700000
+],
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "cactus",
+"drops": [
+{
+"baseChance": 0.65,
+"type": 11
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+35,
+52.5
+],
+"Damage": 35,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"HealthRange": [
+131.25,
+196.875
+],
+"Damage": 105,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"HealthRange": [
+472.5,
+708.75
+],
+"Damage": 315,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 37,
+"HealthRange": [
+1890,
+2835
+],
+"Damage": 945,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 339,
+"HealthRange": [
+11340,
+17010
+],
+"Damage": 2835,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3955,
+"HealthRange": [
+110565,
+165847.5
+],
+"Damage": 8505,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 193034,
+"HealthRange": [
+5103000,
+7654500
+],
+"Damage": 25515,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 9324817,
+"HealthRange": [
+153090000,
+229635008
+],
+"Damage": 76545,
+"Armor": 583
+}
+]
+},
+{
+"sid": "centipede",
+"drops": [
+{
+"baseChance": 0.05,
+"type": 22
+},
+{
+"baseChance": 0.05,
+"type": 44
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 93.75,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 337.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 15,
+"Health": 1350,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 133,
+"Health": 8100,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 2038,
+"Health": 78975,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 59386,
+"Health": 3645000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 3895257,
+"Health": 109350000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "centipede_body",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+25,
+25
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 2,
+"HealthRange": [
+75,
+75
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 10,
+"HealthRange": [
+225,
+225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 80,
+"HealthRange": [
+675,
+675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 400,
+"HealthRange": [
+2025,
+2025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 9000,
+"HealthRange": [
+6075,
+6075
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 45000,
+"HealthRange": [
+18225,
+18225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 350000,
+"HealthRange": [
+54675,
+54675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 1950000,
+"HealthRange": [
+164025,
+164025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Centipede",
+"source": "florr_clone"
+},
+{
+"sid": "centipede_desert",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 23
+},
+{
+"baseChance": 0.05,
+"type": 47
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 93.75,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 337.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 22,
+"Health": 1350,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 206,
+"Health": 8100,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3071,
+"Health": 78975,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 103208,
+"Health": 3645000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 6620333,
+"Health": 109350000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "centipede_evil",
+"drops": [
+{
+"baseChance": 0.05,
+"type": 7
+},
+{
+"baseChance": 0.05,
+"type": 10
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 93.75,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 337.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 15,
+"Health": 1350,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 133,
+"Health": 8100,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 2038,
+"Health": 78975,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 59386,
+"Health": 3645000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 3895257,
+"Health": 109350000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "centipede_hel",
+"drops": [
+{
+"baseChance": 0.01,
+"type": 102
+},
+{
+"baseChance": 0.001,
+"type": 61
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 30,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 187.5,
+"Damage": 90,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 0,
+"Health": 675,
+"Damage": 270,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 3,
+"Health": 2700,
+"Damage": 810,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 26,
+"Health": 16200,
+"Damage": 2430,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 386,
+"Health": 157950,
+"Damage": 7290,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 10108,
+"Health": 7290000,
+"Damage": 21870,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 613144,
+"Health": 218700000,
+"Damage": 65610,
+"Armor": 583
+}
+]
+},
+{
+"sid": "crab",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 35
+},
+{
+"baseChance": 0.05,
+"type": 26
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 75,
+"Damage": 25,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 281.25,
+"Damage": 75,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 1012.5,
+"Damage": 225,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 28,
+"Health": 4050,
+"Damage": 675,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 256,
+"Health": 24300,
+"Damage": 2025,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3633,
+"Health": 236925,
+"Damage": 6075,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 136433,
+"Health": 10935000,
+"Damage": 18225,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 8423191,
+"Health": 328049984,
+"Damage": 54675,
+"Armor": 583
+}
+]
+},
+{
+"sid": "crab_mecha",
+"drops": [
+{
+"baseChance": 1,
+"type": 94
+},
+{
+"baseChance": 0.65,
+"type": 101
+},
+{
+"baseChance": 0.5,
+"type": 29
+},
+{
+"baseChance": 0.05,
+"type": 69
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 75,
+"Damage": 15,
+"Armor": 3,
+"Lightning": 5
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 281.25,
+"Damage": 45,
+"Armor": 8,
+"Lightning": 15
+},
+{
+"rarity": "Super",
+"exp": 9,
+"Health": 1012.5,
+"Damage": 135,
+"Armor": 25,
+"Lightning": 45
+},
+{
+"rarity": "Epic",
+"exp": 74,
+"Health": 4050,
+"Damage": 405,
+"Armor": 76,
+"Lightning": 135
+},
+{
+"rarity": "Legendary",
+"exp": 692,
+"Health": 24300,
+"Damage": 1215,
+"Armor": 227,
+"Lightning": 405
+},
+{
+"rarity": "Mythic",
+"exp": 8471,
+"Health": 236925,
+"Damage": 3645,
+"Armor": 680,
+"Lightning": 1215
+},
+{
+"rarity": "Ultra",
+"exp": 388335,
+"Health": 10935000,
+"Damage": 10935,
+"Armor": 2041,
+"Lightning": 3645
+},
+{
+"rarity": "Super",
+"exp": 20017732,
+"Health": 328049984,
+"Damage": 32805,
+"Armor": 4957,
+"Lightning": 10935
+}
+]
+},
+{
+"sid": "cube",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+180,
+180
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+540,
+540
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 10,
+"HealthRange": [
+1620,
+1620
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 70,
+"HealthRange": [
+4860,
+4860
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 980,
+"HealthRange": [
+14580,
+14580
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 8100,
+"HealthRange": [
+43740,
+43740
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 220000,
+"HealthRange": [
+131220,
+131220
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1800000,
+"HealthRange": [
+393660,
+393660
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 10000000,
+"HealthRange": [
+1180980,
+1180980
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Cube",
+"source": "florr_clone"
+},
+{
+"sid": "dandelion",
+"drops": [
+{
+"baseChance": 0.3,
+"type": 15
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 15,
+"Armor": 1,
+"DandelionHealth": 2.5,
+"DandelionDamage": 15,
+"Duration": 30
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 93.75,
+"Damage": 45,
+"Armor": 2,
+"DandelionHealth": 12.5,
+"DandelionDamage": 45,
+"Duration": 30
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 337.5,
+"Damage": 135,
+"Armor": 7,
+"DandelionHealth": 62.5,
+"DandelionDamage": 135,
+"Duration": 30
+},
+{
+"rarity": "Epic",
+"exp": 23,
+"Health": 1350,
+"Damage": 405,
+"Armor": 22,
+"DandelionHealth": 312.5,
+"DandelionDamage": 405,
+"Duration": 30
+},
+{
+"rarity": "Legendary",
+"exp": 211,
+"Health": 8100,
+"Damage": 1215,
+"Armor": 65,
+"DandelionHealth": 1562.5,
+"DandelionDamage": 1215,
+"Duration": 30
+},
+{
+"rarity": "Mythic",
+"exp": 2823,
+"Health": 78975,
+"Damage": 3645,
+"Armor": 194,
+"DandelionHealth": 7812.5,
+"DandelionDamage": 3645,
+"Duration": 30
+},
+{
+"rarity": "Ultra",
+"exp": 120659,
+"Health": 3645000,
+"Damage": 10935,
+"Armor": 583,
+"DandelionHealth": 39062.5,
+"DandelionDamage": 10935,
+"Duration": 30
+},
+{
+"rarity": "Super",
+"exp": 7133325,
+"Health": 109350000,
+"Damage": 32805,
+"Armor": 583,
+"DandelionHealth": 195312.5,
+"DandelionDamage": 32805,
+"Duration": 30
+}
+]
+},
+{
+"sid": "dark_ladybug",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+85,
+85
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+255,
+255
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 30,
+"HealthRange": [
+765,
+765
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 270,
+"HealthRange": [
+2295,
+2295
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1400,
+"HealthRange": [
+6885,
+6885
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 32000,
+"HealthRange": [
+20655,
+20655
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 150000,
+"HealthRange": [
+61965,
+61965
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1200000,
+"HealthRange": [
+185895,
+185895
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+557685,
+557685
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Dark Ladybug",
+"source": "florr_clone"
+},
+{
+"sid": "desert_centipede",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 2,
+"HealthRange": [
+25,
+25
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 6,
+"HealthRange": [
+75,
+75
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 40,
+"HealthRange": [
+225,
+225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 320,
+"HealthRange": [
+675,
+675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1600,
+"HealthRange": [
+2025,
+2025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 36000,
+"HealthRange": [
+6075,
+6075
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 180000,
+"HealthRange": [
+18225,
+18225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1400000,
+"HealthRange": [
+54675,
+54675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 7800000,
+"HealthRange": [
+164025,
+164025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Desert Centipede",
+"source": "florr_clone"
+},
+{
+"sid": "desert_centipede_body",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+25,
+25
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 2,
+"HealthRange": [
+75,
+75
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 10,
+"HealthRange": [
+225,
+225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 80,
+"HealthRange": [
+675,
+675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 400,
+"HealthRange": [
+2025,
+2025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 9000,
+"HealthRange": [
+6075,
+6075
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 45000,
+"HealthRange": [
+18225,
+18225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 350000,
+"HealthRange": [
+54675,
+54675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 1950000,
+"HealthRange": [
+164025,
+164025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Desert Centipede",
+"source": "florr_clone"
+},
+{
+"sid": "digger",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 37
+},
+{
+"baseChance": 0.15,
+"type": 39
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 350,
+"Damage": 30,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 1312.5,
+"Damage": 90,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 4725,
+"Damage": 270,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 30,
+"Health": 18900,
+"Damage": 810,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 279,
+"Health": 113400,
+"Damage": 2430,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4105,
+"Health": 1105650,
+"Damage": 7290,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 147030,
+"Health": 51030000,
+"Damage": 21870,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 9345409,
+"Health": 1530899968,
+"Damage": 65610,
+"Armor": 583
+}
+]
+},
+{
+"sid": "dust",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+51,
+51
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+153,
+153
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"HealthRange": [
+459,
+459
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 22,
+"HealthRange": [
+1377,
+1377
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 125,
+"HealthRange": [
+4131,
+4131
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 1800,
+"HealthRange": [
+12393,
+12393
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 12500,
+"HealthRange": [
+37179,
+37179
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1250000,
+"HealthRange": [
+111537,
+111537
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 5000000,
+"HealthRange": [
+334611,
+334611
+],
+"Damage": 12,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Dust",
+"source": "florr_clone"
+},
+{
+"sid": "evil_centipede",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 3,
+"HealthRange": [
+25,
+25
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 9,
+"HealthRange": [
+75,
+75
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 60,
+"HealthRange": [
+225,
+225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 480,
+"HealthRange": [
+675,
+675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 2400,
+"HealthRange": [
+2025,
+2025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 54000,
+"HealthRange": [
+6075,
+6075
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 270000,
+"HealthRange": [
+18225,
+18225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 2100000,
+"HealthRange": [
+54675,
+54675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 11700000,
+"HealthRange": [
+164025,
+164025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Evil Centipede",
+"source": "florr_clone"
+},
+{
+"sid": "evil_centipede_body",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+25,
+25
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+75,
+75
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 15,
+"HealthRange": [
+225,
+225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 120,
+"HealthRange": [
+675,
+675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 600,
+"HealthRange": [
+2025,
+2025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 13500,
+"HealthRange": [
+6075,
+6075
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 67500,
+"HealthRange": [
+18225,
+18225
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 525000,
+"HealthRange": [
+54675,
+54675
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 2900000,
+"HealthRange": [
+164025,
+164025
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Evil Centipede",
+"source": "florr_clone"
+},
+{
+"sid": "fire_ant_baby",
+"drops": [
+{
+"baseChance": 0.5,
+"type": 112
+},
+{
+"baseChance": 0.25,
+"type": 2
+},
+{
+"baseChance": 0.15,
+"type": 28
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 20,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 93.75,
+"Damage": 60,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 9,
+"Health": 337.5,
+"Damage": 180,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 67,
+"Health": 1350,
+"Damage": 540,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 615,
+"Health": 8100,
+"Damage": 1620,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 8164,
+"Health": 78975,
+"Damage": 4860,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 345862,
+"Health": 3645000,
+"Damage": 14580,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 19893553,
+"Health": 109350000,
+"Damage": 43740,
+"Armor": 583
+}
+]
+},
+{
+"sid": "fire_ant_burrow",
+"drops": [
+{
+"baseChance": 0.5,
+"type": 29
+},
+{
+"baseChance": 0.3,
+"type": 72
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1
+},
+{
+"rarity": "Rare",
+"exp": 0
+},
+{
+"rarity": "Super",
+"exp": 6
+},
+{
+"rarity": "Epic",
+"exp": 54
+},
+{
+"rarity": "Legendary",
+"exp": 497
+},
+{
+"rarity": "Mythic",
+"exp": 6321
+},
+{
+"rarity": "Ultra",
+"exp": 286267
+},
+{
+"rarity": "Super",
+"exp": 15878612
+}
+]
+},
+{
+"sid": "fire_ant_egg",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 51
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 150,
+"Damage": 3,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 562.5,
+"Damage": 9,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 2025,
+"Damage": 27,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 21,
+"Health": 8100,
+"Damage": 81,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 190,
+"Health": 48600,
+"Damage": 243,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 2614,
+"Health": 473850,
+"Damage": 729,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 106740,
+"Health": 21870000,
+"Damage": 2187,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 6475563,
+"Health": 656099968,
+"Damage": 6561,
+"Armor": 583
+}
+]
+},
+{
+"sid": "fire_ant_hole",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 50,
+"HealthRange": [
+750,
+750
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 200,
+"HealthRange": [
+2250,
+2250
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 1200,
+"HealthRange": [
+6750,
+6750
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 8000,
+"HealthRange": [
+20250,
+20250
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 45000,
+"HealthRange": [
+60750,
+60750
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 900000,
+"HealthRange": [
+182250,
+182250
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 4500000,
+"HealthRange": [
+546750,
+546750
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 35000000,
+"HealthRange": [
+1640250,
+1640250
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 180000000,
+"HealthRange": [
+4920750,
+4920750
+],
+"Damage": 15,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Fire Ant Hole",
+"source": "florr_clone"
+},
+{
+"sid": "fire_ant_queen",
+"drops": [
+{
+"baseChance": 0.5,
+"type": 51
+},
+{
+"baseChance": 0.3,
+"type": 49
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 250,
+"Damage": 20,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 937.5,
+"Damage": 60,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 3375,
+"Damage": 180,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 31,
+"Health": 13500,
+"Damage": 540,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 287,
+"Health": 81000,
+"Damage": 1620,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4425,
+"Health": 789750,
+"Damage": 4860,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 285763,
+"Health": 36450000,
+"Damage": 14580,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 15878612,
+"Health": 1093500032,
+"Damage": 43740,
+"Armor": 583
+}
+]
+},
+{
+"sid": "fire_ant_soldier",
+"drops": [
+{
+"baseChance": 0.3,
+"type": 28
+},
+{
+"baseChance": 0.25,
+"type": 106
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 20,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 60,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 6,
+"Health": 1350,
+"Damage": 180,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 44,
+"Health": 5400,
+"Damage": 540,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 400,
+"Health": 32400,
+"Damage": 1620,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 5437,
+"Health": 315900,
+"Damage": 4860,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 227398,
+"Health": 14580000,
+"Damage": 14580,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 13608888,
+"Health": 437400000,
+"Damage": 43740,
+"Armor": 583
+}
+]
+},
+{
+"sid": "fire_ant_worker",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 28
+},
+{
+"baseChance": 0.15,
+"type": 25
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 20,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 225,
+"Damage": 60,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 810,
+"Damage": 180,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 31,
+"Health": 3240,
+"Damage": 540,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 279,
+"Health": 19440,
+"Damage": 1620,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4105,
+"Health": 189540,
+"Damage": 4860,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 147030,
+"Health": 8748000,
+"Damage": 14580,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 9345409,
+"Health": 262440000,
+"Damage": 43740,
+"Armor": 583
+}
+]
+},
+{
+"sid": "firefly",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 8
+},
+{
+"baseChance": 0.25,
+"type": 55
+},
+{
+"baseChance": 0.05,
+"type": 69
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 40,
+"Damage": 5,
+"Armor": 1,
+"Lightning": 13,
+"Bounces": 5
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 150,
+"Damage": 15,
+"Armor": 2,
+"Lightning": 39,
+"Bounces": 6
+},
+{
+"rarity": "Super",
+"exp": 7,
+"Health": 540,
+"Damage": 45,
+"Armor": 7,
+"Lightning": 117,
+"Bounces": 7
+},
+{
+"rarity": "Epic",
+"exp": 49,
+"Health": 2160,
+"Damage": 135,
+"Armor": 22,
+"Lightning": 351,
+"Bounces": 8
+},
+{
+"rarity": "Legendary",
+"exp": 445,
+"Health": 12960,
+"Damage": 405,
+"Armor": 65,
+"Lightning": 1053,
+"Bounces": 9
+},
+{
+"rarity": "Mythic",
+"exp": 6247,
+"Health": 126360,
+"Damage": 1215,
+"Armor": 194,
+"Lightning": 3159,
+"Bounces": 10
+},
+{
+"rarity": "Ultra",
+"exp": 243172,
+"Health": 5832000,
+"Damage": 3645,
+"Armor": 583,
+"Lightning": 9477,
+"Bounces": 11
+},
+{
+"rarity": "Super",
+"exp": 14898753,
+"Health": 174960000,
+"Damage": 10935,
+"Armor": 583,
+"Lightning": 28431,
+"Bounces": 12
+}
+]
+},
+{
+"sid": "firefly_magic",
+"drops": [
+{
+"baseChance": 1,
+"type": 69
+},
+{
+"baseChance": 0.28,
+"type": 81
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 40,
+"Damage": 5,
+"Armor": 1,
+"Lightning": 13,
+"Bounces": 5
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 150,
+"Damage": 15,
+"Armor": 2,
+"Lightning": 39,
+"Bounces": 6
+},
+{
+"rarity": "Super",
+"exp": 9,
+"Health": 540,
+"Damage": 45,
+"Armor": 7,
+"Lightning": 117,
+"Bounces": 7
+},
+{
+"rarity": "Epic",
+"exp": 69,
+"Health": 2160,
+"Damage": 135,
+"Armor": 22,
+"Lightning": 351,
+"Bounces": 8
+},
+{
+"rarity": "Legendary",
+"exp": 658,
+"Health": 12960,
+"Damage": 405,
+"Armor": 65,
+"Lightning": 1053,
+"Bounces": 9
+},
+{
+"rarity": "Mythic",
+"exp": 7737,
+"Health": 126360,
+"Damage": 1215,
+"Armor": 194,
+"Lightning": 3159,
+"Bounces": 10
+},
+{
+"rarity": "Ultra",
+"exp": 364604,
+"Health": 5832000,
+"Damage": 3645,
+"Armor": 583,
+"Lightning": 9477,
+"Bounces": 11
+},
+{
+"rarity": "Super",
+"exp": 16727376,
+"Health": 174960000,
+"Damage": 10935,
+"Armor": 583,
+"Lightning": 28431,
+"Bounces": 12
+}
+]
+},
+{
+"sid": "fly",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 52
+},
+{
+"baseChance": 0.25,
+"type": 8
+},
+{
+"baseChance": 0.1,
+"type": 68
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 5,
+"Damage": 10,
+"Armor": 1,
+"Evasion": 0.8999999761581421
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 18.75,
+"Damage": 30,
+"Armor": 2,
+"Evasion": 0.8999999761581421
+},
+{
+"rarity": "Super",
+"exp": 7,
+"Health": 67.5,
+"Damage": 90,
+"Armor": 7,
+"Evasion": 0.8999999761581421
+},
+{
+"rarity": "Epic",
+"exp": 53,
+"Health": 270,
+"Damage": 270,
+"Armor": 22,
+"Evasion": 0.8999999761581421
+},
+{
+"rarity": "Legendary",
+"exp": 486,
+"Health": 1620,
+"Damage": 810,
+"Armor": 65,
+"Evasion": 0.8999999761581421
+},
+{
+"rarity": "Mythic",
+"exp": 6856,
+"Health": 15795,
+"Damage": 2430,
+"Armor": 194,
+"Evasion": 0.8999999761581421
+},
+{
+"rarity": "Ultra",
+"exp": 266727,
+"Health": 729000,
+"Damage": 7290,
+"Armor": 583,
+"Evasion": 0.8999999761581421
+},
+{
+"rarity": "Super",
+"exp": 16401473,
+"Health": 21870000,
+"Damage": 21870,
+"Armor": 583,
+"Evasion": 0.8999999761581421
+}
+]
+},
+{
+"sid": "gambler",
+"drops": [
+{
+"baseChance": 1,
+"type": 80
+},
+{
+"baseChance": 0.25,
+"type": 75
+},
+{
+"baseChance": 0.25,
+"type": 76
+},
+{
+"baseChance": 0.25,
+"type": 67
+},
+{
+"baseChance": 0.25,
+"type": 102
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 15,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 45,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 10,
+"Health": 1350,
+"Damage": 135,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 82,
+"Health": 5400,
+"Damage": 405,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 757,
+"Health": 32400,
+"Damage": 1215,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 10456,
+"Health": 315900,
+"Damage": 3645,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 578801,
+"Health": 14580000,
+"Damage": 10935,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 35741620,
+"Health": 437400000,
+"Damage": 32805,
+"Armor": 583
+}
+]
+},
+{
+"sid": "garbage",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 52
+},
+{
+"baseChance": 0.25,
+"type": 112
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 250,
+"Damage": 3,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 937.5,
+"Damage": 9,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 3375,
+"Damage": 27,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 13500,
+"Damage": 81,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 81000,
+"Damage": 243,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 5228,
+"Health": 789750,
+"Damage": 729,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 213479,
+"Health": 36450000,
+"Damage": 2187,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 12951125,
+"Health": 1093500032,
+"Damage": 6561,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ghost",
+"drops": [
+{
+"baseChance": 1,
+"type": 1
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 187.5,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 0,
+"Health": 675,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 0,
+"Health": 2700,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 0,
+"Health": 16200,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 0,
+"Health": 157950,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 0,
+"Health": 7290000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 0,
+"Health": 218700000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "glitch",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+250,
+250
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+750,
+750
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 10,
+"HealthRange": [
+2250,
+2250
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 70,
+"HealthRange": [
+6750,
+6750
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 980,
+"HealthRange": [
+20250,
+20250
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 14800,
+"HealthRange": [
+60750,
+60750
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 220000,
+"HealthRange": [
+182250,
+182250
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1800000,
+"HealthRange": [
+546750,
+546750
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 10000000,
+"HealthRange": [
+1640250,
+1640250
+],
+"Damage": 25,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Glitch",
+"source": "florr_clone"
+},
+{
+"sid": "glitch_flower",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 2,
+"HealthRange": [
+400,
+400
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 5,
+"HealthRange": [
+1200,
+1200
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 16,
+"HealthRange": [
+3600,
+3600
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 110,
+"HealthRange": [
+10800,
+10800
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1500,
+"HealthRange": [
+32400,
+32400
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 22000,
+"HealthRange": [
+97200,
+97200
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 330000,
+"HealthRange": [
+291600,
+291600
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 2700000,
+"HealthRange": [
+874800,
+874800
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 15000000,
+"HealthRange": [
+2624400,
+2624400
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Glitch Flower",
+"source": "florr_clone"
+},
+{
+"sid": "golden_leafbug",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+50,
+50
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+150,
+150
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 30,
+"HealthRange": [
+450,
+450
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 270,
+"HealthRange": [
+1350,
+1350
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1400,
+"HealthRange": [
+4050,
+4050
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 32000,
+"HealthRange": [
+12150,
+12150
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 150000,
+"HealthRange": [
+36450,
+36450
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1200000,
+"HealthRange": [
+109350,
+109350
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+328050,
+328050
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Golden Leafbug",
+"source": "florr_clone"
+},
+{
+"sid": "hel_beetle",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 2,
+"HealthRange": [
+150,
+150
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 8,
+"HealthRange": [
+450,
+450
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 35,
+"HealthRange": [
+1350,
+1350
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 300,
+"HealthRange": [
+4050,
+4050
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1500,
+"HealthRange": [
+12150,
+12150
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 40000,
+"HealthRange": [
+36450,
+36450
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 200000,
+"HealthRange": [
+109350,
+109350
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1600000,
+"HealthRange": [
+328050,
+328050
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 8000000,
+"HealthRange": [
+984150,
+984150
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Hel Beetle",
+"source": "florr_clone"
+},
+{
+"sid": "hornet",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 9
+},
+{
+"baseChance": 0.25,
+"type": 50
+},
+{
+"baseChance": 0.1,
+"type": 17
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 50,
+"Armor": 1,
+"MissileHealth": 5,
+"MissileDamage": 10
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 225,
+"Damage": 150,
+"Armor": 2,
+"MissileHealth": 25,
+"MissileDamage": 30
+},
+{
+"rarity": "Super",
+"exp": 6,
+"Health": 810,
+"Damage": 450,
+"Armor": 7,
+"MissileHealth": 125,
+"MissileDamage": 90
+},
+{
+"rarity": "Epic",
+"exp": 53,
+"Health": 3240,
+"Damage": 1350,
+"Armor": 22,
+"MissileHealth": 625,
+"MissileDamage": 270
+},
+{
+"rarity": "Legendary",
+"exp": 486,
+"Health": 19440,
+"Damage": 4050,
+"Armor": 65,
+"MissileHealth": 3125,
+"MissileDamage": 810
+},
+{
+"rarity": "Mythic",
+"exp": 6856,
+"Health": 189540,
+"Damage": 12150,
+"Armor": 194,
+"MissileHealth": 15625,
+"MissileDamage": 2430
+},
+{
+"rarity": "Ultra",
+"exp": 266727,
+"Health": 8748000,
+"Damage": 36450,
+"Armor": 583,
+"MissileHealth": 78125,
+"MissileDamage": 7290
+},
+{
+"rarity": "Super",
+"exp": 16401473,
+"Health": 262440000,
+"Damage": 109350,
+"Armor": 583,
+"MissileHealth": 390625,
+"MissileDamage": 21870
+}
+]
+},
+{
+"sid": "item_spawner",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100000000,
+100000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+300000000,
+300000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 1,
+"HealthRange": [
+900000000,
+900000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 1,
+"HealthRange": [
+2700000000,
+2700000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1,
+"HealthRange": [
+8100000000,
+8100000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 1,
+"HealthRange": [
+24300000000,
+24300000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 1,
+"HealthRange": [
+72900000000,
+72900000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1,
+"HealthRange": [
+218700000000,
+218700000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 1,
+"HealthRange": [
+656100000000,
+656100000000
+],
+"Damage": 50,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Item Spawner",
+"source": "florr_clone"
+},
+{
+"sid": "javascript",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+175,
+175
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 2,
+"HealthRange": [
+525,
+525
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 5,
+"HealthRange": [
+1575,
+1575
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 35,
+"HealthRange": [
+4725,
+4725
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 490,
+"HealthRange": [
+14175,
+14175
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 8200,
+"HealthRange": [
+42525,
+42525
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 200000,
+"HealthRange": [
+127575,
+127575
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1600000,
+"HealthRange": [
+382725,
+382725
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 8000000,
+"HealthRange": [
+1148175,
+1148175
+],
+"Damage": 22,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "JavaScript",
+"source": "florr_clone"
+},
+{
+"sid": "jellyfish",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 34
+},
+{
+"baseChance": 0.15,
+"type": 33
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 75,
+"Lightning": 7,
+"Armor": 1,
+"Bounces": 2
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 281.25,
+"Lightning": 21,
+"Armor": 2,
+"Bounces": 4
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 1012.5,
+"Lightning": 63,
+"Armor": 7,
+"Bounces": 6
+},
+{
+"rarity": "Epic",
+"exp": 36,
+"Health": 4050,
+"Lightning": 189,
+"Armor": 22,
+"Bounces": 8
+},
+{
+"rarity": "Legendary",
+"exp": 329,
+"Health": 24300,
+"Lightning": 567,
+"Armor": 65,
+"Bounces": 10
+},
+{
+"rarity": "Mythic",
+"exp": 4666,
+"Health": 236925,
+"Lightning": 1701,
+"Armor": 194,
+"Bounces": 12
+},
+{
+"rarity": "Ultra",
+"exp": 180255,
+"Health": 10935000,
+"Lightning": 5103,
+"Armor": 583,
+"Bounces": 14
+},
+{
+"rarity": "Super",
+"exp": 11148267,
+"Health": 328049984,
+"Lightning": 15309,
+"Armor": 583,
+"Bounces": 16
+}
+]
+},
+{
+"sid": "ladybug",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 2
+},
+{
+"baseChance": 0.25,
+"type": 5
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 225,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 810,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 3240,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 19440,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 5228,
+"Health": 189540,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 213479,
+"Health": 8748000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 12951125,
+"Health": 262440000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ladybug_dark",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 38
+},
+{
+"baseChance": 0.1,
+"type": 19
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 85,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 318.75,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 1147.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 32,
+"Health": 4590,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 297,
+"Health": 27540,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4242,
+"Health": 268515,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 159988,
+"Health": 12393000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 9925911,
+"Health": 371790016,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "ladybug_shiny",
+"drops": [
+{
+"baseChance": 1,
+"type": 5
+},
+{
+"baseChance": 1,
+"type": 38
+},
+{
+"baseChance": 0.5,
+"type": 30
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 2,
+"Health": 85,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 318.75,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 12,
+"Health": 1147.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 94,
+"Health": 4590,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 1107,
+"Health": 27540,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 13485,
+"Health": 268515,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 664283,
+"Health": 12393000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 28427241,
+"Health": 371790016,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "leafbug",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 22
+},
+{
+"baseChance": 0.25,
+"type": 65
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 30,
+"Armor": 11
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 187.5,
+"Damage": 90,
+"Armor": 32
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 675,
+"Damage": 270,
+"Armor": 97
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 2700,
+"Damage": 810,
+"Armor": 292
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 16200,
+"Damage": 2430,
+"Armor": 875
+},
+{
+"rarity": "Mythic",
+"exp": 5228,
+"Health": 157950,
+"Damage": 7290,
+"Armor": 2624
+},
+{
+"rarity": "Ultra",
+"exp": 213479,
+"Health": 7290000,
+"Damage": 21870,
+"Armor": 7873
+},
+{
+"rarity": "Super",
+"exp": 12951125,
+"Health": 218700000,
+"Damage": 65610,
+"Armor": 22453
+}
+]
+},
+{
+"sid": "leafbug_shiny",
+"drops": [
+{
+"baseChance": 1,
+"type": 65
+},
+{
+"baseChance": 0.25,
+"type": 97
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 30,
+"Armor": 11
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 187.5,
+"Damage": 90,
+"Armor": 32
+},
+{
+"rarity": "Super",
+"exp": 6,
+"Health": 675,
+"Damage": 270,
+"Armor": 97
+},
+{
+"rarity": "Epic",
+"exp": 47,
+"Health": 2700,
+"Damage": 810,
+"Armor": 292
+},
+{
+"rarity": "Legendary",
+"exp": 455,
+"Health": 16200,
+"Damage": 2430,
+"Armor": 875
+},
+{
+"rarity": "Mythic",
+"exp": 4994,
+"Health": 157950,
+"Damage": 7290,
+"Armor": 2624
+},
+{
+"rarity": "Ultra",
+"exp": 287517,
+"Health": 7290000,
+"Damage": 21870,
+"Armor": 7873
+},
+{
+"rarity": "Super",
+"exp": 16280939,
+"Health": 218700000,
+"Damage": 65610,
+"Armor": 22453
+}
+]
+},
+{
+"sid": "leech",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 42
+},
+{
+"baseChance": 0.25,
+"type": 12
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 10,
+"Armor": 1,
+"Lifesteal": 7
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 30,
+"Armor": 2,
+"Lifesteal": 21
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 1350,
+"Damage": 90,
+"Armor": 7,
+"Lifesteal": 63
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 5400,
+"Damage": 270,
+"Armor": 22,
+"Lifesteal": 189
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 32400,
+"Damage": 810,
+"Armor": 65,
+"Lifesteal": 567
+},
+{
+"rarity": "Mythic",
+"exp": 5228,
+"Health": 315900,
+"Damage": 2430,
+"Armor": 194,
+"Lifesteal": 1701
+},
+{
+"rarity": "Ultra",
+"exp": 213479,
+"Health": 14580000,
+"Damage": 7290,
+"Armor": 583,
+"Lifesteal": 5103
+},
+{
+"rarity": "Super",
+"exp": 12951125,
+"Health": 437400000,
+"Damage": 21870,
+"Armor": 583,
+"Lifesteal": 15309
+}
+]
+},
+{
+"sid": "leech_body",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+35,
+35
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 2,
+"HealthRange": [
+105,
+105
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 10,
+"HealthRange": [
+315,
+315
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 80,
+"HealthRange": [
+945,
+945
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 400,
+"HealthRange": [
+2835,
+2835
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 9000,
+"HealthRange": [
+8505,
+8505
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 45000,
+"HealthRange": [
+25515,
+25515
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 350000,
+"HealthRange": [
+76545,
+76545
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 1950000,
+"HealthRange": [
+229635,
+229635
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Leech",
+"source": "florr_clone"
+},
+{
+"sid": "magic_firefly",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+50,
+50
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+150,
+150
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 30,
+"HealthRange": [
+450,
+450
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 270,
+"HealthRange": [
+1350,
+1350
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1400,
+"HealthRange": [
+4050,
+4050
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 32000,
+"HealthRange": [
+12150,
+12150
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 150000,
+"HealthRange": [
+36450,
+36450
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1200000,
+"HealthRange": [
+109350,
+109350
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+328050,
+328050
+],
+"Damage": 30,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Magic Firefly",
+"source": "florr_clone"
+},
+{
+"sid": "mantis",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 44
+},
+{
+"baseChance": 0.25,
+"type": 64
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 20,
+"Armor": 1,
+"MantisPeaHealth": 2.5,
+"MantisPeaDamage": 2,
+"ArmorDebuff": -4,
+"Duration": 10
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 60,
+"Armor": 2,
+"MantisPeaHealth": 12.5,
+"MantisPeaDamage": 6,
+"ArmorDebuff": -12,
+"Duration": 10
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 1350,
+"Damage": 180,
+"Armor": 7,
+"MantisPeaHealth": 62.5,
+"MantisPeaDamage": 18,
+"ArmorDebuff": -36,
+"Duration": 10
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 5400,
+"Damage": 540,
+"Armor": 22,
+"MantisPeaHealth": 312.5,
+"MantisPeaDamage": 54,
+"ArmorDebuff": -108,
+"Duration": 10
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 32400,
+"Damage": 1620,
+"Armor": 65,
+"MantisPeaHealth": 1562.5,
+"MantisPeaDamage": 162,
+"ArmorDebuff": -324,
+"Duration": 10
+},
+{
+"rarity": "Mythic",
+"exp": 5228,
+"Health": 315900,
+"Damage": 4860,
+"Armor": 194,
+"MantisPeaHealth": 7812.5,
+"MantisPeaDamage": 486,
+"ArmorDebuff": -972,
+"Duration": 10
+},
+{
+"rarity": "Ultra",
+"exp": 213479,
+"Health": 14580000,
+"Damage": 14580,
+"Armor": 583,
+"MantisPeaHealth": 39062.5,
+"MantisPeaDamage": 1458,
+"ArmorDebuff": -2916,
+"Duration": 10
+},
+{
+"rarity": "Super",
+"exp": 12951125,
+"Health": 437400000,
+"Damage": 43740,
+"Armor": 583,
+"MantisPeaHealth": 195312.5,
+"MantisPeaDamage": 4374,
+"ArmorDebuff": -8748,
+"Duration": 10
+}
+]
+},
+{
+"sid": "mecha_flower",
+"drops": [
+{
+"baseChance": 1,
+"type": 98
+},
+{
+"baseChance": 1,
+"type": 94
+},
+{
+"baseChance": 0.05,
+"type": 69
+},
+{
+"baseChance": 0.002,
+"type": 93
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 10,
+"Armor": 6
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 30,
+"Armor": 17
+},
+{
+"rarity": "Super",
+"exp": 7,
+"Health": 1350,
+"Damage": 90,
+"Armor": 52
+},
+{
+"rarity": "Epic",
+"exp": 54,
+"Health": 5400,
+"Damage": 270,
+"Armor": 157
+},
+{
+"rarity": "Legendary",
+"exp": 522,
+"Health": 32400,
+"Damage": 810,
+"Armor": 470
+},
+{
+"rarity": "Mythic",
+"exp": 6013,
+"Health": 315900,
+"Damage": 2430,
+"Armor": 1409
+},
+{
+"rarity": "Ultra",
+"exp": 279337,
+"Health": 14580000,
+"Damage": 7290,
+"Armor": 4228
+},
+{
+"rarity": "Super",
+"exp": 11870866,
+"Health": 437400000,
+"Damage": 21870,
+"Armor": 11518
+}
+]
+},
+{
+"sid": "moth",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 8
+},
+{
+"baseChance": 0.25,
+"type": 55
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 15,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 56.25,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 202.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 810,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 4860,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 5228,
+"Health": 47385,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 213479,
+"Health": 2187000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 12951125,
+"Health": 65610000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "oracle",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 3,
+"HealthRange": [
+150,
+150
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 10,
+"HealthRange": [
+450,
+450
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 40,
+"HealthRange": [
+1350,
+1350
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 350,
+"HealthRange": [
+4050,
+4050
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1800,
+"HealthRange": [
+12150,
+12150
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 45000,
+"HealthRange": [
+36450,
+36450
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 220000,
+"HealthRange": [
+109350,
+109350
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1800000,
+"HealthRange": [
+328050,
+328050
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 9000000,
+"HealthRange": [
+984150,
+984150
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Oracle",
+"source": "florr_clone"
+},
+{
+"sid": "queen_ant",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 15,
+"HealthRange": [
+250,
+250
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 60,
+"HealthRange": [
+750,
+750
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 360,
+"HealthRange": [
+2250,
+2250
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 2400,
+"HealthRange": [
+6750,
+6750
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 13500,
+"HealthRange": [
+20250,
+20250
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 270000,
+"HealthRange": [
+60750,
+60750
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 1350000,
+"HealthRange": [
+182250,
+182250
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 10500000,
+"HealthRange": [
+546750,
+546750
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 54000000,
+"HealthRange": [
+1640250,
+1640250
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Queen Ant",
+"source": "florr_clone"
+},
+{
+"sid": "roach",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 17
+},
+{
+"baseChance": 0.05,
+"type": 54
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 20,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 187.5,
+"Damage": 60,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 675,
+"Damage": 180,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 28,
+"Health": 2700,
+"Damage": 540,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 256,
+"Health": 16200,
+"Damage": 1620,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3633,
+"Health": 157950,
+"Damage": 4860,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 136433,
+"Health": 7290000,
+"Damage": 14580,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 8423191,
+"Health": 218700000,
+"Damage": 43740,
+"Armor": 583
+}
+]
+},
+{
+"sid": "rock",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 3
+},
+{
+"baseChance": 0.05,
+"type": 18
+},
+{
+"baseChance": 0.005,
+"type": 77
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+50,
+100
+],
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"HealthRange": [
+187.5,
+375
+],
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"HealthRange": [
+675,
+1350
+],
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 22,
+"HealthRange": [
+2700,
+5400
+],
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 206,
+"HealthRange": [
+16200,
+32400
+],
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3071,
+"HealthRange": [
+157950,
+315900
+],
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 103973,
+"HealthRange": [
+7290000,
+14580000
+],
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 6824717,
+"HealthRange": [
+218700000,
+437400000
+],
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "sandstorm",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 26
+},
+{
+"baseChance": 0.1,
+"type": 79
+},
+{
+"baseChance": 0.05,
+"type": 45
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 75,
+"Damage": 40,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 281.25,
+"Damage": 120,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 1012.5,
+"Damage": 360,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 30,
+"Health": 4050,
+"Damage": 1080,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 308,
+"Health": 24300,
+"Damage": 3240,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4699,
+"Health": 236925,
+"Damage": 9720,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 156457,
+"Health": 10935000,
+"Damage": 29160,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 10070681,
+"Health": 328049984,
+"Damage": 87480,
+"Armor": 583
+}
+]
+},
+{
+"sid": "scorpion",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 7
+},
+{
+"baseChance": 0.25,
+"type": 27
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 15,
+"Armor": 1,
+"MissileHealth": 5,
+"MissileDamage": 5,
+"MissilePoison": [
+40,
+15
+]
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 375,
+"Damage": 45,
+"Armor": 2,
+"MissileHealth": 25,
+"MissileDamage": 15,
+"MissilePoison": [
+120,
+45
+]
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 1350,
+"Damage": 135,
+"Armor": 7,
+"MissileHealth": 125,
+"MissileDamage": 45,
+"MissilePoison": [
+360,
+135
+]
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 5400,
+"Damage": 405,
+"Armor": 22,
+"MissileHealth": 625,
+"MissileDamage": 135,
+"MissilePoison": [
+1080,
+405
+]
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 32400,
+"Damage": 1215,
+"Armor": 65,
+"MissileHealth": 3125,
+"MissileDamage": 405,
+"MissilePoison": [
+3240,
+1215
+]
+},
+{
+"rarity": "Mythic",
+"exp": 5228,
+"Health": 315900,
+"Damage": 3645,
+"Armor": 194,
+"MissileHealth": 15625,
+"MissileDamage": 1215,
+"MissilePoison": [
+9720,
+3645
+]
+},
+{
+"rarity": "Ultra",
+"exp": 213479,
+"Health": 14580000,
+"Damage": 10935,
+"Armor": 583,
+"MissileHealth": 78125,
+"MissileDamage": 3645,
+"MissilePoison": [
+29160,
+10935
+]
+},
+{
+"rarity": "Super",
+"exp": 12951125,
+"Health": 437400000,
+"Damage": 32805,
+"Armor": 583,
+"MissileHealth": 390625,
+"MissileDamage": 10935,
+"MissilePoison": [
+87480,
+32805
+]
+}
+]
+},
+{
+"sid": "server",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 50,
+"HealthRange": [
+3000,
+3000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 200,
+"HealthRange": [
+9000,
+9000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 1200,
+"HealthRange": [
+27000,
+27000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 8000,
+"HealthRange": [
+81000,
+81000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 45000,
+"HealthRange": [
+243000,
+243000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 900000,
+"HealthRange": [
+729000,
+729000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 4500000,
+"HealthRange": [
+2187000,
+2187000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 35000000,
+"HealthRange": [
+6561000,
+6561000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 180000000,
+"HealthRange": [
+19683000,
+19683000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Server",
+"source": "florr_clone"
+},
+{
+"sid": "shell",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 32
+},
+{
+"baseChance": 0.15,
+"type": 36
+},
+{
+"baseChance": 0.01,
+"type": 29
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 10,
+"Armor": 1,
+"PearlHealth": 50,
+"PearlDamage": 10
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 187.5,
+"Damage": 30,
+"Armor": 2,
+"PearlHealth": 250,
+"PearlDamage": 30
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 675,
+"Damage": 90,
+"Armor": 7,
+"PearlHealth": 1250,
+"PearlDamage": 90
+},
+{
+"rarity": "Epic",
+"exp": 38,
+"Health": 2700,
+"Damage": 270,
+"Armor": 22,
+"PearlHealth": 6250,
+"PearlDamage": 270
+},
+{
+"rarity": "Legendary",
+"exp": 351,
+"Health": 16200,
+"Damage": 810,
+"Armor": 65,
+"PearlHealth": 31250,
+"PearlDamage": 810
+},
+{
+"rarity": "Mythic",
+"exp": 4983,
+"Health": 157950,
+"Damage": 2430,
+"Armor": 194,
+"PearlHealth": 156250,
+"PearlDamage": 2430
+},
+{
+"rarity": "Ultra",
+"exp": 188172,
+"Health": 7290000,
+"Damage": 7290,
+"Armor": 583,
+"PearlHealth": 781250,
+"PearlDamage": 7290
+},
+{
+"rarity": "Super",
+"exp": 11648938,
+"Health": 218700000,
+"Damage": 21870,
+"Armor": 583,
+"PearlHealth": 3906250,
+"PearlDamage": 21870
+}
+]
+},
+{
+"sid": "shiny_ladybug",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+85,
+85
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 5,
+"HealthRange": [
+255,
+255
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 20,
+"HealthRange": [
+765,
+765
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 180,
+"HealthRange": [
+2295,
+2295
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 900,
+"HealthRange": [
+6885,
+6885
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 28000,
+"HealthRange": [
+20655,
+20655
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 120000,
+"HealthRange": [
+61965,
+61965
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 960000,
+"HealthRange": [
+185895,
+185895
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 5440000,
+"HealthRange": [
+557685,
+557685
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Shiny Ladybug",
+"source": "florr_clone"
+},
+{
+"sid": "silverfish",
+"drops": [
+{
+"baseChance": 0.75,
+"type": 111
+},
+{
+"baseChance": 0.25,
+"type": 110
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 30,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 187.5,
+"Damage": 90,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 8,
+"Health": 675,
+"Damage": 270,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 60,
+"Health": 2700,
+"Damage": 810,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 563,
+"Health": 16200,
+"Damage": 2430,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 6868,
+"Health": 157950,
+"Damage": 7290,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 316580,
+"Health": 7290000,
+"Damage": 21870,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 16028874,
+"Health": 218700000,
+"Damage": 65610,
+"Armor": 583
+}
+]
+},
+{
+"sid": "soldier_ant",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100,
+100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+300,
+300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 30,
+"HealthRange": [
+900,
+900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 270,
+"HealthRange": [
+2700,
+2700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1400,
+"HealthRange": [
+8100,
+8100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 32000,
+"HealthRange": [
+24300,
+24300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 150000,
+"HealthRange": [
+72900,
+72900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1200000,
+"HealthRange": [
+218700,
+218700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+656100,
+656100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Soldier Ant",
+"source": "florr_clone"
+},
+{
+"sid": "soldier_ant_pet",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100,
+100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+300,
+300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 1,
+"HealthRange": [
+900,
+900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 1,
+"HealthRange": [
+2700,
+2700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1,
+"HealthRange": [
+8100,
+8100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 1,
+"HealthRange": [
+24300,
+24300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 1,
+"HealthRange": [
+72900,
+72900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1,
+"HealthRange": [
+218700,
+218700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 1,
+"HealthRange": [
+656100,
+656100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Soldier Ant Pet",
+"source": "florr_clone"
+},
+{
+"sid": "soldier_fire_ant",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100,
+100
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+300,
+300
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"HealthRange": [
+900,
+900
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 22,
+"HealthRange": [
+2700,
+2700
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 206,
+"HealthRange": [
+8100,
+8100
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 3100,
+"HealthRange": [
+24300,
+24300
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 19800,
+"HealthRange": [
+72900,
+72900
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 2100000,
+"HealthRange": [
+218700,
+218700
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+656100,
+656100
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Soldier Fire Ant",
+"source": "florr_clone"
+},
+{
+"sid": "soldier_fire_ant_pet",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100,
+100
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+300,
+300
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 1,
+"HealthRange": [
+900,
+900
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 1,
+"HealthRange": [
+2700,
+2700
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1,
+"HealthRange": [
+8100,
+8100
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 1,
+"HealthRange": [
+24300,
+24300
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 1,
+"HealthRange": [
+72900,
+72900
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1,
+"HealthRange": [
+218700,
+218700
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 1,
+"HealthRange": [
+656100,
+656100
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Soldier Fire Ant Pet",
+"source": "florr_clone"
+},
+{
+"sid": "spider",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 12
+},
+{
+"baseChance": 0.25,
+"type": 20
+},
+{
+"baseChance": 0.01,
+"type": 43
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 15,
+"Armor": 1,
+"Poison": [
+40,
+15
+]
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 225,
+"Damage": 45,
+"Armor": 2,
+"Poison": [
+120,
+45
+]
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 810,
+"Damage": 135,
+"Armor": 7,
+"Poison": [
+360,
+135
+]
+},
+{
+"rarity": "Epic",
+"exp": 41,
+"Health": 3240,
+"Damage": 405,
+"Armor": 22,
+"Poison": [
+1080,
+405
+]
+},
+{
+"rarity": "Legendary",
+"exp": 379,
+"Health": 19440,
+"Damage": 1215,
+"Armor": 65,
+"Poison": [
+3240,
+1215
+]
+},
+{
+"rarity": "Mythic",
+"exp": 5259,
+"Health": 189540,
+"Damage": 3645,
+"Armor": 194,
+"Poison": [
+9720,
+3645
+]
+},
+{
+"rarity": "Ultra",
+"exp": 219486,
+"Health": 8748000,
+"Damage": 10935,
+"Armor": 583,
+"Poison": [
+29160,
+10935
+]
+},
+{
+"rarity": "Super",
+"exp": 13451796,
+"Health": 262440000,
+"Damage": 32805,
+"Armor": 583,
+"Poison": [
+87480,
+32805
+]
+}
+]
+},
+{
+"sid": "spider_hel",
+"drops": [
+{
+"baseChance": 0.1,
+"type": 76
+},
+{
+"baseChance": 0.01,
+"type": 61
+},
+{
+"baseChance": 0.01,
+"type": 43
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 150,
+"Damage": 15,
+"Armor": 1,
+"Poison": [
+80,
+30
+]
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 562.5,
+"Damage": 45,
+"Armor": 2,
+"Poison": [
+240,
+90
+]
+},
+{
+"rarity": "Super",
+"exp": 2,
+"Health": 2025,
+"Damage": 135,
+"Armor": 7,
+"Poison": [
+720,
+270
+]
+},
+{
+"rarity": "Epic",
+"exp": 14,
+"Health": 8100,
+"Damage": 405,
+"Armor": 22,
+"Poison": [
+2160,
+810
+]
+},
+{
+"rarity": "Legendary",
+"exp": 130,
+"Health": 48600,
+"Damage": 1215,
+"Armor": 65,
+"Poison": [
+6480,
+2430
+]
+},
+{
+"rarity": "Mythic",
+"exp": 1976,
+"Health": 473850,
+"Damage": 3645,
+"Armor": 194,
+"Poison": [
+19440,
+7290
+]
+},
+{
+"rarity": "Ultra",
+"exp": 67173,
+"Health": 21870000,
+"Damage": 10935,
+"Armor": 583,
+"Poison": [
+58320,
+21870
+]
+},
+{
+"rarity": "Super",
+"exp": 4451690,
+"Health": 656099968,
+"Damage": 32805,
+"Armor": 583,
+"Poison": [
+174960,
+65610
+]
+}
+]
+},
+{
+"sid": "spider_mecha",
+"drops": [
+{
+"baseChance": 1,
+"type": 94
+},
+{
+"baseChance": 0.25,
+"type": 107
+},
+{
+"baseChance": 0.1,
+"type": 116
+},
+{
+"baseChance": 0.05,
+"type": 69
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Lightning": 30,
+"Armor": 3
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 225,
+"Lightning": 90,
+"Armor": 8
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 810,
+"Lightning": 270,
+"Armor": 25
+},
+{
+"rarity": "Epic",
+"exp": 40,
+"Health": 3240,
+"Lightning": 810,
+"Armor": 76
+},
+{
+"rarity": "Legendary",
+"exp": 363,
+"Health": 19440,
+"Lightning": 2430,
+"Armor": 227
+},
+{
+"rarity": "Mythic",
+"exp": 5261,
+"Health": 189540,
+"Lightning": 7290,
+"Armor": 680
+},
+{
+"rarity": "Ultra",
+"exp": 189681,
+"Health": 8748000,
+"Lightning": 21870,
+"Armor": 2041
+},
+{
+"rarity": "Super",
+"exp": 11873539,
+"Health": 262440000,
+"Lightning": 65610,
+"Armor": 4957
+}
+]
+},
+{
+"sid": "sponge",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 40
+},
+{
+"baseChance": 0.1,
+"type": 90
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 375,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 1350,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 33,
+"Health": 5400,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 297,
+"Health": 32400,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4242,
+"Health": 315900,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 159988,
+"Health": 14580000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 9925911,
+"Health": 437400000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "sponge_1",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100,
+100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+300,
+300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"HealthRange": [
+900,
+900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 22,
+"HealthRange": [
+2700,
+2700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 222,
+"HealthRange": [
+8100,
+8100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 722,
+"HealthRange": [
+24300,
+24300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 22220,
+"HealthRange": [
+72900,
+72900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 700000,
+"HealthRange": [
+218700,
+218700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 2000000,
+"HealthRange": [
+656100,
+656100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Sponge",
+"source": "florr_clone"
+},
+{
+"sid": "sponge_2",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100,
+100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 1,
+"HealthRange": [
+300,
+300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"HealthRange": [
+900,
+900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 22,
+"HealthRange": [
+2700,
+2700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 222,
+"HealthRange": [
+8100,
+8100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 722,
+"HealthRange": [
+24300,
+24300
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 22220,
+"HealthRange": [
+72900,
+72900
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 700000,
+"HealthRange": [
+218700,
+218700
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 2000000,
+"HealthRange": [
+656100,
+656100
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Sponge",
+"source": "florr_clone"
+},
+{
+"sid": "square",
+"drops": [
+{
+"baseChance": 1,
+"type": 4
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 35,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 131.25,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 0,
+"Health": 472.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 0,
+"Health": 1890,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 0,
+"Health": 11340,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 0,
+"Health": 110565,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 0,
+"Health": 5103000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 0,
+"Health": 153090000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "starfish",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 31
+},
+{
+"baseChance": 0.05,
+"type": 26
+},
+{
+"baseChance": 0.05,
+"type": 23
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 50,
+"Damage": 20,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 187.5,
+"Damage": 60,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 5,
+"Health": 675,
+"Damage": 180,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 35,
+"Health": 2700,
+"Damage": 540,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 322,
+"Health": 16200,
+"Damage": 1620,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 4652,
+"Health": 157950,
+"Damage": 4860,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 166126,
+"Health": 7290000,
+"Damage": 14580,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 10370819,
+"Health": 218700000,
+"Damage": 43740,
+"Armor": 583
+}
+]
+},
+{
+"sid": "sun",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+100,
+100
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+300,
+300
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 30,
+"HealthRange": [
+900,
+900
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 270,
+"HealthRange": [
+2700,
+2700
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1400,
+"HealthRange": [
+8100,
+8100
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 32000,
+"HealthRange": [
+24300,
+24300
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 150000,
+"HealthRange": [
+72900,
+72900
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1200000,
+"HealthRange": [
+218700,
+218700
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+656100,
+656100
+],
+"Damage": 250,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Sun",
+"source": "florr_clone"
+},
+{
+"sid": "target_dummy",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 100,
+"HealthRange": [
+1000000000,
+1000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 100,
+"HealthRange": [
+3000000000,
+3000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 100,
+"HealthRange": [
+9000000000,
+9000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 100,
+"HealthRange": [
+27000000000,
+27000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 100,
+"HealthRange": [
+81000000000,
+81000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 100,
+"HealthRange": [
+243000000000,
+243000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 100,
+"HealthRange": [
+729000000000,
+729000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 100,
+"HealthRange": [
+2187000000000,
+2187000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 100,
+"HealthRange": [
+6561000000000,
+6561000000000
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Target Dummy",
+"source": "florr_clone"
+},
+{
+"sid": "termite_baby",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 57
+},
+{
+"baseChance": 0.05,
+"type": 53
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 25,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 93.75,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 337.5,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 28,
+"Health": 1350,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 256,
+"Health": 8100,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3633,
+"Health": 78975,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 136433,
+"Health": 3645000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 8423191,
+"Health": 109350000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "termite_egg",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 51
+},
+{
+"baseChance": 0.05,
+"type": 70
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 150,
+"Damage": 3,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 562.5,
+"Damage": 9,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 2025,
+"Damage": 27,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 28,
+"Health": 8100,
+"Damage": 81,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 256,
+"Health": 48600,
+"Damage": 243,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3633,
+"Health": 473850,
+"Damage": 729,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 136433,
+"Health": 21870000,
+"Damage": 2187,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 8423191,
+"Health": 656099968,
+"Damage": 6561,
+"Armor": 583
+}
+]
+},
+{
+"sid": "termite_mound",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 41
+},
+{
+"baseChance": 0.2,
+"type": 62
+},
+{
+"baseChance": 0.15,
+"type": 53
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1
+},
+{
+"rarity": "Rare",
+"exp": 2
+},
+{
+"rarity": "Super",
+"exp": 7
+},
+{
+"rarity": "Epic",
+"exp": 54
+},
+{
+"rarity": "Legendary",
+"exp": 495
+},
+{
+"rarity": "Mythic",
+"exp": 7032
+},
+{
+"rarity": "Ultra",
+"exp": 271421
+},
+{
+"rarity": "Super",
+"exp": 16815142
+}
+]
+},
+{
+"sid": "termite_overmind",
+"drops": [
+{
+"baseChance": 1,
+"type": 60
+},
+{
+"baseChance": 1,
+"type": 71
+},
+{
+"baseChance": 0.5,
+"type": 53
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 500,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 1875,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 10,
+"Health": 6750,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 78,
+"Health": 27000,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 742,
+"Health": 162000,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 8492,
+"Health": 1579500,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 566790,
+"Health": 72900000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 28425635,
+"Health": 2187000064,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "termite_soldier",
+"drops": [
+{
+"baseChance": 0.25,
+"type": 58
+},
+{
+"baseChance": 0.05,
+"type": 53
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 375,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 1350,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 28,
+"Health": 5400,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 256,
+"Health": 32400,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3633,
+"Health": 315900,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 136433,
+"Health": 14580000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 8423191,
+"Health": 437400000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "termite_worker",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 59
+},
+{
+"baseChance": 0.05,
+"type": 53
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 10,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 225,
+"Damage": 30,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 3,
+"Health": 810,
+"Damage": 90,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 23,
+"Health": 3240,
+"Damage": 270,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 206,
+"Health": 19440,
+"Damage": 810,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3071,
+"Health": 189540,
+"Damage": 2430,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 103208,
+"Health": 8748000,
+"Damage": 7290,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 6620333,
+"Health": 262440000,
+"Damage": 21870,
+"Armor": 583
+}
+]
+},
+{
+"sid": "tomb",
+"drops": [
+{
+"baseChance": 1,
+"type": 66
+},
+{
+"baseChance": 0.5,
+"type": 111
+},
+{
+"baseChance": 0.25,
+"type": 105
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 2,
+"Health": 150,
+"Damage": 3,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 3,
+"Health": 562.5,
+"Damage": 9,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 12,
+"Health": 2025,
+"Damage": 27,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 99,
+"Health": 8100,
+"Damage": 81,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 931,
+"Health": 48600,
+"Damage": 243,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 11106,
+"Health": 473850,
+"Damage": 729,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 521685,
+"Health": 21870000,
+"Damage": 2187,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 25061827,
+"Health": 656099968,
+"Damage": 6561,
+"Armor": 583
+}
+]
+},
+{
+"sid": "trader",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 3,
+"HealthRange": [
+150,
+150
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 10,
+"HealthRange": [
+450,
+450
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 40,
+"HealthRange": [
+1350,
+1350
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 350,
+"HealthRange": [
+4050,
+4050
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1800,
+"HealthRange": [
+12150,
+12150
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 45000,
+"HealthRange": [
+36450,
+36450
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 220000,
+"HealthRange": [
+109350,
+109350
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1800000,
+"HealthRange": [
+328050,
+328050
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 9000000,
+"HealthRange": [
+984150,
+984150
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Trader",
+"source": "florr_clone"
+},
+{
+"sid": "wasp",
+"drops": [
+{
+"baseChance": 0.75,
+"type": 9
+},
+{
+"baseChance": 0.2,
+"type": 17
+},
+{
+"baseChance": 0.1,
+"type": 63
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 50,
+"Armor": 1,
+"MissileHealth": 5,
+"MissileDamage": 10
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 225,
+"Damage": 150,
+"Armor": 2,
+"MissileHealth": 25,
+"MissileDamage": 30
+},
+{
+"rarity": "Super",
+"exp": 8,
+"Health": 810,
+"Damage": 450,
+"Armor": 7,
+"MissileHealth": 125,
+"MissileDamage": 90
+},
+{
+"rarity": "Epic",
+"exp": 69,
+"Health": 3240,
+"Damage": 1350,
+"Armor": 22,
+"MissileHealth": 625,
+"MissileDamage": 270
+},
+{
+"rarity": "Legendary",
+"exp": 647,
+"Health": 19440,
+"Damage": 4050,
+"Armor": 65,
+"MissileHealth": 3125,
+"MissileDamage": 810
+},
+{
+"rarity": "Mythic",
+"exp": 8248,
+"Health": 189540,
+"Damage": 12150,
+"Armor": 194,
+"MissileHealth": 15625,
+"MissileDamage": 2430
+},
+{
+"rarity": "Ultra",
+"exp": 354255,
+"Health": 8748000,
+"Damage": 36450,
+"Armor": 583,
+"MissileHealth": 78125,
+"MissileDamage": 7290
+},
+{
+"rarity": "Super",
+"exp": 18670535,
+"Health": 262440000,
+"Damage": 109350,
+"Armor": 583,
+"MissileHealth": 390625,
+"MissileDamage": 21870
+}
+]
+},
+{
+"sid": "wasp_hel",
+"drops": [
+{
+"baseChance": 0.75,
+"type": 9
+},
+{
+"baseChance": 0.1,
+"type": 75
+},
+{
+"baseChance": 0.01,
+"type": 61
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 50,
+"Armor": 1,
+"MissileHealth": 2.5,
+"MissileDamage": 5
+},
+{
+"rarity": "Rare",
+"exp": 2,
+"Health": 225,
+"Damage": 150,
+"Armor": 2,
+"MissileHealth": 12.5,
+"MissileDamage": 15
+},
+{
+"rarity": "Super",
+"exp": 7,
+"Health": 810,
+"Damage": 450,
+"Armor": 7,
+"MissileHealth": 62.5,
+"MissileDamage": 45
+},
+{
+"rarity": "Epic",
+"exp": 54,
+"Health": 3240,
+"Damage": 1350,
+"Armor": 22,
+"MissileHealth": 312.5,
+"MissileDamage": 135
+},
+{
+"rarity": "Legendary",
+"exp": 503,
+"Health": 19440,
+"Damage": 4050,
+"Armor": 65,
+"MissileHealth": 1562.5,
+"MissileDamage": 405
+},
+{
+"rarity": "Mythic",
+"exp": 6198,
+"Health": 189540,
+"Damage": 12150,
+"Armor": 194,
+"MissileHealth": 7812.5,
+"MissileDamage": 1215
+},
+{
+"rarity": "Ultra",
+"exp": 271006,
+"Health": 8748000,
+"Damage": 36450,
+"Armor": 583,
+"MissileHealth": 39062.5,
+"MissileDamage": 3645
+},
+{
+"rarity": "Super",
+"exp": 13504331,
+"Health": 262440000,
+"Damage": 109350,
+"Armor": 583,
+"MissileHealth": 195312.5,
+"MissileDamage": 10935
+}
+]
+},
+{
+"sid": "wasp_mecha",
+"drops": [
+{
+"baseChance": 1,
+"type": 94
+},
+{
+"baseChance": 0.75,
+"type": 95
+},
+{
+"baseChance": 0.45,
+"type": 100
+},
+{
+"baseChance": 0.05,
+"type": 69
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 60,
+"Damage": 50,
+"Armor": 3,
+"MissileHealth": 5,
+"MissileDamage": 10
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 225,
+"Damage": 150,
+"Armor": 8,
+"MissileHealth": 25,
+"MissileDamage": 30
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 810,
+"Damage": 450,
+"Armor": 25,
+"MissileHealth": 125,
+"MissileDamage": 90
+},
+{
+"rarity": "Epic",
+"exp": 36,
+"Health": 3240,
+"Damage": 1350,
+"Armor": 76,
+"MissileHealth": 625,
+"MissileDamage": 270
+},
+{
+"rarity": "Legendary",
+"exp": 335,
+"Health": 19440,
+"Damage": 4050,
+"Armor": 227,
+"MissileHealth": 3125,
+"MissileDamage": 810
+},
+{
+"rarity": "Mythic",
+"exp": 6660,
+"Health": 189540,
+"Damage": 12150,
+"Armor": 680,
+"MissileHealth": 15625,
+"MissileDamage": 2430
+},
+{
+"rarity": "Ultra",
+"exp": 395015,
+"Health": 8748000,
+"Damage": 36450,
+"Armor": 2041,
+"MissileHealth": 78125,
+"MissileDamage": 7290
+},
+{
+"rarity": "Super",
+"exp": 19958311,
+"Health": 262440000,
+"Damage": 109350,
+"Armor": 4957,
+"MissileHealth": 390625,
+"MissileDamage": 21870
+}
+]
+},
+{
+"sid": "worker_ant",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+60,
+60
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 4,
+"HealthRange": [
+180,
+180
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 40,
+"HealthRange": [
+540,
+540
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 300,
+"HealthRange": [
+1620,
+1620
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 2000,
+"HealthRange": [
+4860,
+4860
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 42000,
+"HealthRange": [
+14580,
+14580
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 220000,
+"HealthRange": [
+43740,
+43740
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1800000,
+"HealthRange": [
+131220,
+131220
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 8000000,
+"HealthRange": [
+393660,
+393660
+],
+"Damage": 10,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Worker Ant",
+"source": "florr_clone"
+},
+{
+"sid": "worker_fire_ant",
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"HealthRange": [
+60,
+60
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unusual",
+"exp": 3,
+"HealthRange": [
+180,
+180
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Rare",
+"exp": 30,
+"HealthRange": [
+540,
+540
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Epic",
+"exp": 270,
+"HealthRange": [
+1620,
+1620
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Legendary",
+"exp": 1400,
+"HealthRange": [
+4860,
+4860
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Mythic",
+"exp": 32000,
+"HealthRange": [
+14580,
+14580
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Ultra",
+"exp": 150000,
+"HealthRange": [
+43740,
+43740
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Super",
+"exp": 1200000,
+"HealthRange": [
+131220,
+131220
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+},
+{
+"rarity": "Unique",
+"exp": 6800000,
+"HealthRange": [
+393660,
+393660
+],
+"Damage": 20,
+"Armor": 1,
+"source": "florr_clone"
+}
+],
+"drops": [],
+"cn": "Worker Fire Ant",
+"source": "florr_clone"
+},
+{
+"sid": "worm",
+"drops": [
+{
+"baseChance": 0.15,
+"type": 73
+},
+{
+"baseChance": 0.1,
+"type": 41
+}
+],
+"rarities": [
+{
+"rarity": "Common",
+"exp": 1,
+"Health": 100,
+"Damage": 30,
+"Armor": 1
+},
+{
+"rarity": "Rare",
+"exp": 0,
+"Health": 375,
+"Damage": 90,
+"Armor": 2
+},
+{
+"rarity": "Super",
+"exp": 4,
+"Health": 1350,
+"Damage": 270,
+"Armor": 7
+},
+{
+"rarity": "Epic",
+"exp": 27,
+"Health": 5400,
+"Damage": 810,
+"Armor": 22
+},
+{
+"rarity": "Legendary",
+"exp": 247,
+"Health": 32400,
+"Damage": 2430,
+"Armor": 65
+},
+{
+"rarity": "Mythic",
+"exp": 3680,
+"Health": 315900,
+"Damage": 7290,
+"Armor": 194
+},
+{
+"rarity": "Ultra",
+"exp": 126764,
+"Health": 14580000,
+"Damage": 21870,
+"Armor": 583
+},
+{
+"rarity": "Super",
+"exp": 8123053,
+"Health": 437400000,
+"Damage": 65610,
+"Armor": 583,
+"PoisonPerSecond": 76545
+}
+]
+}
+]
