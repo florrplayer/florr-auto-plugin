@@ -19,7 +19,8 @@ PATH_CACHE = {"goal": None, "path": None}
 SHOW_MAP_WINDOW = True                  # 实时地图窗口: 红=路径 绿=玩家 蓝=巡逻点 黄=目标
 
 # ===== 人性化模拟（让脚本玩得像真人）=====
-HUMANIZE = True            # 总开关
+# v1.20.1: 用户决定关闭——防挂机已有其他手段(AFK破解/聊天回复/随机巡逻), 延迟影响战斗效率
+HUMANIZE = False           # 总开关(False=所有微转向/停顿/反应延迟/鼠标微动/手抖全停, 战斗即时响应)
 HUMAN_BLINK_MIN = 6        # 移动中"眨眼"停顿间隔范围(秒)
 HUMAN_BLINK_MAX = 15
 HUMAN_PAUSE_CHANCE = 0.2   # 每段巡逻后随机停顿概率

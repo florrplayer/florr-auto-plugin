@@ -127,9 +127,19 @@ def get_mob_radius(sid, rarity='Common'):
 
 
 def get_attack_distance(sid, rarity='Common'):
-    """根据怪种+稀有度+追击速度返回最佳攻击距离(停在怪真实碰撞箱外)
-    v1.19.8: 追得上的怪(aggro_speed>=1.0, 蝎子/蜘蛛/沙漠蜈蚣)保持更大距离防接触伤害"""
+    """根据怪种+稀有度+追击速度+突破点战术返回最佳攻击距离(停在怪真实碰撞箱外)
+    v1.19.8: 追得上的怪(aggro_speed>=1.0, 蝎子/蜘蛛/沙漠蜈蚣)保持更大距离防接触伤害
+    v1.20.1: BREAKTHROUGH 突破点 - 水母/萤火虫/冥界甲虫贴脸(电波中心安全/传送前秒掉),
+              岩石/仙人掌/赌徒远程, 黄蜂/胡蜂打带跑"""
     r = get_mob_radius(sid, rarity)
+    bt = mob_db.BREAKTHROUGH.get(_norm_sid(sid))
+    if bt:
+        mode = bt['dist_mode']
+        if mode == 'close':
+            return r + 1   # 贴脸: 水母电波中心安全, 冥界甲虫传送前快速输出
+        if mode == 'kite':
+            return r + 6   # 打带跑: 黄蜂/胡蜂预判导弹, 保持距离+折返
+        return r + 6       # far: 岩石反击弹幕/赌徒花瓣圈, 保持距离
     spd = mob_db.get_aggro_speed(_norm_sid(sid))
     # 追得上的高威胁怪: 保持距离(远程/冲撞都别贴脸)
     if spd >= 1.0:
