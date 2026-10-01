@@ -151,6 +151,29 @@ MOB_AGGRO_CLASS = {
     "ant_soldier_diver":"aggressive","beetle_mummy":"aggressive","mecha_flower":"boss",
 }
 
+# 追击速度系数(源码级: gardn Ai.cc, ×玩家加速度) —— 决定"能不能风筝"
+# ≥1.0 = 追得上玩家, 不能边走边打;  <1.0 = 追不上, 可风筝
+AGGRO_SPEED = {
+    "scorpion":1.20,"spider":1.20,"centipede_desert":1.33,
+    "soldier_ant":0.95,"ant_soldier":0.95,"fire_ant_soldier":0.95,"beetle":0.95,
+    "beetle_massive":0.95,"centipede_evil":0.95,"hornet":0.975,"wasp":0.975,
+    "ant_worker":0.975,"ladybug_dark":0.975,"ladybug_shiny":0.975,"queen_ant":0.95,"ant_queen":0.95,
+    "digger":0.95,"termite_soldier":0.95,"mantis":0.95,"moth":0.95,"leech":0.975,
+}
+
+def get_aggro_speed(sid):
+    """怪的追击速度系数; 默认0.95(攻击态基准) / 被动怪=0"""
+    if sid in AGGRO_SPEED:
+        return AGGRO_SPEED[sid]
+    cls = MOB_AGGRO_CLASS.get(sid, "passive")
+    if cls == "passive":
+        return 0.0
+    return 0.95
+
+def get_escape_dist(sid):
+    """风筝线 = 1.5 × 检测半径(源码 _focus_lose_clause): 出这个圈才丢仇恨"""
+    return 1.5 * get_aggro(sid)
+
 # ================= 怪物属性 =================
 def mobs():
     m = _load_json('mob_stats_full.json')
@@ -260,6 +283,10 @@ def assess_mob(sid, hp, player_dps, dist=None):
     if sid in PRIORITY_SIDS:
         score += 5000.0
     score += drop_value(sid) * 10.0
+    # 源码级危险修正: 追得上的怪(≥1.0倍速)危险加倍 - 必须秒杀或立即风筝
+    spd = get_aggro_speed(sid)
+    if spd >= 1.0:
+        score -= 3000.0 if action != 'oneshot' else 0.0
     if dist is not None:
         score += 2000.0 / (dist + 50)
     return action, score, rarity, cn(sid)
