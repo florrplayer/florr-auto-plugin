@@ -296,15 +296,22 @@ def type_id_to_sid(tid):
 _RARITY_VALUE = {"Common":1,"Rare":2,"Super":3,"Epic":4,"Legendary":5,"Mythic":10,"Ultra":30,"Unique":50}
 
 def drop_value(sid):
-    """打这只怪的价值分: 掉落花瓣种类数x稀有度权重x基础概率"""
+    """打这只怪的价值分: 掉落花瓣种类数x稀有度权重x基础概率
+    v1.19.6: 真源掉率优先(dropchance_v2 期望掉落数 × 档位稀有度权重), 无数据回退旧表"""
+    v2 = _load_drop_v2().get(sid)
+    if v2:
+        _TIER_W = {"Common":1,"Unusual":2,"Rare":4,"Epic":8,"Legendary":16,"Mythic":40,"Ultra":120,"Super":400}
+        total = 0.0
+        for tier, rows in v2.items():
+            if not rows:
+                continue
+            exp = sum(r.get('rate', 0) for r in rows)  # 该档期望掉落花瓣数(每花瓣独立roll)
+            total += exp * _TIER_W.get(tier, 1)
+        return total
     m = mobs().get(sid)
     if not m:
         return 0.0
-    total = 0.0
-    for d in m.get('drops', []):
-        chance = d.get('baseChance', 0)
-        total += chance * 50  # 掉落价值基础分(有掉落的怪更值得打)
-    return total
+    return sum(d.get('baseChance', 0) * 50 for d in m.get('drops', []))
 
 # ================= 真源掉率表 (FlorrBt私服 drop_rate.h 转译, v1.19.0) =================
 _DROP_V2 = None
