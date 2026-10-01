@@ -373,17 +373,7 @@ def detect_drops(frame=None, exclude_center=True, hsv=None, with_rank=False):
         frame = get_frame()
     if hsv is None:
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask = np.zeros(hsv.shape[:2], np.uint8)
-    for rng in RANK_HSV.values():
-        m = cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
-        mask = cv2.bitwise_or(mask, m)
-    if exclude_center:
-        cx, cy = get_screen_center()
-        cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
-    det_w = 960
-    det_h = int(hsv.shape[0] / _downscale)
-    small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
-    n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
+    small, n, labels, stats, cents = _cc_all(hsv)
     sh, sw = hsv.shape[:2]
     pts = []
     for i in range(1, n):
@@ -536,6 +526,29 @@ def detect_legendary(frame=None):
     return _detect_color(hsv, LEGENDARY_HSV)
 
 
+_CC_CACHE = {"t": 0.0, "hsv_id": None, "small": None, "n": 0, "labels": None, "stats": None, "cents": None}
+def _cc_all(hsv):
+    """v1.18.3: 一次全档 mask + 中心排除 + 降采样 + 连通域分析, 按帧缓存供 detect_all/projectiles/drops 共享
+    原来每帧三套独立全档 inRange+CC(实测 detect_all 9.7ms + projectiles 9.9ms + drops 9.2ms) -> 同帧只算一套"""
+    from utils import _FRAME
+    t = _FRAME["t"]
+    if _CC_CACHE["t"] == t and _CC_CACHE["hsv_id"] == id(hsv) and _CC_CACHE["small"] is not None:
+        return (_CC_CACHE["small"], _CC_CACHE["n"], _CC_CACHE["labels"],
+                _CC_CACHE["stats"], _CC_CACHE["cents"])
+    mask = np.zeros((hsv.shape[0], hsv.shape[1]), np.uint8)
+    for rng in RANK_HSV.values():
+        mask |= cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
+    cx, cy = get_screen_center()
+    cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
+    det_w = 960
+    det_h = int(hsv.shape[0] / _downscale)
+    small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
+    n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
+    _CC_CACHE.update({"t": t, "hsv_id": id(hsv), "small": small, "n": n,
+                      "labels": labels, "stats": stats, "cents": cents})
+    return small, n, labels, stats, cents
+
+
 def detect_all(frame=None, with_size=False, with_sid=False, hsv=None):
     """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)
     with_sid=True 时每点为 (x, y, r, sid): 怪种识别(按官方体型缩放+形状分类, 稀有度缩放系数内置)
@@ -545,16 +558,8 @@ def detect_all(frame=None, with_size=False, with_sid=False, hsv=None):
         frame = get_frame()
     if hsv is None:
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    small, n, labels, stats, cents = _cc_all(hsv)
     h, w = hsv.shape[:2]
-    mask = np.zeros((h, w), np.uint8)
-    for rng in RANK_HSV.values():
-        mask |= cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
-    cx, cy = get_screen_center()
-    cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
-    det_w = 960
-    det_h = int(h / _downscale)
-    small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
-    n, labels, stats, cents = cv2.connectedComponentsWithStats(small, 8)
     out = {rk: [] for rk in RANK_HSV}
     for i in range(1, n):
         area = stats[i, cv2.CC_STAT_AREA]
@@ -656,26 +661,19 @@ def detect_projectiles(frame=None, hsv=None):
         frame = get_frame()
     if hsv is None:
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mask_all = np.zeros((hsv.shape[0], hsv.shape[1]), np.uint8)
-    for rng in RANK_HSV.values():
-        mask_all |= cv2.inRange(hsv, np.array(rng[0]), np.array(rng[1]))
-    cx, cy = get_screen_center()
-    cv2.circle(mask_all, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
-    det_w = 960
-    det_h = int(hsv.shape[0] / _downscale)
-    small = cv2.resize(mask_all, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
+    small, n, labels, stats, cents = _cc_all(hsv)
     moving = []
     if _PROJ_PREV["mask"] is not None and _PROJ_PREV["mask"].shape == small.shape:
         diff = cv2.absdiff(small, _PROJ_PREV["mask"])
-        n, labels, stats, cents = cv2.connectedComponentsWithStats(diff, 8)
-        for i in range(1, n):
-            area = stats[i, cv2.CC_STAT_AREA]
-            w_, h_ = stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_HEIGHT]
+        n2, labels2, stats2, cents2 = cv2.connectedComponentsWithStats(diff, 8)
+        for i in range(1, n2):
+            area = stats2[i, cv2.CC_STAT_AREA]
+            w_, h_ = stats2[i, cv2.CC_STAT_WIDTH], stats2[i, cv2.CC_STAT_HEIGHT]
             if not (PROJ_MIN_PX * PROJ_MIN_PX / 4 <= area <= PROJ_MAX_PX * PROJ_MAX_PX):
                 continue
             if w_ > PROJ_MAX_PX * 1.5 or h_ > PROJ_MAX_PX * 1.5:
                 continue
-            moving.append((int(cents[i][0] * _downscale), int(cents[i][1] * _downscale)))
+            moving.append((int(cents2[i][0] * _downscale), int(cents2[i][1] * _downscale)))
     _PROJ_PREV["mask"] = small.copy()
     return moving
 

@@ -66,11 +66,11 @@ class MemoryBattle:
             ax = ax + CENTER_BIAS * cx
             ay = ay + CENTER_BIAS * cy
         if abs(ax) > abs(ay):
-            if ax < 0: self.w.key_down(VK_D)
-            else:      self.w.key_down(VK_A)
+            if ax < 0: self.w.key_down(VK_A)   # v1.18.3: 修方向反转(ax<0=逃向-x=按A向左, 原来按D送死)
+            else:      self.w.key_down(VK_D)
         else:
-            if ay < 0: self.w.key_down(VK_S)
-            else:      self.w.key_down(VK_W)
+            if ay < 0: self.w.key_down(VK_W)   # v1.18.3: 修方向反转(ay<0=逃向-y=按W向上)
+            else:      self.w.key_down(VK_S)
 
     def _move_dir(self, d):
         """按指定方向移动 (w/a/s/d)"""

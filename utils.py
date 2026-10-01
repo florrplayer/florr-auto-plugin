@@ -17,6 +17,31 @@ _STAGE_CACHE = {"image": None, "stage": None}
 ARRIVE = 5.0        # 到达判定阈值（地图像素）
 FRAME_TTL = 0.05    # 帧缓存有效期（秒）
 _screen_center = [960, 540]   # 实际窗口客户区中心(启动时标定, 兼容4K/DPI缩放)
+_CAPTURE_ON = False            # v1.18.3: 异步抓帧线程标志
+_capture_thread = None
+
+
+def start_capture_thread():
+    """v1.18.3: 后台抓帧线程 - ImageGrab 实测固定~100ms/次(屏幕合成器开销, 与区域无关)
+    主循环每圈 get_frame 都会阻塞100ms -> 决策仅~10fps。线程持续抓帧, 主循环读最新帧不阻塞。
+    线程安全: _FRAME["img"] 整体替换引用(GIL下原子), 读者拿到旧/新帧均完整"""
+    global _CAPTURE_ON, _capture_thread
+    if _CAPTURE_ON:
+        return
+    import threading
+    _CAPTURE_ON = True
+    def _worker():
+        while _CAPTURE_ON:
+            try:
+                img = get_window().capture()
+                if img is not None:
+                    _FRAME["t"] = time.time()
+                    _FRAME["img"] = img
+            except Exception:
+                pass
+            time.sleep(0.02)   # 尝试 ~50fps; capture 自身~100ms 决定实际 ~10fps
+    _capture_thread = threading.Thread(target=_worker, daemon=True)
+    _capture_thread.start()
 
 
 def set_screen_center(w, h):
@@ -45,11 +70,17 @@ def load_binary_map():
 
 
 def get_frame(force=False):
-    """共享帧缓存：一次 PrintWindow 截图供同帧多次读取复用。
-
-    原实现每次 get_pixel / get_map 都做一次全窗口 PrintWindow 截图
-    （单次可达 30~200ms），运动循环每 50ms 就要截 2~3 次，是最大瓶颈。
-    """
+    """共享帧缓存：一次截图供同帧多次读取复用。
+    v1.18.3: 若异步抓帧线程已启动(capture 实测固定~100ms/次, 阻塞主循环), get_frame 直接读最新帧不阻塞;
+    否则走原逻辑(主线程截图)"""
+    if _CAPTURE_ON:
+        img = _FRAME["img"]
+        if img is None or force:
+            if force:
+                _FRAME["t"] = time.time()
+                _FRAME["img"] = img = get_window().capture()
+            return img
+        return img
     now = time.time()
     img = _FRAME["img"]
     if force or img is None or now - _FRAME["t"] > FRAME_TTL:

@@ -600,28 +600,6 @@ def leech_target(t, trail):
         set_k(set())
 
 
-def handle_danger(pos, near, ranks_map, trail, kill_rank):
-    """>秒杀等级的危险怪: 先尝试绕开(5px设墙); 绕不开则往怪最少的方向跑, 直到脱离"""
-    from combat import (build_avoid_map, detect_all, screen_to_map_safe,
-                        RANK_ORDER, escape_direction)
-    binary = load_binary_map()
-    dx, dy = pos[0] - near[0], pos[1] - near[1]
-    nd = math.hypot(dx, dy) or 1.0
-    # 1) 尝试绕开
-    avoid = build_avoid_map(binary, [near], pos)
-    escape = calibrate_player(avoid, (pos[0] + dx / nd * 40, pos[1] + dy / nd * 40))
-    p = lazy_theta_star(avoid, pos, escape)
-    if p:
-        print("[危险] 尝试绕开...")
-        lazy_theta_execute_path(p)
-        return True
-    # 2) 绕不开：往怪最少的方向跑
-    print("[危险] 绕不开，往怪最少的方向跑")
-    ex, ey = escape_direction(ranks_map, pos, binary=binary)
-    goal = calibrate_player(binary, (pos[0] + ex * 50, pos[1] + ey * 50))
-    p2 = lazy_theta_star(binary, pos, goal)
-    if p2:
-        lazy_theta_execute_path(p2)
 def draw_overlay_window(patrol_points, pos=None):
     """实时地图窗口: 红=寻路路径 绿=玩家 蓝=巡逻点 黄=当前目标(每0.3s刷新)"""
     try:
@@ -823,6 +801,10 @@ if __name__ == "__main__":
     # 画面冻结监测: 最小化/遮挡时自动恢复窗口(Edge最小化会暂停渲染, 截图会失明)
     threading.Thread(target=freeze_watchdog, daemon=True).start()
     print("[+] 画面冻结监测已开启（窗口被最小化/遮挡会自动恢复）")
+    # v1.18.3: 异步抓帧线程(ImageGrab固定~100ms/次, 主循环不再被截图阻塞, 决策帧率~10fps -> 不阻塞)
+    from utils import start_capture_thread
+    start_capture_thread()
+    print("[+] 异步抓帧线程已启动（截图不阻塞主循环）")
 
     # ===== 后台防御线程：一直按住右键 =====
     # ===== 交互配置(弹窗让玩家选, 存档后只问要不要更新) =====
@@ -1022,6 +1004,8 @@ if __name__ == "__main__":
             if time.time() - _STATS["report"] > 300:
                 _STATS["report"] = time.time()
                 print(f"[统计] 已运行 {int((time.time() - _STATS['t0']) / 60)} 分钟 | 战斗 {_STATS['fights']} 次 | 拾取掉落 {_STATS['pickups']} 次")
+            target = None   # v1.18.3: 循环顶部初始化(否则Boss暂停/首圈/不打怪模式 1264 引用未定义变量 NameError)
+            ranks_map = {}
             # ===== AFK Check 弹窗("Are you here?", 60秒不点踢下线): 中心暗+静止连续4帧 -> 点Yes =====
             from combat import detect_afk_check
             _cdf = get_frame()
@@ -1054,6 +1038,8 @@ if __name__ == "__main__":
                         time.sleep(1.5)
                     else:
                         print(f"[AFK] 检测到 AFK Check 弹窗(中心灰度{_cmean:.0f})，点击 Yes 按钮...")
+                        from utils import get_screen_center
+                        _ccx, _ccy = get_screen_center()
                         get_window().left_click(_ccx, _ccy + 60)
                         time.sleep(2)
                 _afk_hits = 0
@@ -1238,7 +1224,7 @@ if __name__ == "__main__":
                             else:
                                 time.sleep(HUMAN_REACT_MIN + random.random() * (HUMAN_REACT_MAX - HUMAN_REACT_MIN))
                         set_title("战斗中")
-                        from combat import mob_name, drop_hint, mob_hp
+                        from combat import mob_name, drop_hint, mob_hp, threat_hint
                         _tname = mob_name(target[3]) if len(target) >= 4 and target[3] else "未知"
                         _drop = drop_hint(target[3], rarity=5) if len(target) >= 4 and target[3] else ""
                         _kidx = RANK_ORDER.index(kill_rank) if kill_rank in RANK_ORDER else 5

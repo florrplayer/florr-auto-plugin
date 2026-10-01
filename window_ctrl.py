@@ -171,21 +171,52 @@ class WindowController:
             wc.SWP_NOACTIVATE | wc.SWP_NOSIZE | wc.SWP_NOMOVE | wc.SWP_SHOWWINDOW,
         )
 
+    def _printwindow_capture(self):
+        """PrintWindow + PW_RENDERFULLCONTENT 快速截客户区(绕过屏幕合成器, 后台也能截)
+        实测 ImageGrab 抓屏固定 ~100ms(与区域大小无关); PrintWindow 只渲染目标窗口, 快 5-20x
+        现代 Chromium Edge 支持 PW_RENDERFULLCONTENT(2); 失败/全黑返回 None 由调用方回退"""
+        try:
+            from ctypes import windll
+            hwnd = self.hwnd
+            l, t, r, b = win32gui.GetClientRect(hwnd)
+            w, h = r - l, b - t
+            if w <= 0 or h <= 0:
+                return None
+            hdc_win = win32gui.GetDC(hwnd)
+            hdc_mem = win32ui.CreateDCFromHandle(hdc_win)
+            hbmp = win32ui.CreateBitmap()
+            hbmp.CreateCompatibleBitmap(hdc_win, w, h)
+            hdc_mem.SelectObject(hbmp)
+            PW_RENDERFULLCONTENT = 2
+            ok = windll.user32.PrintWindow(hwnd, hdc_mem.GetSafeHdc(), PW_RENDERFULLCONTENT)
+            hdc_mem.DeleteDC()
+            win32gui.ReleaseDC(hwnd, hdc_win)
+            if not ok:
+                return None
+            bits = hbmp.GetBitmapBits(True)
+            img = np.frombuffer(bits, dtype=np.uint8).reshape((h, w, 4))
+            img = img[:, :, [2, 1, 0]]  # BGRA -> BGR
+            if not img.any():
+                return None
+            return np.ascontiguousarray(img)
+        except Exception:
+            return None
+
     def capture(self, region=None):
         """截取窗口客户区，返回 BGR numpy 数组
-        用 PIL ImageGrab 截全屏然后裁剪(PrintWindow对Edge截到旧缓存, BitBlt全黑)
-        注意: florr窗口需在前台可见, 不要被其他窗口遮挡"""
+        v1.18.3: 优先 PrintWindow(快速, 后台可截); 失败/全黑回退 ImageGrab bbox
+        注意: ImageGrab 路径要求 florr窗口在前台可见"""
         if not self.hwnd:
             raise RuntimeError("窗口未初始化")
-        from PIL import ImageGrab
-        l, t, r, b = win32gui.GetClientRect(self.hwnd)
-        w, h = r - l, b - t
-        # 客户区转屏幕坐标
-        sl, st = win32gui.ClientToScreen(self.hwnd, (0, 0))
-        screen = ImageGrab.grab()
-        pil_img = screen.crop((sl, st, sl + w, st + h))
-        img = np.array(pil_img)
-        img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+        img = self._printwindow_capture()
+        if img is None:
+            from PIL import ImageGrab
+            l, t, r, b = win32gui.GetClientRect(self.hwnd)
+            w, h = r - l, b - t
+            sl, st = win32gui.ClientToScreen(self.hwnd, (0, 0))
+            pil_img = ImageGrab.grab(bbox=(sl, st, sl + w, st + h))
+            img = np.array(pil_img)
+            img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
         if region:
             x, y, rw, rh = region
             img = img[y:y + rh, x:x + rw]

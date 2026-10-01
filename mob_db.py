@@ -259,9 +259,8 @@ def drop_value(sid):
 def assess_mob(sid, hp, player_dps, dist=None):
     """综合评估一只怪: 返回 (action, score, rarity, name_cn)
     action: 'oneshot'(秒杀追) / 'fight'(可打) / 'flee'(避开) / 'ignore'(不管) / 'danger'(危险逃跑)
+    v1.18.3: 危险怪能秒杀照样打(用户: 秒杀自动追), 秒不了才避开
     """
-    if sid in DANGER_SIDS:
-        return 'danger', -1000, None, cn(sid)
     rarity = rarity_infer(sid, hp)
     hi = hp_range(sid, rarity)
     max_hp = hi[1] if hi else hp
@@ -274,6 +273,9 @@ def assess_mob(sid, hp, player_dps, dist=None):
             action = 'ignore'
     else:
         action = 'fight' if max_hp < 500 else 'ignore'
+    # 危险怪: 秒不了的才避开(能秒的走 oneshot 追击)
+    if sid in DANGER_SIDS and action != 'oneshot':
+        return 'danger', -1000, None, cn(sid)
     # 评分: 秒杀优先 + 特殊怪加成 + 掉落价值 + 距离
     score = 0.0
     if action == 'oneshot':
