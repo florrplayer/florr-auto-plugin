@@ -121,7 +121,26 @@ class MemoryBattle:
 
                 if target:
                     dist = math.hypot(target['x']-px, target['y']-py)
-                    if dist > STOP_DIST:
+                    spd = mob_db.get_aggro_speed(target['sid'])   # AI研究: 追击速度系数(≥1.0=追得上玩家)
+                    # 追得上的怪(冲撞/毒)不能站桩贴脸(接触伤害白嫖), 用打带跑: 蹭1下立刻拉开
+                    hit_run = (spd >= 1.0) and (target.get('score', 0) < 1000)
+                    if hit_run and dist > STOP_DIST:
+                        dx, dy = target['x']-px, target['y']-py
+                        self._move_towards(dx, dy)
+                        print(f"[打带跑] {target['cn']}({target.get('rarity','')}) 追击速度{spd:.2f} 距离{dist:.0f}")
+                        last_move = time.time()
+                    elif hit_run and dist <= STOP_DIST:
+                        # 贴到跟前打一下立刻撤 (0.8s输出后反向拉开)
+                        self._keys_release()
+                        now = time.time()
+                        if now - last_move > 0.8:
+                            self._run_away(px-target['x'], py-target['y'], px, py)
+                            print(f"[打带跑] 蹭完即撤")
+                            last_move = now
+                        else:
+                            # 输出窗口内保持静止(防御状态的花瓣在打)
+                            time.sleep(0.15)
+                    elif dist > STOP_DIST:
                         dx, dy = target['x']-px, target['y']-py
                         self._move_towards(dx, dy)
                         print(f"[打] {target['cn']}({target.get('rarity','')}) hp={target['hp']} 距离{dist:.0f} 评分{target.get('score',0):.0f}")
