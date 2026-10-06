@@ -499,7 +499,7 @@ def chase_target(patrol_goal, trail, kill_rank, stop_dist=None, fixed_target=Non
 
 LEECH_RANGE = 25.0      # 蹭掉落触发范围(地图像素): 高等级怪距玩家10-25px时
 LEECH_APPROACH = 5.0    # 蹭掉落贴近距离: 走到5px内站定输出
-LEECH_TIME = 2.5        # 站定输出秒数(总伤害>1%即可分掉落)
+LEECH_TIME = 4.0        # v1.24.3: 站定输出秒数 - 官方最新机制需伤害≥5%+屏幕距离内才能分掉落(changelog), 2.5s不足, 提到4s
 PICKUP_DROPS = False   # 掉落自动拾取(顺路捡: 只捡距玩家<=PICKUP_RANGE的掉落); 装了磁铁花瓣建议关(磁铁自动吸附近掉落, 跑过去捡反而浪费时间)
 PICKUP_MIN_RANK = 3      # v1.7.0 掉落价值筛选: 只捡稀有度权重>=此值的掉落(3=Epic, 垃圾掉落不浪费时间)
 PICKUP_ARRIVE = 4.0     # 走到多近算"碰到"(玩家本体碰撞即拾取)
@@ -547,7 +547,8 @@ def walk_to_pickup(t, trail):
 
 
 def leech_target(t, trail):
-    """朝高等级怪走到5px内, 站定2.5秒(攻击/防御线程自动输出>1%伤害混掉落), 期间低血/危险中断"""
+    """朝高等级怪走到5px内, 站定输出LEECH_TIME秒(攻击/防御线程自动输出≥5%伤害混掉落), 期间低血/危险中断
+    v1.24.3: 官方机制需≥5%伤害+屏幕距离内才分掉落(changelog), 站定时间已提到4s"""
     from combat import HP_FLEE, get_hp_ratio
     w = get_window()
     t0 = time.time()
@@ -1215,7 +1216,7 @@ if __name__ == "__main__":
                             continue
                         print(f"[稀有] {sp_name} 结束，继续巡逻")
                         continue
-                    # 蹭掉落: 打不动的更高等级怪在10-25px内 -> 打2.5s混掉落(总伤害>1%即可分掉落)
+                    # 蹭掉落: 打不动的更高等级怪在10-25px内 -> 打LEECH_TIME秒混掉落(总伤害≥5%即可分掉落, v1.24.3)
                     if LEECH:
                         far = []
                         for r in RANK_ORDER[idx + 1:]:
