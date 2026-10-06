@@ -846,10 +846,15 @@ if __name__ == "__main__":
             return False
         if not _bridge_has_data(1.5):
             import subprocess
-            bp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bridge_server.py")
-            if os.path.exists(bp):
+            base = os.path.dirname(os.path.abspath(__file__))
+            # v1.35: 优先同目录 bridge_server.exe (小白版免Python), 否则 bridge_server.py
+            bpy = os.path.join(base, "bridge_server.exe")
+            if not os.path.exists(bpy):
+                bpy = os.path.join(base, "bridge_server.py")
+            if os.path.exists(bpy):
                 try:
-                    subprocess.Popen([sys.executable, bp], creationflags=0x08000000)  # CREATE_NO_WINDOW
+                    cmd = [bpy] if bpy.endswith(".exe") else [sys.executable, bpy]
+                    subprocess.Popen(cmd, creationflags=0x08000000)  # CREATE_NO_WINDOW
                     print("[内存] 自动启动 bridge_server(127.0.0.1:18899)...")
                 except Exception:
                     pass

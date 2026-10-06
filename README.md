@@ -13,11 +13,12 @@
 3. 运行 `py main.py 地图名`（如 `py main.py desert`）
 4. 挂机中！看 cmd 日志就行
 
-## 内存模式（免截图，更快更准）
+## 内存模式（v1.35 默认自动开启，免截图，更快更准）
 
-- 先跑桥接：`py bridge_server.py`（或直接双击 **bridge_server.exe** Go 版，免 Python 环境）
-- 浏览器打开 florr.io 进图后：`py main.py desert --memory`
+- **默认自动**：运行 `py main.py 地图名` 会自动探测/拉起 bridge_server，连上即内存模式，连不上自动回退截图模式，零配置
+- 小白版自带 **bridge_server.exe**（免 Python 环境），内存模式开箱即用
 - 直接读 wasm 内存：玩家坐标 100% 准确、怪种类/稀有度(HP反推)/真实碰撞箱/追击圈全识别
+- 参数：`--screenshot` 强制截图模式；`--memory` 强制内存模式
 
 ## 功能
 
