@@ -1,120 +1,592 @@
 {
- "basic": {"sid": "basic", "name": "Basic", "description": "A nice petal, not too strong but not too weak."},
- "light": {"sid": "light", "name": "Light", "description": "Weaker than most petals, but recharges very quickly."},
- "rock": {"sid": "rock", "name": "Rock", "description": "Extremely durable, but takes a bit longer to recharge."},
- "square": {"sid": "square", "name": "Square", "description": "This shape... it looks familiar..."},
- "rose": {"sid": "rose", "name": "Rose", "description": "Its healing properties are amazing. Not so good at combat though."},
- "stinger": {"sid": "stinger", "name": "Stinger", "description": "It really hurts, but it's very fragile."},
- "iris": {"sid": "iris", "name": "Iris", "description": "Very poisonous, but takes a little while to do its work.<n/>-50% damage vs other flowers."},
- "wing": {"sid": "wing", "name": "Wing", "description": "It comes and goes."},
- "missile": {"sid": "missile", "name": "Missile", "description": "You can actually shoot this one."},
- "grapes": {"sid": "grapes", "name": "Grapes", "description": "It goes poof. Now with a secret ingredient: poison."},
- "cactus": {"sid": "cactus", "name": "Cactus", "description": "Not very strong, but somehow increases your maximum health."},
- "faster": {"sid": "faster", "name": "Faster", "description": "It's so light it makes your other petals spin faster."},
- "bubble": {"sid": "bubble", "name": "Bubble", "description": "Physics are for the weak."},
- "pollen": {"sid": "pollen", "name": "Pollen", "description": "Asthmatics beware."},
- "dandelion": {"sid": "dandelion", "name": "Dandelion", "description": "Its interesting properties inhibits healing effects on affected units.<n/>Affected units have their healing reduced by 20%. Stacks with itself."},
- "beetle_egg": {"sid": "beetle_egg", "name": "Egg", "description": "Something interesting might pop out of this."},
- "antennae": {"sid": "antennae", "name": "Antennae", "description": "Allows your flower to sense foes farther away."},
- "heavy": {"sid": "heavy", "name": "Heavy", "description": "This thing is so heavy that nothing gets in the way.<n/>Slows down petal rotation speed when equipped."},
- "yin_yang": {"sid": "yin_yang", "name": "Yin Yang", "description": "This mysterious petal affects the rotation of your petals in unpredictable ways."},
- "web": {"sid": "web", "name": "Web", "description": "It's really sticky."},
- "honey": {"sid": "honey", "name": "Honey", "description": "Mobs love this. Attracts them in a large radius.<n/>Mobs will prioritize this over flowers.<n/>Affected units develop immunity to its effects after some time."},
- "leaf": {"sid": "leaf", "name": "Leaf", "description": "Gathers energy from the sun to heal your flower passively."},
- "salt": {"sid": "salt", "name": "Salt", "description": "Reflects some of the damage you take back to the enemy that dealt it.<n/>Higher rarity mobs have higher resistance to damage reflection."},
- "rice": {"sid": "rice", "name": "Rice", "description": "Spawns very quickly, but not very strong."},
- "corn": {"sid": "corn", "name": "Corn", "description": "Takes a long time to spawn, but has a lot of health."},
- "sand": {"sid": "sand", "name": "Sand", "description": "A bunch of sand particles."},
- "pincer": {"sid": "pincer", "name": "Pincer", "description": "Debilitates enemies temporarily, reducing their movement speed."},
- "yucca": {"sid": "yucca", "name": "Yucca", "description": "Heals your flower but only while in the defensive position."},
- "magnet": {"sid": "magnet", "name": "Magnet", "description": "Increases drop pick up range."},
- "yggdrasil": {"sid": "yggdrasil", "name": "Yggdrasil", "description": "A dried leaf from the Yggdrasil tree.<n/>Rumored to be able to bring the fallen back to life."},
- "starfish": {"sid": "starfish", "name": "Starfish", "description": "Increases health regen while below 75% health."},
- "pearl": {"sid": "pearl", "name": "Pearl", "description": "Just drop it off somewhere and use your kinetic powers so you don't lose it."},
- "lightning": {"sid": "lightning", "name": "Lightning", "description": "Strikes several nearby enemies."},
- "jelly": {"sid": "jelly", "name": "Jelly", "description": "No one likes touching this."},
- "claw": {"sid": "claw", "name": "Claw", "description": "Deals extra damage if the victim is above 80% health.<n/>-50% damage vs other flowers."},
- "shell": {"sid": "shell", "name": "Shell", "description": "Adds a temporary shield to yourself or allies."},
- "cutter": {"sid": "cutter", "name": "Cutter", "description": "A friend used to own this... now it's time for revenge.<n/>Increases body damage."},
- "dahlia": {"sid": "dahlia", "name": "Dahlia", "description": "A small amount of heal but fairly consistent."},
- "uranium": {"sid": "uranium", "name": "Uranium", "description": "Periodically releases radiation.<n/>-75% damage versus other flowers.<n/>Effect strength depends on distance to petal."},
- "sponge": {"sid": "sponge", "name": "Sponge", "description": "Spreads damage taken by the flower over a period of time.<n/>If destroyed, deals remaining damage all at once.<n/>Does not delay {#Attribute/PoisonNoColon} damage."},
- "soil": {"sid": "soil", "name": "Soil", "description": "Increases health, but also increases flower size and decreases movement speed."},
- "fang": {"sid": "fang", "name": "Fang", "description": "Heals based on damage dealt by this petal."},
- "third_eye": {"sid": "third_eye", "name": "Third Eye", "description": "Allows your flower to expand your petals further out."},
- "peas": {"sid": "peas", "name": "Peas", "description": "It goes poof."},
- "stick": {"sid": "stick", "name": "Stick", "description": "A mysterious stick that summons the forces of the wind."},
- "clover": {"sid": "clover", "name": "Clover", "description": "Increases your luck.<n/>{#UI/Luck/Help}"},
- "powder": {"sid": "powder", "name": "Powder", "description": "Increases movement speed.<n/>Disabled if flower takes damage or if near a mob higher than a certain rarity."},
- "air": {"sid": "air", "name": "Air", "description": "It's literally nothing."},
- "basil": {"sid": "basil", "name": "Basil", "description": "Increases all healing received."},
- "orange": {"sid": "orange", "name": "Orange", "description": "A sweet citrus fruit."},
- "ant_egg": {"sid": "ant_egg", "name": "Egg", "description": "Something interesting might pop out of this."},
- "poo": {"sid": "poo", "name": "Poo", "description": "Makes mobs less likely to want to attack you."},
- "relic": {"sid": "relic", "name": "Relic", "description": "A strange relic. Significantly increases maximum health.<n/>Damage taken is spread among other wearers."},
- "lotus": {"sid": "lotus", "name": "Lotus", "description": "Absorbs poison damage taken by the flower."},
- "bulb": {"sid": "bulb", "name": "Bulb", "description": "A shiny lightbulb. Draws aggro from mobs."},
- "cotton": {"sid": "cotton", "name": "Cotton", "description": "Absorbs damage taken by the flower."},
- "carrot": {"sid": "carrot", "name": "Carrot", "description": "Sturdy and reliable. Can be shot and bounces off walls."},
- "bone": {"sid": "bone", "name": "Bone", "description": "Sturdy. Loses half of its armor each hit."},
- "plank": {"sid": "plank", "name": "Plank", "description": "Does 20x damage vs projectiles and petals."},
- "tomato": {"sid": "tomato", "name": "Tomato", "description": "Gets stronger over time."},
- "mark": {"sid": "mark", "name": "Mark", "description": "A dark mark that binds itself to a fallen soul."},
- "rubber": {"sid": "rubber", "name": "Rubber", "description": "Increases knockback received. Also absorbs lightning damage dealt to the flower."},
- "blood_stinger": {"sid": "blood_stinger", "name": "Stinger", "description": "It really hurts, but it's very fragile.<n/>Deals damage to self when spawned."},
- "bur": {"sid": "bur", "name": "Bur", "description": "Decreases armor of affected unit. Does not stack with itself."},
- "root": {"sid": "root", "name": "Root", "description": "Provides a layer of additional armor every interval, a layer is removed each time damage is taken."},
- "ankh": {"sid": "ankh", "name": "Ankh", "description": "An ancient relic.<n/>When destroyed, will teleport the flower back to where it was destroyed."},
- "dice": {"sid": "dice", "name": "Dice", "description": "Has a 5% chance of dealing 35x damage.<n/>Chance increases by 4% per point in luck."},
- "talisman": {"sid": "talisman", "name": "Talisman", "description": "A necklace that allows the wearer to anticipate enemy attacks."},
- "battery": {"sid": "battery", "name": "Battery", "description": "Discharges electricity whenever the flower gets hit."},
- "amulet": {"sid": "amulet", "name": "Amulet", "description": "Converts a percentage of overheal into shields."},
- "compass": {"sid": "compass", "name": "Compass", "description": "This crappy thing might be able to find something interesting..."},
- "disc": {"sid": "disc", "name": "Disc", "description": "Reduces damage taken from collisions with mobs and flowers."},
- "shovel": {"sid": "shovel", "name": "Shovel", "description": "Becomes untargetable but unable to use petals for a limited time."},
- "coin": {"sid": "coin", "name": "Coin", "description": "The power of capitalism compels you!"},
- "chip": {"sid": "chip", "name": "Chip", "description": "ALL IN."},
- "card": {"sid": "card", "name": "Card", "description": "A playing card. Likely marked."},
- "moon": {"sid": "moon", "name": "Moon", "description": "This thing is so big your petals orbit it instead.<n/>Where did you find this anyway?"},
- "privet": {"sid": "privet", "name": "Privet", "description": "Deals extra {#Attribute/PoisonNoColon} damage based on the existing {#Attribute/PoisonNoColon} damage per second."},
- "glass": {"sid": "glass", "name": "Glass", "description": "Phases through enemies.<n/>Cannot damage enemies more often than a certain interval."},
- "corruption": {"sid": "corruption", "name": "Corruption", "description": "Corrupts one's soul, turning them against their own kind."},
- "orb": {"sid": "orb", "name": "Orb", "description": "Creates mana."},
- "blueberries": {"sid": "blueberries", "name": "Blueberries", "description": "It goes poof. Now with the extra secret ingredient: lightning."},
- "magic_cotton": {"sid": "magic_cotton", "name": "Cotton", "description": "Absorbs damage taken by the flower."},
- "magic_stinger": {"sid": "magic_stinger", "name": "Stinger", "description": "It really hurts, but it's very fragile."},
- "magic_leaf": {"sid": "magic_leaf", "name": "Leaf", "description": "Gathers mana from the environment passively."},
- "magic_cactus": {"sid": "magic_cactus", "name": "Cactus", "description": "Increases maximum mana capacity."},
- "magic_eye": {"sid": "magic_eye", "name": "Magic Eye", "description": "Consumes half the current mana and deals damage based on that value."},
- "magic_missile": {"sid": "magic_missile", "name": "Missile", "description": "You can actually shoot this one... with magic."},
- "magic_stick": {"sid": "magic_stick", "name": "Stick", "description": "A mysterious stick that summons the forces of the wind... with magic."},
- "coral": {"sid": "coral", "name": "Coral", "description": "Breaks apart on impact.<n/>Each piece has 50% of the stats of the predecessor."},
- "magic_bubble": {"sid": "magic_bubble", "name": "Bubble", "description": "Physics are for the magicless."},
- "nazar": {"sid": "nazar", "name": "Nazar", "description": "When the flower receives damage, reduces it by 98% and consumes a charge."},
- "mimic": {"sid": "mimic", "name": "Mimic", "description": "Copies the petal to the left of this, with the same rarity as this."},
- "mjolnir": {"sid": "mjolnir", "name": "{#Petals/mjolnir/{0:rarity}/Name#Petals/mjolnir/default/Name}", "description": "{#Petals/mjolnir/{0:rarity}/Description#Petals/mjolnir/default/Description}"},
- "mecha_missile": {"sid": "mecha_missile", "name": "Missile", "description": "Locked on."},
- "wax": {"sid": "wax", "name": "Wax", "description": "Don't ask where it came from."},
- "golden_leaf": {"sid": "golden_leaf", "name": "Leaf", "description": "A very special leaf, seems to allow you to use your other petals even more."},
- "cog": {"sid": "cog", "name": "Cog", "description": "Doesn't seem to do much..."},
- "monstera": {"sid": "monstera", "name": "Monstera", "description": "Heals flowers around it.<n/>Effect fades out with distance to petal."},
- "mecha_antennae": {"sid": "mecha_antennae", "name": "Antennae", "description": "Allows your flower to sense foes farther away.<n/>And it has a blinking red light on top."},
- "laser": {"sid": "laser", "name": "Laser", "description": "Pew pew."},
- "domino": {"sid": "domino", "name": "Domino", "description": "Damage depends on how many dots it has."},
- "bandage": {"sid": "bandage", "name": "Bandage", "description": "Turns the flower <c val=\"{#Colors/undead}\">Undead</c> for a limited time on death.<n/>Delays death until expiration.<n/>Flower <c val=\"{#Colors/damage}\">Body Damage</c> is reduced during this period.<n/>Prevents revival for some time afterwards."},
- "pharaoh_crown": {"sid": "pharaoh_crown", "name": "Crown", "description": "Spawns <c val=\"{#Colors/undead}\">Undead</c> Beetles to fight at your side."},
- "totem": {"sid": "totem", "name": "Totem", "description": "Grants health regen for a certain duration after killing a mob."},
- "triangle": {"sid": "triangle", "name": "Triangle", "description": "Each copy of this petal equipped grants additional damage to it."},
- "electric_web": {"sid": "electric_web", "name": "Web", "description": "It's a little less sticky, but a bit more shocking."},
- "sacrifice": {"sid": "sacrifice", "name": "Sacrifice", "description": "On death, summons a mob to fight again.<n/>Mob type depends on where the sacrifice happens.<n/>Cannot be used in low mob rarity areas."},
- "sawblade": {"sid": "sawblade", "name": "Sawblade", "description": "This looks like it'd hurt."},
- "clay": {"sid": "clay", "name": "Clay", "description": "It sticks to dust in the air to get bigger and stronger."},
- "dust": {"sid": "dust", "name": "Dust", "description": "Sometimes it sticks together, sometimes it doesn't."},
- "broccoli": {"sid": "broccoli", "name": "Broccoli", "description": "Explodes when it hits something. For reasons unknown."},
- "lentil": {"sid": "lentil", "name": "Lentil", "description": "Increases petal attraction to enemies."},
- "dead_leaf": {"sid": "dead_leaf", "name": "Leaf", "description": "Increases petal health but makes them reload slower."},
- "splitter": {"sid": "splitter", "name": "Splitter", "description": "{#Petals/splitter/Description/{0:rarity}#Petals/splitter/Description/default}"},
- "goggles": {"sid": "goggles", "name": "Goggles", "description": "Allows finding some paranormal activity."},
- "bean": {"sid": "bean", "name": "Bean", "description": "Deals more damage if there are no allied flowers around you."},
- "champion_crown": {"sid": "champion_crown", "name": "Crown", "description": "Gives flowers around you a {#Rarities/super/NameColored} {#Petals/basic/FullName}.<n/>You receive credit for damage dealt using it."}
+ "basic": {
+  "sid": "basic",
+  "name": "Basic",
+  "description": "A nice petal, not too strong but not too weak."
+ },
+ "light": {
+  "sid": "light",
+  "name": "Light",
+  "description": "Weaker than most petals, but recharges very quickly."
+ },
+ "rock": {
+  "sid": "rock",
+  "name": "Rock",
+  "description": "Extremely durable, but takes a bit longer to recharge."
+ },
+ "square": {
+  "sid": "square",
+  "name": "Square",
+  "description": "This shape... it looks familiar..."
+ },
+ "rose": {
+  "sid": "rose",
+  "name": "Rose",
+  "description": "Its healing properties are amazing. Not so good at combat though."
+ },
+ "stinger": {
+  "sid": "stinger",
+  "name": "Stinger",
+  "description": "It really hurts, but it's very fragile."
+ },
+ "iris": {
+  "sid": "iris",
+  "name": "Iris",
+  "description": "Very poisonous, but takes a little while to do its work.<n/>-50% damage vs other flowers."
+ },
+ "wing": {
+  "sid": "wing",
+  "name": "Wing",
+  "description": "It comes and goes."
+ },
+ "missile": {
+  "sid": "missile",
+  "name": "Missile",
+  "description": "You can actually shoot this one."
+ },
+ "grapes": {
+  "sid": "grapes",
+  "name": "Grapes",
+  "description": "It goes poof. Now with a secret ingredient: poison."
+ },
+ "cactus": {
+  "sid": "cactus",
+  "name": "Cactus",
+  "description": "Not very strong, but somehow increases your maximum health."
+ },
+ "faster": {
+  "sid": "faster",
+  "name": "Faster",
+  "description": "It's so light it makes your other petals spin faster."
+ },
+ "bubble": {
+  "sid": "bubble",
+  "name": "Bubble",
+  "description": "Physics are for the weak."
+ },
+ "pollen": {
+  "sid": "pollen",
+  "name": "Pollen",
+  "description": "Asthmatics beware."
+ },
+ "dandelion": {
+  "sid": "dandelion",
+  "name": "Dandelion",
+  "description": "Its interesting properties inhibits healing effects on affected units.<n/>Affected units have their healing reduced by 20%. Stacks with itself."
+ },
+ "beetle_egg": {
+  "sid": "beetle_egg",
+  "name": "Egg",
+  "description": "Something interesting might pop out of this."
+ },
+ "antennae": {
+  "sid": "antennae",
+  "name": "Antennae",
+  "description": "Allows your flower to sense foes farther away."
+ },
+ "heavy": {
+  "sid": "heavy",
+  "name": "Heavy",
+  "description": "This thing is so heavy that nothing gets in the way.<n/>Slows down petal rotation speed when equipped."
+ },
+ "yin_yang": {
+  "sid": "yin_yang",
+  "name": "Yin Yang",
+  "description": "This mysterious petal affects the rotation of your petals in unpredictable ways."
+ },
+ "web": {
+  "sid": "web",
+  "name": "Web",
+  "description": "It's really sticky."
+ },
+ "honey": {
+  "sid": "honey",
+  "name": "Honey",
+  "description": "Mobs love this. Attracts them in a large radius.<n/>Mobs will prioritize this over flowers.<n/>Affected units develop immunity to its effects after some time."
+ },
+ "leaf": {
+  "sid": "leaf",
+  "name": "Leaf",
+  "description": "Gathers energy from the sun to heal your flower passively."
+ },
+ "salt": {
+  "sid": "salt",
+  "name": "Salt",
+  "description": "Reflects some of the damage you take back to the enemy that dealt it.<n/>Higher rarity mobs have higher resistance to damage reflection."
+ },
+ "rice": {
+  "sid": "rice",
+  "name": "Rice",
+  "description": "Spawns very quickly, but not very strong."
+ },
+ "corn": {
+  "sid": "corn",
+  "name": "Corn",
+  "description": "Takes a long time to spawn, but has a lot of health."
+ },
+ "sand": {
+  "sid": "sand",
+  "name": "Sand",
+  "description": "A bunch of sand particles."
+ },
+ "pincer": {
+  "sid": "pincer",
+  "name": "Pincer",
+  "description": "Debilitates enemies temporarily, reducing their movement speed."
+ },
+ "yucca": {
+  "sid": "yucca",
+  "name": "Yucca",
+  "description": "Heals your flower but only while in the defensive position."
+ },
+ "magnet": {
+  "sid": "magnet",
+  "name": "Magnet",
+  "description": "Increases drop pick up range."
+ },
+ "yggdrasil": {
+  "sid": "yggdrasil",
+  "name": "Yggdrasil",
+  "description": "A dried leaf from the Yggdrasil tree.<n/>Rumored to be able to bring the fallen back to life."
+ },
+ "starfish": {
+  "sid": "starfish",
+  "name": "Starfish",
+  "description": "Increases health regen while below 75% health."
+ },
+ "pearl": {
+  "sid": "pearl",
+  "name": "Pearl",
+  "description": "Just drop it off somewhere and use your kinetic powers so you don't lose it."
+ },
+ "lightning": {
+  "sid": "lightning",
+  "name": "Lightning",
+  "description": "Strikes several nearby enemies."
+ },
+ "jelly": {
+  "sid": "jelly",
+  "name": "Jelly",
+  "description": "No one likes touching this."
+ },
+ "claw": {
+  "sid": "claw",
+  "name": "Claw",
+  "description": "Deals extra damage if the victim is above 80% health.<n/>-50% damage vs other flowers."
+ },
+ "shell": {
+  "sid": "shell",
+  "name": "Shell",
+  "description": "Adds a temporary shield to yourself or allies."
+ },
+ "cutter": {
+  "sid": "cutter",
+  "name": "Cutter",
+  "description": "A friend used to own this... now it's time for revenge.<n/>Increases body damage."
+ },
+ "dahlia": {
+  "sid": "dahlia",
+  "name": "Dahlia",
+  "description": "A small amount of heal but fairly consistent."
+ },
+ "uranium": {
+  "sid": "uranium",
+  "name": "Uranium",
+  "description": "Periodically releases radiation.<n/>-75% damage versus other flowers.<n/>Effect strength depends on distance to petal."
+ },
+ "sponge": {
+  "sid": "sponge",
+  "name": "Sponge",
+  "description": "Spreads damage taken by the flower over a period of time.<n/>If destroyed, deals remaining damage all at once.<n/>Does not delay {#Attribute/PoisonNoColon} damage."
+ },
+ "soil": {
+  "sid": "soil",
+  "name": "Soil",
+  "description": "Increases health, but also increases flower size and decreases movement speed."
+ },
+ "fang": {
+  "sid": "fang",
+  "name": "Fang",
+  "description": "Heals based on damage dealt by this petal."
+ },
+ "third_eye": {
+  "sid": "third_eye",
+  "name": "Third Eye",
+  "description": "Allows your flower to expand your petals further out."
+ },
+ "peas": {
+  "sid": "peas",
+  "name": "Peas",
+  "description": "It goes poof."
+ },
+ "stick": {
+  "sid": "stick",
+  "name": "Stick",
+  "description": "A mysterious stick that summons the forces of the wind."
+ },
+ "clover": {
+  "sid": "clover",
+  "name": "Clover",
+  "description": "Increases your luck.<n/>{#UI/Luck/Help}"
+ },
+ "powder": {
+  "sid": "powder",
+  "name": "Powder",
+  "description": "Increases movement speed.<n/>Disabled if flower takes damage or if near a mob higher than a certain rarity."
+ },
+ "air": {
+  "sid": "air",
+  "name": "Air",
+  "description": "It's literally nothing."
+ },
+ "basil": {
+  "sid": "basil",
+  "name": "Basil",
+  "description": "Increases all healing received."
+ },
+ "orange": {
+  "sid": "orange",
+  "name": "Orange",
+  "description": "A sweet citrus fruit."
+ },
+ "ant_egg": {
+  "sid": "ant_egg",
+  "name": "Egg",
+  "description": "Something interesting might pop out of this."
+ },
+ "poo": {
+  "sid": "poo",
+  "name": "Poo",
+  "description": "Makes mobs less likely to want to attack you."
+ },
+ "relic": {
+  "sid": "relic",
+  "name": "Relic",
+  "description": "A strange relic. Significantly increases maximum health.<n/>Damage taken is spread among other wearers."
+ },
+ "lotus": {
+  "sid": "lotus",
+  "name": "Lotus",
+  "description": "Absorbs poison damage taken by the flower."
+ },
+ "bulb": {
+  "sid": "bulb",
+  "name": "Bulb",
+  "description": "A shiny lightbulb. Draws aggro from mobs."
+ },
+ "cotton": {
+  "sid": "cotton",
+  "name": "Cotton",
+  "description": "Absorbs damage taken by the flower."
+ },
+ "carrot": {
+  "sid": "carrot",
+  "name": "Carrot",
+  "description": "Sturdy and reliable. Can be shot and bounces off walls."
+ },
+ "bone": {
+  "sid": "bone",
+  "name": "Bone",
+  "description": "Sturdy. Loses half of its armor each hit."
+ },
+ "plank": {
+  "sid": "plank",
+  "name": "Plank",
+  "description": "Does 20x damage vs projectiles and petals."
+ },
+ "tomato": {
+  "sid": "tomato",
+  "name": "Tomato",
+  "description": "Gets stronger over time."
+ },
+ "mark": {
+  "sid": "mark",
+  "name": "Mark",
+  "description": "A dark mark that binds itself to a fallen soul."
+ },
+ "rubber": {
+  "sid": "rubber",
+  "name": "Rubber",
+  "description": "Increases knockback received. Also absorbs lightning damage dealt to the flower."
+ },
+ "blood_stinger": {
+  "sid": "blood_stinger",
+  "name": "Stinger",
+  "description": "It really hurts, but it's very fragile.<n/>Deals damage to self when spawned."
+ },
+ "bur": {
+  "sid": "bur",
+  "name": "Bur",
+  "description": "Decreases armor of affected unit. Does not stack with itself."
+ },
+ "root": {
+  "sid": "root",
+  "name": "Root",
+  "description": "Provides a layer of additional armor every interval, a layer is removed each time damage is taken."
+ },
+ "ankh": {
+  "sid": "ankh",
+  "name": "Ankh",
+  "description": "An ancient relic.<n/>When destroyed, will teleport the flower back to where it was destroyed."
+ },
+ "dice": {
+  "sid": "dice",
+  "name": "Dice",
+  "description": "Has a 5% chance of dealing 35x damage.<n/>Chance increases by 4% per point in luck."
+ },
+ "talisman": {
+  "sid": "talisman",
+  "name": "Talisman",
+  "description": "A necklace that allows the wearer to anticipate enemy attacks."
+ },
+ "battery": {
+  "sid": "battery",
+  "name": "Battery",
+  "description": "Discharges electricity whenever the flower gets hit."
+ },
+ "amulet": {
+  "sid": "amulet",
+  "name": "Amulet",
+  "description": "Converts a percentage of overheal into shields."
+ },
+ "compass": {
+  "sid": "compass",
+  "name": "Compass",
+  "description": "This crappy thing might be able to find something interesting..."
+ },
+ "disc": {
+  "sid": "disc",
+  "name": "Disc",
+  "description": "Reduces damage taken from collisions with mobs and flowers."
+ },
+ "shovel": {
+  "sid": "shovel",
+  "name": "Shovel",
+  "description": "Becomes untargetable but unable to use petals for a limited time."
+ },
+ "coin": {
+  "sid": "coin",
+  "name": "Coin",
+  "description": "The power of capitalism compels you!"
+ },
+ "chip": {
+  "sid": "chip",
+  "name": "Chip",
+  "description": "ALL IN."
+ },
+ "card": {
+  "sid": "card",
+  "name": "Card",
+  "description": "A playing card. Likely marked."
+ },
+ "moon": {
+  "sid": "moon",
+  "name": "Moon",
+  "description": "This thing is so big your petals orbit it instead.<n/>Where did you find this anyway?"
+ },
+ "privet": {
+  "sid": "privet",
+  "name": "Privet",
+  "description": "Deals extra {#Attribute/PoisonNoColon} damage based on the existing {#Attribute/PoisonNoColon} damage per second."
+ },
+ "glass": {
+  "sid": "glass",
+  "name": "Glass",
+  "description": "Phases through enemies.<n/>Cannot damage enemies more often than a certain interval."
+ },
+ "corruption": {
+  "sid": "corruption",
+  "name": "Corruption",
+  "description": "Corrupts one's soul, turning them against their own kind."
+ },
+ "orb": {
+  "sid": "orb",
+  "name": "Orb",
+  "description": "Creates mana."
+ },
+ "blueberries": {
+  "sid": "blueberries",
+  "name": "Blueberries",
+  "description": "It goes poof. Now with the extra secret ingredient: lightning."
+ },
+ "magic_cotton": {
+  "sid": "magic_cotton",
+  "name": "Cotton",
+  "description": "Absorbs damage taken by the flower."
+ },
+ "magic_stinger": {
+  "sid": "magic_stinger",
+  "name": "Stinger",
+  "description": "It really hurts, but it's very fragile."
+ },
+ "magic_leaf": {
+  "sid": "magic_leaf",
+  "name": "Leaf",
+  "description": "Gathers mana from the environment passively."
+ },
+ "magic_cactus": {
+  "sid": "magic_cactus",
+  "name": "Cactus",
+  "description": "Increases maximum mana capacity."
+ },
+ "magic_eye": {
+  "sid": "magic_eye",
+  "name": "Magic Eye",
+  "description": "Consumes half the current mana and deals damage based on that value."
+ },
+ "magic_missile": {
+  "sid": "magic_missile",
+  "name": "Missile",
+  "description": "You can actually shoot this one... with magic."
+ },
+ "magic_stick": {
+  "sid": "magic_stick",
+  "name": "Stick",
+  "description": "A mysterious stick that summons the forces of the wind... with magic."
+ },
+ "coral": {
+  "sid": "coral",
+  "name": "Coral",
+  "description": "Breaks apart on impact.<n/>Each piece has 50% of the stats of the predecessor."
+ },
+ "magic_bubble": {
+  "sid": "magic_bubble",
+  "name": "Bubble",
+  "description": "Physics are for the magicless."
+ },
+ "nazar": {
+  "sid": "nazar",
+  "name": "Nazar",
+  "description": "When the flower receives damage, reduces it by 98% and consumes a charge."
+ },
+ "mimic": {
+  "sid": "mimic",
+  "name": "Mimic",
+  "description": "Copies the petal to the left of this, with the same rarity as this."
+ },
+ "mjolnir": {
+  "sid": "mjolnir",
+  "name": "{#Petals/mjolnir/{0:rarity}/Name#Petals/mjolnir/default/Name}",
+  "description": "{#Petals/mjolnir/{0:rarity}/Description#Petals/mjolnir/default/Description}"
+ },
+ "mecha_missile": {
+  "sid": "mecha_missile",
+  "name": "Missile",
+  "description": "Locked on."
+ },
+ "wax": {
+  "sid": "wax",
+  "name": "Wax",
+  "description": "Don't ask where it came from."
+ },
+ "golden_leaf": {
+  "sid": "golden_leaf",
+  "name": "Leaf",
+  "description": "A very special leaf, seems to allow you to use your other petals even more."
+ },
+ "cog": {
+  "sid": "cog",
+  "name": "Cog",
+  "description": "Doesn't seem to do much..."
+ },
+ "monstera": {
+  "sid": "monstera",
+  "name": "Monstera",
+  "description": "Heals flowers around it.<n/>Effect fades out with distance to petal."
+ },
+ "mecha_antennae": {
+  "sid": "mecha_antennae",
+  "name": "Antennae",
+  "description": "Allows your flower to sense foes farther away.<n/>And it has a blinking red light on top."
+ },
+ "laser": {
+  "sid": "laser",
+  "name": "Laser",
+  "description": "Pew pew."
+ },
+ "domino": {
+  "sid": "domino",
+  "name": "Domino",
+  "description": "Damage depends on how many dots it has."
+ },
+ "bandage": {
+  "sid": "bandage",
+  "name": "Bandage",
+  "description": "Turns the flower <c val=\"{#Colors/undead}\">Undead</c> for a limited time on death.<n/>Delays death until expiration.<n/>Flower <c val=\"{#Colors/damage}\">Body Damage</c> is reduced during this period.<n/>Prevents revival for some time afterwards."
+ },
+ "pharaoh_crown": {
+  "sid": "pharaoh_crown",
+  "name": "Crown",
+  "description": "Spawns <c val=\"{#Colors/undead}\">Undead</c> Beetles to fight at your side."
+ },
+ "totem": {
+  "sid": "totem",
+  "name": "Totem",
+  "description": "Grants health regen for a certain duration after killing a mob."
+ },
+ "triangle": {
+  "sid": "triangle",
+  "name": "Triangle",
+  "description": "Each copy of this petal equipped grants additional damage to it."
+ },
+ "electric_web": {
+  "sid": "electric_web",
+  "name": "Web",
+  "description": "It's a little less sticky, but a bit more shocking."
+ },
+ "sacrifice": {
+  "sid": "sacrifice",
+  "name": "Sacrifice",
+  "description": "On death, summons a mob to fight again.<n/>Mob type depends on where the sacrifice happens.<n/>Cannot be used in low mob rarity areas."
+ },
+ "sawblade": {
+  "sid": "sawblade",
+  "name": "Sawblade",
+  "description": "This looks like it'd hurt."
+ },
+ "clay": {
+  "sid": "clay",
+  "name": "Clay",
+  "description": "It sticks to dust in the air to get bigger and stronger."
+ },
+ "dust": {
+  "sid": "dust",
+  "name": "Dust",
+  "description": "Sometimes it sticks together, sometimes it doesn't."
+ },
+ "broccoli": {
+  "sid": "broccoli",
+  "name": "Broccoli",
+  "description": "Explodes when it hits something. For reasons unknown."
+ },
+ "lentil": {
+  "sid": "lentil",
+  "name": "Lentil",
+  "description": "Increases petal attraction to enemies."
+ },
+ "dead_leaf": {
+  "sid": "dead_leaf",
+  "name": "Leaf",
+  "description": "Increases petal health but makes them reload slower."
+ },
+ "splitter": {
+  "sid": "splitter",
+  "name": "Splitter",
+  "description": "{#Petals/splitter/Description/{0:rarity}#Petals/splitter/Description/default}"
+ },
+ "goggles": {
+  "sid": "goggles",
+  "name": "Goggles",
+  "description": "Allows finding some paranormal activity."
+ },
+ "bean": {
+  "sid": "bean",
+  "name": "Bean",
+  "description": "Deals more damage if there are no allied flowers around you."
+ },
+ "champion_crown": {
+  "sid": "champion_crown",
+  "name": "Crown",
+  "description": "Gives flowers around you a {#Rarities/super/NameColored} {#Petals/basic/FullName}.<n/>You receive credit for damage dealt using it."
+ }
 }

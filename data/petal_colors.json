@@ -1,0 +1,802 @@
+{
+ "Basic": {
+  "cn": "Basic",
+  "color": "#90EE90",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 2500
+ },
+ "Rose": {
+  "cn": "Rose",
+  "color": "#FF69B4",
+  "size": 0.9,
+  "damage": 5,
+  "health": 5,
+  "cooldown": 3500
+ },
+ "Stinger": {
+  "cn": "Stinger",
+  "color": "#FFD700",
+  "size": 1,
+  "damage": 100,
+  "health": 2,
+  "cooldown": 10000
+ },
+ "Light": {
+  "cn": "Light",
+  "color": "#90EE90",
+  "size": 1,
+  "damage": 5,
+  "health": 5,
+  "cooldown": 400
+ },
+ "Rock": {
+  "cn": "Rock",
+  "color": "#8B0000",
+  "size": 1,
+  "damage": 15,
+  "health": 45,
+  "cooldown": 400
+ },
+ "Sand": {
+  "cn": "Sand",
+  "color": "#8B0000",
+  "size": 1,
+  "damage": 5,
+  "health": 1.25,
+  "cooldown": 800
+ },
+ "Yggdrasil": {
+  "cn": "Yggdrasil",
+  "color": "#FFD700",
+  "size": 1,
+  "damage": 0,
+  "health": 1,
+  "cooldown": 2048000
+ },
+ "Dandelion": {
+  "cn": "Dandelion",
+  "color": "#FFD700",
+  "size": 1,
+  "damage": 8,
+  "health": 8,
+  "cooldown": 1000
+ },
+ "Clover": {
+  "cn": "Clover",
+  "color": "#FFD700",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 2500
+ },
+ "Bone": {
+  "cn": "Bone",
+  "color": "#FFFFFF",
+  "size": 1,
+  "damage": 14,
+  "health": 10,
+  "cooldown": 1500
+ },
+ "Cactus": {
+  "cn": "Cactus",
+  "color": "#000000",
+  "size": 1,
+  "damage": 15,
+  "health": 15,
+  "cooldown": 1000
+ },
+ "Poison Cactus": {
+  "cn": "Poison Cactus",
+  "color": "#000000",
+  "size": 1,
+  "damage": 15,
+  "health": 15,
+  "cooldown": 600
+ },
+ "Iris": {
+  "cn": "Iris",
+  "color": "#000000",
+  "size": 0.7,
+  "damage": 0,
+  "health": 1,
+  "cooldown": 1000
+ },
+ "Lightning": {
+  "cn": "Lightning",
+  "color": "#FFFFFF",
+  "size": 1,
+  "damage": 25,
+  "health": 10,
+  "cooldown": 700
+ },
+ "Missile": {
+  "cn": "Missile",
+  "color": "#222222",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 2000
+ },
+ "Jelly": {
+  "cn": "Jelly",
+  "color": "#000000",
+  "size": 1,
+  "damage": 1,
+  "health": 100,
+  "cooldown": 1000
+ },
+ "Yucca": {
+  "cn": "Yucca",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Leaf": {
+  "cn": "Leaf",
+  "color": "#000000",
+  "size": 1,
+  "damage": 16,
+  "health": 12,
+  "cooldown": 1000
+ },
+ "Cutter": {
+  "cn": "Cutter",
+  "color": "#000000",
+  "size": 4,
+  "damage": 0,
+  "health": null,
+  "cooldown": 1
+ },
+ "Lightning Cutter": {
+  "cn": "Lightning Cutter",
+  "color": "#000000",
+  "size": 4,
+  "damage": 1,
+  "health": null,
+  "cooldown": 1
+ },
+ "Wing": {
+  "cn": "Wing",
+  "color": "#000000",
+  "size": 1,
+  "damage": 20,
+  "health": 10,
+  "cooldown": 2500
+ },
+ "Square": {
+  "cn": "Square",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Golden Leaf": {
+  "cn": "Golden Leaf",
+  "color": "#000000",
+  "size": 1.2,
+  "damage": 1,
+  "health": 100,
+  "cooldown": 200
+ },
+ "Blood Leaf": {
+  "cn": "Blood Leaf",
+  "color": "#000000",
+  "size": 1.5,
+  "damage": 0.6,
+  "health": 500,
+  "cooldown": 1500
+ },
+ "Bulb": {
+  "cn": "Bulb",
+  "color": "#ffff00",
+  "size": 1.5,
+  "damage": 8,
+  "health": 10,
+  "cooldown": 627
+ },
+ "Gas": {
+  "cn": "Gas",
+  "color": "#000000",
+  "size": 1,
+  "damage": 0,
+  "health": null,
+  "cooldown": 800
+ },
+ "Starfish": {
+  "cn": "Starfish",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 2000
+ },
+ "Sponge": {
+  "cn": "Sponge",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 2000
+ },
+ "JavaScript": {
+  "cn": "JavaScript",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 128,
+  "cooldown": 2000
+ },
+ "Glitch": {
+  "cn": "Glitch",
+  "color": "#000000",
+  "size": 1,
+  "damage": -1,
+  "health": 128,
+  "cooldown": 2000
+ },
+ "Corn": {
+  "cn": "Corn",
+  "color": "#000000",
+  "size": 1,
+  "damage": 8,
+  "health": 200,
+  "cooldown": 7000
+ },
+ "Third Eye": {
+  "cn": "Third Eye",
+  "color": "#000000",
+  "size": 1,
+  "damage": 0,
+  "health": null,
+  "cooldown": 1
+ },
+ "Antennae": {
+  "cn": "Antennae",
+  "color": "#000000",
+  "size": 1,
+  "damage": 0,
+  "health": null,
+  "cooldown": 1
+ },
+ "Mecha Antennae": {
+  "cn": "Mecha Antennae",
+  "color": "#000000",
+  "size": 1,
+  "damage": 0,
+  "health": null,
+  "cooldown": 1
+ },
+ "Faster": {
+  "cn": "Faster",
+  "color": "#000000",
+  "size": 0.5,
+  "damage": 5,
+  "health": 5,
+  "cooldown": 500
+ },
+ "Pollen": {
+  "cn": "Pollen",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Bumble Bee Pollen": {
+  "cn": "Bumble Bee Pollen",
+  "color": "#000000",
+  "size": 0.5,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Powder": {
+  "cn": "Powder",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Peas": {
+  "cn": "Peas",
+  "color": "#000000",
+  "size": 1,
+  "damage": 2.5,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Grapes": {
+  "cn": "Grapes",
+  "color": "#000000",
+  "size": 1,
+  "damage": 0.625,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Blueberries": {
+  "cn": "Blueberries",
+  "color": "#000000",
+  "size": 1,
+  "damage": 8,
+  "health": 10,
+  "cooldown": 50
+ },
+ "Soil": {
+  "cn": "Soil",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Air": {
+  "cn": "Air",
+  "color": "#000000",
+  "size": 1,
+  "damage": 0,
+  "health": 0,
+  "cooldown": 1000
+ },
+ "Magnet": {
+  "cn": "Magnet",
+  "color": "#000000",
+  "size": 1,
+  "damage": 1,
+  "health": 5,
+  "cooldown": 2000
+ },
+ "Yin Yang": {
+  "cn": "Yin Yang",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Lentil": {
+  "cn": "Lentil",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Bubble": {
+  "cn": "Bubble",
+  "color": "rgba(255, 255, 255, 0)",
+  "size": 1,
+  "damage": 0,
+  "health": 1,
+  "cooldown": 2000
+ },
+ "Rainbow": {
+  "cn": "Rainbow",
+  "color": "#000000",
+  "size": 2,
+  "damage": 10,
+  "health": null,
+  "cooldown": 9999
+ },
+ "Bomb": {
+  "cn": "Bomb",
+  "color": "#000000",
+  "size": 2,
+  "damage": 0,
+  "health": 10,
+  "cooldown": 1500
+ },
+ "Flower": {
+  "cn": "Flower",
+  "color": "#9B59B6",
+  "size": 1,
+  "damage": 5,
+  "health": 15,
+  "cooldown": 50000
+ },
+ "Raindrop": {
+  "cn": "Raindrop",
+  "color": "#00ffff",
+  "size": 1,
+  "damage": 5,
+  "health": 15,
+  "cooldown": 2000
+ },
+ "Dahlia": {
+  "cn": "Dahlia",
+  "color": "#FF00FF",
+  "size": 0.33,
+  "damage": 3,
+  "health": 3,
+  "cooldown": 1.2
+ },
+ "Azalea": {
+  "cn": "Azalea",
+  "color": "#FF00FF",
+  "size": 1,
+  "damage": 3,
+  "health": 3,
+  "cooldown": 1.2
+ },
+ "Sparkle Petal": {
+  "cn": "Sparkle Petal",
+  "color": "#FFD700",
+  "size": 1,
+  "damage": 9999999999,
+  "health": 99999,
+  "cooldown": 500
+ },
+ "Healing Petal": {
+  "cn": "Healing Petal",
+  "color": "#FF69B4",
+  "size": 1.2,
+  "damage": 5,
+  "health": 15,
+  "cooldown": 2000
+ },
+ "Explosive Petal": {
+  "cn": "Explosive Petal",
+  "color": "#FF4500",
+  "size": 1,
+  "damage": 25,
+  "health": 5,
+  "cooldown": 3000
+ },
+ "Test Explosive Petal": {
+  "cn": "Test Explosive Petal",
+  "color": "#FF0000",
+  "size": 1,
+  "damage": 15,
+  "health": 10,
+  "cooldown": 2000
+ },
+ "Shield Petal": {
+  "cn": "Shield Petal",
+  "color": "#4169E1",
+  "size": 1.1,
+  "damage": 10,
+  "health": 20,
+  "cooldown": 5000
+ },
+ "Splitter": {
+  "cn": "Splitter",
+  "color": "#9B59B6",
+  "size": 1,
+  "damage": 5,
+  "health": 15,
+  "cooldown": 10000
+ },
+ "Hornet Missile": {
+  "cn": "Hornet Missile",
+  "color": "#222222",
+  "size": 1.5,
+  "damage": 10,
+  "health": 5,
+  "cooldown": 2000
+ },
+ "Wasp Missile": {
+  "cn": "Wasp Missile",
+  "color": "#c8803c",
+  "size": 1.5,
+  "damage": 10,
+  "health": 5,
+  "cooldown": 1000
+ },
+ "Action Test Petal": {
+  "cn": "Action Test Petal",
+  "color": "#000000",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1000
+ },
+ "Egg": {
+  "cn": "Egg",
+  "color": "#FFD700",
+  "size": 1,
+  "damage": 5,
+  "health": 5,
+  "cooldown": 1000
+ },
+ "Glass": {
+  "cn": "Glass",
+  "color": "#B0E0E6",
+  "size": 1,
+  "damage": 12,
+  "health": null,
+  "cooldown": 1000
+ },
+ "Glasss": {
+  "cn": "Glasss",
+  "color": "#808080",
+  "size": 1.1,
+  "damage": 15,
+  "health": null,
+  "cooldown": 500
+ },
+ "Infinity": {
+  "cn": "Infinity",
+  "color": "#2bffa3",
+  "size": 3,
+  "damage": null,
+  "health": null,
+  "cooldown": 1000
+ },
+ "Web": {
+  "cn": "Web",
+  "color": "#FFFFFF",
+  "size": 1.2,
+  "damage": 5,
+  "health": 10,
+  "cooldown": 3000
+ },
+ "Guided Missile": {
+  "cn": "Guided Missile",
+  "color": "#7c7c7c",
+  "size": 1,
+  "damage": 25,
+  "health": 5,
+  "cooldown": 2000
+ },
+ "Blue Iris": {
+  "cn": "Blue Iris",
+  "color": "#000000",
+  "size": 0.7,
+  "damage": 0,
+  "health": 10,
+  "cooldown": 1500
+ },
+ "Stick": {
+  "cn": "Stick",
+  "color": "#8c6239",
+  "size": 1.3,
+  "damage": 1,
+  "health": null,
+  "cooldown": 4000
+ },
+ "Pincer": {
+  "cn": "Pincer",
+  "color": "#333333",
+  "size": 1,
+  "damage": 5,
+  "health": 5,
+  "cooldown": 2500
+ },
+ "Moon": {
+  "cn": "Moon",
+  "color": "#878787",
+  "size": 2.6,
+  "damage": 1,
+  "health": 1000,
+  "cooldown": 10000
+ },
+ "Lotus": {
+  "cn": "Lotus",
+  "color": "#ce76db",
+  "size": 1.2,
+  "damage": 0,
+  "health": null,
+  "cooldown": 2000
+ },
+ "Heaviest": {
+  "cn": "Heaviest",
+  "color": "#333333",
+  "size": 1.3,
+  "damage": 13,
+  "health": 150,
+  "cooldown": 15000
+ },
+ "Rice": {
+  "cn": "Rice",
+  "color": "#ffffff",
+  "size": 1.3,
+  "damage": 5,
+  "health": 2,
+  "cooldown": 50
+ },
+ "Uranium": {
+  "cn": "Uranium",
+  "color": "#63bf2e",
+  "size": 1,
+  "damage": 4,
+  "health": 10,
+  "cooldown": 2500
+ },
+ "Honey": {
+  "cn": "Honey",
+  "color": "#f7cf2f",
+  "size": 1.1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1700
+ },
+ "Shell": {
+  "cn": "Shell",
+  "color": "#fcdd86",
+  "size": 1.1,
+  "damage": 5,
+  "health": 25,
+  "cooldown": 3500
+ },
+ "Battery": {
+  "cn": "Battery",
+  "color": "#fcdd86",
+  "size": 1.0,
+  "damage": 0,
+  "health": null,
+  "cooldown": 2500
+ },
+ "Bur": {
+  "cn": "Bur",
+  "color": "#8B4513",
+  "size": 1,
+  "damage": 5,
+  "health": 5,
+  "cooldown": 2000
+ },
+ "Root": {
+  "cn": "Root",
+  "color": "#b86c32",
+  "size": 1,
+  "damage": 0,
+  "health": null,
+  "cooldown": 1000
+ },
+ "Orb": {
+  "cn": "Orb",
+  "color": "#90EE90",
+  "size": 0.9,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 1200
+ },
+ "Magic Leaf": {
+  "cn": "Magic Leaf",
+  "color": "#000000",
+  "size": 1,
+  "damage": 16,
+  "health": 12,
+  "cooldown": 1800
+ },
+ "Magic Cactus": {
+  "cn": "Magic Cactus",
+  "color": "#000000",
+  "size": 1,
+  "damage": 15,
+  "health": 15,
+  "cooldown": 1000
+ },
+ "Magic Stick": {
+  "cn": "Magic Stick",
+  "color": "#8c6239",
+  "size": 1.3,
+  "damage": 1,
+  "health": 10,
+  "cooldown": 3000
+ },
+ "Magic Missile": {
+  "cn": "Magic Missile",
+  "color": "#222222",
+  "size": 1,
+  "damage": 35,
+  "health": 2,
+  "cooldown": 200
+ },
+ "Magic Stinger": {
+  "cn": "Magic Stinger",
+  "color": "#222222",
+  "size": 1,
+  "damage": 100,
+  "health": 2,
+  "cooldown": 2000
+ },
+ "Magic Bubble": {
+  "cn": "Magic Bubble",
+  "color": "rgba(255, 255, 255, 0)",
+  "size": 1,
+  "damage": 0,
+  "health": 1,
+  "cooldown": 2000
+ },
+ "Poo": {
+  "cn": "Poo",
+  "color": "#8B4513",
+  "size": 1,
+  "damage": 0,
+  "health": 1,
+  "cooldown": 2500
+ },
+ "Talisman": {
+  "cn": "Talisman",
+  "color": "#8B4513",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 2500
+ },
+ "Salt": {
+  "cn": "Salt",
+  "color": "#FFFFFF",
+  "size": 1,
+  "damage": 10,
+  "health": 10,
+  "cooldown": 2500
+ },
+ "Claw": {
+  "cn": "Claw",
+  "color": "#000000",
+  "size": 1,
+  "damage": 5,
+  "health": 10,
+  "cooldown": 3500
+ },
+ "Fang": {
+  "cn": "Fang",
+  "color": "#000000",
+  "size": 1,
+  "damage": 15,
+  "health": 1,
+  "cooldown": 3500
+ },
+ "Cotton": {
+  "cn": "Cotton",
+  "color": "#000000",
+  "size": 1,
+  "damage": 0,
+  "health": 2,
+  "cooldown": 1500
+ },
+ "Pearl": {
+  "cn": "Pearl",
+  "color": "#000000",
+  "size": 1.25,
+  "damage": 20,
+  "health": 50,
+  "cooldown": 4000
+ },
+ "Coral": {
+  "cn": "Coral",
+  "color": "#000000",
+  "size": 1.25,
+  "damage": 35,
+  "health": 10,
+  "cooldown": 2499
+ },
+ "Oranges": {
+  "cn": "Oranges",
+  "color": "#000000",
+  "size": 1.25,
+  "damage": 35,
+  "health": 10,
+  "cooldown": 2499
+ },
+ "Capacitor": {
+  "cn": "Capacitor",
+  "color": "#000000",
+  "size": 1.25,
+  "damage": 0,
+  "health": null,
+  "cooldown": 2499
+ },
+ "Coin": {
+  "cn": "Coin",
+  "color": "#90EE90",
+  "size": 1,
+  "damage": 15,
+  "health": 10,
+  "cooldown": 2500
+ },
+ "Wax": {
+  "cn": "Wax",
+  "color": "#ffff00",
+  "size": 1,
+  "damage": 0,
+  "health": 1000,
+  "cooldown": 30000
+ }
+}

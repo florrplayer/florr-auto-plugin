@@ -80,6 +80,9 @@ class ChatSolver:
         if self.last_frame is None:
             self.last_frame = gray.copy()
             return False
+        if gray.shape != self.last_frame.shape:   # 窗口尺寸变化 -> 重置基线, 防 sizes mismatch
+            self.last_frame = gray.copy()
+            return False
         diff = cv2.absdiff(gray, self.last_frame)
         change = float((diff > 25).sum()) / max(1, gray.size)
         self.last_frame = gray.copy()

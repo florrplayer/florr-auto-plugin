@@ -128,6 +128,26 @@ def check_stage(img=None):
     except Exception:
         pass
 
+    # 1d. 底部花瓣槽特征(游戏中): 画面底部中央区域有彩色圆点(花瓣图标), 菜单没有
+    #     v1.32: 跨桌面渲染瞬时异常时小地图检测失败, 用花瓣槽兜底防误判菜单
+    try:
+        by0 = h - int(h * 0.12)
+        by1 = h - int(h * 0.03)
+        bx0 = int(w * 0.15)
+        bx1 = int(w * 0.85)
+        if 0 < by0 < by1 <= h and 0 <= bx0 < bx1 <= w:
+            crop = img[by0:by1, bx0:bx1]
+            if crop is not None and crop.size > 0 and crop.shape[0] > 10 and crop.shape[1] > 10:
+                hsv2 = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
+                sat = hsv2[:, :, 1]
+                val = hsv2[:, :, 2]
+                colored = np.sum((sat > 80) & (val > 60)) / (crop.shape[0] * crop.shape[1])
+                if colored > 0.02:
+                    _STAGE_CACHE.update(image=img, stage="in_game")
+                    return "in_game"
+    except Exception:
+        pass
+
     # 2. 检测死亡界面: 画面中央偏下的绿色复活按钮(取区域平均色)
     rx = int(960 * w / 1920)
     ry = off + int(620 * game_h / 1080)
@@ -378,6 +398,8 @@ def preprocess_map(image):
 
 
 def get_player_location_on_map(opencv_img, target_color, map, precise=False):
+    if opencv_img is None or opencv_img.size == 0 or opencv_img.shape[0] < 50 or opencv_img.shape[1] < 50:
+        return None   # v1.32: 空图保护(渲染停止瞬间截图), 防 cv::inRange 崩溃
     target_color_bgr = tuple(int(target_color[i:i + 2], 16) for i in (4, 2, 0))
     lower_bound = np.array([max(0, c - 30) for c in target_color_bgr])
     upper_bound = np.array([min(255, c + 30) for c in target_color_bgr])

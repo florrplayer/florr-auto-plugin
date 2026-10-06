@@ -1,8 +1,15 @@
 # -*- coding: utf-8 -*-
 """HTML 问卷星风格配置界面 (替换 tkinter 弹窗)
-本地 http server (127.0.0.1:18898) + 浏览器问卷
+本地 http server (127.0.0.1:18898) + 浏览器问卷:
+  - 一题一页, 鼠标点选(选中变蓝), 底部[下一步]提交
+  - 多题队列: 前端轮询下一题, 全答完自动关页
+  - 支持单选/多选
+用法:
+    from config_web import ask_web
+    ans = ask_web("你想全程攻击还是防御？", [("attack","全程攻击"),...], "florr 挂机设置 ①/⑥", multi=False)
 """
 import json
+import os
 import queue
 import threading
 import webbrowser
@@ -11,7 +18,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 PORT = 18898
 HOST = "127.0.0.1"
 
-PAGE_HTML = """<!DOCTYPE html>
+# 问卷页面 (纯 HTML+JS, 无外部依赖)
+PAGE_HTML = r"""<!DOCTYPE html>
 <html lang="zh"><head><meta charset="utf-8"><title>florr 挂机设置</title>
 <style>
 body{margin:0;background:#f4f3ee;font-family:'Microsoft YaHei UI','Segoe UI',sans-serif;display:flex;justify-content:center;padding:48px 16px}
@@ -19,11 +27,12 @@ body{margin:0;background:#f4f3ee;font-family:'Microsoft YaHei UI','Segoe UI',san
 h1{font-size:17px;color:#1a1b1c;margin:0 0 6px;font-weight:600}
 .step{font-size:12px;color:#8a8f98;margin-bottom:18px}
 .prompt{font-size:14px;color:#1a1b1c;line-height:1.6;white-space:pre-wrap;background:#f8f7f4;border-radius:10px;padding:14px 16px;margin-bottom:16px}
-.opt{display:block;padding:11px 14px;margin:7px 0;background:#fff;border:1px solid #e4e3dd;border-radius:10px;font-size:13.5px;color:#1a1b1c;cursor:pointer}
+.opt{display:block;padding:11px 14px;margin:7px 0;background:#fff;border:1px solid #e4e3dd;border-radius:10px;font-size:13.5px;color:#1a1b1c;cursor:pointer;transition:all .12s}
 .opt:hover{border-color:#9eace9;background:#fbfcff}
 .opt.sel{background:#d6e4ff;border-color:#5b7cf0;color:#123;font-weight:600}
 .next{display:block;width:100%;margin-top:20px;padding:12px;background:#5b7cf0;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer}
 .next:hover{background:#4a6ae0}
+.next:disabled{background:#c5c9d8;cursor:not-allowed}
 .done{text-align:center;color:#52c41a;font-size:15px;font-weight:600;padding:40px 0}
 </style></head><body>
 <div class="card">
@@ -34,14 +43,14 @@ h1{font-size:17px;color:#1a1b1c;margin:0 0 6px;font-weight:600}
 <button class="next" id="next" onclick="submit()">下一步</button>
 </div>
 <script>
-var MULTI=false;
+var MULTI=false, SEL={};
 function loadQ(){
   fetch('/question?t='+Date.now()).then(function(r){return r.json()}).then(function(q){
-    if(q.done){ document.querySelector('.card').innerHTML='<div class="done">配置完成，开始挂机</div>'; return; }
+    if(q.done){ document.querySelector('.card').innerHTML='<div class="done">配置完成，开始挂机 ✓</div>'; return; }
     document.getElementById('title').textContent=q.title||'florr 挂机设置';
     document.getElementById('step').textContent=q.step||'';
     document.getElementById('prompt').textContent=q.prompt||'';
-    MULTI=!!q.multi;
+    MULTI=!!q.multi; SEL={};
     var o=document.getElementById('opts'); o.innerHTML='';
     (q.options||[]).forEach(function(op){
       var d=document.createElement('div'); d.className='opt'; d.textContent=op.label;
@@ -96,8 +105,8 @@ class _Handler(BaseHTTPRequestHandler):
 
 class _WebServer:
     def __init__(self):
-        self._queue = queue.Queue()
-        self._answers = {}
+        self._queue = queue.Queue()          # 待问题目
+        self._answers = {}                   # key -> 答案
         self._server = HTTPServer((HOST, PORT), _Handler)
         self._server.daemon_threads = True
         self._thread = threading.Thread(target=self._server.serve_forever, daemon=True)
@@ -123,14 +132,15 @@ _server = _WebServer()
 
 
 def ask_web(prompt, options, title="florr 挂机设置", multi=False, step=""):
-    """阻塞等待一题答案; 返回 key(单选)/列表(多选); 超时返回 None/[]"""
+    """阻塞等待一题答案: options=[(key,label),...]; 返回 key(单选)/列表(多选); 关页/异常返回 None/[]"""
     key = "q%d" % len(_server._queue.queue)
     _server._queue.put({
         "key": key, "title": title, "step": step, "prompt": prompt,
         "multi": multi, "options": [{"key": k, "label": lb} for k, lb in options],
     })
     webbrowser.open("http://%s:%d/" % (HOST, PORT))
-    for _ in range(600):
+    # 等这一题被回答
+    for _ in range(600):  # 最多等 120s
         if key in _server._answers:
             v = _server._answers.pop(key)
             return v if multi else (v[0] if isinstance(v, list) and v else v)

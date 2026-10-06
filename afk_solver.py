@@ -303,17 +303,103 @@ def drag_path(window, path_points, speed=60.0, hold_ms=150):
     win32api.PostMessage(hwnd, win32con.WM_LBUTTONUP, 0, _lp(ex, ey))
 
 
+def solve_afk_flap_v2(frame=None, crop_margin=0.05):
+    """AFK Flap(飞行)类型破解 - v1.29.3 新机制(wasm: UI/AFKCheck/Flap/Instructions="操控圆球飞行到终点")
+    与Drag不同: 无彩色起点色块(圆球=玩家自己, 在路径一端), 用键盘WASD飞行到终点
+    复用窗口定位/归一化/终点检测; 起点=路径端点(离屏幕中心近的那端)
+    返回 (ok, path_abs, end_abs)
+    """
+    try:
+        if frame is None:
+            from combat import get_frame
+            frame = get_frame()
+        h, w = frame.shape[:2]
+        win = find_afk_window(frame)
+        if win is None:
+            return False, [], (0, 0)
+        x0, y0, x1, y1 = win
+        mx = int((x1 - x0) * crop_margin)
+        my = int((y1 - y0) * crop_margin)
+        roi = frame[y0 + my:y1 - my, x0 + mx:x1 - mx]
+        if roi.size == 0:
+            return False, [], (0, 0)
+        mask = normalize_afk(roi)
+        path_mask, labels, idx = find_largest_component(mask)
+        if path_mask is None:
+            return False, [], (0, 0)
+        end = find_endpoint(path_mask)
+        if end is None:
+            return False, [], (0, 0)
+        # 起点 = 路径上与屏幕中心最近的点 (玩家圆球)
+        cy, cx = roi.shape[0] // 2, roi.shape[1] // 2
+        ys, xs = np.where(path_mask > 0)
+        if len(xs) < 10:
+            return False, [], (0, 0)
+        dists = (xs - cx) ** 2 + (ys - cy) ** 2
+        i = int(np.argmin(dists))
+        start = (int(xs[i]), int(ys[i]))
+        path = dijkstra_widest(path_mask, start, end)
+        if not path or len(path) < MIN_PATH_LEN:
+            return False, [], (0, 0)
+        path = rdp_simplify(path, epsilon=3.0)
+        path = extend_to_end(path, end, length=8)
+        off = (x0 + mx, y0 + my)
+        end_abs = (end[0] + off[0], end[1] + off[1])
+        path_abs = [(p[0] + off[0], p[1] + off[1]) for p in path]
+        return True, path_abs, end_abs
+    except Exception as e:
+        print(f"[AFK-Flap] 异常: {e}")
+        return False, [], (0, 0)
+
+
+def flap_path(window, path, speed_px_per_s=95.0, min_hold=0.05):
+    """Flap 飞行执行: 键盘 WASD 沿路径逐段飞 (非拖动!)
+    每段按方向键, 按(段长/速度)秒后换向; 最后一小段多飞0.3s保证到终点"""
+    import win32api, win32con
+    hwnd = window.hwnd
+    def _key(vk):
+        win32api.PostMessage(hwnd, win32con.WM_KEYDOWN, vk, 1)
+        win32api.PostMessage(hwnd, win32con.WM_KEYUP, vk, 1)
+    VK = {'w': 0x57, 'a': 0x41, 's': 0x53, 'd': 0x44}
+    for i in range(1, len(path)):
+        px, py = path[i]
+        qx, qy = path[i - 1]
+        d = math.hypot(px - qx, py - qy)
+        if d < 1:
+            continue
+        keys = []
+        if abs(px - qx) > 2:
+            keys.append('d' if px > qx else 'a')
+        if abs(py - qy) > 2:
+            keys.append('s' if py > qy else 'w')
+        hold = max(min_hold, d / speed_px_per_s)
+        if i == len(path) - 1:
+            hold += 0.35  # 终点多飞一程
+        for k in keys:
+            win32api.PostMessage(hwnd, win32con.WM_KEYDOWN, VK[k], 1)
+        time.sleep(hold)
+        for k in keys:
+            win32api.PostMessage(hwnd, win32con.WM_KEYUP, VK[k], 1)
+        time.sleep(0.03)
+
+
 def try_solve_and_drag(window, frame=None):
-    """一键: 检测+求解+拖动. 返回是否成功"""
+    """一键: 检测+求解+执行. 自动判别 Drag(彩色起点) / Flap(飞行)
+    返回是否成功"""
     ok, start, path, end = solve_afk_drag_v2(frame)
-    if not ok:
-        return False
-    if len(path) < 2:
-        return False
-    print(f"[AFK-v2] 起点{start} -> 终点{end} 路径{len(path)}点")
-    drag_path(window, path)
-    time.sleep(1.5)
-    return True
+    if ok and len(path) >= 2:
+        print(f"[AFK-v2] 拖动型: 起点{start} -> 终点{end} 路径{len(path)}点")
+        drag_path(window, path)
+        time.sleep(1.5)
+        return True
+    # 拖动失败 -> 可能是 Flap 飞行型(无彩色起点): 键盘飞行破解
+    ok2, path2, end2 = solve_afk_flap_v2(frame)
+    if ok2 and len(path2) >= 2:
+        print(f"[AFK-v2] 飞行型(Flap): 终点{end2} 路径{len(path2)}点, 键盘飞行破解")
+        flap_path(window, path2)
+        time.sleep(1.5)
+        return True
+    return False
 
 
 if __name__ == '__main__':

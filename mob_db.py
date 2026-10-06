@@ -347,10 +347,58 @@ def rarity_infer(sid, hp):
             best_d, best = d, r.get('rarity')
     return best or 'Common'
 
+# ===== v1.29.2: 官方碰撞箱 (florr_hitboxes.json, 2026版wasm反汇编) =====
+_HITBOXES = _load_json('florr_hitboxes.json') or {}
+
+# sid 别名归一化 (官方名 -> 插件 sid)
+_SID_ALIAS = {
+    'honey_bee': 'bee', 'bumble_bee': 'bumble_bee', 'queen_ant': 'ant_queen',
+    'soldier_ant': 'ant_soldier', 'worker_ant': 'ant_worker', 'baby_ant': 'ant_baby',
+    'fire_ant_baby': 'fire_ant_baby', 'fire_ant_worker': 'fire_ant_worker',
+    'fire_ant_soldier': 'fire_ant_soldier', 'fire_ant_queen': 'fire_ant_queen',
+    'fire_ant_hole': 'fire_ant_burrow', 'centipede_evil': 'centipede_evil',
+    'centipede_desert': 'centipede_desert', 'leafbug_shiny': 'leafbug_shiny',
+    'ladybug_dark': 'ladybug_dark', 'ladybug_shiny': 'ladybug_shiny',
+    'ant_soldier_diver': 'ant_soldier_diver', 'mecha_flower': 'mecha_flower',
+    'beetle_mummy': 'beetle_mummy', 'beetle_pharaoh': 'beetle_pharaoh',
+    'termite_overmind': 'termite_overmind', 'termite_mound': 'termite_mound',
+    'spider_hel': 'spider_hel', 'centipede_hel': 'centipede_hel',
+    'wasp_hel': 'wasp_hel', 'beetle_hel': 'beetle_hel', 'firefly_magic': 'firefly_magic',
+    'beetle_nazar': 'beetle_nazar', 'wasp_mecha': 'wasp_mecha', 'spider_mecha': 'spider_mecha',
+    'crab_mecha': 'crab_mecha', 'assembler': 'assembler', 'silverfish': 'silverfish',
+    'garbage': 'garbage', 'ghost': 'ghost',
+}
+_RARITY_MULT_KEY = {'Common': 'common', 'Rare': 'rare', 'Super': 'super', 'Epic': 'epic',
+                    'Legendary': 'legendary', 'Mythic': 'mythic', 'Ultra': 'ultra',
+                    'Unique': 'unique', 'Eternal': 'eternal', 'Unusual': 'uncommon'}
+
+
+def _norm_sid(sid):
+    if sid in _HITBOXES:
+        return sid
+    return _SID_ALIAS.get(sid)
+
+
 def get_radius(sid, rarity='Common'):
-    """真实碰撞箱(地图像素)"""
+    """真实碰撞箱(地图像素) - v1.29.2: 官方 rarity_size_mult 相对缩放锚定 WASM_RADII 实测值
+    官方 hitbox_units 是渲染单位非地图像素, 直接用会偏小(如 bee 1.3px);
+    换算: base = WASM_RADII(反汇编实测), scale = rarity_mult / common_mult"""
     base = WASM_RADII.get(sid, 12.0)
+    key = _norm_sid(sid)
+    hb = _HITBOXES.get(key)
+    if hb:
+        mult = hb.get('rarity_size_mult') or {}
+        common_m = mult.get('common', 1.0)
+        m = mult.get(_RARITY_MULT_KEY.get(rarity, 'common'))
+        if m:
+            return base * (m / common_m)
+        return base * (hb.get('max_hitbox_units', 1.0) / max(0.1, common_m) * 1.0)
     return base * RARITY_RADIUS_SCALE.get(rarity, 1.0)
+
+
+def official_hitbox(sid):
+    """官方碰撞箱原始记录 dict (含 damage/health/color/aggro/ai 等)"""
+    return _HITBOXES.get(_norm_sid(sid) or sid) or {}
 
 def get_aggro(sid):
     """追击范围"""
@@ -401,6 +449,45 @@ def map_cn(key):
     if k in MAP_CN:
         return MAP_CN[k]
     return i18n(key)
+
+# ===== 官方英文 i18n (2026-10-06 新增: 84怪/118花瓣/10稀有度, 含官方描述) =====
+_EN_MOBS = None
+def _load_en_mobs():
+    global _EN_MOBS
+    if _EN_MOBS is None:
+        try:
+            import json as _json
+            _EN_MOBS = _json.load(open(os.path.join(_DATA_DIR, 'mob_names_en.json'), encoding='utf-8'))
+        except Exception:
+            _EN_MOBS = {}
+    return _EN_MOBS
+
+def en_mob(sid):
+    """怪英文名+描述: sid -> {name, description, spawn} (无则空dict)"""
+    return _load_en_mobs().get(sid, {})
+
+def mob_en_name(sid):
+    return en_mob(sid).get('name') or i18n(f"Mobs/{sid}/Name") or sid
+
+def mob_description(sid):
+    return en_mob(sid).get('description', '')
+
+_EN_PETALS = None
+def _load_en_petals():
+    global _EN_PETALS
+    if _EN_PETALS is None:
+        try:
+            import json as _json
+            _EN_PETALS = _json.load(open(os.path.join(_DATA_DIR, 'petal_names_en.json'), encoding='utf-8'))
+        except Exception:
+            _EN_PETALS = {}
+    return _EN_PETALS
+
+def petal_en_name(sid):
+    return _load_en_petals().get(sid, {}).get('name') or i18n(f"Petals/{sid}/Name") or sid
+
+def petal_description(sid):
+    return _load_en_petals().get(sid, {}).get('description', '')
 
 def type_id_to_sid(tid):
     return TYPE_ID_TO_SID.get(tid)
@@ -553,6 +640,97 @@ def is_heal_petal(sid):
 
 def petal_cn(sid):
     return PETAL_CN.get(sid, sid)
+
+
+# ===== v1.29.2: 花瓣颜色 / 刷怪调优 / 自然稀有度分布 =====
+def petal_color(sid):
+    """v1.29.2: 花瓣颜色(供截图识别/图标索引), 来自 clone_petals.json 提取的 petal_colors.json
+    key 大小写归一化(Basic==basic)"""
+    d = _load_json('petal_colors.json') or {}
+    hit = d.get(sid)
+    if hit is None:
+        low = sid.lower()
+        for k, v in d.items():
+            if k.lower() == low:
+                hit = v
+                break
+    return (hit or {}).get('color')
+
+
+def spawn_tuning():
+    """v1.29.2: 官方刷怪调优常量 (florr_clone spawning.h/difficulty.h)"""
+    return _load_json('spawn_tuning.json') or {}
+
+
+_RARITY_SPREAD = None
+def rarity_spread():
+    """v1.29.2: 自然稀有度分布 (官方 kNaturalRaritySpread 真源, common..apex 10档)
+    无 luck 加成时的基线刷怪概率"""
+    global _RARITY_SPREAD
+    if _RARITY_SPREAD is not None:
+        return _RARITY_SPREAD
+    st = spawn_tuning()
+    diff = (st or {}).get('difficulty', {}) or {}
+    spread = diff.get('kNaturalRaritySpread')
+    if isinstance(spread, list) and spread:
+        names = ['Common', 'Unusual', 'Rare', 'Epic', 'Legendary', 'Mythic',
+                 'Ultra', 'Super', 'Unique', 'Apex']
+        _RARITY_SPREAD = dict(zip(names, spread))
+        return _RARITY_SPREAD
+    _RARITY_SPREAD = {'Common': 0.40, 'Unusual': 0.30, 'Rare': 0.15,
+                      'Epic': 0.10, 'Legendary': 0.04, 'Mythic': 0.01}
+    return _RARITY_SPREAD
+
+
+# ===== v1.29.2: 官方刷怪数学 (difficulty.h 真源) - 区域刷怪预测 =====
+def tier_value_for_difficulty(difficulty):
+    """难度 -> 稀有度价值 (kDifficultyAnchors 线性插值)
+    anchors: 0→0.00, 100→6.02, 200→7.00, 300→8.05; 上限 kMaxTierValue=8"""
+    st = spawn_tuning()
+    diff = (st or {}).get('difficulty', {}) or {}
+    anchors = diff.get('kDifficultyAnchors') or []
+    if not anchors:
+        return 0.0
+    d = float(difficulty)
+    if d <= anchors[0][0]:
+        return anchors[0][1]
+    for i in range(len(anchors) - 1):
+        a0, v0 = anchors[i]
+        a1, v1 = anchors[i + 1]
+        if d <= a1:
+            return v0 + (v1 - v0) * (d - a0) / max(1e-9, a1 - a0)
+    return anchors[-1][1]
+
+
+def luck_tier_drift(luck):
+    """幸运 -> 稀有度价值漂移: max(0, luck - kNeutralSpawnLuck) × kTierValuePerLuckPoint
+    每点幸运(超过中性1.0) +0.01 稀有度价值"""
+    st = spawn_tuning()
+    diff = (st or {}).get('difficulty', {}) or {}
+    neutral = diff.get('kNeutralSpawnLuck', 1.0)
+    per = diff.get('kTierValuePerLuckPoint', 0.01)
+    return max(0.0, float(luck) - float(neutral)) * float(per)
+
+
+def tier_mix_for_tier_value(tier):
+    """稀有度价值 -> 混合档 (lower/upper + upperChance) - 官方 rollTierMix 前置
+    返回 {lower, upper, upperChance}"""
+    names = ['Common', 'Unusual', 'Rare', 'Epic', 'Legendary', 'Mythic',
+             'Ultra', 'Super', 'Unique', 'Apex']
+    tier = max(0.0, min(8.0, float(tier)))
+    lower_i = int(tier)
+    frac = tier - lower_i
+    if lower_i >= len(names) - 1:
+        return {'lower': names[-1], 'upper': names[-1], 'upperChance': 0.0}
+    return {'lower': names[lower_i], 'upper': names[lower_i + 1], 'upperChance': frac}
+
+
+def dominant_tier_for_difficulty(difficulty, luck=1.0):
+    """给定难度+幸运 -> 该区域最可能刷的稀有度 (官方 dominantTierForDifficulty)
+    tier = tierValueForDifficulty(diff) + luckTierDrift(luck); upperChance>0.5 取 upper 否则 lower"""
+    tv = tier_value_for_difficulty(difficulty) + luck_tier_drift(luck)
+    mix = tier_mix_for_tier_value(tv)
+    return mix['upper'] if mix['upperChance'] > 0.5 else mix['lower']
 
 
 if __name__ == '__main__':

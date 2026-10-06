@@ -1,0 +1,76 @@
+{
+ "source": "florr_clone cpp (spawning.h/difficulty.h)",
+ "tuning": {
+  "_file": "florr_clone\\cpp\\server\\systems\\spawning.h",
+  "kSpawnViewportHalfWidth": "kViewportWidth * 0.5 + kViewportBuffer",
+  "kSpawnViewportHalfHeight": "kViewportHeight * 0.5 + kViewportBuffer",
+  "kLatentWakeMargin": "700.0",
+  "kMaxLiveMobs": "900",
+  "kEscortSpawnScatter": "1.0",
+  "kMinSpawnDistance": "250.0",
+  "kMinMobSpawnSpacing": "80.0",
+  "kPreliminarySpawnRadius": "20.0",
+  "kMobDespawnDelayMillis": "30000.0",
+  "kPopulationIntervalMillis": "500.0",
+  "kNestWaveIntervalMillis": "15000.0",
+  "kMaxNestChildren": "12",
+  "kMaxNestDepth": "2",
+  "kZoneIntervalMillis": "1000.0",
+  "kZoneStockPerPass": "32",
+  "kZoneWakePerPass": "24",
+  "kRespawnScatter": "900.0",
+  "kInViewRespawnMinMillis": "3000.0",
+  "kInViewRespawnMaxMillis": "12000.0",
+  "kZonePlacementAttempts": "60",
+  "kTargetMobDensity": "9000.0 / (kWorldSize * kWorldSize)",
+  "kAnnouncedRarity": "Rarity::Super",
+  "kUniqueSpawnCooldownMillis": "20.0 * 60.0 * 1000.0",
+  "kApexSpawnCooldownMillis": "2.0 * 60.0 * 60.0 * 1000.0",
+  "kBossUpgradeChance": "0.10"
+ },
+ "difficulty": {
+  "kDifficultyAnchors": [
+   [
+    0.0,
+    0.0
+   ],
+   [
+    100.0,
+    6.02
+   ],
+   [
+    200.0,
+    7.0
+   ],
+   [
+    300.0,
+    8.05
+   ]
+  ],
+  "kNaturalRaritySpread": [
+   0.4,
+   0.3,
+   0.15,
+   0.1,
+   0.04,
+   0.01,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "kNeutralSpawnLuck": 1.0,
+  "kTierValuePerLuckPoint": 0.01,
+  "kMaxTierValue": 8.0,
+  "_raw": {
+   "kDifficultyAnchors": "{{\n    {0.0, 0.00},\n    {100.0, 6.02},\n    {200.0, 7.00},\n    {300.0, 8.05},\n}}",
+   "kNaturalRaritySpread": "{{\n    0.40,  // common\n    0.30,  // uncommon\n    0.15,  // rare\n    0.10,  // epic\n    0.04,  // legendary\n    0.01,  // mythic\n    0.0,   // ultra\n    0.0,   // super\n    0.0,   // unique\n    0.0,   // apex\n}}",
+   "kNeutralSpawnLuck": "1.0",
+   "kTierValuePerLuckPoint": "0.01",
+   "kMaxTierValue": "static_cast<double>(kRarityCount - 1)",
+   "kRandomDifficulty": "-1.0",
+   "kRandomDifficultyTierValue": "randomSpreadTierValue()",
+   "kDangerousGroundDifficulty": "difficultyForTierValue(static_cast<double>(rarityIndex(Rarity::Rare)) - 1.0)"
+  }
+ }
+}

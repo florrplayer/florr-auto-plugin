@@ -1,0 +1,214 @@
+[
+ {
+  "mob": "Ant Egg",
+  "message": "A Super Ant Egg has spawned somewhere!"
+ },
+ {
+  "mob": "Ant Hole",
+  "message": "A Super Ant Hole has spawned somewhere!"
+ },
+ {
+  "mob": "Baby Ant",
+  "message": "A Super Baby Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Baby Fire Ant",
+  "message": "A Super Baby Fire Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Baby Termite",
+  "message": "A Super Baby Termite has spawned somewhere!"
+ },
+ {
+  "mob": "Bee",
+  "message": "A Super Bee has spawned somewhere!"
+ },
+ {
+  "mob": "Beetle",
+  "message": "A Super Beetle has spawned somewhere!"
+ },
+ {
+  "mob": "Hel Beetle",
+  "message": "You sense ominous vibrations coming from a different realm..."
+ },
+ {
+  "mob": "Bubble",
+  "message": "A Super Bubble has spawned somewhere!"
+ },
+ {
+  "mob": "Bumble Bee",
+  "message": "A Super Bumble Bee has spawned somewhere!"
+ },
+ {
+  "mob": "Bush",
+  "message": "A Super Bush has spawned somewhere!"
+ },
+ {
+  "mob": "Cactus",
+  "message": "A tower of thorns rises from the sands..."
+ },
+ {
+  "mob": "Centipede",
+  "message": "A Super Centipede has spawned somewhere!"
+ },
+ {
+  "mob": "Desert Centipede",
+  "message": "A Super Centipede has spawned somewhere!"
+ },
+ {
+  "mob": "Evil Centipede",
+  "message": "A Super Centipede has spawned somewhere!"
+ },
+ {
+  "mob": "Crab",
+  "message": "A Super Crab has spawned somewhere!"
+ },
+ {
+  "mob": "Dandelion",
+  "message": "A Super Dandelion has spawned somewhere!"
+ },
+ {
+  "mob": "Digger",
+  "message": "A Super Digger has spawned somewhere!"
+ },
+ {
+  "mob": "Firefly",
+  "message": "A Super Firefly has spawned somewhere!"
+ },
+ {
+  "mob": "Fire Ant Burrow",
+  "message": "A Super Fire Ant Burrow has spawned somewhere!"
+ },
+ {
+  "mob": "Fire Ant Egg",
+  "message": "A Super Fire Ant Egg has spawned somewhere!"
+ },
+ {
+  "mob": "Fly",
+  "message": "A buzzing noise echoes through the sewer tunnels..."
+ },
+ {
+  "mob": "Hornet",
+  "message": "A big yellow spot shows up in the distance..."
+ },
+ {
+  "mob": "Jellyfish",
+  "message": "You hear lightning strikes coming from a far distance..."
+ },
+ {
+  "mob": "Ladybug",
+  "message": "A Super Ladybug has spawned somewhere!"
+ },
+ {
+  "mob": "Dark Ladybug",
+  "message": "A Super Ladybug has spawned somewhere!"
+ },
+ {
+  "mob": "Shiny Ladybug",
+  "message": "A Super Ladybug has spawned somewhere!"
+ },
+ {
+  "mob": "Leafbug",
+  "message": "A Super Leafbug has spawned somewhere!"
+ },
+ {
+  "mob": "Leech",
+  "message": "A Super Leech has spawned somewhere!"
+ },
+ {
+  "mob": "Mantis",
+  "message": "A Super Mantis has spawned somewhere!"
+ },
+ {
+  "mob": "Moth",
+  "message": "There's a bright light in the horizon..."
+ },
+ {
+  "mob": "Queen Ant",
+  "message": "A Super Queen Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Queen Fire Ant",
+  "message": "A Super Queen Fire Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Roach",
+  "message": "A Super Roach has spawned somewhere!"
+ },
+ {
+  "mob": "Rock",
+  "message": "Something mountain-like appears in the distance..."
+ },
+ {
+  "mob": "Sandstorm",
+  "message": "A Super Sandstorm has spawned somewhere!"
+ },
+ {
+  "mob": "Scorpion",
+  "message": "A Super Scorpion has spawned somewhere!"
+ },
+ {
+  "mob": "Shell",
+  "message": "A Super Shell has spawned somewhere!"
+ },
+ {
+  "mob": "Soldier Ant",
+  "message": "A Super Soldier Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Soldier Fire Ant",
+  "message": "A Super Soldier Fire Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Soldier Termite",
+  "message": "A Super Soldier Termite has spawned somewhere!"
+ },
+ {
+  "mob": "Spider",
+  "message": "A Super Spider has spawned somewhere!"
+ },
+ {
+  "mob": "Sponge",
+  "message": "A Super Sponge has spawned somewhere!"
+ },
+ {
+  "mob": "Square",
+  "message": "A Super Square has spawned somewhere!"
+ },
+ {
+  "mob": "Starfish",
+  "message": "A Super Starfish has spawned somewhere!"
+ },
+ {
+  "mob": "Target Dummy",
+  "message": "None (always exists in Ellne)"
+ },
+ {
+  "mob": "Termite Egg",
+  "message": "A Super Termite Egg has spawned somewhere!"
+ },
+ {
+  "mob": "Termite Mound",
+  "message": "A Super Termite Mound has spawned somewhere!"
+ },
+ {
+  "mob": "Termite Overmind",
+  "message": "A Super Termite Overmind has spawned somewhere!"
+ },
+ {
+  "mob": "Wasp",
+  "message": "A Super Wasp has spawned somewhere!"
+ },
+ {
+  "mob": "Worker Ant",
+  "message": "A Super Worker Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Worker Fire Ant",
+  "message": "A Super Worker Fire Ant has spawned somewhere!"
+ },
+ {
+  "mob": "Worker Termite",
+  "message": "A Super Worker Termite has spawned somewhere!"
+ }
+]

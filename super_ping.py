@@ -21,11 +21,35 @@ KEYWORD_SIDS = {
     'You hear someone whisper faintly...just... one more game...': "gambler",
     "You hear lightning strikes coming from a far distance...": "jellyfish",
     "Something mountain-like appears in the distance...": "rock",
-    "There's a bright light in the horizon": "firefly",
+    "There's a bright light in the horizon": "moth",
     "A big yellow spot shows up in the distance...": "hornet",
     "A buzzing noise echoes through the sewer tunnels": "fly",
-    "You sense ominous vibrations coming from a different realm...": None,  # Hel传送门事件
+    "You sense ominous vibrations coming from a different realm...": "hel_beetle",
 }
+
+# v1.29.0: 官方 super_spawn_message 全表数据驱动 (data/florr_super_messages.json)
+# 通用公告 "A Super X has spawned..." 的怪名X -> sid 映射, 来自官方 mob stats
+_SUPER_NAME_TO_SID = {}
+try:
+    _d = json.load(open(os.path.join(_BASE, 'data', 'florr_mob_official.json'), encoding='utf-8'))
+    _stats_dir = os.path.join(_BASE, 'data')
+    for _name, _v in _d.items():
+        _super = _v.get('super_spawn_message') or ''
+        _sid = _name
+        # 官方 JSON 已按文件名sid为key? 兼容: 优先用 super message 映射
+        if 'has spawned' in _super:
+            pass
+    # 用消息中的怪名做键: 由 florr_super_messages.json 生成
+    _d2 = json.load(open(os.path.join(_BASE, 'data', 'florr_super_messages.json'), encoding='utf-8'))
+    for _entry in _d2:
+        _msg = _entry.get('message') or ''
+        _mob = _entry.get('mob') or ''
+        import re as _re
+        _mm = _re.match(r'A Super (\w+) has spawned', _msg)
+        if _mm:
+            _SUPER_NAME_TO_SID[_mm.group(1)] = _mob
+except Exception:
+    pass
 
 # Super 怪 -> 中文名 (公告用)
 _SUPER_CN = {
@@ -34,6 +58,15 @@ _SUPER_CN = {
     "scorpion": "蝎子", "bee": "蜜蜂", "ladybug": "瓢虫", "centipede": "蜈蚣",
     "beetle": "甲虫", "starfish": "海星", "shell": "贝壳", "crab": "螃蟹",
     "wasp": "胡蜂", "mantis": "螳螂", "sandstorm": "沙暴", "leech": "水蛭",
+    "moth": "飞蛾", "hel_beetle": "冥界甲虫", "square": "正方形", "sponge": "海绵",
+    "roach": "蟑螂", "leafbug": "叶虫", "bubble": "泡泡", "digger": "挖掘者",
+    "bush": "灌木", "dandelion": "蒲公英", "bumble_bee": "熊蜂", "ant_hole": "蚁穴",
+    "queen_ant": "蚁后", "queen_fire_ant": "火蚁后", "soldier_ant": "兵蚁",
+    "soldier_fire_ant": "火兵蚁", "worker_ant": "工蚁", "worker_fire_ant": "火工蚁",
+    "baby_ant": "幼蚁", "baby_fire_ant": "幼火蚁", "termite_overmind": "白蚁领主",
+    "soldier_termite": "白蚁兵", "worker_termite": "白蚁工", "baby_termite": "白蚁幼",
+    "fire_ant_burrow": "火蚁穴", "fire_ant_egg": "火蚁蛋", "termite_egg": "白蚁蛋",
+    "termite_mound": "白蚁丘", "ant_egg": "蚁蛋", "target_dummy": "训练靶",
 }
 
 class SuperPing:
@@ -61,7 +94,9 @@ class SuperPing:
         m = PAT_SUPER.search(msg)
         if m:
             loc = 'here' if (m.group('loc') or '').startswith(' here') else ('somewhere' if m.group('loc') else 'unknown')
-            return m.group(1).lower(), content.get('userPosition'), loc
+            name = m.group(1)
+            sid = _SUPER_NAME_TO_SID.get(name) or name.lower().replace(' ', '_')
+            return sid, content.get('userPosition'), loc
         k = KEYWORD_SIDS.get(msg)
         if k:
             return k, content.get('userPosition'), 'unknown'
@@ -86,8 +121,9 @@ class SuperPing:
             self.super_hunt_until = now + 120.0
             self._stats['hunts'] += 1
         self.last_ping = now
-        print(f"[Super雷达] {_SUPER_CN.get(sid, sid)} {loc or '未知位置'}")
-        return sid, _SUPER_CN.get(sid, sid), pos
+        _cn = _SUPER_CN.get(sid) or _SUPER_CN.get(sid.lower()) or sid
+        print(f"[Super雷达] {_cn} {loc or '未知位置'}")
+        return sid, _cn, pos
 
     def is_hunting(self, now=None):
         return (now or time.time()) < self.super_hunt_until
