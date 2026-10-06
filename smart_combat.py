@@ -141,6 +141,16 @@ def get_attack_distance(sid, rarity='Common'):
             return r + 6   # 打带跑: 黄蜂/胡蜂预判导弹, 保持距离+折返
         return r + 6       # far: 岩石反击弹幕/赌徒花瓣圈, 保持距离
     spd = mob_db.get_aggro_speed(_norm_sid(sid))
+    # v1.23.1: florr_clone AI机制 - 有远程/毒/电/花瓣环/蛛网的怪按机制保持距离
+    ai = mob_db.mob_ai_info(_norm_sid(sid))
+    if ai.get('stinger') or ai.get('projectile'):
+        return r + 8   # 黄蜂/胡蜂/螳螂摆尾齐射: 更远+横向闪避
+    if ai.get('poison') or ai.get('lightning'):
+        return r + 6   # 蝎子毒/水母电: 别磨蹭, 保持距离快速解决
+    if ai.get('petal_ring'):
+        return r + 8   # 蒲公英/glitch_flower花瓣环: 别站圈内
+    if ai.get('web'):
+        return r + 6   # 蜘蛛传奇+吐网减速50%: 保持距离别被网住
     # 追得上的高威胁怪: 保持距离(远程/冲撞都别贴脸)
     if spd >= 1.0:
         return r + 6  # 追击速度≥1.0(追得上玩家) - 保持6px, 蹭完就撤
