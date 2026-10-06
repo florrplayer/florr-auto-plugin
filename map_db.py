@@ -19,6 +19,8 @@ def _load(name):
 _ZONES = _load('florr_zones.json')
 _PORTALS = _load('florr_portals.json')
 _TERRAIN = _load('florr_terrain.json')
+# v1.23.0: 具体怪种刷怪区(florr_clone map_bundle.ts 247区中96个精确怪种区)
+_SPAWN_ZONES = _load('florr_mob_spawn_zones.json')
 
 # diff -> 稀有度档(对齐config秒杀等级)
 DIFF_RARITY = [(0, 'common'), (15, 'unusual'), (30, 'rare'), (53, 'epic'),
@@ -74,6 +76,30 @@ def recommend_zone(map_name, kill_rank):
     if not cands:
         return None
     return max(cands, key=lambda z: z[2] if z[2] is not None else 0)
+
+
+# ===== v1.23.0: 具体怪种刷怪区 (map_bundle.ts 精确怪种区) =====
+def spawn_zones_for(mobs_spec):
+    """按怪种规格查刷怪区: 传入 'bee'/'ladybug'/'soldier_fire_ant' 或完整规格串
+    返回 [(x, y, w, h), ...] (世界坐标, 与memory模式一致)"""
+    z = (_SPAWN_ZONES.get('spawn_zones') or {})
+    if mobs_spec in z:
+        return z[mobs_spec]
+    # 模糊匹配: 规格串包含怪名 (如 'soldier_fire_ant 60% worker_fire_ant 30%...')
+    for spec, zs in z.items():
+        if mobs_spec in spec:
+            return zs
+    return []
+
+
+def nearest_spawn_zone(mobs_spec, x, y):
+    """当前坐标最近的指定怪种刷怪区 (定向刷花瓣: 想要什么花瓣->去什么怪区)"""
+    best, bd = None, 1e18
+    for z in spawn_zones_for(mobs_spec):
+        d = math.hypot(z['x'] - x, z['y'] - y)
+        if d < bd:
+            best, bd = z, d
+    return best
 
 
 def all_portals():
