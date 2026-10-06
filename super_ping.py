@@ -10,8 +10,10 @@ import time, re, json, os
 
 _BASE = os.path.dirname(os.path.abspath(__file__))
 
-# 公告模板: "A Super X has spawned"
-PAT_SUPER = re.compile(r'A Super (\w+) has spawned', re.I)
+# 公告模板: "A Super X has spawned" / "has spawned here!"(本地) / "has spawned somewhere!"(别处)
+PAT_SUPER = re.compile(r'A Super (\w+) has spawned(?P<loc> here!| somewhere!)?', re.I)
+# v1.24.4: sacrifice召唤公告("has been summoned!")不是Super, 过滤防误报
+PAT_SUMMONED = re.compile(r'has been summoned!', re.I)
 
 # 特殊公告关键词 -> (怪sid, 中文名)
 KEYWORD_SIDS = {
@@ -43,36 +45,48 @@ class SuperPing:
         self._stats = {'pings': 0, 'hunts': 0}
 
     def parse(self, chat_ping):
-        """解析一条聊天消息 -> (mob_sid|None, userPosition|None)
-        chat_ping: {'content': {'area': str, 'message': str, 'userPosition': {x,y}|None, 'user': str}}"""
+        """解析一条聊天消息 -> (mob_sid|None, userPosition|None, loc)
+        chat_ping: {'content': {'area': str, 'message': str, 'userPosition': {x,y}|None, 'user': str}} """
         try:
             content = chat_ping.get('content') or {}
             area = content.get('area') or ''
             msg = (content.get('message') or '').strip()
         except Exception:
-            return None, None
+            return None, None, None
         if area != '$system' and not msg.startswith('A Super'):
-            return None, None
+            return None, None, None
+        # sacrifice召唤公告过滤(不是Super)
+        if PAT_SUMMONED.search(msg):
+            return None, None, None
         m = PAT_SUPER.search(msg)
         if m:
-            return m.group(1).lower(), content.get('userPosition')
+            loc = 'here' if (m.group('loc') or '').startswith(' here') else ('somewhere' if m.group('loc') else 'unknown')
+            return m.group(1).lower(), content.get('userPosition'), loc
         k = KEYWORD_SIDS.get(msg)
         if k:
-            return k, content.get('userPosition')
-        return None, None
+            return k, content.get('userPosition'), 'unknown'
+        return None, None, None
 
     def feed(self, chat_ping):
         """喂一条聊天消息, 命中公告则开启 Super 猎杀模式
         返回 (sid, cn, pos) 或 None"""
-        sid, pos = self.parse(chat_ping)
+        sid, pos, loc = self.parse(chat_ping)
         if not sid:
             return None
         now = time.time()
         self._stats['pings'] += 1
         self.super_hunt_sid = sid
-        self.super_hunt_until = now + 120.0   # 公告后120s内全图扫
+        # v1.24.4: 本地公告(here!)才值得全图猎杀; 别处(somewhere)不浪费120s
+        if loc == 'here':
+            self.super_hunt_until = now + 120.0
+            self._stats['hunts'] += 1
+        elif loc == 'somewhere':
+            self.super_hunt_until = now + 15.0   # 别处=路过顺带扫, 15s即止
+        else:
+            self.super_hunt_until = now + 120.0
+            self._stats['hunts'] += 1
         self.last_ping = now
-        self._stats['hunts'] += 1
+        print(f"[Super雷达] {_SUPER_CN.get(sid, sid)} {loc or '未知位置'}")
         return sid, _SUPER_CN.get(sid, sid), pos
 
     def is_hunting(self, now=None):
@@ -87,7 +101,11 @@ if __name__ == '__main__':
         {'content': {'area': '$system', 'message': 'A Super Cactus has spawned', 'userPosition': None}},
         {'content': {'area': '$system', 'message': 'There\'s a bright light in the horizon', 'userPosition': {'x': 100, 'y': 200}}},
         {'content': {'area': '$system', 'message': 'A Super Jellyfish has spawned', 'userPosition': {'x': 50, 'y': 60}}},
+        {'content': {'area': '$system', 'message': 'A Super Hornet has spawned here!', 'userPosition': None}},
+        {'content': {'area': '$system', 'message': 'A Super Wasp has spawned somewhere!', 'userPosition': None}},
+        {'content': {'area': '$system', 'message': 'A Super Beetle has been summoned!', 'userPosition': None}},
         {'content': {'area': '$guild', 'message': 'hi', 'userPosition': None}},
+        {'content': {'area': '$system', 'message': 'x', 'userPosition': None}},
     ]
     for t in tests:
         print(sp.feed(t) or ('忽略:', t['content']['message'][:40]))
