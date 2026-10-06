@@ -201,6 +201,16 @@ def get_aggro_speed(sid):
         return 0.0
     return 0.95
 
+
+def knockback_share(sid, rarity='Common'):
+    """v1.23.6: 怪承受击退份额 (florr_clone combat.h 质量模型)
+    怪质量 = 1 + radius/25 (kGardnMassRadius), 花质量=1
+    击退份额 = 花质量/(花质量+怪质量) = 1/(2+radius/25)
+    大怪吃不到击退: ladybug r10=0.42 / sandstorm r40=0.28 / termite_overmind r60=0.23 / centipede r75=0.20
+    用途: '打不动'第二信号(重质量怪=击退免疫+贴脸难躲)"""
+    r = get_radius(sid, rarity)
+    return 1.0 / (2.0 + r / 25.0)
+
 def get_escape_dist(sid):
     """风筝线 = 1.5 × 检测半径(源码 _focus_lose_clause): 出这个圈才丢仇恨"""
     return 1.5 * get_aggro(sid)

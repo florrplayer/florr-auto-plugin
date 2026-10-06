@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "source": "florr_clone cpp/server/systems/{loot,petals,combat}.cpp + bot_ai.cpp",
+    "date": "2026-10-06",
+    "note": "第三方官方风格复刻源码, 参数与官方florr.io可能有差异, 作参考"
+  },
+  "loot": {
+    "pickup_reach": "body.radius * 2 + magnetism(磁力值)",
+    "magnetism_behavior": "磁铁只扩大拾取半径, 不把掉落物吸过来(官方注释: 'Magnetism widens the reach and nothing else')",
+    "drop_claim": "掉落物按伤害榜归owner, 死亡后回来仍可捡自己的那份(可捡一次)",
+    "drop_rarity_roll": "rollDropRarity(authored, mobRarity) = scale + finish 两级: 怪稀有度会抬升掉落稀有度"
+  },
+  "petals_heal": {
+    "starfish_threshold": "血量 < 75 绝对数值触发(不是百分比! 源码注释: 'Starfish compares ABSOLUTE health, not a fraction')",
+    "starfish_amount": "回 25 x sqrt(3)^稀有度 x 天赋 x 3",
+    "healing_interval": "回血花瓣每 2000ms 触发一次",
+    "healing_amount": "回 20 x sqrt(3)^稀有度 x 天赋 x 3",
+    "blood_leaf": "爆炸 + 自伤-1(不致死, 保底1血)",
+    "heal_formula": "amount x pow(sqrt(3), rarityIndex) x Healing天赋 x 3.0"
+  },
+  "combat": {
+    "claw_crit": "爪击: 目标血量>kClawCritHealthFraction时额外+critDamage",
+    "knockback_formula": "impulse = direction x (strength / mass)  击退=花瓣击退值/怪质量, 替换旧向量不叠加",
+    "knockback_implication": "质量大的怪(甲虫/沙暴类)几乎不吃击退 -> 打不动怪的第二信号",
+    "mob_contact_knockback": "怪撞玩家固定小位移(玩家被打会被推)"
+  },
+  "boss_spawn": {
+    "super_origin": "difficulty-200的刷怪带全出Super(地图作者设定难度)",
+    "unique_upgrade": "Super出生时若biome的unique/apex时钟冷却完则抽rollBossUpgrade升级为Unique/Apex",
+    "super_press": "Super在场占着该biome的Unique/Apex名额 -> 抢Super=抢Unique入场券",
+    "spawn_stagger": "各biome Boss错峰出生(避免同时), 相位随机"
+  }
+}
