@@ -7,6 +7,8 @@ v1.25.2: find_best_target 加 sticky_sid 目标粘滞(AI研究§8.1-2)
 import time, math, json, urllib.request
 
 import mob_db
+import protocol_db  # v1.27.0: 网络协议全表(怪名/花瓣名/稀有度/实体解码)
+import combat_strategy  # v1.27.0: 移植florr-auto-farm实测战斗策略(Ultra危险对/物种档/Mythic走位)
 
 BRIDGE_URL = "http://127.0.0.1:18899"
 
@@ -104,8 +106,17 @@ def get_nearby_mobs(max_dist=3000):
             dist = math.hypot(x - px, y - py)
             if dist > max_dist:
                 continue
-        sid = mob_db.type_id_to_sid(t) or TYPE_NAMES.get(t, f"mob_{t}")
-        rarity = mob_db.rarity_infer(sid, hp)
+        # v1.27.0: 协议字段优先 (bridge升级后带net_type/rarity_idx就用协议真值, 否则回退内存逻辑)
+        net_type = m.get('net_type')
+        if net_type is not None:
+            sid = protocol_db.net_mob_sid(net_type) or TYPE_NAMES.get(t, f"mob_{t}")
+        else:
+            sid = mob_db.type_id_to_sid(t) or TYPE_NAMES.get(t, f"mob_{t}")
+        rarity_idx = m.get('rarity_idx')
+        if rarity_idx is not None and 0 <= rarity_idx < len(protocol_db.NET_RARITY_NAMES):
+            rarity = protocol_db.NET_RARITY_NAMES.get(rarity_idx, 'Common')
+        else:
+            rarity = mob_db.rarity_infer(sid, hp)
         result.append({
             'x': x, 'y': y,
             'hp': hp,
@@ -165,6 +176,11 @@ def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000, force_
         action, score, rarity, _ = mob_db.assess_mob(sid, hp, can_kill_hp, dist)
         if action in ('danger', 'ignore'):
             continue
+        # v1.27.0: 移植florr-auto-farm实测策略 - Ultra蝎子/甲虫AVOID不打, 失败方向选"别惹"
+        if combat_strategy.classify_action(sid, rarity) == 'AVOID':
+            continue
+        # 物种档平手规则: 同稀有度时物种优先级高者优先(沙暴>仙人掌>甲虫>蝎子>...)
+        score += combat_strategy.SPECIES_RANK.get(sid, 0) * 10.0
         # Super雷达猎杀: 目标怪权重拉满(抢Super)
         if force_sid and sid == force_sid:
             score += 500000.0

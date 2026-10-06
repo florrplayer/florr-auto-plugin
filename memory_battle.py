@@ -7,9 +7,11 @@
 v1.18.0: 决策走 mob_db(稀有度反推/真实碰撞箱/追击范围/掉落价值) + 逃跑不往墙角跑
 v1.24.0: bot式侧移避怪 + v1.24.1 导弹射程撤出 + v1.24.5 修NameError
 v1.25.2: 深度用AI研究§8 - 目标粘滞+传送门3秒无敌窗+蟑螂螃蟹打带跑
+v1.27.0: Mythic走位表(florr-auto-farm实测) - Mythic甲虫/火兵蚁/蝎子/沙蜈蚣 strafe/ram 打带跑
 """
 import time, math, threading
 import mob_db
+import combat_strategy  # v1.27.0: Mythic走位表(strafe/ram/hold)
 from bridge_combat import (get_player, get_nearby_mobs, find_best_target,
                            wave_end_count)
 import bridge_combat  # v1.24.5: 修 NameError (第201行 bridge_combat._fetch_latest 需要模块名)
@@ -271,8 +273,11 @@ class MemoryBattle:
                     spd = mob_db.get_aggro_speed(target['sid'])   # AI研究: 追击速度系数(≥1.0=追得上玩家)
                     # v1.23.7: stinger/导弹怪(黄蜂/胡蜂/螳螂)也进打带跑 - 摆尾蓄力250ms闪避窗
                     # v1.25.2: +蟑螂(受击爆发冲撞)/螃蟹(40%血冲刺)(AI研究§8.2-12/13) -> 打带跑横移
+                    # v1.27.0: +Mythic走位表(florr-auto-farm实测) - Mythic甲虫/火兵蚁/蝎子/沙蜈蚣 strafe/ram 打带跑, 不站桩被秒
                     ai_info = mob_db.mob_ai_info(target['sid'])
-                    dash_dodge = target['sid'] in ('roach', 'crab', 'crab_mecha')
+                    mythic_kite = combat_strategy.mythic_kite(target['sid'])
+                    dash_dodge = target['sid'] in ('roach', 'crab', 'crab_mecha') or (
+                        mythic_kite in ('strafe', 'ram') and target.get('rarity') == 'Mythic')
                     stinger_dodge = bool(ai_info.get('stinger') or ai_info.get('projectile')) or dash_dodge
                     # 追得上的怪(冲撞/毒)或远程导弹怪不能站桩贴脸(接触伤害/导弹白嫖), 用打带跑: 蹭1下立刻拉开
                     hit_run = (spd >= 1.0 or stinger_dodge) and (target.get('score', 0) < 1000)
