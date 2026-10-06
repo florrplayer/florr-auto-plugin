@@ -2,6 +2,7 @@
 
 > 全自动：进图 → 巡逻 → 打怪 → 捡掉落 → 回血 → 防挂机检测 → 死亡复活重进
 > 不用看屏幕，不用动鼠标，键盘自动操作（WASD 移动 + 空格切换回血花瓣）
+> 多语言架构：Python 主控 + HTML/CSS/JS 问卷界面 + 浏览器注入(JS) + Go 桥接 + C++ 级 OpenCV 加速（detect_mobs 合并连通域）
 
 ## 快速开始（小白版）
 
@@ -52,3 +53,9 @@
 - **bridge_server.exe（Go 交叉编译，双击即用，免 Python 环境）**：接口与 `py bridge_server.py` 100% 兼容（GET 拉数据 / POST 浏览器 hook 推送），单静态 exe 免装 Python，小白直接跑
 - 源码 `bridge_server.go`：`go build bridge_server.go`（本机）/ `GOOS=windows GOARCH=amd64 go build -o bridge_server.exe bridge_server.go`（出 Windows exe）
 - 实测桥接层不是性能瓶颈（Python 与 Go 同量级）；真正的"不犹豫"收益来自内存模式本身（免截图）+ 后续推送式协议（WebSocket/增量帧）
+## 多语言增强（v1.34）
+
+- **HTML/CSS/JS 问卷界面（config_web.py）**：启动配置弹窗从 tkinter 换成浏览器网页问卷（问卷星风格：一题一页、鼠标点选变蓝、下一步提交；点选可靠不串键），tkinter 自动兜底
+- **detect_mobs 合并连通域**：M(青)/U(粉) 两个 mask 合并成 1 次降采样+连通域，按中心 5x5 平均 HSV 分拣（2 次 CC → 1 次），实测 7.1ms → 5.8ms（-18%）
+- **Edge AIEP 窗口兼容**：Edge 更新后窗口类名带 `_AIEP_xxx:` 前缀，find_window 改包含匹配
+- **完全后台键盘移动**：auto/默认一律 PostMessage 键盘（不碰真实鼠标），后台/最小化都能挂
