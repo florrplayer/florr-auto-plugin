@@ -177,8 +177,18 @@ def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000, force_
         if action in ('danger', 'ignore'):
             continue
         # v1.27.0: 移植florr-auto-farm实测策略 - Ultra蝎子/甲虫AVOID不打, 失败方向选"别惹"
-        if combat_strategy.classify_action(sid, rarity) == 'AVOID':
+        act_cs = combat_strategy.classify_action(sid, rarity)
+        if act_cs == 'AVOID':
             continue
+        # v1.28.1: CAUTIOUS标记(Ultra沙尘暴/仙人掌/沙蜈蚣/火蚁可打但保持距离) -> 供战斗循环打带跑
+        m['cautious'] = (act_cs == 'CAUTIOUS')
+        m['cautious_hold_px'] = 250.0 if m['cautious'] else 0.0
+        # v1.28.1: 防微振(florr-auto-farm实测: 对着乱动/打不死的低稀有度目标原地微振,
+        # 整轮move_count=0不刷怪) - 非秒杀的低稀有度目标弱化, Mythic及以上/秒杀才值得专门追
+        if rarity not in ('Mythic', 'Ultra', 'Super', 'Unique', 'Eternal') and action != 'oneshot':
+            score *= 0.3
+        if rarity in ('Mythic', 'Ultra', 'Super'):
+            score += 4000.0   # chase门槛: Mythic+ 目标碾压低稀有度(实测规则"chase只留给Mythic及以上")
         # 物种档平手规则: 同稀有度时物种优先级高者优先(沙暴>仙人掌>甲虫>蝎子>...)
         score += combat_strategy.SPECIES_RANK.get(sid, 0) * 10.0
         # Super雷达猎杀: 目标怪权重拉满(抢Super)
