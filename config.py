@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-"""交互配置: 启动弹窗让玩家选 全程攻/防/不弄 + 能秒的怪等级; 存档后只问要不要更新"""
+"""交互配置: 启动弹窗让玩家选 全程攻/防/不弄 + 能秒的怪等级; 存档后只问要不要更新
+v1.34: 问卷改用 HTML 网页(web优先, tkinter兜底) —— 点选可靠+问卷星风格"""
 import json
 import os
 import tkinter as tk
@@ -14,15 +15,9 @@ HEAL_NAMES = {1: "副槽1", 2: "副槽2", 3: "副槽3", 4: "副槽4", 5: "副槽
 HEAL_TYPE_NAMES = {"rose": "玫瑰Rose(爆发救急)", "dahlia": "大丽花Dahlia(稳定小回血)",
                    "yucca": "丝兰Yucca(防御时回血)", "starfish": "海星Starfish(被动回血)",
                    "leaf": "叶子Leaf(过渡用)"}
-# 旧配置兼容(1.x: M=只打神话, M+L=神话+传奇, none=纯巡逻)
 RANK_LEGACY = {"M": "mythic", "M+L": "legendary", "none": "none"}
 
-
-
 # ===== 刷怪区域系统 =====
-# 每图区域: (key, 显示名, 推荐秒杀档(kill_rank自动匹配用), 中心百分比(x,y) [地图像素=百分比x300], 巡逻半径百分比)
-# ⚠️ 坐标为初版估算(依据研究手册分区描述)，实测位置不对时截图/报坐标给我精调；
-#    也可在"要不要重新设置巡逻点"时选"重新设置"手动点选校准。
 REGION_TABLE = {
     "garden": [
         ("ladybug", "出生点/瓢虫区（绿黄怪，新手）", ("common", "unusual"), (0.50, 0.78), 0.10),
@@ -70,12 +65,10 @@ REGION_TABLE = {
     ],
 }
 
-# 秒杀档 -> 推荐区域名映射(自动模式): 每图按 REGION_TABLE 的推荐档匹配, 无匹配回退第一个
 RANK_LEVEL = {"common": 0, "unusual": 1, "rare": 2, "epic": 3, "legendary": 4, "mythic": 5, "ultra": 6, "none": 99}
 
 
 def region_options(map_name):
-    """弹窗选项: (key, label)；第一个为自动(按秒杀等级推荐)"""
     opts = [("auto", "自动（按秒杀等级推荐刷怪区）")]
     for key, label, _, _, _ in REGION_TABLE.get(map_name, []):
         opts.append((key, label))
@@ -83,12 +76,10 @@ def region_options(map_name):
 
 
 def pick_region(map_name, kill_rank):
-    """自动模式: 按秒杀等级匹配区域 key；无匹配回退第一个"""
     rows = REGION_TABLE.get(map_name, [])
     if not rows:
         return None
     lv = RANK_LEVEL.get(kill_rank, 99)
-    # 找推荐档包含该等级的最近区域
     best, best_d = rows[0][0], 10 ** 9
     for key, _, ranks, _, _ in rows:
         for r in ranks:
@@ -99,8 +90,6 @@ def pick_region(map_name, kill_rank):
 
 
 def region_patrol_points(map_name, region_key, kill_rank):
-    """生成区域信息: 区域圆(中心+半径)。返回 (区域名, 锚点列表, 区域圆(cx,cy,r))
-    巡逻时在区域内随机取点(随机游走), 锚点仅供地图窗口显示"""
     rows = REGION_TABLE.get(map_name, [])
     key = region_key
     if key == "auto":
@@ -111,7 +100,7 @@ def region_patrol_points(map_name, region_key, kill_rank):
         if k == key:
             label, cx, cy, radius = lb, px, py, pr
             break
-    S = 300  # 地图统一 300x300
+    S = 300
     cxp, cyp = int(cx * S), int(cy * S)
     rp = max(6, int(radius * S))
     pts = [(cxp, cyp), (cxp + rp // 2, cyp), (cxp - rp // 2, cyp),
@@ -127,7 +116,6 @@ def load_config():
         cfg2 = {**DEFAULTS, **cfg}
         if cfg2["kill_rank"] in RANK_LEGACY:
             cfg2["kill_rank"] = RANK_LEGACY[cfg2["kill_rank"]]
-        # 旧版单槽兼容: heal_slot -> heal_slots 列表
         if cfg2.get("heal_slot", 0) and not cfg2.get("heal_slots"):
             cfg2["heal_slots"] = [int(cfg2["heal_slot"])]
         cfg2["heal_slots"] = [int(s) for s in cfg2.get("heal_slots", []) if int(s) in HEAL_NAMES]
@@ -146,8 +134,14 @@ def save_config(cfg):
 
 
 def _ask(prompt, options, title):
-    """问卷星风格单选: 选项列表鼠标点选(选中变蓝高亮), 底部[下一步]提交;
-    返回选中的 key(未选/关窗口返回 None)"""
+    """问卷星风格单选: 优先 HTML 网页问卷(web), 失败兜底 tkinter"""
+    try:
+        from config_web import ask_web
+        v = ask_web(prompt, options, title, multi=False)
+        if v is not None:
+            return v
+    except Exception:
+        pass
     result = {"v": None}
     root = tk.Tk()
     root.title(title)
@@ -174,8 +168,14 @@ def _ask(prompt, options, title):
 
 
 def _ask_multi(prompt, options, title, preselect=()):
-    """问卷星风格多选: 选项列表鼠标点选切换(选中变蓝高亮+凹), 底部[下一步]提交;
-    preselect: 默认勾选的 key 集合; 返回选中的 key 列表(关窗口返回 [])"""
+    """问卷星风格多选: 优先 HTML 网页问卷(web), 失败兜底 tkinter"""
+    try:
+        from config_web import ask_web
+        v = ask_web(prompt, options, title, multi=True)
+        if v is not None:
+            return v
+    except Exception:
+        pass
     result = {"v": []}
     root = tk.Tk()
     root.title(title)
@@ -202,7 +202,6 @@ def _ask_multi(prompt, options, title, preselect=()):
 
 
 def _pick(sel, key, vv, bb, multi):
-    """点选: 单选=先取消其他再选中(蓝底+凹), 多选=只切换自己"""
     if not multi:
         for k, (ov, ob) in sel.items():
             if ov.get():
@@ -214,7 +213,6 @@ def _pick(sel, key, vv, bb, multi):
 
 
 def _submit(sel, multi):
-    """收集选中项: 单选返回第一个选中key(无则None), 多选返回列表"""
     if multi:
         return [k for k, (vv, _) in sel.items() if vv.get()]
     for k, (vv, _) in sel.items():
@@ -227,8 +225,6 @@ HEAL_COLOR_NAMES = {"rose/dahlia": "粉(玫瑰/大丽花)", "leaf/yucca": "绿(�
 
 
 def ask_heal_confirm(cand):
-    """扫描到回血花瓣候选后: 弹窗勾选确认(默认全勾, 可取消误检的), 返回选中槽位列表(关窗口返回 None)
-    cand: [(行号, 槽位1-10, 颜色名), ...]"""
     if not cand:
         return None
     options = [(f"{s}", f"槽位{s}（{'副' if r else '主'}行, {HEAL_COLOR_NAMES.get(c, c)}）") for r, s, c in cand]
@@ -238,7 +234,6 @@ def ask_heal_confirm(cand):
 
 
 def ask_update(cfg):
-    """有存档时调用: 只问要不要更新(否→False 用旧设置)"""
     mode = MODE_NAMES.get(cfg.get("mode", "defense"), "?")
     rank = RANK_NAMES.get(cfg.get("kill_rank", "M"), "?")
     heal = ", ".join(HEAL_NAMES.get(s, "?") for s in cfg.get("heal_slots", [])) or "不用(没带回血)"
@@ -251,14 +246,13 @@ def ask_update(cfg):
 
 
 def ask_config(map_name="desert"):
-    """首次/更新时调用: 依次问配置问题；map_name 用于列出刷怪区域"""
     m = _ask("你想全程攻击还是防御还是不弄？",
              [("attack", "全程攻击（按空格发射花瓣）"),
               ("defense", "全程防御（按住右键，花瓣绕身转）"),
               ("none", "不弄（纯手动操作）")], "florr 挂机设置 ①/⑥")
     if m is None:
         m = "defense"
-    r = _ask("你可以秒（<3秒）哪个等级的怪？\\n（=这级自动追贴脸打，更高避开，更低不管）",
+    r = _ask("你可以秒（<3秒）哪个等级的怪？\n（=这级自动追贴脸打，更高避开，更低不管）",
              [(k, RANK_NAMES[k]) for k in RANK_ORDER] + [("random", "随机打怪（碰到什么打什么，避开U级）")], "florr 挂机设置 ②/⑦")
     if r is None:
         r = "mythic"
