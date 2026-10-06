@@ -9,6 +9,7 @@ import time, math, json, urllib.request
 import mob_db
 import protocol_db  # v1.27.0: 网络协议全表(怪名/花瓣名/稀有度/实体解码)
 import combat_strategy  # v1.27.0: 移植florr-auto-farm实测战斗策略(Ultra危险对/物种档/Mythic走位)
+import ws_client  # v1.29.2: WebSocket 增量订阅 (延迟~200ms→<10ms, 断线回退HTTP)
 
 BRIDGE_URL = "http://127.0.0.1:18899"
 
@@ -55,7 +56,11 @@ DEFAULT_PLAYER_DPS = 200
 
 
 def _fetch_latest():
-    """从bridge_server拉最新数据 (跨进程)"""
+    """v1.29.2: 优先 WebSocket 本地缓存(零IO, <10ms); 未连上回退 HTTP 轮询"""
+    ws_client.start()  # 幂等
+    d = ws_client.get_latest()
+    if d is not None:
+        return d
     try:
         with urllib.request.urlopen(BRIDGE_URL, timeout=1) as r:
             return json.loads(r.read().decode())
