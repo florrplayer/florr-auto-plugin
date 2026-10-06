@@ -167,8 +167,9 @@ def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000, force_
             max_hp = hi[1] if hi else hp
             if hp < max_hp * 0.5:
                 score += 100000.0
-        # 距离权重(近的优先, 但不让距离淹没稀有度)
-        score += 2000.0 / (dist + 50.0)
+        # v1.23.4: 官方bot评分公式(florr_clone bot_ai.cpp) - 稀有度胃口-距离
+        # 单位都是"值得走这么远": Rare 460/Legendary 920/Mythic 1150/Super 6000
+        score += mob_db.tier_appetite(rarity) - dist
         if score > best_score:
             best_score = score
             m['score'] = score

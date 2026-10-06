@@ -233,6 +233,21 @@ def aggro_range(sid):
         return m['range']
     return get_aggro(sid)
 
+
+# ===== v1.23.4: 官方bot目标评分公式 (florr_clone cpp/server/bot_ai.cpp) =====
+_RARITY_INDEX = {'common': 0, 'unusual': 1, 'rare': 2, 'epic': 3,
+                 'legendary': 4, 'mythic': 5, 'ultra': 6, 'super': 7,
+                 'unique': 7, 'eternal': 7}
+
+
+def tier_appetite(rarity):
+    """稀有度胃口 = 官方bot 'worth this many units of walking'
+    普通级 0x230, Rare 2x230=460, Legendary 920, Mythic 1150, Ultra 1380, Boss(Super+) 6000"""
+    idx = _RARITY_INDEX.get((rarity or '').lower(), 0)
+    if idx >= 7:
+        return 6000.0
+    return idx * 230.0
+
 # ================= 怪物属性 =================
 def mobs():
     m = _load_json('mob_stats_v2.json') or _load_json('mob_stats_full.json')
