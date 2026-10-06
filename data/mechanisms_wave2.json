@@ -1,6 +1,6 @@
 {
  "meta": {
-  "source": "florr_clone cpp/server/systems/{loot,petals,combat}.cpp + bot_ai.cpp",
+  "source": "florr_clone cpp/server/systems/{loot,petals,combat}.cpp + bot_ai.cpp + wasm反汇编 + 官方changelog字符串",
   "date": "2026-10-06",
   "note": "第三方官方风格复刻源码, 参数与官方florr.io可能有差异, 作参考"
  },
@@ -128,5 +128,48 @@
   "boss_upgrade_chance": 0.1,
   "boss_upgrade_rule": "时钟READY + biome无同tier在场(topBossTaken) + 10%概率 -> Super升级Unique/Apex; 升级成功时钟重置; Apex优先于Unique判定; 正常生成=Super",
   "same_tier_single": "同一biome同一tier同时只站一只Boss(在场期间不再抽同tier)"
+ },
+ "wasm_ai_behaviors": {
+  "aggro_tiers": "aggressive/semi-aggressive/passive 三档; 被打不回去的实体(墙后/地下)攻击时会逃跑(flee)",
+  "aggro_vs_attack_range": "两独立半径: 进aggro范围才追, 进attack范围才出手(hornet不会半张图开打)",
+  "aggro_grows_with_age": "仇恨范围随存活时间持续增长 - 越老的怪越容易引到你, 清旧怪优先",
+  "wave_end_all_aggro": "波末全体怪仇恨(已接入wave_end_count)",
+  "max_speed": "120 px/s 默认最大速度",
+  "velocity_damping": "-1.34%/帧 速度阻尼, 无推力0.5s内停下",
+  "contact_damage_base": "1.4 碰撞伤害 / 0.5 击退基准",
+  "rarity_scale": "1.15(hp/速度) / 1.38(伤害) / 1.1 随稀有度缩放",
+  "fan_shot_angles": "扇形弹幕角模板 [-0.315,-0.105,0.105,0.315] / [-0.7,-0.233,0.233,0.7]",
+  "bulb_taunt": "bulb灯泡=嘲讽拉怪道具; MobAggroRange花瓣可降低怪物对自己仇恨百分比",
+  "summon_collision": "召唤物不与其他召唤物碰撞; 对非友方怪造成碰撞伤害",
+  "missile_has_hp": "导弹是独立HP实体(missile health按花瓣health缩放) - 导弹可被击落",
+  "sandstorm_phase": "沙暴可穿透非玩家实体(仍造成伤害)",
+  "leech_shared_hp": "leech节段共享HP(整个身体池一条命)",
+  "cactus_no_poison": "cactus高稀有度不再带毒, 改加HP",
+  "beetle_special_move": "beetle移动模型与普通怪不同"
+ },
+ "official_changelog_mechanics": {
+  "loot_share_4p": "掉落分给伤害前4玩家(各需≥5%伤害, 小队伤害合并); 仅约屏幕距离内玩家可分到; 每玩家独立随机roll",
+  "ant_hole_rarity_cap": "蚂蚁洞稀有度上限Rare",
+  "mob_drop_rarity_cap": "怪最多掉自身稀有度(旧版) -> 最多+1级(新版)",
+  "poison_base_rate": "基础毒伤15/s(从9/s提升)",
+  "luck_affects_spawn": "Luck天赋影响刷怪稀有度(该区域怪稀有度提升)",
+  "map_scales_with_mobs": "地图随包含怪缩放(防后期波次拥挤)",
+  "mythic_respawn_faster": "Mythic以下怪重生更快",
+  "wave_next_condition": "本波<=4只怪存活时下一波开始(已接入wave_end_count)",
+  "pvp_drop_basic": "PvP击杀玩家掉Basic花瓣(按对方点数)",
+  "death_clears_credit": "死亡清伤害记录(复活除外)(已接入)",
+  "salt_stack": "Salt盐可叠加; 反射伤害对花减75%",
+  "slow_rework": "减速效果按怪vs花瓣稀有度决定",
+  "special_wave_15pct": "特殊单怪波不再固定波次, 任意波随机出现, 概率15%",
+  "super_announce_region": "Super出生公告发给区域内所有图所有玩家(super_ping已用)",
+  "super_spawn_bias": "Super偏向Ultra不常被杀的怪种生成; 不再随Ultra存活时间增加概率",
+  "petal_offense_defense": "花瓣分进攻/防御型, 伤害与耐久缩放不同"
+ },
+ "spawn_announcement": {
+  "ultra_spawn_10x": "Ultra生成频率约10倍于从前, 但掉率低3-4倍 - 蹲Ultra掉落性价比下降",
+  "super_bias_rare_killed": "Super偏向Ultra不常被杀的怪种生成",
+  "announce_here_vs_somewhere": "公告分\"has spawned here!\"(本地)与\"has spawned somewhere!\"(别处)",
+  "sacrifice_announce": "玩家sacrifice召唤的怪也发公告(\"has been summoned!\") - 会被误报为Super, 需区分",
+  "special_wave_15pct": "特殊单怪波任意波15%概率"
  }
 }

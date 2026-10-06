@@ -119,12 +119,16 @@ def get_nearby_mobs(max_dist=3000):
 
 
 def get_danger_mobs(player_x, player_y, radius=400):
-    """获取附近危险怪 (含追击范围判断: 危险怪在追击范围内才会主动来)"""
+    """获取附近危险怪 (含追击范围判断: 危险怪在追击范围内才会主动来)
+    v1.24.2: 危险 = DANGER集 OR hostile攻击性档(ai_type) - hostile怪进仇恨圈就会追你"""
     mobs, _ = get_nearby_mobs()
     danger = []
     for m in mobs:
         dist = math.hypot(m['x'] - player_x, m['y'] - player_y)
-        if dist < radius and m['type'] in DANGER_TYPES:
+        if dist >= radius:
+            continue
+        sid = m.get('sid')
+        if m['type'] in DANGER_TYPES or (sid and mob_db.is_hostile(sid)):
             danger.append(m)
     return danger
 
