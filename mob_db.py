@@ -6,6 +6,8 @@
 """
 import json, os, math
 
+import real_stats  # v1.27.1: 真实官方HP校准层 (data/real_florr_mob_stats.json)
+
 _DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 _cache = {}
 
@@ -474,6 +476,10 @@ def assess_mob(sid, hp, player_dps, dist=None):
     rarity = rarity_infer(sid, hp)
     hi = hp_range(sid, rarity)
     max_hp = hi[1] if hi else hp
+    # v1.27.1: 真实官方HP校准 (real_florr_mob_stats.json 82怪×9稀有度) - 秒杀判定用真值
+    real_hp = real_stats.real_health(sid, rarity)
+    if real_hp is not None:
+        max_hp = real_hp
     if player_dps > 0:
         if max_hp <= player_dps:
             action = 'oneshot'
