@@ -6,6 +6,17 @@ __pycache__/
 # C extensions
 *.so
 
+# florr-auto-afk auto-generating
+latest.log
+debug.log
+images/
+test/
+tools/
+train/
+eula.txt
+saves/
+outputs/
+
 # Distribution / packaging
 .Python
 build/
@@ -30,7 +41,6 @@ MANIFEST
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
-*.spec
 
 # Installer logs
 pip-log.txt
@@ -167,35 +177,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Ruff stuff:
-.ruff_cache/
-
 # PyPI configuration file
 .pypirc
-
-# Debug artifacts (调试截图/脚本, 不入库)
-_dbg_*
-_debug_*
-_shot*
-_user_shot*.png
-compare.jpg.bak
-
-# 玩家个人配置(不入库)
-config.json
-florr-auto-*.zip
-
-# 会话临时文件(不入库)
-desktop.ini
-git_check.txt
-push_log.txt
-res_size.txt
-afk_check.txt
-copied_flag.txt
-live_tail.txt
-proc_check*.txt
-web_test_out.txt
-check_windows.txt
-filelist.txt
-
-# 大型克隆仓库(原始参考, 不入库)
-reference-florr-tools/

@@ -1,0 +1,134 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Build Python
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: write
+
+jobs:
+  pyinstaller-build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Extract version from constants.py
+        id: get_version
+        shell: python
+        run: |
+          import re
+          with open('constants.py', 'r', encoding='utf-8') as f:
+              content = f.read()
+          match = re.search(r'VERSION_INFO\s*=\s*"([^"]+)"', content)
+          if not match:
+              raise ValueError("VERSION_INFO not found in constants.py")
+          print(f"::set-output name=version::{match.group(1)}")
+          match = re.search(r'VERSION_TYPE\s*=\s*"([^"]+)"', content)
+          if not match:
+              raise ValueError("VERSION_TYPE not found in constants.py")
+          print(f"::set-output name=versiontype::{match.group(1)}")
+          match = re.search(r'SUB_VERSION\s*=\s*"([^"]+)"', content)
+          if not match:
+              raise ValueError("VERSION_TYPE not found in constants.py")
+          print(f"::set-output name=versionsub::{match.group(1)}")
+
+
+      - name: Check for Dev version
+        shell: bash
+        if: ${{ steps.get_version.outputs.versiontype }}
+        run: |
+          if [[ "${{ steps.get_version.outputs.versiontype }}" == "Dev" ]]; then
+            echo "Dev version detected: v${{ steps.get_version.outputs.version }} ${{ steps.get_version.outputs.versiontype }}.${{ steps.get_version.outputs.versionsub }}. Stopping workflow."
+            exit 1
+          fi
+
+      - name: Install pywin32
+        shell: powershell
+        run: |
+          python -m pip install --upgrade pip
+          pip install pywin32
+
+      - name: Install dependencies
+        shell: powershell
+        run: |
+          pip install -r py311-requirements.txt
+          pip install pyinstaller
+      
+      - name: Run PyInstaller
+        shell: powershell
+        run: |
+          python -m PyInstaller segment.spec
+          python -m PyInstaller server.spec
+
+      - name: Copy libraries
+        shell: powershell
+        run: |
+          Copy-Item -Path ./config.json -Destination ./dist/segment/config.json
+          Copy-Item -Path ./extension.swap.json -Destination ./dist/segment/extension.swap.json
+          Copy-Item -Path ./conversation.json -Destination ./dist/segment/conversation.json
+          Copy-Item -Path ./README.md -Destination ./dist/segment/README.md
+          Copy-Item -Path ./LICENSE -Destination ./dist/segment/LICENSE
+          Copy-Item -Path ./DEVELOPMENT.MD -Destination ./dist/segment/DEVELOPMENT.MD
+          Copy-Item -Path ./extension.js -Destination ./dist/segment/extension.js
+          New-Item -Path ./dist/segment/imgs -ItemType Directory
+          Copy-Item -Path ./imgs/test.png -Destination ./dist/segment/imgs/test.png
+          Copy-Item -Path ./models -Destination ./dist/segment/models -Recurse
+          Copy-Item -Path ./extensions -Destination ./dist/segment/extensions -Recurse
+          Copy-Item -Path ./gui -Destination ./dist/segment/gui -Recurse
+
+          Copy-Item -Path ./config.json -Destination ./dist/server/config.json
+          Copy-Item -Path ./extension.swap.json -Destination ./dist/server/extension.swap.json
+          Copy-Item -Path ./conversation.json -Destination ./dist/server/conversation.json
+          Copy-Item -Path ./README.md -Destination ./dist/server/README.md
+          Copy-Item -Path ./LICENSE -Destination ./dist/server/LICENSE
+          Copy-Item -Path ./DEVELOPMENT.MD -Destination ./dist/server/DEVELOPMENT.MD
+          Copy-Item -Path ./extension.js -Destination ./dist/server/extension.js
+          Copy-Item -Path ./extensions -Destination ./dist/server/extensions -Recurse
+
+      - name: Create Symbolic Links
+        shell: cmd
+        run: |
+          mklink /D ".\dist\segment\_internal\extensions\" "..\extensions"
+          mklink /D ".\dist\server\_internal\extensions\" "..\extensions"
+
+      - name: Compress files into tar.gz
+        shell: bash
+        run: |
+          echo "Compressing ./dist/segment directory into a tar.gz"
+          tar -czf ./dist/florr-auto-afk-v${{ steps.get_version.outputs.version }}.tar.gz -C ./dist segment
+          echo "Compressing ./dist/server directory into a tar.gz"
+          tar -czf ./dist/florr-auto-afk-server-v${{ steps.get_version.outputs.version }}.tar.gz -C ./dist server
+
+      - name: Upload Executable to Release
+        if: ${{ github.event_name == 'push' }}
+        shell: bash
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [[ "${{ steps.get_version.outputs.versiontype }}" == "Pre-Release" ]]; then
+            gh release create "v${{ steps.get_version.outputs.version }}.${{ steps.get_version.outputs.versionsub }}" \
+              --title "Pre-Release v${{ steps.get_version.outputs.version }}.${{ steps.get_version.outputs.versionsub }}" \
+              --notes "Automated pre-release for version v${{ steps.get_version.outputs.version }}.${{ steps.get_version.outputs.versionsub }}" \
+              --target main \
+              --prerelease
+            gh release upload "v${{ steps.get_version.outputs.version }}.${{ steps.get_version.outputs.versionsub }}" "./dist/florr-auto-afk-v${{ steps.get_version.outputs.version }}.tar.gz" --clobber
+            gh release upload "v${{ steps.get_version.outputs.version }}.${{ steps.get_version.outputs.versionsub }}" "./dist/florr-auto-afk-server-v${{ steps.get_version.outputs.version }}.tar.gz" --clobber
+          else
+            gh release create "v${{ steps.get_version.outputs.version }}" \
+              --title "Release v${{ steps.get_version.outputs.version }}" \
+              --notes "Automated release for version v${{ steps.get_version.outputs.version }}" \
+              --target main
+            gh release upload "v${{ steps.get_version.outputs.version }}" "./dist/florr-auto-afk-v${{ steps.get_version.outputs.version }}.tar.gz" --clobber
+            gh release upload "v${{ steps.get_version.outputs.version }}" "./dist/florr-auto-afk-server-v${{ steps.get_version.outputs.version }}.tar.gz" --clobber
+          fi
