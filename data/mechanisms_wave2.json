@@ -73,5 +73,26 @@
    "poison": 0.006,
    "note": "蝎子毒0.006/次"
   }
+ },
+ "aggro_mechanics": {
+  "acquire_range": "reach = min(aggroRange + bonus, kMobTargetRetainRadius)",
+  "player_notice_circle": "每玩家有独立被感知圈: gap <= range*scale + bonus; poo大便缩小感知圈(防围殴), 天赋/道具可加减",
+  "los_block": "怪只追看得见的玩家(terrain.segmentBlocked射线检测) -> 绕障碍物(墙/树/地形)可甩怪! 躲猫猫逃跑",
+  "nearest_first": "多候选取最近+视线可见第一个(不是最大贡献者)",
+  "ledger_bounty": "谁打怪谁上账本, 怪追最近贡献者",
+  "provocation_any_distance": "任何距离打怪都会引仇恨(远处打=怪从远处来追你)",
+  "retention": "保留仇恨=flat 5视野(不看怪自身范围) - 逃跑要跑出5视野"
+ },
+ "drop_lifetime_seconds": {
+  "Common": 10,
+  "Unusual": 20,
+  "Rare": 30,
+  "Epic": 40,
+  "Legendary": 50,
+  "Mythic": 60,
+  "Ultra": 80,
+  "Super": 120,
+  "Unique": 300,
+  "Eternal": 600
  }
 }
