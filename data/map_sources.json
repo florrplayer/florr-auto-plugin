@@ -1,0 +1,34 @@
+{
+ "MAPS_LIST_URL": "https://florr.io/static/i18n/en_US/maps.txt",
+ "MAPS_BASE_URL": "https://florr.io/static/maps",
+ "MAP_ORDER": [
+  "Garden",
+  "Desert",
+  "Ocean",
+  "Jungle",
+  "Ant Hell",
+  "Sewers",
+  "Hel",
+  "Factory",
+  "Training Grounds",
+  "Crystal Room",
+  "Worm",
+  "Ant Hole",
+  "Rift: Garden",
+  "Rift: Ant Hell",
+  "Rift: Factory",
+  "Rift: Hel",
+  "Rift: Ocean",
+  "Rift: Sewers",
+  "Rift: Victory",
+  "Rift: Pyramid",
+  "Pyramid"
+ ],
+ "warp_rules": [
+  {
+   "id": "br/main",
+   "name": "Rift: Garden"
+  }
+ ],
+ "tmj_url_template": "https://florr.io/static/maps/{id}.tmj"
+}

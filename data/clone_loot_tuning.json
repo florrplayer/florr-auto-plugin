@@ -1,0 +1,6 @@
+{
+ "_file": "florr_clone\\cpp\\server\\systems\\loot.h",
+ "kDropLifetimeByRarity": "{\n    10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 80.0, 120.0, 300.0, 600.0,\n}",
+ "kDropBodyRadius": "14.0",
+ "kDropWallRadius": "15.0"
+}

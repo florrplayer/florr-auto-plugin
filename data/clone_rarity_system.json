@@ -1,0 +1,119 @@
+{
+ "_file": "florr_clone\\cpp\\shared\\game\\rarity.h",
+ "kRarityNames": "{\n    \"common\", \"uncommon\", \"rare\", \"epic\", \"legendary\",\n    \"mythic\", \"ultra\", \"super\", \"unique\", \"apex\",\n}",
+ "kRarityLabels": "{\n    \"Common\", \"Uncommon\", \"Rare\", \"Epic\", \"Legendary\",\n    \"Mythic\", \"Ultra\", \"Super\", \"Unique\", \"Apex\",\n}",
+ "kRarityColors": "{\n    0x7EEF6Du,  // common     green\n    0xFFE65Du,  // uncommon   yellow\n    0x4D52E3u,  // rare       blue\n    0x861FDEu,  // epic       purple\n    0xDE1F1Fu,  // legendary  red\n    0x1FDBDEu,  // mythic     cyan\n    0xFF2B75u,  // ultra      pink\n    0x2BFFA3u,  // super      mint\n    0xEEEEEEu,  // unique     white\n    0xFF00FFu,  // apex       magenta\n}",
+ "kMobHealthScale": "{\n    1.0, 3.75, 13.5, 54.0, 324.0, 3159.0, 126830.0, 2374000.0, 1e7, 2e8,\n}",
+ "kMobDamageScale": "{\n    1.0, 3.0, 9.0, 27.0, 81.0, 243.0, 729.0, 2187.0, 6561.0, 1968300.0,\n}",
+ "kMobArmorScale": "{\n    1.0, 3.0, 9.0, 27.0, 81.0, 243.0, 729.0, 729.0, 729.0, 729.0,\n}",
+ "kMobSizeScale": "{\n    1.5, 1.65, 1.95, 2.58, 4.5, 7.5, 10.5, 16.777216, 26.8435456, 42.949673,\n}",
+ "kOracleCraftCost": "{\n    7,     // common    -> uncommon\n    11,    // uncommon  -> rare\n    19,    // rare      -> epic\n    34,    // epic      -> legendary\n    65,    // legendary -> mythic\n    128,   // mythic    -> ultra\n    253,   // ultra     -> super\n    506,   // super     -> unique\n    1012,  // unique    -> apex\n    0,     // apex: nothing above it\n}",
+ "kRarityCount": "static_cast<int>(Rarity::Count)",
+ "_functions": [
+  {
+   "name": "rarityIndex",
+   "params": "Rarity r",
+   "body": "return static_cast<int>(r);"
+  },
+  {
+   "name": "upgradeRarity",
+   "params": "Rarity r",
+   "body": "const int i = rarityIndex(r); return i + 1 < kRarityCount ? static_cast<Rarity>(i + 1) : r;"
+  },
+  {
+   "name": "downgradeRarity",
+   "params": "Rarity r",
+   "body": "const int i = rarityIndex(r); return i > 0 ? static_cast<Rarity>(i - 1) : r;"
+  },
+  {
+   "name": "clampRarity",
+   "params": "int index",
+   "body": "return static_cast<Rarity>(clamp(index, 0, kRarityCount - 1));"
+  },
+  {
+   "name": "isBossRarity",
+   "params": "Rarity r",
+   "body": "return rarityIndex(r) >= rarityIndex(Rarity::Super);"
+  },
+  {
+   "name": "minionRarity",
+   "params": "Rarity asked",
+   "body": "return rarityIndex(asked) > rarityIndex(Rarity::Ultra) ? Rarity::Ultra : asked;"
+  },
+  {
+   "name": "mobSizeRamp",
+   "params": "Rarity r, double scaleAtUnique",
+   "body": "constexpr double kUniqueIndex = static_cast<double>(static_cast<int>(Rarity::Unique)); return 1.0 - (1.0 - scaleAtUnique) * (rarityIndex(r) / kUniqueIndex);"
+  },
+  {
+   "name": "petalStatScale",
+   "params": "Rarity r",
+   "body": "return std::pow(3.0, rarityIndex(r));"
+  },
+  {
+   "name": "petalHealScale",
+   "params": "Rarity r",
+   "body": "constexpr int kMythic = static_cast<int>(Rarity::Mythic); const int i = rarityIndex(r); if (i <= kMythic) return std::pow(3.0, i); return std::pow(3.0, kMythic) * std::pow(std::sqrt(3.0), i - kMythic)"
+  },
+  {
+   "name": "petalManaScale",
+   "params": "Rarity r",
+   "body": "return std::pow(2.0, rarityIndex(r));"
+  },
+  {
+   "name": "petalZoomScale",
+   "params": "Rarity r",
+   "body": "return std::pow(4.0 / 3.0, rarityIndex(r));"
+  },
+  {
+   "name": "antennaeVisionRangeScale",
+   "params": "Rarity r",
+   "body": "static constexpr std::array<double, kRarityCount> kVisionScale = { 1.0, 1.0, 1.25, 4.0 / 3.0, 10.0 / 7.0, 2.0, 20.0 / 7.0, 5.0, 10.0, 10.0,"
+  },
+  {
+   "name": "petalModifierScale",
+   "params": "Rarity r",
+   "body": "constexpr double kUniqueIndex = static_cast<double>(static_cast<int>(Rarity::Unique)); return 1.0 + (rarityIndex(r) / kUniqueIndex) * 3.0;"
+  },
+  {
+   "name": "petalAggroRangeScale",
+   "params": "double authored, Rarity r",
+   "body": "return std::pow(authored, rarityIndex(r) + 1);"
+  },
+  {
+   "name": "petalEvasionScale",
+   "params": "double authored, Rarity r",
+   "body": "return clamp(authored * (rarityIndex(r) + 1), 0.0, 1.0);"
+  },
+  {
+   "name": "craftSuccessChance",
+   "params": "Rarity from",
+   "body": "return 0.64 / std::pow(2.0, rarityIndex(from));"
+  },
+  {
+   "name": "oracleCraftCost",
+   "params": "Rarity from",
+   "body": "return rarityIndex(from) < kRarityCount ? kOracleCraftCost[rarityIndex(from)] : 0;"
+  },
+  {
+   "name": "dropUpgradeChance",
+   "params": "Rarity mobRarity",
+   "body": "if (rarityIndex(mobRarity) >= kRarityCount - 1) return 0.0; return craftSuccessChance(mobRarity) / 3.0;"
+  },
+  {
+   "name": "dropDowngradeChance",
+   "params": "Rarity mobRarity",
+   "body": "const int i = rarityIndex(mobRarity); if (i <= 0) return 0.0; // The TypeScript formula uses the crafting ladder as a percentage (64, // 32, ...), then uses the result as a probability. craftSuccessCh"
+  },
+  {
+   "name": "stallPower",
+   "params": "Rarity source, Rarity target",
+   "body": "return std::min(1.0, std::pow(3.0, rarityIndex(source) - rarityIndex(target)));"
+  },
+  {
+   "name": "reflectionScale",
+   "params": "Rarity salt, Rarity attacker",
+   "body": "return std::pow(3.0, rarityIndex(salt) - rarityIndex(attacker));"
+  }
+ ]
+}

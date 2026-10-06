@@ -1,0 +1,18 @@
+{
+ "_note": "client.exe(8.5MB, SDL2+OpenGL+Skia原生客户端)字符串提取; 无patch notes(仅GL/Skia), 得到官方控制开关清单",
+ "official_switches": [
+  "&dh=florr.io",
+  "&dt=florr.io",
+  "&an=florr.io",
+  "Reddit button soon, meanwhile, join us at reddit.com/r/florrio",
+  "florrio_movement_helper",
+  "florrio_keyboard_control",
+  "florrio_mobile_zoom",
+  "florrio_touch_controls",
+  "florrio_fixed_joystick",
+  "florrio_nickname",
+  "C:\\Projects\\florrio\\engine\\out\\win64_release_local\\dist\\client\\client.exe.pdb"
+ ],
+ "total_strings": 13492,
+ "gl_strings": 904
+}

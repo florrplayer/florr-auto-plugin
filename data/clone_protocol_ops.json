@@ -1,0 +1,36 @@
+{
+ "_file": "florr_clone\\cpp\\shared\\net\\protocol.h",
+ "kProtocolVersion": "43",
+ "kNoShopOffer": "0xFF",
+ "kMaxFrameBytes": "1u << 20",
+ "kTicksPerSecond": "30",
+ "kTickSeconds": "1.0 / kTicksPerSecond",
+ "kTickMillis": "1000.0 / kTicksPerSecond",
+ "kSnapshotsPerSecond": "20",
+ "kSnapshotMillis": "1000.0 / kSnapshotsPerSecond",
+ "kMaxReportedSlots": "10",
+ "kNoSlotCounter": "0xFFFFu",
+ "kMaxLightningTargets": "24",
+ "_functions": [
+  {
+   "name": "healthFieldIsWide",
+   "params": "double maxHealth",
+   "body": "return maxHealth > 65535.0;"
+  },
+  {
+   "name": "quantizeHealthFraction",
+   "params": "double fraction, bool wide",
+   "body": "const double clamped = clamp(fraction, 0.0, 1.0); if (wide) return 1.0 - static_cast<double>(static_cast<float>(1.0 - clamped)); return static_cast<double>(static_cast<std::uint16_t>(clamped * 65535.0"
+  },
+  {
+   "name": "writeHealthFraction",
+   "params": "ByteWriter& out, double fraction, bool wide",
+   "body": "const double clamped = clamp(fraction, 0.0, 1.0); if (wide) out.f32(static_cast<float>(1.0 - clamped)); else out.u16(static_cast<std::uint16_t>(clamped * 65535.0 + 0.5)); return quantizeHealthFraction"
+  },
+  {
+   "name": "readHealthFraction",
+   "params": "ByteReader& in, bool wide",
+   "body": "return wide ? 1.0 - static_cast<double>(in.f32()) : in.unitShort();"
+  }
+ ]
+}

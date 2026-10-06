@@ -1,0 +1,203 @@
+{
+ "dataObj": {},
+ "rarity": {},
+ "database": {
+  "mobHealthFactor": [
+   1.0,
+   3.75,
+   13.5,
+   54,
+   324,
+   3159,
+   196830,
+   4374000,
+   26244000
+  ],
+  "defaultArmor": 0.8,
+  "talentOriginalValue": {
+   "reload": 1,
+   "medic": 1,
+   "duplicator": 0,
+   "poison": 1,
+   "CPoison": 1,
+   "summoner": 1,
+   "luck": 0,
+   "pHealth": 1
+  },
+  "talentRarity": {
+   "reload": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9
+   ],
+   "medic": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9
+   ],
+   "duplicator": [
+    0,
+    4,
+    6
+   ],
+   "poison": [
+    0,
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "CPoison": [
+    7
+   ],
+   "summoner": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9
+   ],
+   "luck": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9
+   ],
+   "pHealth": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    9
+   ]
+  },
+  "talentName": {
+   "JP": {
+    "reload": "再生成",
+    "medic": "医者",
+    "duplicator": "複製",
+    "poison": "毒",
+    "CPoison": "凝縮された毒",
+    "summoner": "召喚士",
+    "luck": "運",
+    "pHealth": "花びら体力"
+   },
+   "EN": {
+    "reload": "Reload",
+    "medic": "Medic",
+    "duplicator": "Duplicator",
+    "poison": "Poison",
+    "CPoison": "Contentrated Poison",
+    "summoner": "Summoner",
+    "luck": "Luck",
+    "pHealth": "Petal Health"
+   }
+  },
+  "talentFactor": {
+   "reload": [
+    -0.1,
+    -0.19,
+    -0.271,
+    -0.344,
+    -0.475,
+    -0.58,
+    -0.664,
+    -0.731,
+    -0.812
+   ],
+   "medic": [
+    0.15,
+    0.322,
+    0.521,
+    0.749,
+    1.011,
+    1.313,
+    1.66,
+    2.059,
+    3.046
+   ],
+   "duplicator": [
+    0,
+    1,
+    2
+   ],
+   "poison": [
+    0.0625,
+    0.125,
+    0.1875,
+    0.25,
+    0.3125,
+    0.375,
+    0.4375,
+    0.5,
+    0.5625
+   ],
+   "CPoison": [
+    -0.167777
+   ],
+   "summoner": [
+    0.15,
+    0.322,
+    0.521,
+    0.749,
+    1.011,
+    1.313,
+    1.66,
+    2.059,
+    3.046
+   ],
+   "luck": [
+    0.1,
+    0.25,
+    0.45,
+    0.7,
+    1,
+    1.35,
+    1.75,
+    2.2,
+    2.7
+   ],
+   "pHealth": [
+    0.15,
+    0.322,
+    0.521,
+    0.749,
+    1.011,
+    1.313,
+    1.66,
+    2.059,
+    3.046
+   ]
+  }
+ },
+ "florr": {}
+}

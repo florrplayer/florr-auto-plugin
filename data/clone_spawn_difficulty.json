@@ -1,0 +1,38 @@
+{
+ "_file": "florr_clone\\cpp\\shared\\game\\difficulty.h",
+ "kDifficultyAnchors": "{{\n    {0.0, 0.00},\n    {100.0, 6.02},\n    {200.0, 7.00},\n    {300.0, 8.05},\n}}",
+ "kNaturalRaritySpread": "{{\n    0.40,  // common\n    0.30,  // uncommon\n    0.15,  // rare\n    0.10,  // epic\n    0.04,  // legendary\n    0.01,  // mythic\n    0.0,   // ultra\n    0.0,   // super\n    0.0,   // unique\n    0.0,   // apex\n}}",
+ "kNeutralSpawnLuck": "1.0",
+ "kTierValuePerLuckPoint": "0.01",
+ "kMaxTierValue": "static_cast<double>(kRarityCount - 1)",
+ "kRandomDifficulty": "-1.0",
+ "kRandomDifficultyTierValue": "randomSpreadTierValue()",
+ "kDangerousGroundDifficulty": "difficultyForTierValue(static_cast<double>(rarityIndex(Rarity::Rare)) - 1.0)",
+ "_functions": [
+  {
+   "name": "tierMixForTierValue",
+   "params": "double tier",
+   "body": "const double clamped = clamp(tier, 0.0, kMaxTierValue); const int lower = static_cast<int>(std::floor(clamped)); if (lower >= kRarityCount - 1) return TierMix{Rarity::Apex, Rarity::Apex, 0.0"
+  },
+  {
+   "name": "tierMixForDifficulty",
+   "params": "double difficulty",
+   "body": "return tierMixForTierValue(tierValueForDifficulty(difficulty));"
+  },
+  {
+   "name": "luckTierDrift",
+   "params": "double luck",
+   "body": "return std::max(0.0, luck - kNeutralSpawnLuck) * kTierValuePerLuckPoint;"
+  },
+  {
+   "name": "rollTierMix",
+   "params": "const TierMix& mix, Rng& rng",
+   "body": "if (!(mix.upperChance > 0.0)) return mix.lower; return rng.chance(mix.upperChance) ? mix.upper : mix.lower;"
+  },
+  {
+   "name": "dominantTierForDifficulty",
+   "params": "double difficulty",
+   "body": "const TierMix mix = tierMixForDifficulty(difficulty); return mix.upperChance > 0.5 ? mix.upper : mix.lower;"
+  }
+ ]
+}

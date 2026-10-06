@@ -1,0 +1,28 @@
+{
+ "_file": "florr_clone\\cpp\\shared\\game\\shop.h",
+ "kShopRotationSeconds": "3600",
+ "kShopOfferCount": "10",
+ "kShopOfferColumns": "5",
+ "_functions": [
+  {
+   "name": "shopPrice",
+   "params": "std::uint16_t petalIndex, Rarity rarity",
+   "body": "return std::floor(content().petal(petalIndex).price * std::pow(3.5, rarityIndex(rarity)));"
+  },
+  {
+   "name": "shopPrice",
+   "params": "const std::string& petalId, Rarity rarity",
+   "body": "const std::uint16_t index = content().petalIndex(petalId); return index == kInvalidIndex ? 0.0 : shopPrice(index, rarity);"
+  },
+  {
+   "name": "shopSellsRarity",
+   "params": "Rarity rarity",
+   "body": "return rarity != Rarity::Unique && rarity != Rarity::Apex;"
+  },
+  {
+   "name": "starsForKill",
+   "params": "Rarity mobRarity",
+   "body": "switch (mobRarity) { case Rarity::Mythic: return 1; case Rarity::Ultra: return 5; case Rarity::Super: return 25; case Rarity::Unique: return 100; case Rarity::Apex: return 250; default: return 0;"
+  }
+ ]
+}

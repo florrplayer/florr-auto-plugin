@@ -1,0 +1,37 @@
+{
+ "_file": "florr_clone\\cpp\\shared\\game\\realm.h",
+ "kMaxRealms": "64",
+ "kMaxWorldMaps": "kMaxRealms - 2",
+ "kArenaRadius": "2500.0",
+ "kArenaMargin": "500.0",
+ "kArenaWorldSize": "2.0 * (kArenaRadius + kArenaMargin)",
+ "kArenaMaxHealth": "100.0",
+ "kArenaInventoryKeepRatio": "0.25",
+ "_functions": [
+  {
+   "name": "realmFromByte",
+   "params": "std::uint8_t value",
+   "body": "return value < static_cast<std::uint8_t>(kMaxRealms) ? static_cast<Realm>(value) : Realm::Overworld;"
+  },
+  {
+   "name": "worldRealm",
+   "params": "int mapSlot",
+   "body": "return mapSlot <= 0 ? Realm::Overworld : static_cast<Realm>(mapSlot + 2);"
+  },
+  {
+   "name": "worldMapSlot",
+   "params": "Realm realm",
+   "body": "if (realm == Realm::Overworld) return 0; if (realm == Realm::Arena || realm == Realm::Maze) return -1; return static_cast<int>(realm) - 2;"
+  },
+  {
+   "name": "isWorldRealm",
+   "params": "Realm realm",
+   "body": "return worldMapSlot(realm) >= 0;"
+  },
+  {
+   "name": "insideArena",
+   "params": "Vec2 p",
+   "body": "return distanceSq(p, kArenaCentre) <= kArenaRadius * kArenaRadius;"
+  }
+ ]
+}

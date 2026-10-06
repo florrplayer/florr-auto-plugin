@@ -1,0 +1,7 @@
+{
+ "formulas": [
+  "pow(1.06, level - 1) * level",
+  "level(uint32_t level) {\n    return (uint32_t)(pow(1.06, level - 1) * level) + 3"
+ ],
+ "_note": "原文已归档为 reference_gardn_staticdata.cc/.hh (GPL, 取数据思路不整段抄)"
+}
