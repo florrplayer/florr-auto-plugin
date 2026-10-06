@@ -242,7 +242,9 @@ _RARITY_INDEX = {'common': 0, 'unusual': 1, 'rare': 2, 'epic': 3,
 
 def tier_appetite(rarity):
     """稀有度胃口 = 官方bot 'worth this many units of walking'
-    普通级 0x230, Rare 2x230=460, Legendary 920, Mythic 1150, Ultra 1380, Boss(Super+) 6000"""
+    普通级 0x230, Rare 2x230=460, Legendary 920, Mythic 1150, Ultra 1380, Boss(Super+) 6000
+    v1.23.5: Super 是抢怪理由加一条 - Super 在场占着 biome 的 Unique/Apex 名额
+    (florr_clone spawning.cpp: 只有Super死后, unique/apex 时钟冷却完+抽中才升级出 Unique)"""
     idx = _RARITY_INDEX.get((rarity or '').lower(), 0)
     if idx >= 7:
         return 6000.0
