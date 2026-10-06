@@ -94,5 +94,15 @@
   "Super": 120,
   "Unique": 300,
   "Eternal": 600
+ },
+ "aggro_constants": {
+  "default_chase_range": 500.0,
+  "retain_radius": 9600.0,
+  "contact_slack": 4.0,
+  "los_ray_cap": 8,
+  "neutral_vs_hostile": "Neutral只追打过它的(墙后/5视野外打=立刻失仇); Hostile只在自己范围内找目标(远处挑衅无效)",
+  "player_over_pet": "玩家在场怪优先追玩家; 玩家出范围才追召唤物(召唤物可挡仇恨)",
+  "size_ladder_range": "仇恨范围按身体中心量, 怪越大范围越大(super wasp 3355对436)",
+  "bee_ai_always": "蜜蜂类怪横穿飞行(不直线冲), heading摆动"
  }
 }
