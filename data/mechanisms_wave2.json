@@ -104,5 +104,15 @@
   "player_over_pet": "玩家在场怪优先追玩家; 玩家出范围才追召唤物(召唤物可挡仇恨)",
   "size_ladder_range": "仇恨范围按身体中心量, 怪越大范围越大(super wasp 3355对436)",
   "bee_ai_always": "蜜蜂类怪横穿飞行(不直线冲), heading摆动"
+ },
+ "collision_mechanics": {
+  "player_hitbox": "23.5 x sizeMultiplier(radius/base, 上限6.0)",
+  "mob_hitbox": "各怪基础radius x 稀有度尺寸乘数(florr_clone mobs.json已存)",
+  "contact_reach": "body.radius + threatRadius + 4.0 (kMobContactSlack)",
+  "recoil_off_flower": "怪碰花被弹回: velocity -= dir * 560/(1 + mass), mass=1+radius/25 -> 小怪弹飞400速, super wasp(r436)只弹30速几乎不动",
+  "mob_touch_player_knockback": "怪碰玩家推击25.0",
+  "one_bump_per_tick": "玩家被围殴每tick只吃1次碰撞伤害(不会瞬间满伤)",
+  "glitch_infect": "glitch怪碰玩家=感染glitched标记, 重生才清(尸体也glitched)",
+  "poison_shared_chain": "毒滴到共享链(长条怪)作用于整个身体池"
  }
 }
