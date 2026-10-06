@@ -25,9 +25,8 @@ class _GUID(ctypes.Structure):
 
 
 def get_desktop2_id():
-    """获取桌面2的ID: 切换到右边桌面(Win+Ctrl+Right)获取ID, 再切回来"""
+    """获取桌面2的ID"""
     try:
-        # 先获取当前桌面ID
         console = windll.kernel32.GetConsoleWindow()
         clsid = _GUID(0xAA509086, 0x5CA9, 0x4C25, [0x8F,0x95,0x58,0x9D,0x3C,0x07,0xB4,0x8A])
         iid = _GUID(0xA5CD92FF, 0x29BE, 0x454C, [0x8D,0x04,0xD8,0x28,0x79,0xFB,0x3F,0x1B])
@@ -39,7 +38,6 @@ def get_desktop2_id():
         get_id = ctypes.cast(vtbl[4], ctypes.WINFUNCTYPE(ctypes.c_int, c_void_p, wintypes.HWND, POINTER(_GUID)))
         cur_id = _GUID()
         get_id(ptr, console, byref(cur_id))
-        # 切换到右边桌面 (Win+Ctrl+Right)
         win32api.keybd_event(win32con.VK_LWIN, 0, 0, 0)
         win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
         win32api.keybd_event(win32con.VK_RIGHT, 0, 0, 0)
@@ -48,10 +46,8 @@ def get_desktop2_id():
         win32api.keybd_event(win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
         win32api.keybd_event(win32con.VK_LWIN, 0, win32con.KEYEVENTF_KEYUP, 0)
         time.sleep(0.8)
-        # 获取右边桌面ID(桌面2)
         d2_id = _GUID()
         get_id(ptr, console, byref(d2_id))
-        # 切回原桌面 (Win+Ctrl+Left)
         win32api.keybd_event(win32con.VK_LWIN, 0, 0, 0)
         win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
         win32api.keybd_event(win32con.VK_LEFT, 0, 0, 0)
@@ -60,7 +56,6 @@ def get_desktop2_id():
         win32api.keybd_event(win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
         win32api.keybd_event(win32con.VK_LWIN, 0, win32con.KEYEVENTF_KEYUP, 0)
         time.sleep(0.5)
-        # 如果右边桌面和当前桌面ID一样(只有一个桌面), 返回None
         if (d2_id.Data1 == cur_id.Data1 and d2_id.Data2 == cur_id.Data2 and
             d2_id.Data3 == cur_id.Data3 and list(d2_id.Data4) == list(cur_id.Data4)):
             return None
@@ -92,7 +87,6 @@ def move_window_to_desktop2(hwnd):
 
 
 def _lparam(x, y):
-    """构造 WM_* 消息的 LPARAM（不依赖 win32api.MAKELPARAM，兼容新版 pywin32）"""
     return (int(y) << 16) | (int(x) & 0xFFFF)
 
 
@@ -102,41 +96,67 @@ class WindowController:
         self.hwnd = None
 
     def find_window(self):
-        def cb(hwnd, results):
-            if win32gui.IsWindowVisible(hwnd):
+        """严格匹配: 类名=Chrome窗口 + 标题含 florr.io + 客户区>200px
+        v1.34: Edge AIEP 类名包含匹配 + 去掉自动切桌面/自动开 Edge(用户要求完全去桌面2)"""
+        def good(hwnd):
+            try:
+                cls = win32gui.GetClassName(hwnd)
+                if "Chrome_WidgetWin" not in cls:
+                    return False
                 t = win32gui.GetWindowText(hwnd)
-                # 优先: 标题以 florr.io 开头 = 游戏标签页 (排除 GitHub 仓库页等)
-                if t.strip().lower().startswith("florr.io"):
-                    results.append((hwnd, t))
-            return True
+                tl = t.lower()
+                if "florr.io" not in tl:
+                    return False
+                if "devtools" in tl or "新标签页" in t or "new tab" in tl:
+                    return False
+                if "维基" in t or "wiki" in tl or "首页" in t or "home" in tl:
+                    return False
+                l, tt, r, b = win32gui.GetClientRect(hwnd)
+                return (r - l) > 200 and (b - tt) > 200
+            except Exception:
+                return False
         results = []
-        win32gui.EnumWindows(cb, results)
+        def cb_enum(hwnd, r):
+            if good(hwnd):
+                r.append(hwnd)
+            return True
+        win32gui.EnumWindows(cb_enum, results)
         if not results:
-            # 退回: 标题任意位置含 florr.io (老逻辑)
+            print("[!] 当前桌面未找到 florr 窗口(插件必须与游戏同虚拟桌面启动)")
+        if not results:
             def cb2(hwnd, results2):
-                if win32gui.IsWindowVisible(hwnd):
-                    t = win32gui.GetWindowText(hwnd)
-                    if self.title_keyword.lower() in t.lower():
-                        results2.append((hwnd, t))
+                try:
+                    cls = win32gui.GetClassName(hwnd)
+                    if "Chrome_WidgetWin" in cls:
+                        t = win32gui.GetWindowText(hwnd)
+                        tl = t.lower()
+                        if self.title_keyword.lower() in tl and "维基" not in t and "wiki" not in tl and "首页" not in t:
+                            l, tt, r, b = win32gui.GetClientRect(hwnd)
+                            if (r - l) > 200 and (b - tt) > 200:
+                                results2.append(hwnd)
+                except Exception:
+                    pass
                 return True
             win32gui.EnumWindows(cb2, results)
         if not results:
             print(f"[!] 未找到标题含 '{self.title_keyword}' 的窗口")
             return False
-        self.hwnd = results[0][0]
-        print(f"[+] 找到窗口: {results[0][1]}")
+        results.sort(key=lambda h: (win32gui.GetClientRect(h)[2] - win32gui.GetClientRect(h)[0]) * (win32gui.GetClientRect(h)[3] - win32gui.GetClientRect(h)[1]), reverse=True)
+        self.hwnd = results[0]
+        print(f"[+] 找到窗口: {win32gui.GetWindowText(self.hwnd)}")
         return True
 
+    def alive(self):
+        return bool(self.hwnd) and win32gui.IsWindow(self.hwnd)
+
     def move_offscreen(self):
-        """后台运行: 强制最大化 -> 保持在前台(不抢焦点)渲染
-        注意: 不能放最底层(HWND_BOTTOM), 否则Windows停止渲染, PrintWindow截到旧缓存"""
+        """后台运行: 强制最大化 -> 保持在前台(不抢焦点)渲染"""
         if not self.hwnd:
             return
         import win32con as wc
         import time
-        win32gui.ShowWindow(self.hwnd, wc.SW_MAXIMIZE)  # 强制最大化
+        win32gui.ShowWindow(self.hwnd, wc.SW_MAXIMIZE)
         time.sleep(0.5)
-        # 保持在顶层(不激活不抢焦点), 确保Windows持续渲染
         win32gui.SetWindowPos(
             self.hwnd, wc.HWND_TOP,
             0, 0, 0, 0,
@@ -144,19 +164,18 @@ class WindowController:
         )
         print("[+] 窗口已最大化并保持前台渲染(不抢焦点)")
 
-    def move_onscreen(self):
-        """停止时把窗口移回前台给用户"""
+    def move_onscreen(self, bring_front=True):
         if not self.hwnd:
             return
         import win32con as wc
+        zorder = wc.HWND_TOP if bring_front else wc.HWND_BOTTOM
         win32gui.SetWindowPos(
-            self.hwnd, wc.HWND_TOP,
+            self.hwnd, zorder,
             0, 0, 0, 0,
             wc.SWP_NOACTIVATE | wc.SWP_NOSIZE | wc.SWP_SHOWWINDOW,
         )
 
     def restore_visible(self):
-        """最小化/不可见时恢复: 还原+最大化+置顶(强制恢复渲染, 防画面冻结卡死)"""
         if not self.hwnd:
             return
         import win32con as wc
@@ -172,9 +191,7 @@ class WindowController:
         )
 
     def _printwindow_capture(self):
-        """PrintWindow + PW_RENDERFULLCONTENT 快速截客户区(绕过屏幕合成器, 后台也能截)
-        实测 ImageGrab 抓屏固定 ~100ms(与区域大小无关); PrintWindow 只渲染目标窗口, 快 5-20x
-        现代 Chromium Edge 支持 PW_RENDERFULLCONTENT(2); 失败/全黑返回 None 由调用方回退"""
+        """PrintWindow + PW_RENDERFULLCONTENT 快速截客户区"""
         try:
             from ctypes import windll
             hwnd = self.hwnd
@@ -195,7 +212,7 @@ class WindowController:
                 return None
             bits = hbmp.GetBitmapBits(True)
             img = np.frombuffer(bits, dtype=np.uint8).reshape((h, w, 4))
-            img = img[:, :, [2, 1, 0]]  # BGRA -> BGR
+            img = img[:, :, [2, 1, 0]]
             if not img.any():
                 return None
             return np.ascontiguousarray(img)
@@ -203,9 +220,7 @@ class WindowController:
             return None
 
     def capture(self, region=None):
-        """截取窗口客户区，返回 BGR numpy 数组
-        v1.18.3: 优先 PrintWindow(快速, 后台可截); 失败/全黑回退 ImageGrab bbox
-        注意: ImageGrab 路径要求 florr窗口在前台可见"""
+        """截取窗口客户区，返回 BGR numpy 数组"""
         if not self.hwnd:
             raise RuntimeError("窗口未初始化")
         img = self._printwindow_capture()
@@ -226,59 +241,63 @@ class WindowController:
         p = self.capture(region=[x, y, 1, 1])[0, 0]
         return (int(p[2]), int(p[1]), int(p[0]))
 
+    def _post(self, msg, wp, lp):
+        if not self.hwnd:
+            return
+        try:
+            win32api.PostMessage(self.hwnd, msg, wp, lp)
+        except Exception:
+            pass
+
     def mouse_move(self, x, y):
         if not self.hwnd:
             return
         lp = _lparam(x, y)
-        win32api.PostMessage(self.hwnd, win32con.WM_MOUSEMOVE, 0, lp)
+        self._post(win32con.WM_MOUSEMOVE, 0, lp)
 
     def mouse_double_click(self, x, y):
         if not self.hwnd:
             return
         lp = _lparam(x, y)
-        win32api.PostMessage(self.hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lp)
-        win32api.PostMessage(self.hwnd, win32con.WM_LBUTTONUP, 0, lp)
-        win32api.PostMessage(self.hwnd, win32con.WM_LBUTTONDBLCLK, win32con.MK_LBUTTON, lp)
-        win32api.PostMessage(self.hwnd, win32con.WM_LBUTTONUP, 0, lp)
+        self._post(win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lp)
+        self._post(win32con.WM_LBUTTONUP, 0, lp)
+        self._post(win32con.WM_LBUTTONDBLCLK, win32con.MK_LBUTTON, lp)
+        self._post(win32con.WM_LBUTTONUP, 0, lp)
 
     def left_click(self, x, y):
-        """左键单击（点复活按钮用）"""
         if not self.hwnd:
             return
         import time
         lp = _lparam(x, y)
-        win32api.PostMessage(self.hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lp)
+        self._post(win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lp)
         time.sleep(0.08)
-        win32api.PostMessage(self.hwnd, win32con.WM_LBUTTONUP, 0, lp)
+        self._post(win32con.WM_LBUTTONUP, 0, lp)
 
     def right_button_down(self, x=960, y=540):
-        """按住右键（防御）"""
         if not self.hwnd:
             return
         lp = _lparam(x, y)
-        win32api.PostMessage(self.hwnd, win32con.WM_RBUTTONDOWN, win32con.MK_RBUTTON, lp)
+        self._post(win32con.WM_RBUTTONDOWN, win32con.MK_RBUTTON, lp)
 
     def right_button_up(self, x=960, y=540):
-        """松开右键"""
         if not self.hwnd:
             return
         lp = _lparam(x, y)
-        win32api.PostMessage(self.hwnd, win32con.WM_RBUTTONUP, 0, lp)
+        self._post(win32con.WM_RBUTTONUP, 0, lp)
 
     def key_down(self, vk):
         if not self.hwnd:
             return
-        # 完整lParam: 重复计数1 + 扫描码(16-23位), 否则游戏可能解析错键
         scan = win32api.MapVirtualKey(vk, 0)
         lparam = (1) | (scan << 16)
-        win32api.PostMessage(self.hwnd, win32con.WM_KEYDOWN, vk, lparam)
+        self._post(win32con.WM_KEYDOWN, vk, lparam)
 
     def key_up(self, vk):
         if not self.hwnd:
             return
         scan = win32api.MapVirtualKey(vk, 0)
-        lparam = (1) | (scan << 16) | (1 << 30)  # 先前按下 + 释放
-        win32api.PostMessage(self.hwnd, win32con.WM_KEYUP, vk, lparam)
+        lparam = (1) | (scan << 16) | (1 << 30)
+        self._post(win32con.WM_KEYUP, vk, lparam)
 
     def press(self, vk, delay=0.05):
         import time
@@ -286,9 +305,7 @@ class WindowController:
         time.sleep(delay)
         self.key_up(vk)
 
-    # ===== 移动方式支持 (v1.18.1): 鼠标模式/键盘模式都能动 =====
     def is_foreground(self):
-        """窗口是否前台(鼠标模式要求前台可见; 键盘模式后台也行)"""
         if not self.hwnd:
             return False
         try:
@@ -297,7 +314,6 @@ class WindowController:
             return False
 
     def client_center(self):
-        """窗口客户区中心(屏幕坐标) - 鼠标模式控制方向用"""
         if not self.hwnd:
             return None
         try:
@@ -309,7 +325,6 @@ class WindowController:
             return None
 
     def mouse_to_screen(self, sx, sy):
-        """把真实鼠标移到屏幕坐标(游戏读鼠标相对窗口位置 -> 角色朝鼠标走)"""
         try:
             win32api.SetCursorPos((int(sx), int(sy)))
         except Exception:
@@ -323,43 +338,7 @@ def init_window(title_keyword="florr.io"):
     _inst = WindowController(title_keyword)
     ok = _inst.find_window()
     if not ok:
-        # 自动打开 Edge 浏览器访问 florr.io
-        import subprocess, time, os
-        edge_paths = [
-            r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
-            r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
-        ]
-        edge = None
-        for p in edge_paths:
-            if os.path.exists(p):
-                edge = p
-                break
-        if edge:
-            print(f"[+] 自动打开 Edge: {edge}")
-            subprocess.Popen([edge, "https://florr.io"])
-        else:
-            print("[+] 用默认浏览器打开 florr.io")
-            os.startfile("https://florr.io")
-        print("[+] 等待浏览器窗口出现(5秒)...")
-        time.sleep(5)
-        # 找到浏览器窗口并移动到当前桌面(桌面2)
-        def _cb(h, results):
-            if win32gui.IsWindowVisible(h):
-                t = win32gui.GetWindowText(h)
-                if "florr.io" in t or "Edge" in t or "edge" in t:
-                    results.append((h, t))
-            return True
-        br_results = []
-        win32gui.EnumWindows(_cb, br_results)
-        if br_results:
-            print(f"[+] 找到浏览器窗口: {br_results[0][1]}")
-            if move_window_to_desktop2(br_results[0][0]):
-                print("[+] 浏览器窗口已移动到桌面2")
-        print("[+] 等待页面加载(10秒)...")
-        time.sleep(10)
-        ok = _inst.find_window()
-        if not ok:
-            print("[!] 仍未找到 florr 窗口，请手动打开浏览器进入游戏")
+        print("[!] 请确保浏览器 florr.io 游戏已打开，并用与游戏同桌面的方式启动插件")
     return ok
 
 def get_window():
