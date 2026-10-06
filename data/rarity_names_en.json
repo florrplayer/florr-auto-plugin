@@ -1,0 +1,42 @@
+{
+ "common": {
+  "Name": "Common",
+  "NameColored": "<c val=\"{#Colors/common}\">{#Rarities/common/Name}</c>"
+ },
+ "unusual": {
+  "Name": "Unusual",
+  "NameColored": "<c val=\"{#Colors/unusual}\">{#Rarities/unusual/Name}</c>"
+ },
+ "rare": {
+  "Name": "Rare",
+  "NameColored": "<c val=\"{#Colors/rare}\">{#Rarities/rare/Name}</c>"
+ },
+ "epic": {
+  "Name": "Epic",
+  "NameColored": "<c val=\"{#Colors/epic}\">{#Rarities/epic/Name}</c>"
+ },
+ "legendary": {
+  "Name": "Legendary",
+  "NameColored": "<c val=\"{#Colors/legendary}\">{#Rarities/legendary/Name}</c>"
+ },
+ "mythic": {
+  "Name": "Mythic",
+  "NameColored": "<c val=\"{#Colors/mythic}\">{#Rarities/mythic/Name}</c>"
+ },
+ "ultra": {
+  "Name": "Ultra",
+  "NameColored": "<c val=\"{#Colors/ultra}\">{#Rarities/ultra/Name}</c>"
+ },
+ "super": {
+  "Name": "Super",
+  "NameColored": "<c val=\"{#Colors/super}\">{#Rarities/super/Name}</c>"
+ },
+ "eternal": {
+  "Name": "Eternal",
+  "NameColored": "<c val=\"{#Colors/eternal}\">{#Rarities/eternal/Name}</c>"
+ },
+ "unique": {
+  "Name": "Unique",
+  "NameColored": "<c val=\"{#Colors/unique}\">{#Rarities/unique/Name}</c>"
+ }
+}

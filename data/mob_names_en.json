@@ -1,0 +1,433 @@
+{
+ "rock": {
+  "sid": "rock",
+  "name": "Rock",
+  "description": "A rock. It doesn't do much.",
+  "spawn": "Something mountain-like appears in the distance..."
+ },
+ "cactus": {
+  "sid": "cactus",
+  "name": "Cactus",
+  "description": "Avoid touching it, it hurts.",
+  "spawn": "A tower of thorns rises from the sands..."
+ },
+ "ladybug": {
+  "sid": "ladybug",
+  "name": "Ladybug",
+  "description": "Cute and harmless."
+ },
+ "bee": {
+  "sid": "bee",
+  "name": "Bee",
+  "description": "It stings. Don't touch it."
+ },
+ "ant_baby": {
+  "sid": "ant_baby",
+  "name": "Baby Ant",
+  "description": "Weak and defenseless, but big dreams."
+ },
+ "ant_worker": {
+  "sid": "ant_worker",
+  "name": "Worker Ant",
+  "description": "It's a bit temperamental, probably from working all the time."
+ },
+ "ant_soldier": {
+  "sid": "ant_soldier",
+  "name": "Soldier Ant",
+  "description": "It's got wings and it's ready to use them."
+ },
+ "ant_queen": {
+  "sid": "ant_queen",
+  "name": "Queen Ant",
+  "description": "You must have done something really bad if she's chasing you."
+ },
+ "ant_hole": {
+  "sid": "ant_hole",
+  "name": "Ant Hole",
+  "description": "Ants go in, and come out. Can't explain that."
+ },
+ "beetle": {
+  "sid": "beetle",
+  "name": "Beetle",
+  "description": "It's hungry and flowers are its favorite meal."
+ },
+ "hornet": {
+  "sid": "hornet",
+  "name": "Hornet",
+  "description": "These aren't quite as nice as the little bees.",
+  "spawn": "A big yellow spot shows up in the distance..."
+ },
+ "centipede": {
+  "sid": "centipede",
+  "name": "Centipede",
+  "description": "It's just there doing its thing."
+ },
+ "centipede_body": {
+  "sid": "centipede_body",
+  "name": "Centipede",
+  "description": "It's just there doing its thing."
+ },
+ "centipede_evil": {
+  "sid": "centipede_evil",
+  "name": "Centipede",
+  "description": "This one loves flowers."
+ },
+ "centipede_evil_body": {
+  "sid": "centipede_evil_body",
+  "name": "Centipede",
+  "description": "This one loves flowers."
+ },
+ "centipede_desert": {
+  "sid": "centipede_desert",
+  "name": "Centipede",
+  "description": "Gotta go fast."
+ },
+ "centipede_desert_body": {
+  "sid": "centipede_desert_body",
+  "name": "Centipede",
+  "description": "Gotta go fast."
+ },
+ "square": {
+  "sid": "square",
+  "name": "Square",
+  "description": "This shape... it looks familiar..."
+ },
+ "ladybug_dark": {
+  "sid": "ladybug_dark",
+  "name": "Ladybug",
+  "description": "Cute and harmless... if left unprovoked."
+ },
+ "ladybug_shiny": {
+  "sid": "ladybug_shiny",
+  "name": "Ladybug",
+  "description": "Shiny, cute and mostly harmless."
+ },
+ "spider": {
+  "sid": "spider",
+  "name": "Spider",
+  "description": "Spooky."
+ },
+ "scorpion": {
+  "sid": "scorpion",
+  "name": "Scorpion",
+  "description": "IT STINGS!"
+ },
+ "fire_ant_soldier": {
+  "sid": "fire_ant_soldier",
+  "name": "Soldier Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee."
+ },
+ "fire_ant_burrow": {
+  "sid": "fire_ant_burrow",
+  "name": "Fire Ant Burrow",
+  "description": "What could be in here?"
+ },
+ "sandstorm": {
+  "sid": "sandstorm",
+  "name": "Sandstorm",
+  "description": "Darude (1999)"
+ },
+ "bubble": {
+  "sid": "bubble",
+  "name": "Bubble",
+  "description": "Pop"
+ },
+ "bumble_bee": {
+  "sid": "bumble_bee",
+  "name": "Bumble Bee",
+  "description": "GOTTA RUN."
+ },
+ "shell": {
+  "sid": "shell",
+  "name": "Shell",
+  "description": "Not an advertisement."
+ },
+ "starfish": {
+  "sid": "starfish",
+  "name": "Starfish",
+  "description": "His name is Patrick."
+ },
+ "crab": {
+  "sid": "crab",
+  "name": "Crab",
+  "description": "Mr. Crab."
+ },
+ "jellyfish": {
+  "sid": "jellyfish",
+  "name": "Jellyfish",
+  "description": "Makes the most delicious jam.",
+  "spawn": "You hear lightning strikes coming from a far distance..."
+ },
+ "digger": {
+  "sid": "digger",
+  "name": "Digger",
+  "description": "Wrong game, bud."
+ },
+ "sponge": {
+  "sid": "sponge",
+  "name": "Sponge",
+  "description": "Bob."
+ },
+ "leech": {
+  "sid": "leech",
+  "name": "Leech",
+  "description": "Slurp slurp."
+ },
+ "leech_body": {
+  "sid": "leech_body",
+  "name": "Leech",
+  "description": "Slurp slurp."
+ },
+ "dandelion": {
+  "sid": "dandelion",
+  "name": "Dandelion",
+  "description": "Puffy."
+ },
+ "fire_ant_baby": {
+  "sid": "fire_ant_baby",
+  "name": "Baby Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee."
+ },
+ "fire_ant_worker": {
+  "sid": "fire_ant_worker",
+  "name": "Worker Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee."
+ },
+ "fire_ant_queen": {
+  "sid": "fire_ant_queen",
+  "name": "Queen Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee."
+ },
+ "ant_egg": {
+  "sid": "ant_egg",
+  "name": "Ant Egg",
+  "description": "Not yet an ant but perhaps soon."
+ },
+ "fire_ant_egg": {
+  "sid": "fire_ant_egg",
+  "name": "Fire Ant Egg",
+  "description": "This ant is not yet on fire."
+ },
+ "fly": {
+  "sid": "fly",
+  "name": "Fly",
+  "description": "Hzzzzzzzzzzzz."
+ },
+ "leafbug": {
+  "sid": "leafbug",
+  "name": "Leafbug",
+  "description": "It's not a leaf, but it is a bug."
+ },
+ "mantis": {
+  "sid": "mantis",
+  "name": "Mantis",
+  "description": "You better pray you don't become dinner."
+ },
+ "termite_baby": {
+  "sid": "termite_baby",
+  "name": "Baby Termite",
+  "description": "Weak and defenseless, but big dreams.<n/>These creatures appear to be connected somehow."
+ },
+ "termite_worker": {
+  "sid": "termite_worker",
+  "name": "Worker Termite",
+  "description": "It's a bit temperamental, probably from working all the time.<n/>These creatures appear to be connected somehow."
+ },
+ "termite_soldier": {
+  "sid": "termite_soldier",
+  "name": "Soldier Termite",
+  "description": "It's got wings and it's ready to use them.<n/>These creatures appear to be connected somehow."
+ },
+ "termite_overmind": {
+  "sid": "termite_overmind",
+  "name": "Termite Overmind",
+  "description": "The one who oversees all."
+ },
+ "termite_mound": {
+  "sid": "termite_mound",
+  "name": "Termite Mound",
+  "description": "Termites go in, and come out. Can't explain that."
+ },
+ "termite_egg": {
+  "sid": "termite_egg",
+  "name": "Termite Egg",
+  "description": "Not yet a termite but perhaps soon."
+ },
+ "bush": {
+  "sid": "bush",
+  "name": "Bush",
+  "description": "Don't misunderestimate me."
+ },
+ "roach": {
+  "sid": "roach",
+  "name": "Roach",
+  "description": "Gotta go FAST... until they get tired."
+ },
+ "moth": {
+  "sid": "moth",
+  "name": "Moth",
+  "description": "Easily scared, be nice."
+ },
+ "firefly": {
+  "sid": "firefly",
+  "name": "Firefly",
+  "description": "Oooooh shiny.",
+  "spawn": "There's a bright light in the horizon..."
+ },
+ "beetle_hel": {
+  "sid": "beetle_hel",
+  "name": "Beetle",
+  "description": "Scourge that spawns in the other plane.",
+  "spawn": "You sense ominous vibrations coming from a different realm..."
+ },
+ "wasp": {
+  "sid": "wasp",
+  "name": "Wasp",
+  "description": "They are ANGRY."
+ },
+ "dummy": {
+  "sid": "dummy",
+  "name": "Target Dummy",
+  "description": "How do you have this in your gallery?"
+ },
+ "spider_hel": {
+  "sid": "spider_hel",
+  "name": "Spider",
+  "description": "Scourge that spawns in the other plane.",
+  "spawn": "You sense ominous vibrations coming from a different realm..."
+ },
+ "centipede_hel": {
+  "sid": "centipede_hel",
+  "name": "Centipede",
+  "description": "Scourge that spawns in the other plane.",
+  "spawn": "You sense ominous vibrations coming from a different realm..."
+ },
+ "centipede_hel_body": {
+  "sid": "centipede_hel_body",
+  "name": "Centipede",
+  "description": "Scourge that spawns in the other plane.",
+  "spawn": "You sense ominous vibrations coming from a different realm..."
+ },
+ "wasp_hel": {
+  "sid": "wasp_hel",
+  "name": "Wasp",
+  "description": "Scourge that spawns in the other plane.",
+  "spawn": "You sense ominous vibrations coming from a different realm..."
+ },
+ "trader": {
+  "sid": "trader",
+  "name": "Trader",
+  "description": ""
+ },
+ "gambler": {
+  "sid": "gambler",
+  "name": "Gambler",
+  "description": "This can happen to YOU.",
+  "spawn": "You hear someone whisper faintly... \"just... one more game...\""
+ },
+ "oracle": {
+  "sid": "oracle",
+  "name": "Oracle",
+  "description": ""
+ },
+ "firefly_magic": {
+  "sid": "firefly_magic",
+  "name": "Firefly",
+  "description": "There's something magical about this one."
+ },
+ "titan": {
+  "sid": "titan",
+  "name": "Titan",
+  "description": ""
+ },
+ "beetle_nazar": {
+  "sid": "beetle_nazar",
+  "name": "Beetle",
+  "description": "This one has a different pattern... what does that mean?"
+ },
+ "worm": {
+  "sid": "worm",
+  "name": "Worm",
+  "description": "It's supposed to eat dirt but this one's eating flowers."
+ },
+ "worm_guts": {
+  "sid": "worm_guts",
+  "name": "Worm guts",
+  "description": "You're not supposed to see this text. I'm calling the police."
+ },
+ "mecha_flower": {
+  "sid": "mecha_flower",
+  "name": "Mecha Flower",
+  "description": "Someone has been making these mechanical flowers... What could this mean?"
+ },
+ "wasp_mecha": {
+  "sid": "wasp_mecha",
+  "name": "Wasp",
+  "description": "They're MECHA ANGRY."
+ },
+ "spider_mecha": {
+  "sid": "spider_mecha",
+  "name": "Spider",
+  "description": "Mecha Spooky."
+ },
+ "leafbug_shiny": {
+  "sid": "leafbug_shiny",
+  "name": "Leafbug",
+  "description": "This one has a special color to it..."
+ },
+ "crab_mecha": {
+  "sid": "crab_mecha",
+  "name": "Crab",
+  "description": "Dr. Crab."
+ },
+ "assembler": {
+  "sid": "assembler",
+  "name": "Assembler",
+  "description": ""
+ },
+ "barrel": {
+  "sid": "barrel",
+  "name": "Barrel",
+  "description": "Under no circumstances let this thing spill.<n/>We cannot risk another mutant insect this month."
+ },
+ "beetle_mummy": {
+  "sid": "beetle_mummy",
+  "name": "Beetle",
+  "description": "This one seems like it shouldn't be alive..."
+ },
+ "beetle_pharaoh": {
+  "sid": "beetle_pharaoh",
+  "name": "Beetle",
+  "description": "That thing on its head looks valuable... We should steal it."
+ },
+ "tomb": {
+  "sid": "tomb",
+  "name": "Tomb",
+  "description": "Huh, what could be in here?"
+ },
+ "silverfish": {
+  "sid": "silverfish",
+  "name": "Silverfish",
+  "description": "Those annoying little things that eat clothes.<n/>It also loves garbage."
+ },
+ "garbage": {
+  "sid": "garbage",
+  "name": "Garbage",
+  "description": "Someone's treasure..."
+ },
+ "ant_soldier_diver": {
+  "sid": "ant_soldier_diver",
+  "name": "Soldier Ant",
+  "description": "How did they end up here?"
+ },
+ "ghost": {
+  "sid": "ghost",
+  "name": "Ghost",
+  "description": "A tormented soul, freeing it is the best you can do for it."
+ },
+ "crystal": {
+  "sid": "crystal",
+  "name": "Crystal",
+  "description": ""
+ }
+}
