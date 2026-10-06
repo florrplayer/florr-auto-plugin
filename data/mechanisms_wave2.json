@@ -114,5 +114,19 @@
   "one_bump_per_tick": "玩家被围殴每tick只吃1次碰撞伤害(不会瞬间满伤)",
   "glitch_infect": "glitch怪碰玩家=感染glitched标记, 重生才清(尸体也glitched)",
   "poison_shared_chain": "毒滴到共享链(长条怪)作用于整个身体池"
+ },
+ "spawn_mechanics": {
+  "population_interval_ms": 500.0,
+  "mob_cap": "kMaxLiveMobs(全局怪数量上限)",
+  "max_nest_depth": 2,
+  "max_pending_boss_spawns": 16,
+  "boss_clock_per_biome": "每biome每tier一个冷却钟(unique/apex)",
+  "boss_deal_scatter": "多biome Boss均匀错开(洗牌+slot均匀分布), 不同时到",
+  "boss_ready_formula": "ready = now + cooldown * (slot + phase) / slots",
+  "unique_cooldown_minutes": 20.0,
+  "apex_cooldown_hours": 2.0,
+  "boss_upgrade_chance": 0.1,
+  "boss_upgrade_rule": "时钟READY + biome无同tier在场(topBossTaken) + 10%概率 -> Super升级Unique/Apex; 升级成功时钟重置; Apex优先于Unique判定; 正常生成=Super",
+  "same_tier_single": "同一biome同一tier同时只站一只Boss(在场期间不再抽同tier)"
  }
 }
