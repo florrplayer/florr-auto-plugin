@@ -1,0 +1,1056 @@
+{
+  "meta": {
+    "repo": "FlorrBt (better-florr client + C++ server)",
+    "version": "v1.0.1",
+    "flower_texture_version": "20260802a",
+    "extracted_from": "web/src + src/Shared + web/locales",
+    "note": "values are original source text; rarity sort_rank of Exotic=7.5 sits between Ultra(7) and Super(8)"
+  },
+  "petal_table": {
+    "1": {
+      "en": "Air",
+      "icon": "air",
+      "cn": "空气"
+    },
+    "2": {
+      "en": "AntEgg",
+      "icon": "ant_egg",
+      "cn": "蚁卵"
+    },
+    "3": {
+      "en": "Antennae",
+      "icon": "antennae",
+      "cn": "触角"
+    },
+    "4": {
+      "en": "Basic",
+      "icon": "basic",
+      "cn": "基本"
+    },
+    "5": {
+      "en": "BeetleEgg",
+      "icon": "beetle_egg",
+      "cn": "甲虫卵"
+    },
+    "6": {
+      "en": "Bone",
+      "icon": "bone",
+      "cn": "骨头"
+    },
+    "7": {
+      "en": "Bubble",
+      "icon": "bubble",
+      "cn": "泡泡"
+    },
+    "8": {
+      "en": "Carrot",
+      "icon": "carrot",
+      "cn": "胡萝卜"
+    },
+    "9": {
+      "en": "Coin",
+      "icon": "coin",
+      "cn": "硬币"
+    },
+    "10": {
+      "en": "Compass",
+      "icon": "compass",
+      "cn": "指南针"
+    },
+    "11": {
+      "en": "Cogwheel",
+      "icon": "cogwheel",
+      "cn": "齿轮"
+    },
+    "12": {
+      "en": "Disc",
+      "icon": "disc",
+      "cn": "圆盘"
+    },
+    "13": {
+      "en": "Dust",
+      "icon": "dust",
+      "cn": "灰尘"
+    },
+    "14": {
+      "en": "GoldenLeaf",
+      "icon": "golden_leaf",
+      "cn": "金叶"
+    },
+    "15": {
+      "en": "Iris",
+      "icon": "iris",
+      "cn": "鸢尾"
+    },
+    "16": {
+      "en": "Lentil",
+      "icon": "lentil",
+      "cn": "扁豆"
+    },
+    "17": {
+      "en": "Moon",
+      "icon": "moon",
+      "cn": "月石"
+    },
+    "18": {
+      "en": "Nullification",
+      "icon": "nullification",
+      "cn": "无效化"
+    },
+    "19": {
+      "en": "Pincer",
+      "icon": "pincer",
+      "cn": "螯针"
+    },
+    "20": {
+      "en": "Relic",
+      "icon": "relic",
+      "cn": "遗物"
+    },
+    "21": {
+      "en": "Rose",
+      "icon": "rose",
+      "cn": "玫瑰"
+    },
+    "22": {
+      "en": "YinYang",
+      "icon": "yin_yang",
+      "cn": "阴阳"
+    },
+    "23": {
+      "en": "Missile",
+      "icon": "missile",
+      "cn": "导弹"
+    },
+    "24": {
+      "en": "BloodSacrifice",
+      "icon": "blood_sacrifice",
+      "cn": "血祭"
+    },
+    "25": {
+      "en": "Corruption",
+      "icon": "corruption",
+      "cn": "腐化"
+    },
+    "26": {
+      "en": "Bandage",
+      "icon": "bandage",
+      "cn": "绷带"
+    },
+    "27": {
+      "en": "Heavy",
+      "icon": "heavy",
+      "cn": "重"
+    },
+    "28": {
+      "en": "Faster",
+      "icon": "faster",
+      "cn": "更快"
+    },
+    "29": {
+      "en": "Yggdrasil",
+      "icon": "yggdrasil",
+      "cn": "世界树"
+    },
+    "30": {
+      "en": "Dahlia",
+      "icon": "dahlia",
+      "cn": "大丽花"
+    },
+    "31": {
+      "en": "Wing",
+      "icon": "wing",
+      "cn": "翅膀"
+    },
+    "32": {
+      "en": "Triangle",
+      "icon": "triangle",
+      "cn": "三角"
+    },
+    "33": {
+      "en": "Sawblade",
+      "icon": "sawblade",
+      "cn": "锯片"
+    },
+    "34": {
+      "en": "Fragment",
+      "icon": "fragment",
+      "cn": "碎片"
+    },
+    "35": {
+      "en": "Mimic",
+      "icon": "mimic",
+      "cn": "拟态"
+    },
+    "36": {
+      "en": "Glass",
+      "icon": "glass",
+      "cn": "玻璃"
+    },
+    "37": {
+      "en": "Stinger",
+      "icon": "stinger",
+      "cn": "毒刺"
+    },
+    "38": {
+      "en": "BrokenEgg",
+      "icon": "broken_egg",
+      "cn": "破碎的卵"
+    },
+    "39": {
+      "en": "Light",
+      "icon": "light",
+      "cn": "光"
+    },
+    "40": {
+      "en": "Leaf",
+      "icon": "leaf",
+      "cn": "叶子"
+    },
+    "41": {
+      "en": "Rock",
+      "icon": "rock",
+      "cn": "岩石"
+    },
+    "42": {
+      "en": "Web",
+      "icon": "web",
+      "cn": "蛛网"
+    },
+    "43": {
+      "en": "Cactus",
+      "icon": "cactus",
+      "cn": "仙人掌"
+    },
+    "44": {
+      "en": "Pollen",
+      "icon": "pollen",
+      "cn": "花粉"
+    },
+    "45": {
+      "en": "Corn",
+      "icon": "corn",
+      "cn": "玉米"
+    },
+    "46": {
+      "en": "Rice",
+      "icon": "rice",
+      "cn": "米"
+    },
+    "47": {
+      "en": "Basil",
+      "icon": "basil",
+      "cn": "罗勒"
+    },
+    "48": {
+      "en": "Soil",
+      "icon": "soil",
+      "cn": "土"
+    },
+    "49": {
+      "en": "Honey",
+      "icon": "honey",
+      "cn": "蜂蜜"
+    },
+    "50": {
+      "en": "Wax",
+      "icon": "wax",
+      "cn": "蜂蜡"
+    },
+    "51": {
+      "en": "ThirdEye",
+      "icon": "third_eye",
+      "cn": "第三只眼"
+    },
+    "52": {
+      "en": "Dandelion",
+      "icon": "dandelion",
+      "cn": "蒲公英"
+    },
+    "53": {
+      "en": "Orange",
+      "icon": "orange",
+      "cn": "橙子"
+    },
+    "54": {
+      "en": "Shovel",
+      "icon": "shovel",
+      "cn": "铲子"
+    },
+    "55": {
+      "en": "Yucca",
+      "icon": "yucca",
+      "cn": "丝兰"
+    },
+    "56": {
+      "en": "WhiteFungus",
+      "icon": "white_fungus",
+      "cn": "白木耳"
+    },
+    "57": {
+      "en": "BlackFungus",
+      "icon": "black_fungus",
+      "cn": "黑木耳"
+    },
+    "58": {
+      "en": "Broccoli",
+      "icon": "broccoli",
+      "cn": "西兰花"
+    },
+    "59": {
+      "en": "Douli",
+      "icon": "douli",
+      "cn": "斗笠"
+    },
+    "60": {
+      "en": "Trapper",
+      "icon": "trapper",
+      "cn": "陷阱炮"
+    },
+    "61": {
+      "en": "Amulet",
+      "icon": "amulet",
+      "cn": "护身符"
+    },
+    "62": {
+      "en": "Plank",
+      "icon": "plank",
+      "cn": "木板"
+    },
+    "63": {
+      "en": "Tomato",
+      "icon": "tomato",
+      "cn": "番茄"
+    }
+  },
+  "non_stack_petal_types": [
+    1,
+    3,
+    17,
+    18,
+    20,
+    24,
+    25,
+    26,
+    38,
+    50,
+    51,
+    54,
+    59
+  ],
+  "mob_table": {
+    "1": {
+      "en": "Beetle",
+      "cn": "甲虫",
+      "draw": "drawBeetle"
+    },
+    "3": {
+      "en": "NormalLadybug",
+      "cn": "瓢虫",
+      "draw": "drawNormalLadybug"
+    },
+    "4": {
+      "en": "MechaFlower",
+      "cn": "机械花",
+      "draw": "(svg mecha_flower)"
+    },
+    "6": {
+      "en": "PlayerFlower",
+      "cn": "玩家",
+      "draw": "player_flower svg"
+    },
+    "7": {
+      "en": "SoldierAnt",
+      "cn": "兵蚁",
+      "draw": "drawSoldierAnt"
+    },
+    "8": {
+      "en": "SoldierFireAnt",
+      "cn": "火兵蚁",
+      "draw": "drawSoldierFireAntMob"
+    },
+    "9": {
+      "en": "SoldierTermite",
+      "cn": "兵白蚁",
+      "draw": "drawSoldierTermite"
+    },
+    "10": {
+      "en": "SummonedBeetle",
+      "cn": "甲虫",
+      "draw": ""
+    },
+    "11": {
+      "en": "SummonedSoldierAnt",
+      "cn": "兵蚁",
+      "draw": ""
+    },
+    "12": {
+      "en": "BandageBeetle",
+      "cn": "绷带甲虫",
+      "draw": "(svg bandage_beetle)"
+    },
+    "13": {
+      "en": "Bee",
+      "cn": "蜜蜂",
+      "draw": "drawBee"
+    },
+    "14": {
+      "en": "Hornet",
+      "cn": "黄蜂",
+      "draw": "drawHornet"
+    },
+    "15": {
+      "en": "BumbleBee",
+      "cn": "熊蜂",
+      "draw": "drawBumbleBee"
+    },
+    "16": {
+      "en": "Rock",
+      "cn": "岩石",
+      "draw": "drawRock"
+    },
+    "17": {
+      "en": "BabyAnt",
+      "cn": "幼蚁",
+      "draw": "drawBabyAnt"
+    },
+    "18": {
+      "en": "WorkerAnt",
+      "cn": "工蚁",
+      "draw": "drawWorkerAnt"
+    },
+    "19": {
+      "en": "QueenAnt",
+      "cn": "蚁后",
+      "draw": "drawQueenAnt"
+    },
+    "20": {
+      "en": "AntHole",
+      "cn": "蚁穴",
+      "draw": "drawAntHole"
+    },
+    "21": {
+      "en": "Spider",
+      "cn": "蜘蛛",
+      "draw": "drawSpider"
+    },
+    "22": {
+      "en": "Sandstorm",
+      "cn": "沙暴",
+      "draw": "drawSandstorm"
+    },
+    "23": {
+      "en": "Dummy",
+      "cn": "假花",
+      "draw": "(dummy svg)"
+    },
+    "24": {
+      "en": "Dandelion",
+      "cn": "蒲公英",
+      "draw": "drawDandelion"
+    },
+    "25": {
+      "en": "AntEgg",
+      "cn": "蚁卵",
+      "draw": "drawAntEggMob"
+    },
+    "26": {
+      "en": "FireAntEgg",
+      "cn": "火蚁卵",
+      "draw": ""
+    },
+    "27": {
+      "en": "TermiteEgg",
+      "cn": "白蚁卵",
+      "draw": ""
+    },
+    "28": {
+      "en": "QueenAntEgg",
+      "cn": "蚁卵",
+      "draw": ""
+    },
+    "29": {
+      "en": "QueenFireAntEgg",
+      "cn": "火蚁卵",
+      "draw": ""
+    },
+    "30": {
+      "en": "BabyFireAnt",
+      "cn": "火幼蚁",
+      "draw": "drawBabyFireAnt"
+    },
+    "31": {
+      "en": "WorkerFireAnt",
+      "cn": "火工蚁",
+      "draw": "drawWorkerFireAnt"
+    },
+    "32": {
+      "en": "FireQueenAnt",
+      "cn": "火蚁后",
+      "draw": "drawFireQueenAnt"
+    },
+    "33": {
+      "en": "BabyTermite",
+      "cn": "幼白蚁",
+      "draw": "drawBabyTermite"
+    },
+    "34": {
+      "en": "WorkerTermite",
+      "cn": "工白蚁",
+      "draw": "drawWorkerTermite"
+    },
+    "35": {
+      "en": "TermiteOvermind",
+      "cn": "白蚁主宰者",
+      "draw": "drawTermiteOvermind"
+    },
+    "36": {
+      "en": "LeafPiece",
+      "cn": "叶片",
+      "draw": "drawLeafPiece"
+    },
+    "37": {
+      "en": "LeafcutterSoldier",
+      "cn": "切叶兵蚁",
+      "draw": "drawLeafcutterSoldier"
+    },
+    "38": {
+      "en": "Titan",
+      "cn": "泰坦",
+      "draw": "(titan svg)"
+    }
+  },
+  "network_entity_offsets": {
+    "NETWORK_PETAL_TYPE_OFFSET": 100,
+    "NETWORK_DROP_TYPE_OFFSET": 180,
+    "trap_projectile": 93,
+    "blood_sacrifice_effect": 94,
+    "dandelion_missile": 95,
+    "pollen_projectile": 96,
+    "spider_web_zone": 97,
+    "hornet_missile": 98,
+    "portal": 99
+  },
+  "rarity_table": {
+    "1": {
+      "en": "Common",
+      "cn": "普通",
+      "short": "C",
+      "sort_rank": 1,
+      "color_fill_rgb": [
+        111,
+        211,
+        96
+      ],
+      "color_edge_rgb": [
+        75,
+        193,
+        164
+      ]
+    },
+    "2": {
+      "en": "Unusual",
+      "cn": "罕见",
+      "short": "Un",
+      "sort_rank": 2,
+      "color_fill_rgb": [
+        255,
+        230,
+        93
+      ],
+      "color_edge_rgb": [
+        34,
+        240,
+        164
+      ]
+    },
+    "3": {
+      "en": "Rare",
+      "cn": "稀有",
+      "short": "R",
+      "sort_rank": 3,
+      "color_fill_rgb": [
+        68,
+        72,
+        200
+      ],
+      "color_edge_rgb": [
+        159,
+        131,
+        126
+      ]
+    },
+    "4": {
+      "en": "Epic",
+      "cn": "史诗",
+      "short": "E",
+      "sort_rank": 4,
+      "color_fill_rgb": [
+        134,
+        31,
+        222
+      ],
+      "color_edge_rgb": [
+        182,
+        181,
+        119
+      ]
+    },
+    "5": {
+      "en": "Legendary",
+      "cn": "传说",
+      "short": "L",
+      "sort_rank": 5,
+      "color_fill_rgb": [
+        219,
+        31,
+        31
+      ],
+      "color_edge_rgb": [
+        0,
+        180,
+        118
+      ]
+    },
+    "6": {
+      "en": "Mythic",
+      "cn": "神话",
+      "short": "M",
+      "sort_rank": 6,
+      "color_fill_rgb": [
+        31,
+        219,
+        222
+      ],
+      "color_edge_rgb": [
+        121,
+        181,
+        119
+      ]
+    },
+    "7": {
+      "en": "Ultra",
+      "cn": "究极",
+      "short": "U",
+      "sort_rank": 7,
+      "color_fill_rgb": [
+        225,
+        38,
+        103
+      ],
+      "color_edge_rgb": [
+        226,
+        182,
+        124
+      ]
+    },
+    "8": {
+      "en": "Super",
+      "cn": "超级",
+      "short": "S",
+      "sort_rank": 8,
+      "color_fill_rgb": [
+        40,
+        240,
+        153
+      ],
+      "color_edge_rgb": [
+        103,
+        209,
+        132
+      ]
+    },
+    "9": {
+      "en": "Eternal",
+      "cn": "永恒",
+      "short": "Et",
+      "sort_rank": 9,
+      "color_fill_rgb": [
+        238,
+        238,
+        238
+      ],
+      "color_edge_rgb": [
+        160,
+        0,
+        224
+      ]
+    },
+    "10": {
+      "en": "Unique",
+      "cn": "唯一",
+      "short": "Q",
+      "sort_rank": 10,
+      "color_fill_rgb": [
+        53,
+        53,
+        53
+      ],
+      "color_edge_rgb": [
+        160,
+        0,
+        50
+      ]
+    },
+    "11": {
+      "en": "Primordial",
+      "cn": "原初",
+      "short": "P",
+      "sort_rank": 11,
+      "color_fill_rgb": [
+        110,
+        110,
+        110
+      ],
+      "color_edge_rgb": [
+        0,
+        0,
+        103
+      ]
+    },
+    "12": {
+      "en": "Exotic",
+      "cn": "何异位",
+      "short": "Ex",
+      "sort_rank": 7.5,
+      "color_fill_rgb": [
+        218,
+        218,
+        218
+      ],
+      "color_edge_rgb": [
+        170,
+        170,
+        170
+      ]
+    }
+  },
+  "entity_flags": {
+    "attacking": 1,
+    "defending": 2,
+    "dead": 4,
+    "owner": 8,
+    "antennae": 128,
+    "summoned": 256,
+    "carrying_leafpiece_attached": 1024,
+    "skill_windup_mask": 61440,
+    "skill_windup_shift": 12
+  },
+  "entity_states": {
+    "1": "poison",
+    "2": "ban_slot",
+    "3": "pincer_speed_reduce",
+    "4": "web_speed_reduce",
+    "5": "anti_heal",
+    "6": "nullification",
+    "7": "undead",
+    "8": "corruption",
+    "9": "no_revive",
+    "10": "invincible",
+    "11": "digging",
+    "12": "psionic_connection"
+  },
+  "talent": {
+    "TalentId": {
+      "PetalHealth": 1,
+      "PetalSplit": 2,
+      "FlowerHealth": 3,
+      "PetalRotationSpeed": 4,
+      "BodyDamage": 5,
+      "BodyDamagePoison": 6,
+      "PoisonDamage": 7,
+      "PetalReload": 8,
+      "SecondChance": 9,
+      "SlotNum": 10,
+      "Medic": 11,
+      "Reach": 12,
+      "Magnetism": 13,
+      "Summoner": 14,
+      "Antennae": 15,
+      "ConcentratedPoison": 16,
+      "Movement": 17
+    },
+    "groups_cn": {
+      "flower": "花朵",
+      "petals": "花瓣",
+      "loadout": "装备",
+      "support": "支援",
+      "poison": "毒素"
+    },
+    "names_cn": {
+      "Health": "生命",
+      "Movement": "移速",
+      "Sharp Edges": "锐利边缘",
+      "Body Toxicity": "体伤毒化",
+      "Petal Health": "花瓣生命",
+      "Reload": "冷却",
+      "Rotation": "转速",
+      "Loadout": "装备槽",
+      "Antennae": "触角",
+      "Reach": "攻击距离",
+      "Duplicator": "重瓣",
+      "Magnetism": "磁力",
+      "Medic": "医疗",
+      "Summoner": "召唤",
+      "Second Chance": "第二次机会",
+      "Poison": "毒性",
+      "Concentrated Poison": "浓缩毒素"
+    },
+    "movement_talent_multiplier_by_rarity": {
+      "3": 1.1,
+      "4": 1.2,
+      "5": 1.3,
+      "6": 1.4,
+      "7": 1.5,
+      "8": 1.75,
+      "9": 2.0
+    },
+    "tier_rarities": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  },
+  "sprite_draw_params": {
+    "common": {
+      "viewbox": 110,
+      "effective_box": 91.667,
+      "clip_x": 9.167,
+      "base_face_angle": "-PI*0.75",
+      "collision": "server-supplied radius (NET_RADIUS_SCALE=1), hp bar drawn by drawMobFrame"
+    },
+    "beetle": {
+      "file": "beetle_sprite.js",
+      "viewbox": 110,
+      "effective_box": 91.667,
+      "sprite_scale": 2.4,
+      "forward_offset_scale": 0.42,
+      "limb": "#333 lw4.667",
+      "fallback": "two arcs 0.95r@(0.42,0.42)/0.8r@(-0.12,-0.12)"
+    },
+    "ladybug": {
+      "file": "ladybug_sprite.js",
+      "viewbox": 110,
+      "body_radius": 27.5,
+      "spots": "random; bodyRadius=25.5, spotR=2.2+rand*6.4, area=PI*r^2*rand*0.75"
+    },
+    "soldier_ant": {
+      "file": "soldier_ant_sprite.js",
+      "viewbox": 110,
+      "body_radius": 19,
+      "wing_alpha": 0.498,
+      "forelimb_width": 5.833,
+      "forelimb_color": "#292929",
+      "summoned_fill": "#f4dc59/#d7bd3c/#c8ad35"
+    },
+    "bee": {
+      "file": "bee_sprite.js",
+      "viewbox": 110,
+      "effective_box": 91.667,
+      "bee_sprite_scale": 2.5,
+      "hornet_sprite_scale": 2.3,
+      "hornet_body_offset": [
+        7,
+        7
+      ],
+      "antenna": "#333 lw2.5",
+      "hornet_missile_center": [
+        86.5,
+        86.5
+      ],
+      "hornet_missile_box": 32,
+      "missile_scale": "radius*2.45",
+      "pollen_viewbox": "39 31 32 32",
+      "pollen_size": "max(3, radius*2.35*pulse)"
+    },
+    "spider": {
+      "file": "spider_sprite.js",
+      "viewbox": 110,
+      "clip_x": 9.167,
+      "clip_size": 91.667,
+      "sprite_scale": 7.7,
+      "leg_groups": "odd {1,3,5,7}"
+    },
+    "garden_mobs": {
+      "file": "garden_mob_sprite.js",
+      "svg_viewbox": 110,
+      "rock_visual_scale": 1.18,
+      "rock_edge_width": 5.2,
+      "rock_fill": "#777/#606060",
+      "rock_size_norm": "(worldRadius-28)/240",
+      "sandstorm_visual_scale": 1.2,
+      "portal_visual_scale": 2.15,
+      "ant_egg_visual_scale": 4.4,
+      "full_ant_visual_scale": 5.65,
+      "baby_ant_visual_scale": 7.37,
+      "overmind_visual_scale": 4.1,
+      "leaf_piece_visual_scale": 3.1,
+      "dandelion_visual_scale": 4.0,
+      "ant_hole_size": "radius*3.05",
+      "soldier_ant_visual_scale": 5.7894736842105265
+    }
+  },
+  "protocol": {
+    "server_recv_opcodes": {
+      "Welcome": 0,
+      "Snapshot": 1,
+      "AuthResult": 2,
+      "OwnerState": 16,
+      "Inventory": 17,
+      "Chat": 18,
+      "CraftResult": 19,
+      "unknown": 255
+    },
+    "client_send_opcodes": {
+      "Auth": 240,
+      "Input": 0,
+      "InputFrame": 248,
+      "Chores": 3,
+      "Equip": 1,
+      "Unequip": 2,
+      "SecondarySlot": 242,
+      "Craft": 243,
+      "Forge": 246,
+      "StateRequest": 245,
+      "SnapshotAck": 247,
+      "TalentRequest": 244,
+      "Chat": 241
+    },
+    "net_scale": {
+      "NET_COORD_SCALE": 64,
+      "NET_RELATIVE_COORD_SCALE": 1,
+      "NET_RADIUS_SCALE": 1,
+      "NET_ANGLE_SCALE": 1000,
+      "NET_PERCENT_SCALE": 255,
+      "NET_SLOT_SIZE_SCALE": 65535,
+      "FRAME_LENGTH_PREFIX": "2-byte little-endian",
+      "FULL_SNAPSHOT_BASE_ID": "0xffffffff"
+    },
+    "chat_flags": {
+      "Global": 0,
+      "Local": 1,
+      "Server": 2,
+      "Whisper": 3,
+      "Squad": 4
+    },
+    "auth_modes": {
+      "Login": 0,
+      "Register": 1,
+      "RequestRegistrationCode": 2,
+      "RequestBindingCode": 3,
+      "ConfirmBinding": 4
+    },
+    "auth_result_codes": {
+      "Failed": 0,
+      "Authenticated": 1,
+      "EmailBindingRequired": 2,
+      "VerificationCodeSending": 3,
+      "VerificationCodeSent": 4,
+      "EmailBound": 5
+    }
+  },
+  "runtime_constants": {
+    "serverTickInterval": 0.016,
+    "expectedSnapshotInterval": 0.048,
+    "packetInterval": 0.03333333333333333,
+    "ownerBaseMaxVelocity": 187.5,
+    "ownerBaseAcceleration": 375.0,
+    "ownerDiggingSpeedMultiplier": 0.5,
+    "viewScreenFill": 0.46,
+    "viewScreenPadding": 36,
+    "mouseMoveDeadzonePx": 16,
+    "bossBarWidthRatio": 0.31,
+    "bossBarMinWidthPx": 310,
+    "bossBarMaxWidthPx": 500,
+    "bossBarHeightPx": 60,
+    "bossBarTitleFontPx": 34,
+    "bossBarRarityFontPx": 27,
+    "maxBossBars": 3,
+    "bossRarity": 8,
+    "loginMapDefaultName": "garden.tmj",
+    "loginMapDefaultX": 51204.928,
+    "loginMapDefaultY": 65008,
+    "loginMapDefaultHorizon": 2048,
+    "titanForgeRange": 2048,
+    "worldPetalSizeScale": 6,
+    "worldDropSizeScale": 3.25,
+    "chatMaxHistory": 80,
+    "chatVisibleMs": 10000
+  },
+  "minimap_material_colors": {
+    "anthole": "#9b6947",
+    "bridge": "#d7d9d6",
+    "bush": "#2d8539",
+    "castle": "#999999",
+    "cellar": "#8b6a45",
+    "cobblestone": "#666666",
+    "coral": "#cd7c92",
+    "desert": "#d7bd72",
+    "dirt": "#9b6947",
+    "dirt2": "#b48763",
+    "factory_floor": "#c6c6c6",
+    "factory_wall": "#999999",
+    "fire": "#8f3838",
+    "foliage": "#2f754c",
+    "grass": "#78b86b",
+    "grass2": "#68aa5d",
+    "grate": "#555555",
+    "hel": "#8f3838",
+    "hut": "#bf9847",
+    "ocean": "#4d98d4",
+    "organic_wall": "#6e1515",
+    "pvp": "#4c5b53",
+    "pyramid": "#c5b58a",
+    "pyramid_wall": "#998c6a",
+    "root": "#99532a",
+    "scliff": "#d9c598",
+    "seaweed": "#72992c",
+    "sewage": "#777744",
+    "sewer": "#6f704d",
+    "stone_bridge_rect": "#d7d9d6",
+    "termite": "#a88642",
+    "tumbleweed": "#a88642",
+    "vent": "#737373",
+    "vine": "#2e6f2d",
+    "water": "#4d98d4",
+    "wood": "#b1843b",
+    "worm": "#601d1d"
+  },
+  "cpp_server_constants": {
+    "world_unit_scale": 2.0,
+    "stats_default_mob_radius": 80.0,
+    "stats_default_mob_horizon": 8192.0,
+    "stats_default_mob_max_velocity": 400.0,
+    "mob_velocity_multiplier": 1.25,
+    "mob_digging_speed_multiplier": 0.5,
+    "mob_fire_ant_damage_multiplier": 2.0,
+    "mob_termite_health_multiplier": 2.0,
+    "mob_termite_overmind_radius_multiplier": 2.5,
+    "mob_termite_overmind_velocity_multiplier": 0.33333334,
+    "mob_spider_web_speed_multiplier": 0.75,
+    "open_rarity_difficulty_scale": 10.0,
+    "open_rarity_gaussian_sigma": 0.36,
+    "portal_attraction_radius_multiplier": 2.0,
+    "default_petal_reload": 2.5,
+    "default_petal_preload": 2.5,
+    "default_petal_radius": "WorldUnits(15)=30",
+    "default_missile_speed_multiplier": 8.0,
+    "default_heavy_mass_multiplier": 120.0,
+    "default_tomato_max_damage_multiplier": 14.0,
+    "drop_rate_source": "src/Shared/drop_rate.h (~1100 lines RegisterDropRate)"
+  },
+  "svg_inventory": {
+    "total_svg": 483,
+    "web_assets_petals": 133,
+    "web_assets_root_monster_player_effect": 50,
+    "web_assets_ui": 4,
+    "web_data_tiles": 144,
+    "notes": "root 50 = monster/player/effect icons (beetle,bee,spider,queen_ant,portal,sandstorm,player_flower variants, eggs...); ui = quick_backpack/craft/talent/reload_talent.svg; tiles = 144 map tile svgs"
+  }
+}

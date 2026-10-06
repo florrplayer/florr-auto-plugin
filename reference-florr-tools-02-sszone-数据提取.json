@@ -1,0 +1,576 @@
+{
+  "_readme": "Extracted from florr-auto-sszone (Shiny-Ladybug SS-zone auto farmer). Wiki part from data/wiki.json (wikitext, programmatically parsed). main.py is triple-obfuscated (pyobfuscate.com -> pickle-AST VM -> nested-lambda interpreter); numeric constants below come from config.json + requirements, which are the de-facto tunables.",
+  "sszone_config_constants": {
+    "source": "config.json",
+    "showLogger": false,
+    "buildNum": 6,
+    "attackMinimumDist_px": 350,
+    "safeDistanceK": 0.2,
+    "target_weight_pick": {
+      "Legendary": 0.6,
+      "Mythic": 3.7,
+      "Ultra": 1.8
+    },
+    "target_size_threshold_px": {
+      "Mythic": 170,
+      "Ultra": 300
+    },
+    "nameOffsetX": 0,
+    "equip_petals": {
+      "antennae": {
+        "slot": 1
+      },
+      "rubber": {
+        "slot": 6
+      },
+      "heal": {
+        "enabled": true,
+        "threshold": 60,
+        "slots": [
+          3,
+          7,
+          8
+        ]
+      },
+      "fang": {
+        "enabled": false,
+        "slot": 9
+      },
+      "powder": {
+        "enabled": true,
+        "slot": 5
+      }
+    },
+    "aiChat": {
+      "enabled": true,
+      "whitelistSender": [
+        "M28"
+      ],
+      "triggerWords": "M28"
+    },
+    "positions": {
+      "areas": {
+        "sandstorm": [
+          [
+            [
+              0,
+              0
+            ],
+            [
+              54,
+              46
+            ]
+          ],
+          [
+            [
+              0,
+              46
+            ],
+            [
+              32,
+              66
+            ]
+          ]
+        ]
+      },
+      "destination": "sandstorm",
+      "locations": {
+        "sandstorm": [
+          25,
+          25
+        ]
+      }
+    },
+    "positions_explained": {
+      "map_coord_system": "Cell-grid coordinates on the maximized (M-keyed) Desert minimap; [col,row] with origin top-left of map",
+      "areas.sandstorm_polygon_cells": [
+        [
+          [
+            0,
+            0
+          ],
+          [
+            54,
+            46
+          ]
+        ],
+        [
+          [
+            0,
+            46
+          ],
+          [
+            32,
+            66
+          ]
+        ]
+      ],
+      "interpretation": "Two rectangular cell-regions defining where sandstorms farm; union covers left half of Desert",
+      "destination_cells": [
+        25,
+        25
+      ],
+      "destination_name": "sandstorm"
+    }
+  },
+  "models_inventory": {
+    "source": "models/*.pt (ultralytics YOLOv10, ultralytics==8.3.65)",
+    "sandstorm_pt": {
+      "size_bytes": 6338339,
+      "role_inferred": "YOLO object detector for the Sandstorm mob (the farming target); class = sandstorm of various rarity; output bbox used to steer mouse/attack"
+    },
+    "afk_pt": {
+      "size_bytes": 6235251,
+      "role_inferred": "AFK verification solver: generic AFK check model (detect/classify the bot-check image)"
+    },
+    "afk_det_pt": {
+      "size_bytes": 5586323,
+      "role_inferred": "AFK verification object detector ('det' = detection): localizes the interactive element in the AFK-check popup"
+    },
+    "afk_seg_pro_pt": {
+      "size_bytes": 6113501,
+      "role_inferred": "AFK verification segmentation ('seg-pro' = segmentation, pro): pixel-mask of the AFK-check region to crop/parse it"
+    }
+  },
+  "template_assets": {
+    "source": "equips/*.png + maps/*.png",
+    "equips": {
+      "ante.png": "antennae petal slot template",
+      "fang.png": "fang petal slot template",
+      "heal.png": "heal petal slot template",
+      "powder.png": "powder petal slot template",
+      "rubber.png": "rubber petal slot template"
+    },
+    "maps_desert_png": "Desert minimap reference thumbnail for on-screen position matching",
+    "note": "equips/*.png are OpenCV matchTemplate targets; config equipPetals.slot tells which hotkey slot (1-9) each petal occupies"
+  },
+  "detection_stack": {
+    "vision": [
+      "ultralytics YOLOv10 (sandstorm/afk detection)",
+      "OpenCV matchTemplate on equips/*.png (petal equip slots)"
+    ],
+    "ocr_nlp": [
+      "paddlehub (OCR/feature)",
+      "paddlenlp + jieba + data/user_dict.txt (680 wiki terms custom seg dict)",
+      "zhipuai ChatGLM (AI chat auto-reply, whitelist sender M28)"
+    ],
+    "input": [
+      "pyautogui",
+      "pydirectinput/rdp (mouse move)",
+      "lap (linear-assignment/Hungarian: assign detected sandstorms to attack targets)"
+    ],
+    "recognition_method_summary": "Deep-learning (YOLO) for mobs/AFK, NOT pure color; template matching for UI; NLP for chat/AFK text"
+  },
+  "wiki": {
+    "source_wiki": "data/wiki.json",
+    "wiki_meta": {
+      "top_level_type": "list",
+      "entry_count": 680,
+      "entry_fields": [
+        "title",
+        "content"
+      ],
+      "content_format": "MediaWiki wikitext (not structured tables)",
+      "is_full_site_snapshot": false,
+      "category_counts": {
+        "mobs_with_infobox": 115,
+        "petals_with_infobox": 120,
+        "drop_subpages_Mob_Drop_Petal": 139,
+        "areas": 60,
+        "fantasy_fanon_pages": 158,
+        "other_templates_and_help": 88
+      },
+      "note": "Curated subset (~522 real-game pages, A-Y main content). Fanon pages prefixed 'Fantasy:' are community alt-universe, not real game data."
+    },
+    "rarity_system": {
+      "order_9": [
+        "Common",
+        "Unusual",
+        "Rare",
+        "Epic",
+        "Legendary",
+        "Mythic",
+        "Ultra",
+        "Super",
+        "Unique"
+      ],
+      "stat_scale_per_step_x": 3,
+      "crafting_success_pct": {
+        "Common->Unusual": 64,
+        "Unusual->Rare": 32,
+        "Rare->Epic": 16,
+        "Epic->Legendary": 8.0,
+        "Legendary->Mythic": 4.0,
+        "Mythic->Ultra": 2.0,
+        "Ultra->Super": 1.0,
+        "Super->Unique": "from Titan only"
+      },
+      "drop_despawn_seconds": {
+        "Common": 15,
+        "Unusual": 30,
+        "Rare": 40,
+        "Epic": 50,
+        "Legendary": 60,
+        "Mythic": 120,
+        "Ultra": 120
+      },
+      "hitbox_hotkey": "G"
+    },
+    "mob_table": {
+      "Sandstorm": {
+        "base_HP_Common": 125,
+        "base_body_damage_Common": 40,
+        "base_armor_Common": 0.8,
+        "drops": [
+          "Sand",
+          "Glass",
+          "Mysterious Stick"
+        ],
+        "spawn_area": [
+          "Desert"
+        ],
+        "behavior": "Neutral; random unpredictable movement faster than player; Super pulls mobs+players; phases through mobs",
+        "per_rarity": {
+          "Common": {
+            "HP": 125,
+            "body_dmg": 40,
+            "armor": 0.8,
+            "XP": 1
+          },
+          "Unusual": {
+            "HP": 468.75,
+            "body_dmg": 120,
+            "armor": 2.4,
+            "XP": 1
+          },
+          "Rare": {
+            "HP": 1687.5,
+            "body_dmg": 360,
+            "armor": 7.2,
+            "XP": 3
+          },
+          "Epic": {
+            "HP": 6750,
+            "body_dmg": 1080,
+            "armor": 21.6,
+            "XP": 29
+          },
+          "Legendary": {
+            "HP": 50625,
+            "body_dmg": 3240,
+            "armor": 64.8,
+            "XP": 307
+          },
+          "Mythic": {
+            "HP": 303750,
+            "body_dmg": 9720,
+            "armor": 194.4,
+            "XP": 4700
+          },
+          "Ultra": {
+            "HP": 3645000,
+            "body_dmg": 29160,
+            "armor": 583.2,
+            "XP": 29700
+          },
+          "Super": {
+            "HP": 164025000,
+            "body_dmg": 87480,
+            "armor": 583.2,
+            "XP": 3200000
+          }
+        }
+      }
+    },
+    "petal_table": {
+      "Sand": {
+        "base_dmg_Common": 5,
+        "base_HP_Common": 1.25,
+        "reload_s": 1.5,
+        "stackable": true,
+        "note": "4 hexagons bunched, total dmg = listed x4",
+        "dropped_by": [
+          "Crab",
+          "Sandstorm",
+          "Starfish"
+        ]
+      },
+      "Glass": {
+        "base_dmg_Common": 15,
+        "interval_s": 1,
+        "reload_s": 2.5,
+        "stackable": true,
+        "note": "phases through mobs, 1s per-target damage cooldown, infinite durability",
+        "dropped_by": [
+          "Sandstorm",
+          "Soldier Ant"
+        ]
+      }
+    },
+    "drop_tables": {
+      "Sandstorm": {
+        "Sand": {
+          "header": [
+            "{{Rarity",
+            "Common}}",
+            "45.5",
+            "10.1",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "{{Rarity",
+              "Unusual}}",
+              "61.3",
+              "34.8",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Rare}}",
+              "1.4",
+              "88.3",
+              "10.3",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Epic}}",
+              "",
+              "19.7",
+              "72.7",
+              "7.6",
+              "",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Legendary}}",
+              "",
+              "",
+              "20.7",
+              "76.3",
+              "3.1",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Mythic}}",
+              "",
+              "",
+              "",
+              "21.2",
+              "78.3",
+              "0.5",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Ultra}}",
+              "",
+              "",
+              "",
+              "",
+              "91.8",
+              "8.9",
+              "0.03"
+            ],
+            [
+              "{{Rarity",
+              "Super}}",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "85.7",
+              "14.3"
+            ]
+          ]
+        },
+        "Glass": {
+          "header": [
+            "{{Rarity",
+            "Common}}",
+            "34.1",
+            "6.9",
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "{{Rarity",
+              "Unusual}}",
+              "63.1",
+              "24.7",
+              "",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Rare}}",
+              "18.2",
+              "77.6",
+              "4.2",
+              "",
+              "",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Epic}}",
+              "",
+              "33.8",
+              "61.0",
+              "5.1",
+              "",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Legendary}}",
+              "",
+              "",
+              "34.9",
+              "63.0",
+              "2.0",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Mythic}}",
+              "",
+              "",
+              "",
+              "35.6",
+              "64.1",
+              "0.3",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Ultra}}",
+              "",
+              "",
+              "",
+              "",
+              "94.0",
+              "6.0",
+              "0.02"
+            ],
+            [
+              "{{Rarity",
+              "Super}}",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "90.2",
+              "9.8"
+            ]
+          ]
+        },
+        "Stick": {
+          "header": [
+            "{{Rarity",
+            "Epic}}",
+            "2.6",
+            "",
+            "",
+            ""
+          ],
+          "rows": [
+            [
+              "{{Rarity",
+              "Legendary}}",
+              "39.9",
+              "1.0",
+              "",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Mythic}}",
+              "59.6",
+              "40.2",
+              "0.2",
+              ""
+            ],
+            [
+              "{{Rarity",
+              "Ultra}}",
+              "",
+              "96.9",
+              "3.0",
+              "0.01"
+            ],
+            [
+              "{{Rarity",
+              "Super}}",
+              "",
+              "",
+              "95.0",
+              "5.0"
+            ]
+          ]
+        }
+      }
+    },
+    "area_table": {
+      "Desert": {
+        "mobs": [
+          "Beetle",
+          "Scorpion",
+          "Desert Centipede",
+          "Ladybug (Desert)",
+          "Cactus (Mob)",
+          "Sandstorm",
+          "Fire Ant Burrow",
+          "Beetle/Nazar"
+        ],
+        "special_entities": [
+          "Trader",
+          "Developer Statue"
+        ],
+        "connections": {
+          "Garden": "Top",
+          "Jungle": "Top Right",
+          "Ant Hell": "Left"
+        },
+        "special_zones": "top-left: many Legendary/Mythic sandstorms; top-right: frequent Legendary desert mobs; bottom-right: Mythic/Ultra, highest Yggdrasil rate; bottom: frequent Ultra, hardest zone, Developer Statue"
+      }
+    },
+    "mob_id_table_from_Mobs_list": {
+      "Rock (Mob)": 1,
+      "Cactus (Mob)": 2,
+      "Ladybug": 3,
+      "Bee": 4,
+      "Baby Ant": 5,
+      "Worker Ant": 6,
+      "Soldier Ant": 7
+    }
+  }
+}

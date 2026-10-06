@@ -1,0 +1,7196 @@
+{
+ "Ant Egg": {
+  "name": "Ant Egg",
+  "description": "Not yet an ant but perhaps soon.",
+  "super_spawn_message": "A Super Ant Egg has spawned somewhere!",
+  "common": {
+   "health": "150",
+   "body_damage": "3",
+   "drops": {
+    "ant egg": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "562.8",
+   "body_damage": "9",
+   "drops": {
+    "ant egg": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "2025",
+   "body_damage": "27",
+   "drops": {
+    "ant egg": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "8100",
+   "body_damage": "81",
+   "drops": {
+    "ant egg": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "60750",
+   "body_damage": "243",
+   "drops": {
+    "ant egg": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "364500",
+   "body_damage": "729",
+   "drops": {
+    "ant egg": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "10950000",
+   "body_damage": "2187",
+   "drops": {
+    "ant egg": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "196800000",
+   "body_damage": "6561",
+   "drops": {
+    "ant egg": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Ant Hole": {
+  "name": "Ant Hole",
+  "description": "Ants come in and come out. Can't explain that.",
+  "super_spawn_message": "A Super Ant Hole has spawned somewhere!",
+  "common": {
+   "health": "750",
+   "body_damage": "15",
+   "drops": {
+    "soil": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "shovel": {
+     "common": "53.9%",
+     "unusual": "13.3%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "2814",
+   "body_damage": "45",
+   "drops": {
+    "soil": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "shovel": {
+     "common": "55.3%",
+     "unusual": "43.6%"
+    }
+   }
+  },
+  "rare": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "shovel": {
+     "common": "3.2%",
+     "unusual": "88.5%",
+     "rare": "8.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "shovel": {
+     "unusual": "11.4%",
+     "rare": "78.6%",
+     "epic": "10%"
+    }
+   }
+  },
+  "legendary": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "shovel": {
+     "rare": "12.2%",
+     "epic": "83.7%",
+     "legendary": "4.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "shovel": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%"
+    }
+   }
+  },
+  "ultra": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "shovel": {
+     "legendary": "88%",
+     "mythic": "11.6%",
+     "ultra": "0.4%"
+    }
+   }
+  },
+  "super": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "shovel": {
+     "mythic": "81.2%",
+     "ultra": "18.6%"
+    }
+   }
+  }
+ },
+ "Baby Ant": {
+  "name": "Baby Ant",
+  "description": "Weak and defenseless, but big dreams.",
+  "super_spawn_message": "A Super Baby Ant has spawned somewhere!",
+  "common": {
+   "health": "25",
+   "body_damage": "10",
+   "drops": {
+    "leaf": {
+     "unusual": "10.1%"
+    },
+    "rice": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "light": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "93.8",
+   "body_damage": "30",
+   "drops": {
+    "leaf": {
+     "unusual": "34.8%"
+    },
+    "rice": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "light": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "337.5",
+   "body_damage": "90",
+   "drops": {
+    "leaf": {
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "rice": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "light": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350",
+   "body_damage": "270",
+   "drops": {
+    "leaf": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "rice": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "light": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125",
+   "body_damage": "810",
+   "drops": {
+    "leaf": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "rice": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "light": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750",
+   "body_damage": "2430",
+   "drops": {
+    "leaf": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "rice": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "light": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000",
+   "body_damage": "7290",
+   "drops": {
+    "leaf": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "rice": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "light": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000",
+   "body_damage": "21870",
+   "drops": {
+    "leaf": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "rice": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "light": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Baby Fire Ant": {
+  "name": "Baby Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee.",
+  "super_spawn_message": "A Super Baby Fire Ant has spawned somewhere!",
+  "common": {
+   "health": "25",
+   "body_damage": "20",
+   "drops": {
+    "light": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "yucca": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "93.8",
+   "body_damage": "60",
+   "drops": {
+    "light": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "yucca": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    }
+   }
+  },
+  "rare": {
+   "health": "337.5",
+   "body_damage": "180",
+   "drops": {
+    "light": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "yucca": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350",
+   "body_damage": "540",
+   "drops": {
+    "light": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "yucca": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125",
+   "body_damage": "1620",
+   "drops": {
+    "light": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "yucca": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750",
+   "body_damage": "4860",
+   "drops": {
+    "light": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "yucca": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000",
+   "body_damage": "14580",
+   "drops": {
+    "light": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "yucca": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000",
+   "body_damage": "43740",
+   "drops": {
+    "light": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "yucca": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    }
+   }
+  }
+ },
+ "Baby Termite": {
+  "name": "Baby Termite",
+  "description": "Weak and defenseless, but big dreams. These creatures appear to be connected somehow.",
+  "super_spawn_message": "A Super Baby Termite has spawned somewhere!",
+  "common": {
+   "health": "50",
+   "body_damage": "10",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    },
+    "carrot": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "187.6",
+   "body_damage": "30",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "51%",
+     "unusual": "13.2%"
+    },
+    "carrot": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "675",
+   "body_damage": "90",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    },
+    "carrot": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "2700",
+   "body_damage": "270",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    },
+    "carrot": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "20250",
+   "body_damage": "810",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    },
+    "carrot": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "121500",
+   "body_damage": "2430",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    },
+    "carrot": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "3650000",
+   "body_damage": "7290",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    },
+    "carrot": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "65600000",
+   "body_damage": "21870",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    },
+    "carrot": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Bee": {
+  "name": "Bee",
+  "description": "It stings. Don't touch it.",
+  "super_spawn_message": "A Super Bee has spawned somewhere!",
+  "common": {
+   "health": "37.5",
+   "body_damage": "50",
+   "drops": {
+    "stinger": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "pollen": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    },
+    "honey": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "140.7",
+   "body_damage": "150",
+   "drops": {
+    "stinger": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "pollen": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    },
+    "honey": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    }
+   }
+  },
+  "rare": {
+   "health": "506.25",
+   "body_damage": "450",
+   "drops": {
+    "stinger": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "pollen": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    },
+    "honey": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "2025",
+   "body_damage": "1350",
+   "drops": {
+    "stinger": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "pollen": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    },
+    "honey": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "15187.5",
+   "body_damage": "4050",
+   "drops": {
+    "stinger": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "pollen": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    },
+    "honey": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "91125",
+   "body_damage": "12150",
+   "drops": {
+    "stinger": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "pollen": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    },
+    "honey": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "2737500",
+   "body_damage": "36450",
+   "drops": {
+    "stinger": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "pollen": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    },
+    "honey": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    }
+   }
+  },
+  "super": {
+   "health": "49200000",
+   "body_damage": "109350",
+   "drops": {
+    "stinger": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "pollen": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    },
+    "honey": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    }
+   }
+  }
+ },
+ "Beetle": {
+  "name": "Beetle",
+  "description": "It's hungry and flowers are its favorite meal.",
+  "super_spawn_message": "A Super Beetle has spawned somewhere!",
+  "common": {
+   "health": "100",
+   "body_damage": "30",
+   "drops": {
+    "egg": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "ankh": {
+     "common": "4.2%",
+     "unusual": "0.7%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "375.2",
+   "body_damage": "90",
+   "drops": {
+    "egg": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "ankh": {
+     "common": "15.4%",
+     "unusual": "2.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1350",
+   "body_damage": "270",
+   "drops": {
+    "egg": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "ankh": {
+     "common": "54.5%",
+     "unusual": "15.1%",
+     "rare": "0.4%"
+    }
+   }
+  },
+  "epic": {
+   "health": "5400",
+   "body_damage": "810",
+   "drops": {
+    "egg": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "ankh": {
+     "common": "1.4%",
+     "unusual": "88.3%",
+     "rare": "9.7%",
+     "epic": "0.5%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "40500",
+   "body_damage": "2430",
+   "drops": {
+    "egg": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "ankh": {
+     "unusual": "11.5%",
+     "rare": "78.6%",
+     "epic": "9.8%",
+     "legendary": "0.2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "243000",
+   "body_damage": "7290",
+   "drops": {
+    "egg": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "ankh": {
+     "rare": "0.5%",
+     "epic": "89.7%",
+     "legendary": "9.8%",
+     "mythic": "0.03%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "7300000",
+   "body_damage": "21870",
+   "drops": {
+    "egg": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "ankh": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%",
+     "ultra": "0.02%"
+    }
+   }
+  },
+  "super": {
+   "health": "131200000",
+   "body_damage": "65610",
+   "drops": {
+    "egg": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "ankh": {
+     "legendary": "77.3%",
+     "mythic": "21.9%",
+     "ultra": "0.8%"
+    }
+   }
+  }
+ },
+ "Hel Beetle": {
+  "name": "Hel Beetle",
+  "description": "Scourge that spawns in the other plane.",
+  "super_spawn_message": "You sense ominous vibrations coming from a different realm...",
+  "common": {
+   "health": "250",
+   "body_damage": "50",
+   "drops": {
+    "egg": {
+     "common": "8.2%",
+     "unusual": "1.4%"
+    },
+    "mark": {
+     "common": "4.2%",
+     "unusual": "0.7%"
+    },
+    "dice": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "938",
+   "body_damage": "150",
+   "drops": {
+    "egg": {
+     "common": "27.7%",
+     "unusual": "5.5%"
+    },
+    "mark": {
+     "common": "15.4%",
+     "unusual": "2.8%"
+    },
+    "dice": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    }
+   }
+  },
+  "rare": {
+   "health": "3375",
+   "body_damage": "450",
+   "drops": {
+    "egg": {
+     "common": "62.4%",
+     "unusual": "27.9%",
+     "rare": "0.9%"
+    },
+    "mark": {
+     "common": "54.5%",
+     "unusual": "15.1%",
+     "rare": "0.4%"
+    },
+    "dice": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "13500",
+   "body_damage": "1350",
+   "drops": {
+    "egg": {
+     "common": "0.02%",
+     "unusual": "80.5%",
+     "rare": "18.4%",
+     "epic": "1%"
+    },
+    "mark": {
+     "common": "1.4%",
+     "unusual": "88.3%",
+     "rare": "9.7%",
+     "epic": "0.5%"
+    },
+    "dice": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "101250",
+   "body_damage": "4050",
+   "drops": {
+    "egg": {
+     "unusual": "1.3%",
+     "rare": "79.7%",
+     "epic": "18.6%",
+     "legendary": "0.4%"
+    },
+    "mark": {
+     "unusual": "11.5%",
+     "rare": "78.6%",
+     "epic": "9.8%",
+     "legendary": "0.2%"
+    },
+    "dice": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "607500",
+   "body_damage": "12150",
+   "drops": {
+    "egg": {
+     "epic": "81.3%",
+     "legendary": "18.6%",
+     "mythic": "0.06%"
+    },
+    "mark": {
+     "rare": "0.5%",
+     "epic": "89.7%",
+     "legendary": "9.8%",
+     "mythic": "0.03%"
+    },
+    "dice": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "18250000",
+   "body_damage": "36450",
+   "drops": {
+    "egg": {
+     "epic": "1.6%",
+     "legendary": "97.1%",
+     "mythic": "1.2%",
+     "ultra": "0.04%"
+    },
+    "mark": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%",
+     "ultra": "0.02%"
+    },
+    "dice": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    }
+   }
+  },
+  "super": {
+   "health": "328000000",
+   "body_damage": "109350",
+   "drops": {
+    "egg": {
+     "legendary": "59.7%",
+     "mythic": "38.6%",
+     "ultra": "1.7%"
+    },
+    "mark": {
+     "legendary": "77.3%",
+     "mythic": "21.9%",
+     "ultra": "0.8%"
+    },
+    "dice": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    }
+   }
+  }
+ },
+ "Bubble": {
+  "name": "Bubble",
+  "description": "Pop",
+  "super_spawn_message": "A Super Bubble has spawned somewhere!",
+  "common": {
+   "health": "0.5",
+   "body_damage": "5",
+   "drops": {
+    "bubble": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "air": {
+     "common": "46.8%",
+     "unusual": "53.2%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "1.876",
+   "body_damage": "15",
+   "drops": {
+    "bubble": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "air": {
+     "common": "4.8%",
+     "unusual": "95.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "6.75",
+   "body_damage": "45",
+   "drops": {
+    "bubble": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "air": {
+     "unusual": "64.8%",
+     "rare": "35.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "27",
+   "body_damage": "135",
+   "drops": {
+    "bubble": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "air": {
+     "rare": "59.1%",
+     "epic": "40.9%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "202.5",
+   "body_damage": "405",
+   "drops": {
+    "bubble": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "air": {
+     "epic": "81.3%",
+     "legendary": "18.7%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "1215",
+   "body_damage": "1215",
+   "drops": {
+    "bubble": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "air": {
+     "legendary": "96.9%",
+     "mythic": "3.1%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "36500",
+   "body_damage": "3645",
+   "drops": {
+    "bubble": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "air": {
+     "legendary": "52.8%",
+     "mythic": "45.2%",
+     "ultra": "2%"
+    }
+   }
+  },
+  "super": {
+   "health": "656000",
+   "body_damage": "10935",
+   "drops": {
+    "bubble": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "air": {
+     "mythic": "35.7%",
+     "ultra": "64.3%"
+    }
+   }
+  }
+ },
+ "Bumble Bee": {
+  "name": "Bumble Bee",
+  "description": "GOTTA RUN",
+  "super_spawn_message": "A Super Bumble Bee has spawned somewhere!",
+  "common": {
+   "health": "25",
+   "body_damage": "20",
+   "special_stats": {
+    "missile_health": "100",
+    "missile_damage": "10"
+   },
+   "drops": {
+    "pollen": {
+     "unusual": "47.2%"
+    },
+    "honey": {
+     "common": "53.9%",
+     "unusual": "13.3%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "93.8",
+   "body_damage": "60",
+   "special_stats": {
+    "missile_health": "300",
+    "missile_damage": "30"
+   },
+   "drops": {
+    "pollen": {
+     "unusual": "92.9%"
+    },
+    "honey": {
+     "common": "55.3%",
+     "unusual": "43.6%"
+    }
+   }
+  },
+  "rare": {
+   "health": "337.5",
+   "body_damage": "180",
+   "special_stats": {
+    "missile_health": "900",
+    "missile_damage": "90"
+   },
+   "drops": {
+    "pollen": {
+     "unusual": "69.1%",
+     "rare": "30.9%"
+    },
+    "honey": {
+     "common": "3.2%",
+     "unusual": "88.5%",
+     "rare": "8.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350",
+   "body_damage": "540",
+   "special_stats": {
+    "missile_health": "2700",
+    "missile_damage": "270"
+   },
+   "drops": {
+    "pollen": {
+     "rare": "64%",
+     "epic": "36%"
+    },
+    "honey": {
+     "unusual": "11.4%",
+     "rare": "78.6%",
+     "epic": "10%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125",
+   "body_damage": "1620",
+   "special_stats": {
+    "missile_health": "8100",
+    "missile_damage": "810"
+   },
+   "drops": {
+    "pollen": {
+     "epic": "83.9%",
+     "legendary": "16.1%"
+    },
+    "honey": {
+     "rare": "12.2%",
+     "epic": "83.7%",
+     "legendary": "4.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750",
+   "body_damage": "4860",
+   "special_stats": {
+    "missile_health": "24300",
+    "missile_damage": "2430"
+   },
+   "drops": {
+    "pollen": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%"
+    },
+    "honey": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000",
+   "body_damage": "14580",
+   "special_stats": {
+    "missile_health": "72900",
+    "missile_damage": "7290"
+   },
+   "drops": {
+    "pollen": {
+     "legendary": "58.1%",
+     "mythic": "40.2%",
+     "ultra": "1.7%"
+    },
+    "honey": {
+     "legendary": "88%",
+     "mythic": "11.6%",
+     "ultra": "0.4%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000",
+   "body_damage": "43740",
+   "special_stats": {
+    "missile_health": "218700",
+    "missile_damage": "21870"
+   },
+   "drops": {
+    "pollen": {
+     "mythic": "41.6%",
+     "ultra": "58.4%"
+    },
+    "honey": {
+     "mythic": "81.2%",
+     "ultra": "18.6%"
+    }
+   }
+  }
+ },
+ "Bush": {
+  "name": "Bush",
+  "description": "Don't misunderestimate me.",
+  "super_spawn_message": "A Super Bush has spawned somewhere!",
+  "common": {
+   "health": "25~50",
+   "body_damage": "10",
+   "drops": {
+    "cotton": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "93.8~187.6",
+   "body_damage": "30",
+   "drops": {
+    "cotton": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "337.5~675",
+   "body_damage": "90",
+   "drops": {
+    "cotton": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350~2700",
+   "body_damage": "270",
+   "drops": {
+    "cotton": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125~20250",
+   "body_damage": "810",
+   "drops": {
+    "cotton": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750~121500",
+   "body_damage": "2430",
+   "drops": {
+    "cotton": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000~3650000",
+   "body_damage": "7290",
+   "drops": {
+    "cotton": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000~65600000",
+   "body_damage": "21870",
+   "drops": {
+    "cotton": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Cactus": {
+  "name": "Cactus",
+  "description": "Avoid touching it, it hurts",
+  "super_spawn_message": "A tower of thorns rises from the sands...",
+  "common": {
+   "health": "75~112.5",
+   "body_damage": "5",
+   "special_stats": {
+    "missile_health": "30",
+    "missile_damage": "40"
+   },
+   "drops": {
+    "cactus": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "281.4~422.1",
+   "body_damage": "15",
+   "special_stats": {
+    "missile_health": "90",
+    "missile_damage": "120"
+   },
+   "drops": {
+    "cactus": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1012.5~1518.75",
+   "body_damage": "45",
+   "special_stats": {
+    "missile_health": "270",
+    "missile_damage": "360"
+   },
+   "drops": {
+    "cactus": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "4050~6075",
+   "body_damage": "135",
+   "special_stats": {
+    "missile_health": "810",
+    "missile_damage": "1080"
+   },
+   "drops": {
+    "cactus": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "30375~45562.5",
+   "body_damage": "405",
+   "special_stats": {
+    "missile_health": "2430",
+    "missile_damage": "3240"
+   },
+   "drops": {
+    "cactus": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "182250~273375",
+   "body_damage": "1215",
+   "special_stats": {
+    "missile_health": "7290",
+    "missile_damage": "9720"
+   },
+   "drops": {
+    "cactus": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "5475000~8212500",
+   "body_damage": "3645",
+   "special_stats": {
+    "missile_health": "21870",
+    "missile_damage": "29160"
+   },
+   "drops": {
+    "cactus": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    }
+   }
+  },
+  "super": {
+   "health": "98400000~147600000",
+   "body_damage": "10935",
+   "special_stats": {
+    "missile_health": "65610",
+    "missile_damage": "87480"
+   },
+   "drops": {
+    "cactus": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    }
+   }
+  }
+ },
+ "Centipede": {
+  "name": "Centipede",
+  "description": "It's just there doing its thing.",
+  "super_spawn_message": "A Super Centipede has spawned somewhere!",
+  "common": {
+   "health": "25",
+   "body_damage": "10",
+   "drops": {
+    "peas": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    },
+    "leaf": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "93.8",
+   "body_damage": "30",
+   "drops": {
+    "peas": {
+     "common": "51%",
+     "unusual": "13.2%"
+    },
+    "leaf": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "337.5",
+   "body_damage": "90",
+   "drops": {
+    "peas": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    },
+    "leaf": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350",
+   "body_damage": "270",
+   "drops": {
+    "peas": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    },
+    "leaf": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125",
+   "body_damage": "810",
+   "drops": {
+    "peas": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    },
+    "leaf": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750",
+   "body_damage": "2430",
+   "drops": {
+    "peas": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    },
+    "leaf": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000",
+   "body_damage": "7290",
+   "drops": {
+    "peas": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    },
+    "leaf": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000",
+   "body_damage": "21870",
+   "drops": {
+    "peas": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    },
+    "leaf": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Desert Centipede": {
+  "name": "Desert Centipede",
+  "description": "Gotta go fast.",
+  "super_spawn_message": "A Super Centipede has spawned somewhere!",
+  "common": {
+   "health": "25",
+   "body_damage": "10",
+   "drops": {
+    "salt": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "powder": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "93.8",
+   "body_damage": "30",
+   "drops": {
+    "salt": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "powder": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "337.5",
+   "body_damage": "90",
+   "drops": {
+    "salt": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "powder": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350",
+   "body_damage": "270",
+   "drops": {
+    "salt": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "powder": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125",
+   "body_damage": "810",
+   "drops": {
+    "salt": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "powder": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750",
+   "body_damage": "2430",
+   "drops": {
+    "salt": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "powder": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000",
+   "body_damage": "7290",
+   "drops": {
+    "salt": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "powder": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000",
+   "body_damage": "21870",
+   "drops": {
+    "salt": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "powder": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Evil Centipede": {
+  "name": "Evil Centipede",
+  "description": "This one loves flowers.",
+  "super_spawn_message": "A Super Centipede has spawned somewhere!",
+  "common": {
+   "health": "25",
+   "body_damage": "10",
+   "drops": {
+    "grapes": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    },
+    "iris": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "93.8",
+   "body_damage": "30",
+   "drops": {
+    "grapes": {
+     "common": "51%",
+     "unusual": "13.2%"
+    },
+    "iris": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "337.5",
+   "body_damage": "90",
+   "drops": {
+    "grapes": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    },
+    "iris": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350",
+   "body_damage": "270",
+   "drops": {
+    "grapes": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    },
+    "iris": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125",
+   "body_damage": "810",
+   "drops": {
+    "grapes": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    },
+    "iris": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750",
+   "body_damage": "2430",
+   "drops": {
+    "grapes": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    },
+    "iris": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000",
+   "body_damage": "7290",
+   "drops": {
+    "grapes": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    },
+    "iris": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000",
+   "body_damage": "21870",
+   "drops": {
+    "grapes": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    },
+    "iris": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Crab": {
+  "name": "Crab",
+  "description": "Mr. Crab",
+  "super_spawn_message": "A Super Crab has spawned somewhere!",
+  "common": {
+   "health": "150",
+   "body_damage": "25",
+   "drops": {
+    "claw": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "sand": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "562.8",
+   "body_damage": "75",
+   "drops": {
+    "claw": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "sand": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "2025",
+   "body_damage": "225",
+   "drops": {
+    "claw": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "sand": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "8100",
+   "body_damage": "675",
+   "drops": {
+    "claw": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "sand": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "60750",
+   "body_damage": "2025",
+   "drops": {
+    "claw": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "sand": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "364500",
+   "body_damage": "6075",
+   "drops": {
+    "claw": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "sand": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "10950000",
+   "body_damage": "18225",
+   "drops": {
+    "claw": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "sand": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "196800000",
+   "body_damage": "54675",
+   "drops": {
+    "claw": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "sand": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Dandelion": {
+  "name": "Dandelion",
+  "description": "Puffy",
+  "super_spawn_message": "A Super Dandelion has spawned somewhere!",
+  "rare": {
+   "health": "337.5",
+   "body_damage": "135",
+   "special_stats": {
+    "missile_health": "450",
+    "missile_damage": "135",
+    "duration": "30"
+   },
+   "drops": {
+    "dandelion": {
+     "common": "0.6%",
+     "unusual": "87.2%",
+     "rare": "12.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "1350",
+   "body_damage": "405",
+   "special_stats": {
+    "missile_health": "1350",
+    "missile_damage": "405",
+    "duration": "30"
+   },
+   "drops": {
+    "dandelion": {
+     "unusual": "3.9%",
+     "rare": "81.5%",
+     "epic": "14.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "10125",
+   "body_damage": "1215",
+   "special_stats": {
+    "missile_health": "4050",
+    "missile_damage": "1215",
+    "duration": "30"
+   },
+   "drops": {
+    "dandelion": {
+     "rare": "4.3%",
+     "epic": "89.7%",
+     "legendary": "6%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "60750",
+   "body_damage": "3645",
+   "special_stats": {
+    "missile_health": "12150",
+    "missile_damage": "3645",
+    "duration": "30"
+   },
+   "drops": {
+    "dandelion": {
+     "epic": "4.5%",
+     "legendary": "94.5%",
+     "mythic": "1%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1825000",
+   "body_damage": "10935",
+   "special_stats": {
+    "missile_health": "36450",
+    "missile_damage": "10935",
+    "duration": "30"
+   },
+   "drops": {
+    "dandelion": {
+     "legendary": "82.6%",
+     "mythic": "16.8%",
+     "ultra": "0.6%"
+    }
+   }
+  },
+  "super": {
+   "health": "32800000",
+   "body_damage": "32805",
+   "special_stats": {
+    "missile_health": "109350",
+    "missile_damage": "32805",
+    "duration": "30"
+   },
+   "drops": {
+    "dandelion": {
+     "mythic": "73.4%",
+     "ultra": "26.6%"
+    }
+   }
+  }
+ },
+ "Digger": {
+  "name": "Digger",
+  "description": "Wrong game, bud.",
+  "super_spawn_message": "A Super Digger has spawned somewhere!",
+  "rare": {
+   "health": "5062.5",
+   "body_damage": "270",
+   "drops": {
+    "cutter": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "uranium": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "20250",
+   "body_damage": "810",
+   "drops": {
+    "cutter": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "uranium": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "151875",
+   "body_damage": "2430",
+   "drops": {
+    "cutter": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "uranium": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "911250",
+   "body_damage": "7290",
+   "drops": {
+    "cutter": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "uranium": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "27375000",
+   "body_damage": "21870",
+   "drops": {
+    "cutter": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "uranium": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    }
+   }
+  },
+  "super": {
+   "health": "492000000",
+   "body_damage": "65610",
+   "drops": {
+    "cutter": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "uranium": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    }
+   }
+  }
+ },
+ "Firefly": {
+  "name": "Firefly",
+  "description": "Oooooh shiny.",
+  "super_spawn_message": "A Super Firefly has spawned somewhere!",
+  "common": {
+   "health": "15",
+   "body_damage": "10",
+   "special_stats": {
+    "lightning": "13",
+    "bounces": "5"
+   },
+   "drops": {
+    "wing": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "bulb": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "battery": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "56.28",
+   "body_damage": "30",
+   "special_stats": {
+    "lightning": "39",
+    "bounces": "6"
+   },
+   "drops": {
+    "wing": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "bulb": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "battery": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "202.5",
+   "body_damage": "90",
+   "special_stats": {
+    "lightning": "117",
+    "bounces": "7"
+   },
+   "drops": {
+    "wing": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "bulb": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "battery": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "810",
+   "body_damage": "270",
+   "special_stats": {
+    "lightning": "351",
+    "bounces": "8"
+   },
+   "drops": {
+    "wing": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "bulb": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "battery": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "6075",
+   "body_damage": "810",
+   "special_stats": {
+    "lightning": "1053",
+    "bounces": "9"
+   },
+   "drops": {
+    "wing": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "bulb": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "battery": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "36450",
+   "body_damage": "2430",
+   "special_stats": {
+    "lightning": "3159",
+    "bounces": "10"
+   },
+   "drops": {
+    "wing": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "bulb": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "battery": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1095000",
+   "body_damage": "7290",
+   "special_stats": {
+    "lightning": "9477",
+    "bounces": "11"
+   },
+   "drops": {
+    "wing": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "bulb": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "battery": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "19680000",
+   "body_damage": "21870",
+   "special_stats": {
+    "lightning": "28431",
+    "bounces": "12"
+   },
+   "drops": {
+    "wing": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "bulb": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "battery": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Fire Ant Burrow": {
+  "name": "Fire Ant Burrow",
+  "description": "What could be in here?",
+  "super_spawn_message": "A Super Fire Ant Burrow has spawned somewhere!",
+  "common": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "common": "66.2%",
+     "unusual": "30.6%"
+    },
+    "disc": {
+     "common": "63.8%",
+     "unusual": "19.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "common": "23.2%",
+     "unusual": "76.8%"
+    },
+    "disc": {
+     "common": "42%",
+     "unusual": "57.9%"
+    }
+   }
+  },
+  "rare": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "unusual": "80.5%",
+     "rare": "19.5%"
+    },
+    "disc": {
+     "common": "0.6%",
+     "unusual": "87.2%",
+     "rare": "12.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "rare": "76.4%",
+     "epic": "23.1%"
+    },
+    "disc": {
+     "unusual": "3.9%",
+     "rare": "81.5%",
+     "epic": "14.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "rare": "0.5%",
+     "epic": "89.7%",
+     "legendary": "9.8%"
+    },
+    "disc": {
+     "rare": "4.3%",
+     "epic": "89.7%",
+     "legendary": "6%"
+    }
+   }
+  },
+  "mythic": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "epic": "0.6%",
+     "legendary": "97.8%",
+     "mythic": "1.6%"
+    },
+    "disc": {
+     "epic": "4.5%",
+     "legendary": "94.5%",
+     "mythic": "1%"
+    }
+   }
+  },
+  "ultra": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "legendary": "72.6%",
+     "mythic": "26.3%",
+     "ultra": "1%"
+    },
+    "disc": {
+     "legendary": "82.6%",
+     "mythic": "16.8%",
+     "ultra": "0.6%"
+    }
+   }
+  },
+  "super": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "magnet": {
+     "mythic": "59.7%",
+     "ultra": "40.3%"
+    },
+    "disc": {
+     "mythic": "73.4%",
+     "ultra": "26.6%"
+    }
+   }
+  }
+ },
+ "Fire Ant Egg": {
+  "name": "Fire Ant Egg",
+  "description": "This ant is not yet on fire.",
+  "super_spawn_message": "A Super Fire Ant Egg has spawned somewhere!",
+  "unusual": {
+   "health": "562.8",
+   "body_damage": "9",
+   "drops": {
+    "ant egg": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "2025",
+   "body_damage": "27",
+   "drops": {
+    "ant egg": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "8100",
+   "body_damage": "81",
+   "drops": {
+    "ant egg": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "60750",
+   "body_damage": "243",
+   "drops": {
+    "ant egg": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "364500",
+   "body_damage": "729",
+   "drops": {
+    "ant egg": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "10950000",
+   "body_damage": "2187",
+   "drops": {
+    "ant egg": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "196800000",
+   "body_damage": "6561",
+   "drops": {
+    "ant egg": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Fly": {
+  "name": "Fly",
+  "description": "Hzzzzzzzzzzzz",
+  "super_spawn_message": "A buzzing noise echoes through the sewer tunnels...",
+  "common": {
+   "health": "15",
+   "body_damage": "10",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "poo": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "talisman": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "56.28",
+   "body_damage": "30",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "poo": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "talisman": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    }
+   }
+  },
+  "rare": {
+   "health": "202.5",
+   "body_damage": "90",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "poo": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "talisman": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "810",
+   "body_damage": "270",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "poo": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "talisman": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "6075",
+   "body_damage": "810",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "poo": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "talisman": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "36450",
+   "body_damage": "2430",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "poo": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "talisman": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1095000",
+   "body_damage": "7290",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "poo": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "talisman": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    }
+   }
+  },
+  "super": {
+   "health": "19680000",
+   "body_damage": "21870",
+   "special_stats": {
+    "evasion": "50%"
+   },
+   "drops": {
+    "wing": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "poo": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "talisman": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    }
+   }
+  }
+ },
+ "Hornet": {
+  "name": "Hornet",
+  "description": "These aren't quite as nice as the little bees.",
+  "super_spawn_message": "A big yellow spot shows up in the distance...",
+  "common": {
+   "health": "62.5",
+   "body_damage": "50",
+   "special_stats": {
+    "missile_health": "100",
+    "missile_damage": "10"
+   },
+   "drops": {
+    "missile": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "orange": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "antennae": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "234.5",
+   "body_damage": "150",
+   "special_stats": {
+    "missile_health": "300",
+    "missile_damage": "30"
+   },
+   "drops": {
+    "missile": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "orange": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "antennae": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    }
+   }
+  },
+  "rare": {
+   "health": "843.75",
+   "body_damage": "450",
+   "special_stats": {
+    "missile_health": "900",
+    "missile_damage": "90"
+   },
+   "drops": {
+    "missile": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "orange": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "antennae": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "3375",
+   "body_damage": "1350",
+   "special_stats": {
+    "missile_health": "2700",
+    "missile_damage": "270"
+   },
+   "drops": {
+    "missile": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "orange": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "antennae": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "25312.5",
+   "body_damage": "4050",
+   "special_stats": {
+    "missile_health": "8100",
+    "missile_damage": "810"
+   },
+   "drops": {
+    "missile": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "orange": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "antennae": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "151875",
+   "body_damage": "12150",
+   "special_stats": {
+    "missile_health": "24300",
+    "missile_damage": "2430"
+   },
+   "drops": {
+    "missile": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "orange": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "antennae": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "4562500",
+   "body_damage": "36450",
+   "special_stats": {
+    "missile_health": "72900",
+    "missile_damage": "7290"
+   },
+   "drops": {
+    "missile": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "orange": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "antennae": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    }
+   }
+  },
+  "super": {
+   "health": "82000000",
+   "body_damage": "109350",
+   "special_stats": {
+    "missile_health": "218700",
+    "missile_damage": "21870"
+   },
+   "drops": {
+    "missile": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "orange": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "antennae": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    }
+   }
+  }
+ },
+ "Jellyfish": {
+  "name": "Jellyfish",
+  "description": "Makes the most delicious jam.",
+  "super_spawn_message": "You hear lightning strikes coming from a far distance...",
+  "common": {
+   "health": "125",
+   "body_damage": "25",
+   "special_stats": {
+    "lightning": "7",
+    "bounces": "2"
+   },
+   "drops": {
+    "lightning": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "jelly": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "469",
+   "body_damage": "75",
+   "special_stats": {
+    "lightning": "21",
+    "bounces": "3"
+   },
+   "drops": {
+    "lightning": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "jelly": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1687.5",
+   "body_damage": "225",
+   "special_stats": {
+    "lightning": "63",
+    "bounces": "4"
+   },
+   "drops": {
+    "lightning": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "jelly": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "6750",
+   "body_damage": "675",
+   "special_stats": {
+    "lightning": "189",
+    "bounces": "5"
+   },
+   "drops": {
+    "lightning": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "jelly": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "50625",
+   "body_damage": "2025",
+   "special_stats": {
+    "lightning": "567",
+    "bounces": "6"
+   },
+   "drops": {
+    "lightning": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "jelly": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "303750",
+   "body_damage": "6075",
+   "special_stats": {
+    "lightning": "1701",
+    "bounces": "7"
+   },
+   "drops": {
+    "lightning": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "jelly": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "9125000",
+   "body_damage": "18225",
+   "special_stats": {
+    "lightning": "5103",
+    "bounces": "8"
+   },
+   "drops": {
+    "lightning": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "jelly": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "164000000",
+   "body_damage": "54675",
+   "special_stats": {
+    "lightning": "15309",
+    "bounces": "9"
+   },
+   "drops": {
+    "lightning": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "jelly": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Ladybug": {
+  "name": "Ladybug",
+  "description": "Cute and harmless.",
+  "super_spawn_message": "A Super Ladybug has spawned somewhere!",
+  "common": {
+   "health": "62.5",
+   "body_damage": "10",
+   "drops": {
+    "rose": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "light": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "234.5",
+   "body_damage": "30",
+   "drops": {
+    "rose": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "light": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "843.75",
+   "body_damage": "90",
+   "drops": {
+    "rose": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "light": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "3375",
+   "body_damage": "270",
+   "drops": {
+    "rose": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "light": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "25312.5",
+   "body_damage": "810",
+   "drops": {
+    "rose": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "light": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "151875",
+   "body_damage": "2430",
+   "drops": {
+    "rose": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "light": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "4562500",
+   "body_damage": "7290",
+   "drops": {
+    "rose": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "light": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "82000000",
+   "body_damage": "21870",
+   "drops": {
+    "rose": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "light": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Dark Ladybug": {
+  "name": "Dark Ladybug",
+  "description": "Cute and harmless... if left unprovoked.",
+  "super_spawn_message": "A Super Ladybug has spawned somewhere!",
+  "common": {
+   "health": "87.5",
+   "body_damage": "10",
+   "drops": {
+    "dahlia": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "yin yang": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "328.3",
+   "body_damage": "30",
+   "drops": {
+    "dahlia": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "yin yang": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1181.25",
+   "body_damage": "90",
+   "drops": {
+    "dahlia": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "yin yang": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    }
+   }
+  },
+  "epic": {
+   "health": "4725",
+   "body_damage": "270",
+   "drops": {
+    "dahlia": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "yin yang": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "35437.5",
+   "body_damage": "810",
+   "drops": {
+    "dahlia": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "yin yang": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "212625",
+   "body_damage": "2430",
+   "drops": {
+    "dahlia": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "yin yang": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "6387500",
+   "body_damage": "7290",
+   "drops": {
+    "dahlia": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "yin yang": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    }
+   }
+  },
+  "super": {
+   "health": "114800000",
+   "body_damage": "21870",
+   "drops": {
+    "dahlia": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "yin yang": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    }
+   }
+  }
+ },
+ "Shiny Ladybug": {
+  "name": "Shiny Ladybug",
+  "description": "Shiny, cute and mostly harmless.",
+  "super_spawn_message": "A Super Ladybug has spawned somewhere!",
+  "common": {
+   "health": "87.5",
+   "body_damage": "10",
+   "drops": {
+    "rose": {
+     "common": "46.8%",
+     "unusual": "53.2%"
+    },
+    "dahlia": {
+     "common": "46.8%",
+     "unusual": "53.2%"
+    },
+    "yggdrasil": {
+     "common": "66.2%",
+     "unusual": "30.6%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "328.3",
+   "body_damage": "30",
+   "drops": {
+    "rose": {
+     "common": "4.8%",
+     "unusual": "95.2%"
+    },
+    "dahlia": {
+     "common": "4.8%",
+     "unusual": "95.2%"
+    },
+    "yggdrasil": {
+     "common": "23.2%",
+     "unusual": "76.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1181.25",
+   "body_damage": "90",
+   "drops": {
+    "rose": {
+     "unusual": "64.8%",
+     "rare": "35.2%"
+    },
+    "dahlia": {
+     "unusual": "64.8%",
+     "rare": "35.2%"
+    },
+    "yggdrasil": {
+     "unusual": "80.5%",
+     "rare": "19.5%"
+    }
+   }
+  },
+  "epic": {
+   "health": "4725",
+   "body_damage": "270",
+   "drops": {
+    "rose": {
+     "rare": "59.1%",
+     "epic": "40.9%"
+    },
+    "dahlia": {
+     "rare": "59.1%",
+     "epic": "40.9%"
+    },
+    "yggdrasil": {
+     "rare": "76.4%",
+     "epic": "23.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "35437.5",
+   "body_damage": "810",
+   "drops": {
+    "rose": {
+     "epic": "81.3%",
+     "legendary": "18.7%"
+    },
+    "dahlia": {
+     "epic": "81.3%",
+     "legendary": "18.7%"
+    },
+    "yggdrasil": {
+     "rare": "0.5%",
+     "epic": "89.7%",
+     "legendary": "9.8%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "212625",
+   "body_damage": "2430",
+   "drops": {
+    "rose": {
+     "legendary": "96.9%",
+     "mythic": "3.1%"
+    },
+    "dahlia": {
+     "legendary": "96.9%",
+     "mythic": "3.1%"
+    },
+    "yggdrasil": {
+     "epic": "0.6%",
+     "legendary": "97.8%",
+     "mythic": "1.6%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "6387500",
+   "body_damage": "7290",
+   "drops": {
+    "rose": {
+     "legendary": "52.8%",
+     "mythic": "45.2%",
+     "ultra": "2%"
+    },
+    "dahlia": {
+     "legendary": "52.8%",
+     "mythic": "45.2%",
+     "ultra": "2%"
+    },
+    "yggdrasil": {
+     "legendary": "72.6%",
+     "mythic": "26.3%",
+     "ultra": "1%"
+    }
+   }
+  },
+  "super": {
+   "health": "114800000",
+   "body_damage": "21870",
+   "drops": {
+    "rose": {
+     "mythic": "35.7%",
+     "ultra": "64.3%"
+    },
+    "dahlia": {
+     "mythic": "35.7%",
+     "ultra": "64.3%"
+    },
+    "yggdrasil": {
+     "mythic": "59.7%",
+     "ultra": "40.3%"
+    }
+   }
+  }
+ },
+ "Leafbug": {
+  "name": "Leafbug",
+  "description": "It's not a leaf, but it is a bug.",
+  "super_spawn_message": "A Super Leafbug has spawned somewhere!",
+  "common": {
+   "health": "50",
+   "body_damage": "30",
+   "special_stats": {
+    "armor": "11"
+   },
+   "drops": {
+    "leaf": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "root": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "187.6",
+   "body_damage": "90",
+   "special_stats": {
+    "armor": "33"
+   },
+   "drops": {
+    "leaf": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "root": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "675",
+   "body_damage": "270",
+   "special_stats": {
+    "armor": "98"
+   },
+   "drops": {
+    "leaf": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "root": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "2700",
+   "body_damage": "810",
+   "special_stats": {
+    "armor": "294"
+   },
+   "drops": {
+    "leaf": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "root": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "20250",
+   "body_damage": "2430",
+   "special_stats": {
+    "armor": "883"
+   },
+   "drops": {
+    "leaf": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "root": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "121500",
+   "body_damage": "7290",
+   "special_stats": {
+    "armor": "2649"
+   },
+   "drops": {
+    "leaf": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "root": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "3650000",
+   "body_damage": "21870",
+   "special_stats": {
+    "armor": "7946"
+   },
+   "drops": {
+    "leaf": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "root": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "65600000",
+   "body_damage": "65610",
+   "special_stats": {
+    "armor": "22526"
+   },
+   "drops": {
+    "leaf": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "root": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Leech": {
+  "name": "Leech",
+  "description": "Slurp slurp.",
+  "super_spawn_message": "A Super Leech has spawned somewhere!",
+  "rare": {
+   "health": "2362.5",
+   "body_damage": "90",
+   "special_stats": {
+    "lifesteal": "63"
+   },
+   "drops": {
+    "fangs": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "faster": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "9450",
+   "body_damage": "270",
+   "special_stats": {
+    "lifesteal": "189"
+   },
+   "drops": {
+    "fangs": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "faster": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "70875",
+   "body_damage": "810",
+   "special_stats": {
+    "lifesteal": "567"
+   },
+   "drops": {
+    "fangs": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "faster": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "425250",
+   "body_damage": "2430",
+   "special_stats": {
+    "lifesteal": "1701"
+   },
+   "drops": {
+    "fangs": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "faster": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "12775000",
+   "body_damage": "7290",
+   "special_stats": {
+    "lifesteal": "5103"
+   },
+   "drops": {
+    "fangs": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "faster": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "229600000",
+   "body_damage": "21870",
+   "special_stats": {
+    "lifesteal": "15309"
+   },
+   "drops": {
+    "fangs": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "faster": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Mantis": {
+  "name": "Mantis",
+  "description": "You better pray you don't become dinner.",
+  "super_spawn_message": "A Super Mantis has spawned somewhere!",
+  "common": {
+   "health": "100",
+   "body_damage": "20",
+   "special_stats": {
+    "missile_health": "50",
+    "missile_damage": "2",
+    "armor_debuff": "-4",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "bur": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "375.2",
+   "body_damage": "60",
+   "special_stats": {
+    "missile_health": "150",
+    "missile_damage": "6",
+    "armor_debuff": "-12",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "bur": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1350",
+   "body_damage": "180",
+   "special_stats": {
+    "missile_health": "450",
+    "missile_damage": "18",
+    "armor_debuff": "-36",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "bur": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "5400",
+   "body_damage": "540",
+   "special_stats": {
+    "missile_health": "1350",
+    "missile_damage": "54",
+    "armor_debuff": "-108",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "bur": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "40500",
+   "body_damage": "1620",
+   "special_stats": {
+    "missile_health": "4050",
+    "missile_damage": "162",
+    "armor_debuff": "-324",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "bur": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "243000",
+   "body_damage": "4860",
+   "special_stats": {
+    "missile_health": "12150",
+    "missile_damage": "486",
+    "armor_debuff": "-972",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "bur": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "7300000",
+   "body_damage": "14580",
+   "special_stats": {
+    "missile_health": "36450",
+    "missile_damage": "1458",
+    "armor_debuff": "-2916",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "bur": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "131200000",
+   "body_damage": "43740",
+   "special_stats": {
+    "missile_health": "109350",
+    "missile_damage": "4374",
+    "armor_debuff": "-8748",
+    "duration": "30"
+   },
+   "drops": {
+    "peas": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "bur": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Moth": {
+  "name": "Moth",
+  "description": "Easily scared, be nice.",
+  "super_spawn_message": "There's a bright light in the horizon...",
+  "common": {
+   "health": "17.5",
+   "body_damage": "10",
+   "drops": {
+    "wing": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "bulb": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "65.66",
+   "body_damage": "30",
+   "drops": {
+    "wing": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "bulb": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "236.25",
+   "body_damage": "90",
+   "drops": {
+    "wing": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "bulb": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "945",
+   "body_damage": "270",
+   "drops": {
+    "wing": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "bulb": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "7087.5",
+   "body_damage": "810",
+   "drops": {
+    "wing": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "bulb": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "42525",
+   "body_damage": "2430",
+   "drops": {
+    "wing": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "bulb": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "1277500",
+   "body_damage": "7290",
+   "drops": {
+    "wing": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "bulb": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "22960000",
+   "body_damage": "21870",
+   "drops": {
+    "wing": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "bulb": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Queen Ant": {
+  "name": "Queen Ant",
+  "description": "You must have done something really bad if she's chasing you.",
+  "super_spawn_message": "A Super Queen Ant has spawned somewhere!",
+  "common": {
+   "health": "250",
+   "body_damage": "10",
+   "drops": {
+    "wing": {
+     "common": "63.8%",
+     "unusual": "19.4%"
+    },
+    "basil": {
+     "common": "63.8%",
+     "unusual": "19.4%"
+    },
+    "ant egg": {
+     "common": "66.2%",
+     "unusual": "30.6%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "938",
+   "body_damage": "30",
+   "drops": {
+    "wing": {
+     "common": "42%",
+     "unusual": "57.9%"
+    },
+    "basil": {
+     "common": "42%",
+     "unusual": "57.9%"
+    },
+    "ant egg": {
+     "common": "23.2%",
+     "unusual": "76.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "3375",
+   "body_damage": "90",
+   "drops": {
+    "wing": {
+     "common": "0.6%",
+     "unusual": "87.2%",
+     "rare": "12.2%"
+    },
+    "basil": {
+     "common": "0.6%",
+     "unusual": "87.2%",
+     "rare": "12.2%"
+    },
+    "ant egg": {
+     "unusual": "80.5%",
+     "rare": "19.5%"
+    }
+   }
+  },
+  "epic": {
+   "health": "13500",
+   "body_damage": "270",
+   "drops": {
+    "wing": {
+     "unusual": "3.9%",
+     "rare": "81.5%",
+     "epic": "14.6%"
+    },
+    "basil": {
+     "unusual": "3.9%",
+     "rare": "81.5%",
+     "epic": "14.6%"
+    },
+    "ant egg": {
+     "rare": "76.4%",
+     "epic": "23.1%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "101250",
+   "body_damage": "810",
+   "drops": {
+    "wing": {
+     "rare": "4.3%",
+     "epic": "89.7%",
+     "legendary": "6%"
+    },
+    "basil": {
+     "rare": "4.3%",
+     "epic": "89.7%",
+     "legendary": "6%"
+    },
+    "ant egg": {
+     "rare": "0.5%",
+     "epic": "89.7%",
+     "legendary": "9.8%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "607500",
+   "body_damage": "2430",
+   "drops": {
+    "wing": {
+     "epic": "4.5%",
+     "legendary": "94.5%",
+     "mythic": "1%"
+    },
+    "basil": {
+     "epic": "4.5%",
+     "legendary": "94.5%",
+     "mythic": "1%"
+    },
+    "ant egg": {
+     "epic": "0.6%",
+     "legendary": "97.8%",
+     "mythic": "1.6%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "18250000",
+   "body_damage": "7290",
+   "drops": {
+    "wing": {
+     "legendary": "82.6%",
+     "mythic": "16.8%",
+     "ultra": "0.6%"
+    },
+    "basil": {
+     "legendary": "82.6%",
+     "mythic": "16.8%",
+     "ultra": "0.6%"
+    },
+    "ant egg": {
+     "legendary": "72.6%",
+     "mythic": "26.3%",
+     "ultra": "1%"
+    }
+   }
+  },
+  "super": {
+   "health": "328000000",
+   "body_damage": "21870",
+   "drops": {
+    "wing": {
+     "mythic": "73.4%",
+     "ultra": "26.6%"
+    },
+    "basil": {
+     "mythic": "73.4%",
+     "ultra": "26.6%"
+    },
+    "ant egg": {
+     "mythic": "59.7%",
+     "ultra": "40.3%"
+    }
+   }
+  }
+ },
+ "Queen Fire Ant": {
+  "name": "Queen Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee.",
+  "super_spawn_message": "A Super Queen Fire Ant has spawned somewhere!",
+  "ultra": {
+   "health": "18250000",
+   "body_damage": "14580",
+   "drops": {
+    "wing": {
+     "legendary": "82.6%",
+     "mythic": "16.8%",
+     "ultra": "0.6%"
+    },
+    "basil": {
+     "legendary": "82.6%",
+     "mythic": "16.8%",
+     "ultra": "0.6%"
+    },
+    "ant egg": {
+     "legendary": "72.6%",
+     "mythic": "26.3%",
+     "ultra": "1%"
+    }
+   }
+  },
+  "super": {
+   "health": "328000000",
+   "body_damage": "43740",
+   "drops": {
+    "wing": {
+     "mythic": "73.4%",
+     "ultra": "26.6%"
+    },
+    "basil": {
+     "mythic": "73.4%",
+     "ultra": "26.6%"
+    },
+    "ant egg": {
+     "mythic": "59.7%",
+     "ultra": "40.3%"
+    }
+   }
+  }
+ },
+ "Roach": {
+  "name": "Roach",
+  "description": "Gotta go FAST... until they get tired.",
+  "super_spawn_message": "A Super Roach has spawned somewhere!",
+  "common": {
+   "health": "62.5",
+   "body_damage": "20",
+   "drops": {
+    "antennae": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "lotus": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "234.5",
+   "body_damage": "60",
+   "drops": {
+    "antennae": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "lotus": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "843.75",
+   "body_damage": "180",
+   "drops": {
+    "antennae": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "lotus": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "3375",
+   "body_damage": "540",
+   "drops": {
+    "antennae": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "lotus": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "25312.5",
+   "body_damage": "1620",
+   "drops": {
+    "antennae": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "lotus": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "151875",
+   "body_damage": "4860",
+   "drops": {
+    "antennae": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "lotus": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "4562500",
+   "body_damage": "14580",
+   "drops": {
+    "antennae": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "lotus": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "82000000",
+   "body_damage": "43740",
+   "drops": {
+    "antennae": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "lotus": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Rock": {
+  "name": "Rock",
+  "description": "A rock. It doesn't do much.",
+  "super_spawn_message": "Something mountain-like appears in the distance...",
+  "common": {
+   "health": "50~100",
+   "body_damage": "10",
+   "drops": {
+    "rock": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "heavy": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "187.6~375.2",
+   "body_damage": "30",
+   "drops": {
+    "rock": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "heavy": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "675~1350",
+   "body_damage": "90",
+   "drops": {
+    "rock": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "heavy": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "2700~5400",
+   "body_damage": "270",
+   "drops": {
+    "rock": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "heavy": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "20250~40500",
+   "body_damage": "810",
+   "drops": {
+    "rock": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "heavy": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "121500~243000",
+   "body_damage": "2430",
+   "drops": {
+    "rock": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "heavy": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "3650000~7300000",
+   "body_damage": "7290",
+   "drops": {
+    "rock": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "heavy": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "65600000~131200000",
+   "body_damage": "21870",
+   "drops": {
+    "rock": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "heavy": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Sandstorm": {
+  "name": "Sandstorm",
+  "description": "Darude (1999)",
+  "super_spawn_message": "A Super Sandstorm has spawned somewhere!",
+  "common": {
+   "health": "125",
+   "body_damage": "40",
+   "drops": {
+    "sand": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "stick": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "469",
+   "body_damage": "120",
+   "drops": {
+    "sand": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "stick": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1687.5",
+   "body_damage": "360",
+   "drops": {
+    "sand": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "stick": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "6750",
+   "body_damage": "1080",
+   "drops": {
+    "sand": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "stick": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "50625",
+   "body_damage": "3240",
+   "drops": {
+    "sand": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "stick": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "303750",
+   "body_damage": "9720",
+   "drops": {
+    "sand": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "stick": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "9125000",
+   "body_damage": "29160",
+   "drops": {
+    "sand": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "stick": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "164000000",
+   "body_damage": "87480",
+   "drops": {
+    "sand": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "stick": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Scorpion": {
+  "name": "Scorpion",
+  "description": "IT STINGS",
+  "super_spawn_message": "A Super Scorpion has spawned somewhere!",
+  "common": {
+   "health": "100",
+   "body_damage": "15",
+   "special_stats": {
+    "missile_health": "100",
+    "missile_damage": "5",
+    "missile_poison": "40"
+   },
+   "drops": {
+    "pincer": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "iris": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "375.2",
+   "body_damage": "45",
+   "special_stats": {
+    "missile_health": "300",
+    "missile_damage": "15",
+    "missile_poison": "120"
+   },
+   "drops": {
+    "pincer": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "iris": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1350",
+   "body_damage": "135",
+   "special_stats": {
+    "missile_health": "900",
+    "missile_damage": "45",
+    "missile_poison": "360"
+   },
+   "drops": {
+    "pincer": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "iris": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "5400",
+   "body_damage": "405",
+   "special_stats": {
+    "missile_health": "2700",
+    "missile_damage": "135",
+    "missile_poison": "1080"
+   },
+   "drops": {
+    "pincer": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "iris": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "40500",
+   "body_damage": "1215",
+   "special_stats": {
+    "missile_health": "8100",
+    "missile_damage": "405",
+    "missile_poison": "3240"
+   },
+   "drops": {
+    "pincer": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "iris": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "243000",
+   "body_damage": "3645",
+   "special_stats": {
+    "missile_health": "24300",
+    "missile_damage": "1215",
+    "missile_poison": "9720"
+   },
+   "drops": {
+    "pincer": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "iris": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "7300000",
+   "body_damage": "10935",
+   "special_stats": {
+    "missile_health": "72900",
+    "missile_damage": "3645",
+    "missile_poison": "29160"
+   },
+   "drops": {
+    "pincer": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "iris": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "131200000",
+   "body_damage": "32805",
+   "special_stats": {
+    "missile_health": "218700",
+    "missile_damage": "10935",
+    "missile_poison": "87480"
+   },
+   "drops": {
+    "pincer": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "iris": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Shell": {
+  "name": "Shell",
+  "description": "Not an advertisement.",
+  "super_spawn_message": "A Super Shell has spawned somewhere!",
+  "common": {
+   "health": "225",
+   "body_damage": "10",
+   "special_stats": {
+    "missile_health": null,
+    "missile_damage": null
+   },
+   "drops": {
+    "pearl": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "shell": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "magnet": {
+     "common": "4.2%",
+     "unusual": "0.7%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "844.2",
+   "body_damage": "30",
+   "special_stats": {
+    "missile_health": null,
+    "missile_damage": null
+   },
+   "drops": {
+    "pearl": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "shell": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "magnet": {
+     "common": "15.4%",
+     "unusual": "2.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "3037.5",
+   "body_damage": "90",
+   "special_stats": {
+    "missile_health": null,
+    "missile_damage": null
+   },
+   "drops": {
+    "pearl": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "shell": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "magnet": {
+     "common": "54.5%",
+     "unusual": "15.1%",
+     "rare": "0.4%"
+    }
+   }
+  },
+  "epic": {
+   "health": "12150",
+   "body_damage": "270",
+   "special_stats": {
+    "missile_health": null,
+    "missile_damage": null
+   },
+   "drops": {
+    "pearl": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "shell": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "magnet": {
+     "common": "1.4%",
+     "unusual": "88.3%",
+     "rare": "9.7%",
+     "epic": "0.5%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "91125",
+   "body_damage": "810",
+   "special_stats": {
+    "missile_health": null,
+    "missile_damage": null
+   },
+   "drops": {
+    "pearl": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "shell": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "magnet": {
+     "unusual": "11.5%",
+     "rare": "78.6%",
+     "epic": "9.8%",
+     "legendary": "0.2%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "546750",
+   "body_damage": "2430",
+   "special_stats": {
+    "missile_health": null,
+    "missile_damage": null
+   },
+   "drops": {
+    "pearl": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "shell": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "magnet": {
+     "rare": "0.5%",
+     "epic": "89.7%",
+     "legendary": "9.8%",
+     "mythic": "0.03%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "16425000",
+   "body_damage": "7290",
+   "special_stats": {
+    "missile_health": "729000",
+    "missile_damage": "7290"
+   },
+   "drops": {
+    "pearl": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "shell": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "magnet": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%",
+     "ultra": "0.02%"
+    }
+   }
+  },
+  "super": {
+   "health": "295200000",
+   "body_damage": "21870",
+   "special_stats": {
+    "missile_health": "2187000",
+    "missile_damage": "21870"
+   },
+   "drops": {
+    "pearl": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "shell": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "magnet": {
+     "legendary": "77.3%",
+     "mythic": "21.9%",
+     "ultra": "0.8%"
+    }
+   }
+  }
+ },
+ "Soldier Ant": {
+  "name": "Soldier Ant",
+  "description": "It's got wings and it's ready to use them.",
+  "super_spawn_message": "A Super Soldier Ant has spawned somewhere!",
+  "common": {
+   "health": "100",
+   "body_damage": "10",
+   "drops": {
+    "wing": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    },
+    "clover": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "375.2",
+   "body_damage": "30",
+   "drops": {
+    "wing": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    },
+    "clover": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1350",
+   "body_damage": "90",
+   "drops": {
+    "wing": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    },
+    "clover": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "5400",
+   "body_damage": "270",
+   "drops": {
+    "wing": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    },
+    "clover": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "40500",
+   "body_damage": "810",
+   "drops": {
+    "wing": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    },
+    "clover": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "243000",
+   "body_damage": "2430",
+   "drops": {
+    "wing": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    },
+    "clover": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "7300000",
+   "body_damage": "7290",
+   "drops": {
+    "wing": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    },
+    "clover": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "131200000",
+   "body_damage": "21870",
+   "drops": {
+    "wing": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    },
+    "clover": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Soldier Fire Ant": {
+  "name": "Soldier Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee.",
+  "super_spawn_message": "A Super Soldier Fire Ant has spawned somewhere!",
+  "common": {
+   "health": "100",
+   "body_damage": "20",
+   "drops": {
+    "wing": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    },
+    "yucca": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "375.2",
+   "body_damage": "60",
+   "drops": {
+    "wing": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    },
+    "yucca": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1350",
+   "body_damage": "180",
+   "drops": {
+    "wing": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    },
+    "yucca": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "5400",
+   "body_damage": "540",
+   "drops": {
+    "wing": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    },
+    "yucca": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "40500",
+   "body_damage": "1620",
+   "drops": {
+    "wing": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    },
+    "yucca": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "243000",
+   "body_damage": "4860",
+   "drops": {
+    "wing": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    },
+    "yucca": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "7300000",
+   "body_damage": "14580",
+   "drops": {
+    "wing": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    },
+    "yucca": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "131200000",
+   "body_damage": "43740",
+   "drops": {
+    "wing": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    },
+    "yucca": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Soldier Termite": {
+  "name": "Soldier Termite",
+  "description": "It's got wings and it's ready to use them. These creatures appear to be connected somehow.",
+  "super_spawn_message": "A Super Soldier Termite has spawned somewhere!",
+  "common": {
+   "health": "250",
+   "body_damage": "10",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    },
+    "bone": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "938",
+   "body_damage": "30",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "51%",
+     "unusual": "13.2%"
+    },
+    "bone": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "3375",
+   "body_damage": "90",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    },
+    "bone": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "13500",
+   "body_damage": "270",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    },
+    "bone": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "101250",
+   "body_damage": "810",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    },
+    "bone": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "607500",
+   "body_damage": "2430",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    },
+    "bone": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "18250000",
+   "body_damage": "7290",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    },
+    "bone": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    }
+   }
+  },
+  "super": {
+   "health": "328000000",
+   "body_damage": "21870",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    },
+    "bone": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    }
+   }
+  }
+ },
+ "Spider": {
+  "name": "Spider",
+  "description": "Spooky.",
+  "super_spawn_message": "A Super Spider has spawned somewhere!",
+  "common": {
+   "health": "62.5",
+   "body_damage": "15",
+   "special_stats": {
+    "poison": "40"
+   },
+   "drops": {
+    "faster": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "web": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "234.5",
+   "body_damage": "45",
+   "special_stats": {
+    "poison": "120"
+   },
+   "drops": {
+    "faster": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "web": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "843.75",
+   "body_damage": "135",
+   "special_stats": {
+    "poison": "360"
+   },
+   "drops": {
+    "faster": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "web": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "3375",
+   "body_damage": "405",
+   "special_stats": {
+    "poison": "1080"
+   },
+   "drops": {
+    "faster": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "web": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "25312.5",
+   "body_damage": "1215",
+   "special_stats": {
+    "poison": "3240"
+   },
+   "drops": {
+    "faster": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "web": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "151875",
+   "body_damage": "3645",
+   "special_stats": {
+    "poison": "9720"
+   },
+   "drops": {
+    "faster": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "web": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "third eye": {
+     "mythic": "0.03%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "4562500",
+   "body_damage": "10935",
+   "special_stats": {
+    "poison": "29160"
+   },
+   "drops": {
+    "faster": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "web": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "third eye": {
+     "mythic": "0.6%",
+     "ultra": "0.02%"
+    }
+   }
+  },
+  "super": {
+   "health": "82000000",
+   "body_damage": "32805",
+   "special_stats": {
+    "poison": "87480"
+   },
+   "drops": {
+    "faster": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "web": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "third eye": {
+     "mythic": "21.9%",
+     "ultra": "0.8%"
+    }
+   }
+  }
+ },
+ "Sponge": {
+  "name": "Sponge",
+  "description": "Bob",
+  "super_spawn_message": "A Super Sponge has spawned somewhere!",
+  "common": {
+   "health": "100",
+   "body_damage": "10",
+   "drops": {
+    "sponge": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "375.2",
+   "body_damage": "30",
+   "drops": {
+    "sponge": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1350",
+   "body_damage": "90",
+   "drops": {
+    "sponge": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "5400",
+   "body_damage": "270",
+   "drops": {
+    "sponge": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "40500",
+   "body_damage": "810",
+   "drops": {
+    "sponge": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "243000",
+   "body_damage": "2430",
+   "drops": {
+    "sponge": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "7300000",
+   "body_damage": "7290",
+   "drops": {
+    "sponge": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    }
+   }
+  },
+  "super": {
+   "health": "131200000",
+   "body_damage": "21870",
+   "drops": {
+    "sponge": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    }
+   }
+  }
+ },
+ "Square": {
+  "name": "Square",
+  "description": "This shape... it looks familiar...",
+  "super_spawn_message": "A Super Square has spawned somewhere!",
+  "common": {
+   "health": "37.5",
+   "body_damage": "10",
+   "drops": null
+  },
+  "unusual": {
+   "health": "140.7",
+   "body_damage": "30",
+   "drops": null
+  },
+  "rare": {
+   "health": "506.25",
+   "body_damage": "90",
+   "drops": null
+  },
+  "epic": {
+   "health": "2025",
+   "body_damage": "270",
+   "drops": null
+  },
+  "legendary": {
+   "health": "15187.5",
+   "body_damage": "810",
+   "drops": null
+  },
+  "mythic": {
+   "health": "91125",
+   "body_damage": "2430",
+   "drops": null
+  },
+  "ultra": {
+   "health": "2737500",
+   "body_damage": "7290",
+   "drops": null
+  },
+  "super": {
+   "health": "49200000",
+   "body_damage": "21870",
+   "drops": null
+  }
+ },
+ "Starfish": {
+  "name": "Starfish",
+  "description": "His name is Patrick",
+  "super_spawn_message": "A Super Starfish has spawned somewhere!",
+  "common": {
+   "health": "150",
+   "body_damage": "20",
+   "drops": {
+    "starfish": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "salt": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    },
+    "sand": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "562.8",
+   "body_damage": "60",
+   "drops": {
+    "starfish": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "salt": {
+     "common": "51%",
+     "unusual": "13.2%"
+    },
+    "sand": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "2025",
+   "body_damage": "180",
+   "drops": {
+    "starfish": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "salt": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    },
+    "sand": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "8100",
+   "body_damage": "540",
+   "drops": {
+    "starfish": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "salt": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    },
+    "sand": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "60750",
+   "body_damage": "1620",
+   "drops": {
+    "starfish": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "salt": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    },
+    "sand": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "364500",
+   "body_damage": "4860",
+   "drops": {
+    "starfish": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "salt": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    },
+    "sand": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "10950000",
+   "body_damage": "14580",
+   "drops": {
+    "starfish": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "salt": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    },
+    "sand": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "196800000",
+   "body_damage": "43740",
+   "drops": {
+    "starfish": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "salt": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    },
+    "sand": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Target Dummy": {
+  "name": "Target Dummy",
+  "description": "How do you have this in your gallery?",
+  "super_spawn_message": "None (always exists in Ellne)",
+  "common": {
+   "health": "1000000000",
+   "body_damage": "20",
+   "drops": null
+  },
+  "unusual": {
+   "health": "1000000000",
+   "body_damage": "60",
+   "drops": null
+  },
+  "rare": {
+   "health": "1000000000",
+   "body_damage": "180",
+   "drops": null
+  },
+  "epic": {
+   "health": "1000000000",
+   "body_damage": "540",
+   "drops": null
+  },
+  "legendary": {
+   "health": "1000000000",
+   "body_damage": "1620",
+   "drops": null
+  },
+  "mythic": {
+   "health": "1000000000",
+   "body_damage": "4860",
+   "drops": null
+  },
+  "ultra": {
+   "health": "1000000000",
+   "body_damage": "14580",
+   "drops": null
+  },
+  "super": {
+   "health": "1000000000",
+   "body_damage": "43740",
+   "drops": null
+  }
+ },
+ "Termite Egg": {
+  "name": "Termite Egg",
+  "description": "Not yet a termite but perhaps soon.",
+  "super_spawn_message": "A Super Termite Egg has spawned somewhere!",
+  "common": {
+   "health": "150",
+   "body_damage": "3",
+   "drops": {
+    "egg (ant)": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "amulet": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "562.8",
+   "body_damage": "9",
+   "drops": {
+    "egg (ant)": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "amulet": {
+     "common": "51%",
+     "unusual": "13.2%"
+    }
+   }
+  },
+  "rare": {
+   "health": "2025",
+   "body_damage": "27",
+   "drops": {
+    "egg (ant)": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "amulet": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    }
+   }
+  },
+  "epic": {
+   "health": "8100",
+   "body_damage": "81",
+   "drops": {
+    "egg (ant)": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "amulet": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "60750",
+   "body_damage": "243",
+   "drops": {
+    "egg (ant)": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "amulet": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "364500",
+   "body_damage": "729",
+   "drops": {
+    "egg (ant)": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "amulet": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "10950000",
+   "body_damage": "2187",
+   "drops": {
+    "egg (ant)": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "amulet": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    }
+   }
+  },
+  "super": {
+   "health": "196800000",
+   "body_damage": "6561",
+   "drops": {
+    "egg (ant)": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "amulet": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    }
+   }
+  }
+ },
+ "Termite Mound": {
+  "name": "Termite Mound",
+  "description": "Termites come in and come out. Can't explain that.",
+  "super_spawn_message": "A Super Termite Mound has spawned somewhere!",
+  "common": {
+   "health": "750",
+   "body_damage": "15",
+   "drops": {
+    "soil": {
+     "common": "59.8%",
+     "unusual": "16.4%"
+    },
+    "relic": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "rubber": {
+     "common": "53.9%",
+     "unusual": "13.3%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "2814",
+   "body_damage": "45",
+   "drops": {
+    "soil": {
+     "common": "48.5%",
+     "unusual": "51.2%"
+    },
+    "relic": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "rubber": {
+     "common": "55.3%",
+     "unusual": "43.6%"
+    }
+   }
+  },
+  "rare": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "common": "1.3%",
+     "unusual": "88.4%",
+     "rare": "10.3%"
+    },
+    "relic": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "rubber": {
+     "common": "3.2%",
+     "unusual": "88.5%",
+     "rare": "8.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "unusual": "6.7%",
+     "rare": "81%",
+     "epic": "12.3%"
+    },
+    "relic": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "rubber": {
+     "unusual": "11.4%",
+     "rare": "78.6%",
+     "epic": "10%"
+    }
+   }
+  },
+  "legendary": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "rare": "7.2%",
+     "epic": "87.7%",
+     "legendary": "5%"
+    },
+    "relic": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "rubber": {
+     "rare": "12.2%",
+     "epic": "83.7%",
+     "legendary": "4.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "epic": "7.5%",
+     "legendary": "91.7%",
+     "mythic": "0.8%"
+    },
+    "relic": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "rubber": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%"
+    }
+   }
+  },
+  "ultra": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "legendary": "85.2%",
+     "mythic": "14.3%",
+     "ultra": "0.5%"
+    },
+    "relic": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "rubber": {
+     "legendary": "88%",
+     "mythic": "11.6%",
+     "ultra": "0.4%"
+    }
+   }
+  },
+  "super": {
+   "health": null,
+   "body_damage": null,
+   "drops": {
+    "soil": {
+     "mythic": "77.2%",
+     "ultra": "22.7%"
+    },
+    "relic": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "rubber": {
+     "mythic": "81.2%",
+     "ultra": "18.6%"
+    }
+   }
+  }
+ },
+ "Termite Overmind": {
+  "name": "Termite Overmind",
+  "description": "The one who sees all.",
+  "super_spawn_message": "A Super Termite Overmind has spawned somewhere!",
+  "common": {
+   "health": "500",
+   "body_damage": "10",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "66.2%",
+     "unusual": "30.6%"
+    },
+    "tomato": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "1876",
+   "body_damage": "30",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "23.2%",
+     "unusual": "76.8%"
+    },
+    "tomato": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "6750",
+   "body_damage": "90",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "unusual": "80.5%",
+     "rare": "19.5%"
+    },
+    "tomato": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "27000",
+   "body_damage": "270",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "rare": "76.4%",
+     "epic": "23.1%"
+    },
+    "tomato": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "202500",
+   "body_damage": "810",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "rare": "0.5%",
+     "epic": "89.7%",
+     "legendary": "9.8%"
+    },
+    "tomato": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "1215000",
+   "body_damage": "2430",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "epic": "0.6%",
+     "legendary": "97.8%",
+     "mythic": "1.6%"
+    },
+    "tomato": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "36500000",
+   "body_damage": "7290",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "legendary": "72.6%",
+     "mythic": "26.3%",
+     "ultra": "1%"
+    },
+    "tomato": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "compass": {
+     "ultra": "2%"
+    }
+   }
+  },
+  "super": {
+   "health": "656000000",
+   "body_damage": "21870",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "mythic": "59.7%",
+     "ultra": "40.3%"
+    },
+    "tomato": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "compass": {
+     "ultra": "64.3%"
+    }
+   }
+  }
+ },
+ "Wasp": {
+  "name": "Wasp",
+  "description": "They are ANGRY.",
+  "super_spawn_message": "A Super Wasp has spawned somewhere!",
+  "common": {
+   "health": "62.5",
+   "body_damage": "50",
+   "special_stats": {
+    "missile_health": "100",
+    "missile_damage": "10"
+   },
+   "drops": {
+    "missile": {
+     "unusual": "42.8%"
+    },
+    "stinger (blood)": {
+     "common": "34.1%",
+     "unusual": "6.9%"
+    },
+    "antennae": {
+     "common": "53.9%",
+     "unusual": "13.3%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "234.5",
+   "body_damage": "150",
+   "special_stats": {
+    "missile_health": "300",
+    "missile_damage": "30"
+   },
+   "drops": {
+    "missile": {
+     "unusual": "89.3%"
+    },
+    "stinger (blood)": {
+     "common": "63.1%",
+     "unusual": "24.7%"
+    },
+    "antennae": {
+     "common": "55.3%",
+     "unusual": "43.6%"
+    }
+   }
+  },
+  "rare": {
+   "health": "843.75",
+   "body_damage": "450",
+   "special_stats": {
+    "missile_health": "900",
+    "missile_damage": "90"
+   },
+   "drops": {
+    "missile": {
+     "unusual": "72.2%",
+     "rare": "27.8%"
+    },
+    "stinger (blood)": {
+     "common": "18.2%",
+     "unusual": "77.6%",
+     "rare": "4.2%"
+    },
+    "antennae": {
+     "common": "3.2%",
+     "unusual": "88.5%",
+     "rare": "8.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "3375",
+   "body_damage": "1350",
+   "special_stats": {
+    "missile_health": "2700",
+    "missile_damage": "270"
+   },
+   "drops": {
+    "missile": {
+     "rare": "67.4%",
+     "epic": "32.6%"
+    },
+    "stinger (blood)": {
+     "unusual": "33.8%",
+     "rare": "61%",
+     "epic": "5.1%"
+    },
+    "antennae": {
+     "unusual": "11.4%",
+     "rare": "78.6%",
+     "epic": "10%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "25312.5",
+   "body_damage": "4050",
+   "special_stats": {
+    "missile_health": "8100",
+    "missile_damage": "810"
+   },
+   "drops": {
+    "missile": {
+     "epic": "85.6%",
+     "legendary": "14.4%"
+    },
+    "stinger (blood)": {
+     "rare": "34.9%",
+     "epic": "63%",
+     "legendary": "2%"
+    },
+    "antennae": {
+     "rare": "12.2%",
+     "epic": "83.7%",
+     "legendary": "4.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "151875",
+   "body_damage": "12150",
+   "special_stats": {
+    "missile_health": "24300",
+    "missile_damage": "2430"
+   },
+   "drops": {
+    "missile": {
+     "legendary": "97.6%",
+     "mythic": "2.4%"
+    },
+    "stinger (blood)": {
+     "epic": "35.6%",
+     "legendary": "64.1%",
+     "mythic": "0.3%"
+    },
+    "antennae": {
+     "epic": "12.6%",
+     "legendary": "86.7%",
+     "mythic": "0.6%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "4562500",
+   "body_damage": "36450",
+   "special_stats": {
+    "missile_health": "72900",
+    "missile_damage": "7290"
+   },
+   "drops": {
+    "missile": {
+     "legendary": "61.9%",
+     "mythic": "36.5%",
+     "ultra": "1.5%"
+    },
+    "stinger (blood)": {
+     "legendary": "93.8%",
+     "mythic": "6%",
+     "ultra": "0.2%"
+    },
+    "antennae": {
+     "legendary": "88%",
+     "mythic": "11.6%",
+     "ultra": "0.4%"
+    }
+   }
+  },
+  "super": {
+   "health": "82000000",
+   "body_damage": "109350",
+   "special_stats": {
+    "missile_health": "218700",
+    "missile_damage": "21870"
+   },
+   "drops": {
+    "missile": {
+     "mythic": "46.2%",
+     "ultra": "53.8%"
+    },
+    "stinger (blood)": {
+     "legendary": "4.1%",
+     "mythic": "86.1%",
+     "ultra": "9.8%"
+    },
+    "antennae": {
+     "mythic": "81.2%",
+     "ultra": "18.6%"
+    }
+   }
+  }
+ },
+ "Worker Ant": {
+  "name": "Worker Ant",
+  "description": "It's a bit temperamental, probably from working all the time.",
+  "super_spawn_message": "A Super Worker Ant has spawned somewhere!",
+  "common": {
+   "health": "62.5",
+   "body_damage": "10",
+   "drops": {
+    "leaf": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "corn": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "234.5",
+   "body_damage": "30",
+   "drops": {
+    "leaf": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "corn": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "843.75",
+   "body_damage": "90",
+   "drops": {
+    "leaf": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "corn": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "3375",
+   "body_damage": "270",
+   "drops": {
+    "leaf": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "corn": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "25312.5",
+   "body_damage": "810",
+   "drops": {
+    "leaf": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "corn": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "151875",
+   "body_damage": "2430",
+   "drops": {
+    "leaf": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "corn": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "4562500",
+   "body_damage": "7290",
+   "drops": {
+    "leaf": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "corn": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    }
+   }
+  },
+  "super": {
+   "health": "82000000",
+   "body_damage": "21870",
+   "drops": {
+    "leaf": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "corn": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    }
+   }
+  }
+ },
+ "Worker Fire Ant": {
+  "name": "Worker Fire Ant",
+  "description": "This ant is on fireeeeeeeeeeeeee.",
+  "super_spawn_message": "A Super Worker Fire Ant has spawned somewhere!",
+  "common": {
+   "health": "62.5",
+   "body_damage": "20",
+   "drops": {
+    "corn": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    },
+    "yucca": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "234.5",
+   "body_damage": "60",
+   "drops": {
+    "corn": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    },
+    "yucca": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "843.75",
+   "body_damage": "180",
+   "drops": {
+    "corn": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    },
+    "yucca": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "3375",
+   "body_damage": "540",
+   "drops": {
+    "corn": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    },
+    "yucca": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "25312.5",
+   "body_damage": "1620",
+   "drops": {
+    "corn": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    },
+    "yucca": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "151875",
+   "body_damage": "4860",
+   "drops": {
+    "corn": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    },
+    "yucca": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "4562500",
+   "body_damage": "14580",
+   "drops": {
+    "corn": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    },
+    "yucca": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    }
+   }
+  },
+  "super": {
+   "health": "82000000",
+   "body_damage": "43740",
+   "drops": {
+    "corn": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    },
+    "yucca": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    }
+   }
+  }
+ },
+ "Worker Termite": {
+  "name": "Worker Termite",
+  "description": "It's a bit temperamental, probably from working all the time. These creatures appear to be connected somehow.",
+  "super_spawn_message": "A Super Worker Termite has spawned somewhere!",
+  "common": {
+   "health": "125",
+   "body_damage": "10",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "19.1%",
+     "unusual": "3.5%"
+    },
+    "plank": {
+     "common": "45.5%",
+     "unusual": "10.1%"
+    }
+   }
+  },
+  "unusual": {
+   "health": "469",
+   "body_damage": "30",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "51%",
+     "unusual": "13.2%"
+    },
+    "plank": {
+     "common": "61.3%",
+     "unusual": "34.8%"
+    }
+   }
+  },
+  "rare": {
+   "health": "1687.5",
+   "body_damage": "90",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "common": "42.6%",
+     "unusual": "55.1%",
+     "rare": "2.1%"
+    },
+    "plank": {
+     "common": "7.7%",
+     "unusual": "86%",
+     "rare": "6.3%"
+    }
+   }
+  },
+  "epic": {
+   "health": "6750",
+   "body_damage": "270",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "unusual": "58.2%",
+     "rare": "39.2%",
+     "epic": "2.6%"
+    },
+    "plank": {
+     "unusual": "19.7%",
+     "rare": "72.7%",
+     "epic": "7.6%"
+    }
+   }
+  },
+  "legendary": {
+   "health": "50625",
+   "body_damage": "810",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "rare": "59.1%",
+     "epic": "39.9%",
+     "legendary": "1%"
+    },
+    "plank": {
+     "rare": "20.7%",
+     "epic": "76.3%",
+     "legendary": "3.1%"
+    }
+   }
+  },
+  "mythic": {
+   "health": "303750",
+   "body_damage": "2430",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "epic": "59.6%",
+     "legendary": "40.2%",
+     "mythic": "0.2%"
+    },
+    "plank": {
+     "epic": "21.2%",
+     "legendary": "78.3%",
+     "mythic": "0.5%"
+    }
+   }
+  },
+  "ultra": {
+   "health": "9125000",
+   "body_damage": "7290",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "legendary": "96.9%",
+     "mythic": "3%",
+     "ultra": "0.1%"
+    },
+    "plank": {
+     "legendary": "90.9%",
+     "mythic": "8.8%",
+     "ultra": "0.3%"
+    }
+   }
+  },
+  "super": {
+   "health": "164000000",
+   "body_damage": "21870",
+   "special_stats": {
+    "psyonic_connection": null
+   },
+   "drops": {
+    "relic": {
+     "legendary": "20.2%",
+     "mythic": "74.7%",
+     "ultra": "5%"
+    },
+    "plank": {
+     "legendary": "0.8%",
+     "mythic": "84.8%",
+     "ultra": "14.3%"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,5031 @@
+{
+ "Air": {
+  "name": "Air",
+  "description": "It's literally nothing.",
+  "common": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  },
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0"
+  }
+ },
+ "Amulet": {
+  "name": "Amulet",
+  "description": "Converts a percentage of overheal into shield.",
+  "common": {
+   "damage": "0",
+   "health": "10",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "5%"
+   }
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "30",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "10%"
+   }
+  },
+  "rare": {
+   "damage": "0",
+   "health": "90",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "15%"
+   }
+  },
+  "epic": {
+   "damage": "0",
+   "health": "270",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "20%"
+   }
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "810",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "25%"
+   }
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "2430",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "30%"
+   }
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "7290",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "35%"
+   }
+  },
+  "super": {
+   "damage": "0",
+   "health": "21870",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "overheal_conversion": "40%"
+   }
+  }
+ },
+ "Ankh": {
+  "name": "Ankh",
+  "description": "An ancient relic. When destroyed, will teleport the flower back to where it was destroyed.",
+  "common": {
+   "damage": "0",
+   "health": "10",
+   "petal_reload": "255.0",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "30",
+   "petal_reload": "127.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "0",
+   "health": "90",
+   "petal_reload": "63.8",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "epic": {
+   "damage": "0",
+   "health": "270",
+   "petal_reload": "31.9",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "810",
+   "petal_reload": "15.9",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "2430",
+   "petal_reload": "8.0",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "7290",
+   "petal_reload": "4.0",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "super": {
+   "damage": "0",
+   "health": "21870",
+   "petal_reload": "2.0",
+   "usage_reload": "0.5",
+   "count": "1"
+  }
+ },
+ "Antennae": {
+  "name": "Antennae",
+  "description": "Allows your flower to sense foes farther away. Does not stack.",
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_vision": "25.0%"
+   }
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_vision": "33.3%"
+   }
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_vision": "42.9%"
+   }
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_vision": "100.0%"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_vision": "185.7%"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_vision": "400.0%"
+   }
+  }
+ },
+ "Basic": {
+  "name": "Basic",
+  "description": "A nice petal, not too strong but not too weak.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Basil": {
+  "name": "Basil",
+  "description": "Increases all healing received.",
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "healing_bonus": "45%"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "healing_bonus": "50%"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "healing_bonus": "55%"
+   }
+  }
+ },
+ "Battery": {
+  "name": "Battery",
+  "description": "Discharges electricity whenever the flower gets hit.",
+  "common": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "15",
+    "bounces": "2",
+    "charges": "5"
+   }
+  },
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "45",
+    "bounces": "3",
+    "charges": "5"
+   }
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "135",
+    "bounces": "4",
+    "charges": "5"
+   }
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "405",
+    "bounces": "5",
+    "charges": "5"
+   }
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "1215",
+    "bounces": "6",
+    "charges": "5"
+   }
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "3645",
+    "bounces": "7",
+    "charges": "5"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "10935",
+    "bounces": "8",
+    "charges": "5"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "32805",
+    "bounces": "9",
+    "charges": "5"
+   }
+  }
+ },
+ "Bone": {
+  "name": "Bone",
+  "description": "Sturdy.",
+  "common": {
+   "damage": "15",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "4"
+   }
+  },
+  "unusual": {
+   "damage": "45",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "12"
+   }
+  },
+  "rare": {
+   "damage": "135",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "36"
+   }
+  },
+  "epic": {
+   "damage": "405",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "108"
+   }
+  },
+  "legendary": {
+   "damage": "1215",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "324"
+   }
+  },
+  "mythic": {
+   "damage": "3645",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "972"
+   }
+  },
+  "ultra": {
+   "damage": "10935",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "2916"
+   }
+  },
+  "super": {
+   "damage": "32805",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "8748"
+   }
+  }
+ },
+ "Bubble": {
+  "name": "Bubble",
+  "description": "Physics are for the weak.",
+  "common": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "5.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "4.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "3.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "epic": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "0.8",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "0.5",
+   "usage_reload": "0.1",
+   "count": "1"
+  },
+  "super": {
+   "damage": "0",
+   "health": "1",
+   "petal_reload": "0.2",
+   "usage_reload": "0.1",
+   "count": "1"
+  }
+ },
+ "Bulb": {
+  "name": "Bulb",
+  "description": "A shiny lightbulb. Draws aggro from mobs.",
+  "common": {
+   "damage": "5",
+   "health": "10",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "300"
+   }
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "30",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "600"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "90",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "900"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "270",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "1200"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "810",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "1500"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "2430",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "1800"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "7290",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "2100"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "21870",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "radius": "2400"
+   }
+  }
+ },
+ "Bur": {
+  "name": "Bur",
+  "description": "Decreases armor of the affected unit. Does not stack with itself.",
+  "common": {
+   "damage": "5",
+   "health": "5",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "1.5",
+    "duration": "3"
+   }
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "15",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "4.5",
+    "duration": "3"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "45",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "13.5",
+    "duration": "3"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "135",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "40.5",
+    "duration": "3"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "121.5",
+    "duration": "3"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "364.5",
+    "duration": "3"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "1093.5",
+    "duration": "3"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "10935",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor_debuff": "3280.5",
+    "duration": "3"
+   }
+  }
+ },
+ "Cactus": {
+  "name": "Cactus",
+  "description": "Not very strong, but somehow increases your maximum health.",
+  "common": {
+   "damage": "5",
+   "health": "15",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "25"
+   }
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "45",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "75"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "135",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "225"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "405",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "675"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "1215",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "2025"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "3645",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "6075"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "10935",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "18225"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "32805",
+   "petal_reload": "1",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "54675"
+   }
+  }
+ },
+ "Carrot": {
+  "name": "Carrot",
+  "description": "Sturdy and reliable. Can be shot and bounces off walls.",
+  "common": {
+   "damage": "10",
+   "health": "20",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "60",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "90",
+   "health": "180",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "epic": {
+   "damage": "270",
+   "health": "540",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "1620",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "4860",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "14580",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "super": {
+   "damage": "21870",
+   "health": "43740",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  }
+ },
+ "Claw": {
+  "name": "Claw",
+  "description": "Deals extra damage if victim is above 80% health. -50% damage versus other flowers.",
+  "common": {
+   "damage": "5",
+   "health": "10",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "100"
+   }
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "30",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "300"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "90",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "900"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "270",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "2700"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "810",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "8100"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "2430",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "24300"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "7290",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "72900"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "21870",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "extra_damage": "218700"
+   }
+  }
+ },
+ "Clover": {
+  "name": "Clover",
+  "description": "Increases your luck. Does not stack with itself. Higher luck increases the chance of finding rarer mobs.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.1"
+   }
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.2"
+   }
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.3"
+   }
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.4"
+   }
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.5"
+   }
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.6"
+   }
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.7"
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "luck": "0.8"
+   }
+  }
+ },
+ "Compass": {
+  "name": "Compass",
+  "description": "This crappy thing might be able to find something interesting...",
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": "4.0",
+   "count": "1",
+   "special_stats": {
+    "affected_by_magnets": true
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": "4.0",
+   "count": "1",
+   "special_stats": {
+    "not_affected_by_magnets": true
+   }
+  }
+ },
+ "Corn": {
+  "name": "Corn",
+  "description": "Takes a long time to spawn, but has a lot of health.",
+  "common": {
+   "damage": "5",
+   "health": "300",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "900",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "45",
+   "health": "2700",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "135",
+   "health": "8100",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "24300",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "72900",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "218700",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "10935",
+   "health": "656100",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Cotton": {
+  "name": "Cotton",
+  "description": "Absorbs damage taken by the flower.",
+  "common": {
+   "damage": "0",
+   "health": "6",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "18",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "0",
+   "health": "54",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "0",
+   "health": "162",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "486",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "1458",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "2525",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "0",
+   "health": "4374",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Cutter": {
+  "name": "Cutter",
+  "description": "A friend used to own this... now it's time for revenge. Increases body damage. Does not stack.",
+  "common": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "20"
+   }
+  },
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "60"
+   }
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "180"
+   }
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "540"
+   }
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "1620"
+   }
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "4860"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "14580"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "body_damage": "43740"
+   }
+  }
+ },
+ "Dahlia": {
+  "name": "Dahlia",
+  "description": "A small amount of heal but fairly consistent.",
+  "unusual": {
+   "damage": "5.0",
+   "health": "5.0",
+   "petal_reload": "1.5",
+   "usage_reload": "1",
+   "count": "3",
+   "special_stats": {
+    "heal": "4"
+   }
+  },
+  "rare": {
+   "damage": "15.0",
+   "health": "15.0",
+   "petal_reload": "1.5",
+   "usage_reload": "1",
+   "count": "3",
+   "special_stats": {
+    "heal": "11"
+   }
+  },
+  "epic": {
+   "damage": "45.0",
+   "health": "45.0",
+   "petal_reload": "1.5",
+   "usage_reload": "1",
+   "count": "3",
+   "special_stats": {
+    "heal": "34"
+   }
+  },
+  "legendary": {
+   "damage": "135.0",
+   "health": "135.0",
+   "petal_reload": "1.5",
+   "usage_reload": "1",
+   "count": "3",
+   "special_stats": {
+    "heal": "101"
+   }
+  },
+  "mythic": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "1.5",
+   "usage_reload": "1",
+   "count": "3",
+   "special_stats": {
+    "heal": "304"
+   }
+  },
+  "ultra": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "1.5",
+   "usage_reload": "1",
+   "count": "3",
+   "special_stats": {
+    "heal": "526"
+   }
+  },
+  "super": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "1.5",
+   "usage_reload": "1",
+   "count": "3",
+   "special_stats": {
+    "heal": "911"
+   }
+  }
+ },
+ "Dandelion": {
+  "name": "Dandelion",
+  "description": "Its interesting properties inhibit healing effects on affected units. Affected units have their healing reduced by 20%. Stacks with itself.",
+  "unusual": {
+   "damage": "15",
+   "health": "15",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "4"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "45",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "8"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "135",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "12"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "16"
+   }
+  },
+  "mythic": {
+   "damage": "607.5",
+   "health": "607.5",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "2",
+   "special_stats": {
+    "duration": "20"
+   }
+  },
+  "ultra": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "3",
+   "special_stats": {
+    "duration": "24"
+   }
+  },
+  "super": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "3",
+   "special_stats": {
+    "duration": "28"
+   }
+  }
+ },
+ "Dice": {
+  "name": "Dice",
+  "description": "Has a 5% chance of dealing x35 damage. Chance increases by 4% per point in luck.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Disc": {
+  "name": "Disc",
+  "description": "Reduces damage taken from collisions from mobs and flowers.",
+  "common": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "6.3%"
+   }
+  },
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "12.5%"
+   }
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "18.8%"
+   }
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "25.0%"
+   }
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "31.3%"
+   }
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "37.5%"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "43.8%"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "collision_damage_resistance": "50.0%"
+   }
+  }
+ },
+ "Ant Egg": {
+  "name": "Ant Egg",
+  "description": "Something interesting might pop out of this.",
+  "common": {
+   "damage": "0",
+   "health": "25.0",
+   "petal_reload": "1",
+   "usage_reload": "30",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Common)"
+   }
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "75.0",
+   "petal_reload": "1",
+   "usage_reload": "38",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Unusual)"
+   }
+  },
+  "rare": {
+   "damage": "0",
+   "health": "225.0",
+   "petal_reload": "1",
+   "usage_reload": "2.4",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Unusual)"
+   }
+  },
+  "epic": {
+   "damage": "0",
+   "health": "675.0",
+   "petal_reload": "1",
+   "usage_reload": "3.3",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Rare)"
+   }
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "2025.0",
+   "petal_reload": "1",
+   "usage_reload": "5.1",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Epic)"
+   }
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "6075.0",
+   "petal_reload": "1",
+   "usage_reload": "15.8",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Legendary)"
+   }
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "18225.0",
+   "petal_reload": "1",
+   "usage_reload": "33.6",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Mythic)"
+   }
+  },
+  "super": {
+   "damage": "0",
+   "health": "54675.0",
+   "petal_reload": "1",
+   "usage_reload": "2",
+   "count": "4",
+   "special_stats": {
+    "contents": "x4 Soldier Ant (Mythic)"
+   }
+  }
+ },
+ "Beetle Egg": {
+  "name": "Beetle Egg",
+  "description": "Something interesting might pop out of this.",
+  "common": {
+   "damage": "0",
+   "health": "25",
+   "petal_reload": "1",
+   "usage_reload": "15",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Common)"
+   }
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "75",
+   "petal_reload": "1",
+   "usage_reload": "19.2",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Unusual)"
+   }
+  },
+  "rare": {
+   "damage": "0",
+   "health": "225",
+   "petal_reload": "1",
+   "usage_reload": "23.5",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Rare)"
+   }
+  },
+  "epic": {
+   "damage": "0",
+   "health": "675",
+   "petal_reload": "1",
+   "usage_reload": "32",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Epic)"
+   }
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "2025",
+   "petal_reload": "1",
+   "usage_reload": "1.8",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Epic)"
+   }
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "6075",
+   "petal_reload": "1",
+   "usage_reload": "7.4",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Legendary)"
+   }
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "18225",
+   "petal_reload": "1",
+   "usage_reload": "16.9",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Mythic)"
+   }
+  },
+  "super": {
+   "damage": "0",
+   "health": "54675",
+   "petal_reload": "1",
+   "usage_reload": "0.1",
+   "count": "1",
+   "special_stats": {
+    "contents": "Beetle (Mythic)"
+   }
+  }
+ },
+ "Fangs": {
+  "name": "Fangs",
+  "description": "Heals based on damage dealt by this petal.",
+  "unusual": {
+   "damage": "45",
+   "health": "30",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_healed": "59.5%"
+   }
+  },
+  "rare": {
+   "damage": "135",
+   "health": "90",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_healed": "59.5%"
+   }
+  },
+  "epic": {
+   "damage": "405",
+   "health": "270",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_healed": "59.5%"
+   }
+  },
+  "legendary": {
+   "damage": "1215",
+   "health": "810",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_healed": "59.5%"
+   }
+  },
+  "mythic": {
+   "damage": "3645",
+   "health": "2430",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_healed": "59.5%"
+   }
+  },
+  "ultra": {
+   "damage": "10935",
+   "health": "7290",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_healed": "34.4%"
+   }
+  },
+  "super": {
+   "damage": "32805",
+   "health": "21870",
+   "petal_reload": "3.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_healed": "34.4%"
+   }
+  }
+ },
+ "Faster": {
+  "name": "Faster",
+  "description": "It's so light it makes your other petals spin faster.",
+  "common": {
+   "damage": "8",
+   "health": "5",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "0.5"
+   }
+  },
+  "unusual": {
+   "damage": "24",
+   "health": "15",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "0.7"
+   }
+  },
+  "rare": {
+   "damage": "72",
+   "health": "45",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "0.9"
+   }
+  },
+  "epic": {
+   "damage": "216",
+   "health": "135",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "1.1"
+   }
+  },
+  "legendary": {
+   "damage": "648",
+   "health": "405",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "1.3"
+   }
+  },
+  "mythic": {
+   "damage": "1944",
+   "health": "1215",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "1.5"
+   }
+  },
+  "ultra": {
+   "damage": "5832",
+   "health": "3645",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "1.7"
+   }
+  },
+  "super": {
+   "damage": "17496",
+   "health": "10935",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "rotation_speed_(rad/s)": "1.9"
+   }
+  }
+ },
+ "Grapes": {
+  "name": "Grapes",
+  "description": "4 in 1 deal. Now with a secret ingredient: poison.",
+  "common": {
+   "damage": "3",
+   "health": "20",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "11",
+    "poison_dps": "15"
+   }
+  },
+  "unusual": {
+   "damage": "9",
+   "health": "60",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "33",
+    "poison_dps": "45"
+   }
+  },
+  "rare": {
+   "damage": "27",
+   "health": "180",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "99",
+    "poison_dps": "135"
+   }
+  },
+  "epic": {
+   "damage": "81",
+   "health": "540",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "297",
+    "poison_dps": "405"
+   }
+  },
+  "legendary": {
+   "damage": "243",
+   "health": "1620",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "891",
+    "poison_dps": "1215"
+   }
+  },
+  "mythic": {
+   "damage": "729",
+   "health": "4860",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "2673",
+    "poison_dps": "3645"
+   }
+  },
+  "ultra": {
+   "damage": "2187",
+   "health": "14580",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "8019",
+    "poison_dps": "10935"
+   }
+  },
+  "super": {
+   "damage": "6561",
+   "health": "43740",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "poison": "24057",
+    "poison_dps": "32805"
+   }
+  }
+ },
+ "Heavy": {
+  "name": "Heavy",
+  "description": "This thing is so heavy that nothing gets in the way. Slows down petal rotation speed when equipped.",
+  "rare": {
+   "damage": "81",
+   "health": "1350",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "243",
+   "health": "4050",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "729",
+   "health": "12150",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "2187",
+   "health": "36450",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "6561",
+   "health": "109350",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "19683",
+   "health": "328050",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Honey": {
+  "name": "Honey",
+  "description": "Mobs love this. Attracts mobs to it in a large radius. Mobs will prioritize this over flowers. Affected units develop immunity to its effects after some time.",
+  "rare": {
+   "damage": "0",
+   "health": "450",
+   "petal_reload": "2",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "max_mob_rarity": "Unusual"
+   }
+  },
+  "epic": {
+   "damage": "0",
+   "health": "1350",
+   "petal_reload": "2",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "max_mob_rarity": "Rare"
+   }
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "4050",
+   "petal_reload": "2",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "max_mob_rarity": "Epic"
+   }
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "12150",
+   "petal_reload": "2",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "max_mob_rarity": "Legendary"
+   }
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "36450",
+   "petal_reload": "2",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "max_mob_rarity": "Mythic"
+   }
+  },
+  "super": {
+   "damage": "0",
+   "health": "109350",
+   "petal_reload": "2",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "max_mob_rarity": "Ultra"
+   }
+  }
+ },
+ "Iris": {
+  "name": "Iris",
+  "description": "Very poisonous, but takes a little while to do its work.",
+  "unusual": {
+   "damage": "15",
+   "health": "15",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "180 (60/sec)"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "45",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "540 (180/sec)"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "135",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "1620 (540/sec)"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "4860 (1620/sec)"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "14580 (4860/sec)"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "43740 (14580/sec)"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "10935",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "131220 (43740/sec)"
+   }
+  }
+ },
+ "Jelly": {
+  "name": "Jelly",
+  "description": "No one likes touching this.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "300"
+   }
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "432"
+   }
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "675"
+   }
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "1100"
+   }
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "2700"
+   }
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "7400"
+   }
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "19000"
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "50700"
+   }
+  }
+ },
+ "Leaf": {
+  "name": "Leaf",
+  "description": "Gathers energy from the sun to heal your flower passively.",
+  "unusual": {
+   "damage": "39",
+   "health": "36",
+   "petal_reload": "1.8",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "3/sec"
+   }
+  },
+  "rare": {
+   "damage": "117",
+   "health": "108",
+   "petal_reload": "1.8",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "9/sec"
+   }
+  },
+  "epic": {
+   "damage": "351",
+   "health": "324",
+   "petal_reload": "1.8",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "27/sec"
+   }
+  },
+  "legendary": {
+   "damage": "1053",
+   "health": "972",
+   "petal_reload": "1.8",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "81/sec"
+   }
+  },
+  "mythic": {
+   "damage": "3159",
+   "health": "2916",
+   "petal_reload": "1.8",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "243/sec"
+   }
+  },
+  "ultra": {
+   "damage": "9477",
+   "health": "8748",
+   "petal_reload": "1.8",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "421/sec"
+   }
+  },
+  "super": {
+   "damage": "28431",
+   "health": "26244",
+   "petal_reload": "1.8",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "729/sec"
+   }
+  }
+ },
+ "Light": {
+  "name": "Light",
+  "description": "Weaker than most petals, but recharges very quickly.",
+  "common": {
+   "damage": "13",
+   "health": "5",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "20",
+   "health": "8",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "2"
+  },
+  "rare": {
+   "damage": "59",
+   "health": "23",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "2"
+  },
+  "epic": {
+   "damage": "117.0",
+   "health": "45.0",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "legendary": {
+   "damage": "351.0",
+   "health": "135.0",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "mythic": {
+   "damage": "631.8",
+   "health": "243",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "5"
+  },
+  "ultra": {
+   "damage": "1895.4",
+   "health": "729",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "5"
+  },
+  "super": {
+   "damage": "5686.2",
+   "health": "2187",
+   "petal_reload": "0.8",
+   "usage_reload": null,
+   "count": "5"
+  }
+ },
+ "Lightning": {
+  "name": "Lightning",
+  "description": "Strikes several nearby enemies.",
+  "unusual": {
+   "damage": "0",
+   "health": "60",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "36",
+    "bounces": "3"
+   }
+  },
+  "rare": {
+   "damage": "0",
+   "health": "180",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "108",
+    "bounces": "4"
+   }
+  },
+  "epic": {
+   "damage": "0",
+   "health": "540",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "324",
+    "bounces": "5"
+   }
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "1620",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "972",
+    "bounces": "6"
+   }
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "4860",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "2916",
+    "bounces": "7"
+   }
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "14580",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "8748",
+    "bounces": "8"
+   }
+  },
+  "super": {
+   "damage": "0",
+   "health": "43740",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "lightning": "26244",
+    "bounces": "9"
+   }
+  }
+ },
+ "Lotus": {
+  "name": "Lotus",
+  "description": "Absorbs poison damage taken by the flower.",
+  "common": {
+   "damage": "1",
+   "health": "40",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "3",
+   "health": "120",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "9",
+   "health": "360",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "27",
+   "health": "1080",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "81",
+   "health": "3240",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "243",
+   "health": "9720",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "729",
+   "health": "29160",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "2187",
+   "health": "87480",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Magnet": {
+  "name": "Magnet",
+  "description": "Increases drop pickup range. Does not stack with itself.",
+  "rare": {
+   "damage": "9",
+   "health": "270",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "pickup_range": "240"
+   }
+  },
+  "epic": {
+   "damage": "27",
+   "health": "810",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "pickup_range": "420"
+   }
+  },
+  "legendary": {
+   "damage": "81",
+   "health": "2430",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "pickup_range": "600"
+   }
+  },
+  "mythic": {
+   "damage": "243",
+   "health": "7290",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "pickup_range": "780"
+   }
+  },
+  "ultra": {
+   "damage": "729",
+   "health": "21870",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "pickup_range": "960"
+   }
+  },
+  "super": {
+   "damage": "2187",
+   "health": "65610",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "pickup_range": "1,140"
+   }
+  }
+ },
+ "Dark Mark": {
+  "name": "Dark Mark",
+  "description": "A dark mark that binds itself to a fallen soul.",
+  "common": {
+   "damage": "0",
+   "health": "10",
+   "petal_reload": "1",
+   "usage_reload": "960",
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "30",
+   "petal_reload": "1",
+   "usage_reload": "480",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "0",
+   "health": "90",
+   "petal_reload": "1",
+   "usage_reload": "240",
+   "count": "1"
+  },
+  "epic": {
+   "damage": "0",
+   "health": "270",
+   "petal_reload": "1",
+   "usage_reload": "120.0",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "810",
+   "petal_reload": "1",
+   "usage_reload": "60.0",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "2430",
+   "petal_reload": "1",
+   "usage_reload": "30.0",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "7290",
+   "petal_reload": "1",
+   "usage_reload": "10.0",
+   "count": "1"
+  },
+  "super": {
+   "damage": "0",
+   "health": "21870",
+   "petal_reload": "1",
+   "usage_reload": "4.0",
+   "count": "1"
+  }
+ },
+ "Missile": {
+  "name": "Missile",
+  "description": "You can actually shoot this one.",
+  "unusual": {
+   "damage": "75",
+   "health": "6",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "225",
+   "health": "18",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "epic": {
+   "damage": "675",
+   "health": "54",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "2025",
+   "health": "162",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "6075",
+   "health": "486",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "18225",
+   "health": "1458",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "super": {
+   "damage": "54675",
+   "health": "4374",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  }
+ },
+ "Orange": {
+  "name": "Orange",
+  "description": "A sweet citrus fruit.",
+  "unusual": {
+   "damage": "20.0",
+   "health": "20.0",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "rare": {
+   "damage": "60.0",
+   "health": "60.0",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "epic": {
+   "damage": "180.0",
+   "health": "180.0",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "legendary": {
+   "damage": "540.0",
+   "health": "540.0",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "mythic": {
+   "damage": "1620",
+   "health": "1620",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "ultra": {
+   "damage": "4860",
+   "health": "4860",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "super": {
+   "damage": "14580",
+   "health": "14580",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "3"
+  }
+ },
+ "Pearl": {
+  "name": "Pearl",
+  "description": "Just drop it off somewhere and use your kinetic powers so you don't lose it.",
+  "unusual": {
+   "damage": "45",
+   "health": "150",
+   "petal_reload": "4",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "135",
+   "health": "450",
+   "petal_reload": "4",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "epic": {
+   "damage": "405",
+   "health": "1350",
+   "petal_reload": "4",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "1215",
+   "health": "4050",
+   "petal_reload": "4",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "3645",
+   "health": "12150",
+   "petal_reload": "4",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "10935",
+   "health": "36450",
+   "petal_reload": "4",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "super": {
+   "damage": "32805",
+   "health": "109350",
+   "petal_reload": "4",
+   "usage_reload": "0.5",
+   "count": "1"
+  }
+ },
+ "Peas": {
+  "name": "Peas",
+  "description": "4 in 1 deal.",
+  "common": {
+   "damage": "10",
+   "health": "20",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "60",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "90",
+   "health": "180",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "epic": {
+   "damage": "270",
+   "health": "540",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "1620",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "4860",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "14580",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "super": {
+   "damage": "21870",
+   "health": "43740",
+   "petal_reload": "1.5",
+   "usage_reload": "0.5",
+   "count": "1"
+  }
+ },
+ "Pincer": {
+  "name": "Pincer",
+  "description": "Debilitates enemies temporarily, reducing their movement speed.",
+  "unusual": {
+   "damage": "15",
+   "health": "15",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "45 (30/sec)",
+    "duration": "1.5"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "45",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "135 (90/sec)",
+    "duration": "1.5"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "135",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "405 (270/sec)",
+    "duration": "1.5"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "1215 (810/sec)",
+    "duration": "1.5"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "3645 (2430/sec)",
+    "duration": "1.5"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "10935 (7290/sec)",
+    "duration": "1.5"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "10935",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "poison": "32805 (21870/sec)",
+    "duration": "1.5"
+   }
+  }
+ },
+ "Plank": {
+  "name": "Plank",
+  "description": "Deals 20x damage vs projectiles and petals.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Pollen": {
+  "name": "Pollen",
+  "description": "Asthmatics beware.",
+  "unusual": {
+   "damage": "45",
+   "health": "15",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "68",
+   "health": "23",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "2"
+  },
+  "epic": {
+   "damage": "135",
+   "health": "45.0",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "3"
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "135.0",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "3"
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "405",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "3"
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "1215",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "3"
+  },
+  "super": {
+   "damage": "10935",
+   "health": "3645",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "3"
+  }
+ },
+ "Poo": {
+  "name": "Poo",
+  "description": "Makes mobs less likely to want to attack you. Does not stack.",
+  "unusual": {
+   "damage": "15",
+   "health": "15",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "mob_aggro_range": "-10%"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "45",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "mob_aggro_range": "-20%"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "135",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "mob_aggro_range": "-30%"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "mob_aggro_range": "-40%"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "mob_aggro_range": "-50%"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "mob_aggro_range": "-60%"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "10935",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "mob_aggro_range": "-70%"
+   }
+  }
+ },
+ "Mysterious Powder": {
+  "name": "Mysterious Powder",
+  "description": "ncreases movement speed. Does not stack. Disabled if the flower takes damage or if near a mob higher than a certain rarity.",
+  "rare": {
+   "damage": "0",
+   "health": "90",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "movement_speed": "75%",
+    "max_mob_rarity": "Common"
+   }
+  },
+  "epic": {
+   "damage": "0",
+   "health": "270",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "movement_speed": "100%",
+    "max_mob_rarity": "Unusual"
+   }
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "810",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "movement_speed": "125%",
+    "max_mob_rarity": "Rare"
+   }
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "2430",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "movement_speed": "150%",
+    "max_mob_rarity": "Epic"
+   }
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "7290",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "movement_speed": "175%",
+    "max_mob_rarity": "Legendary"
+   }
+  },
+  "super": {
+   "damage": "0",
+   "health": "21870",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "movement_speed": "200%",
+    "max_mob_rarity": "Legendary"
+   }
+  }
+ },
+ "Mysterious Relic": {
+  "name": "Mysterious Relic",
+  "description": "A strange relic. Damage is spread among other wearers.",
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": 0,
+   "special_stats": {
+    "%_distributed": "25.0%"
+   }
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": 0,
+   "special_stats": {
+    "%_distributed": "37.5%"
+   }
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": 0,
+   "special_stats": {
+    "%_distributed": "50.0%"
+   }
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": 0,
+   "special_stats": {
+    "%_distributed": "62.5%"
+   }
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": 0,
+   "special_stats": {
+    "%_distributed": "75.0%"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": 0,
+   "special_stats": {
+    "%_distributed": "87.5%"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": 0,
+   "special_stats": {
+    "%_distributed": "100.0%"
+   }
+  }
+ },
+ "Rice": {
+  "name": "Rice",
+  "description": "Spawns very quickly, but not very strong.",
+  "common": {
+   "damage": "4",
+   "health": "1",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "12",
+   "health": "3",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "36",
+   "health": "9",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "108",
+   "health": "27",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "324",
+   "health": "81",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "972",
+   "health": "243",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "2916",
+   "health": "729",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "8748",
+   "health": "2187",
+   "petal_reload": "0.1",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Rock": {
+  "name": "Rock",
+  "description": "Extremely durable, but takes a bit longer to recharge.",
+  "common": {
+   "damage": "15",
+   "health": "45",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "45",
+   "health": "135",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "135",
+   "health": "405",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "405",
+   "health": "1215",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "1215",
+   "health": "3645",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "3645",
+   "health": "10935",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "10935",
+   "health": "32805",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "32805",
+   "health": "98415",
+   "petal_reload": "4",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Root": {
+  "name": "Root",
+  "description": "Provides additional armor but only while in the defensive position.",
+  "common": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "2.5"
+   }
+  },
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "7.5"
+   }
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "22.5"
+   }
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "67.5"
+   }
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "202.5"
+   }
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "607.5"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "1052.2"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "armor": "1822.5"
+   }
+  }
+ },
+ "Rose": {
+  "name": "Rose",
+  "description": "Its healing properties are amazing. Not so good at combat though.",
+  "common": {
+   "damage": "5",
+   "health": "5",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "8"
+   }
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "15",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "23"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "45",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "68"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "135",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "203"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "608"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "1823"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "3157"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "10935",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "heal": "5468"
+   }
+  }
+ },
+ "Rubber": {
+  "name": "Rubber",
+  "description": "Increases knockback received.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "0.3",
+    "lightning_resistance": "20%"
+   }
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "0.6",
+    "lightning_resistance": "20%"
+   }
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "0.9",
+    "lightning_resistance": "20%"
+   }
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "1.2",
+    "lightning_resistance": "20%"
+   }
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "1.5",
+    "lightning_resistance": "20%"
+   }
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "1.8",
+    "lightning_resistance": "20%"
+   }
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "2.1",
+    "lightning_resistance": "20%"
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "knockback": "2.4",
+    "lightning_resistance": "20%"
+   }
+  }
+ },
+ "Salt": {
+  "name": "Salt",
+  "description": "Reflects some of the damage you take back to the enemy that dealt it. Reflected damage is reduced by 70% against flowers.",
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_reflection": "90%"
+   }
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_reflection": "95%"
+   }
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_reflection": "100%"
+   }
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_reflection": "105%"
+   }
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_reflection": "110%"
+   }
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_reflection": "115%"
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "damage_reflection": "120%"
+   }
+  }
+ },
+ "Sand": {
+  "name": "Sand",
+  "description": "A bunch of sand particles.",
+  "common": {
+   "damage": "5",
+   "health": "1.2",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "3.8",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  },
+  "rare": {
+   "damage": "45",
+   "health": "11.3",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  },
+  "epic": {
+   "damage": "135",
+   "health": "33.8",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "101.3",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "303.8",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "911.3",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  },
+  "super": {
+   "damage": "10935",
+   "health": "2733.8",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "4"
+  }
+ },
+ "Shell": {
+  "name": "Shell",
+  "description": "Adds a temporary shield to yourself or allies.",
+  "common": {
+   "damage": "5",
+   "health": "25",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "5"
+   }
+  },
+  "unusual": {
+   "damage": "15",
+   "health": "75",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "15"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "225",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "45"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "675",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "135"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "2025",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "405"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "6075",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "1215"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "18225",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "2104"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "54675",
+   "petal_reload": "3.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "shield": "3645"
+   }
+  }
+ },
+ "Shovel": {
+  "name": "Shovel",
+  "description": "Becomes untargetable but unable to use petals for a limited time.",
+  "common": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "15",
+   "usage_reload": "2",
+   "count": "1"
+  },
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "13",
+   "usage_reload": "2",
+   "count": "1"
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "11.3",
+   "usage_reload": "2",
+   "count": "1"
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "9.4",
+   "usage_reload": "2",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "7.5",
+   "usage_reload": "2",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "5.7",
+   "usage_reload": "2",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "3.9",
+   "usage_reload": "2",
+   "count": "1"
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2",
+   "usage_reload": "2",
+   "count": "1"
+  }
+ },
+ "Soil": {
+  "name": "Soil",
+  "description": "Increases health, but also increases flower size and decreases movement speed.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "50"
+   }
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "150"
+   }
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "450"
+   }
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "1350"
+   }
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "4050"
+   }
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "12150"
+   }
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "36450"
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "flower_health": "109350"
+   }
+  }
+ },
+ "Sponge": {
+  "name": "Sponge",
+  "description": "Spreads damage taken by the flower over a period of time. If destroyed, will deal remaining damage all at once.",
+  "unusual": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "soak_period": "3.9"
+   }
+  },
+  "rare": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "soak_period": "5.4"
+   }
+  },
+  "epic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "soak_period": "7.2"
+   }
+  },
+  "legendary": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "soak_period": "9.6"
+   }
+  },
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "soak_period": "15"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "soak_period": "30"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "soak_period": "60"
+   }
+  }
+ },
+ "Square": {
+  "name": "Square",
+  "description": "This shape... it looks familiar...",
+  "common": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "0",
+   "health": "0",
+   "petal_reload": "60",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Starfish": {
+  "name": "Starfish",
+  "description": "Increases health regen while below 75% health.",
+  "unusual": {
+   "damage": "15",
+   "health": "21",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal": "7/sec"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "63",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal": "20/sec"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "189",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal": "61/sec"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "567",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal": "182/sec"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "1701",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal": "547/sec"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "5103",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal": "947/sec"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "15309",
+   "petal_reload": "1.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal": "1640/sec"
+   }
+  }
+ },
+ "Mysterious Stick": {
+  "name": "Mysterious Stick",
+  "description": "A mysterious stick that summons the forces of wind.",
+  "epic": {
+   "damage": "27",
+   "health": "270",
+   "petal_reload": "4",
+   "usage_reload": "2.5",
+   "count": "1",
+   "special_stats": {
+    "spawn,_duration": "x2 Sandstorm (Rare)"
+   }
+  },
+  "legendary": {
+   "damage": "81",
+   "health": "810",
+   "petal_reload": "4",
+   "usage_reload": "3.7",
+   "count": "1",
+   "special_stats": {
+    "spawn,_duration": "x2 Sandstorm (Epic)"
+   }
+  },
+  "mythic": {
+   "damage": "243",
+   "health": "2430",
+   "petal_reload": "4",
+   "usage_reload": "10.7",
+   "count": "1",
+   "special_stats": {
+    "spawn,_duration": "x2 Sandstorm (Legendary)"
+   }
+  },
+  "ultra": {
+   "damage": "729",
+   "health": "7290",
+   "petal_reload": "4",
+   "usage_reload": "22.3",
+   "count": "1",
+   "special_stats": {
+    "spawn,_duration": "x2 Sandstorm (Mythic)"
+   }
+  },
+  "super": {
+   "damage": "2187",
+   "health": "21870",
+   "petal_reload": "4",
+   "usage_reload": "1.6",
+   "count": "1",
+   "special_stats": {
+    "spawn,_duration": "x2 Sandstorm (Mythic)"
+   }
+  }
+ },
+ "Stinger": {
+  "name": "Stinger",
+  "description": "It really hurts, but its very fragile.",
+  "common": {
+   "damage": "100",
+   "health": "2",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "300",
+   "health": "6",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "900",
+   "health": "18",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "2700",
+   "health": "54",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "8100",
+   "health": "162",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "8100",
+   "health": "162",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "3"
+  },
+  "ultra": {
+   "damage": "14580",
+   "health": "291.6",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "5"
+  },
+  "super": {
+   "damage": "43740",
+   "health": "874.8",
+   "petal_reload": "10",
+   "usage_reload": null,
+   "count": "5"
+  }
+ },
+ "Blood Stinger": {
+  "name": "Blood Stinger",
+  "description": "It really hurts, but its very fragile. Deals some of the damage dealt back to the flower.",
+  "common": {
+   "damage": "100",
+   "health": "2",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "self_damage": "7"
+   }
+  },
+  "unusual": {
+   "damage": "300",
+   "health": "6",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "self_damage": "21"
+   }
+  },
+  "rare": {
+   "damage": "900",
+   "health": "18",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "self_damage": "63"
+   }
+  },
+  "epic": {
+   "damage": "2700",
+   "health": "54",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "self_damage": "189"
+   }
+  },
+  "legendary": {
+   "damage": "8100",
+   "health": "162",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "self_damage": "567"
+   }
+  },
+  "mythic": {
+   "damage": "8100",
+   "health": "162",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "3",
+   "special_stats": {
+    "self_damage": "567"
+   }
+  },
+  "ultra": {
+   "damage": "14580",
+   "health": "292",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "5",
+   "special_stats": {
+    "self_damage": "1021"
+   }
+  },
+  "super": {
+   "damage": "43740",
+   "health": "875",
+   "petal_reload": "5",
+   "usage_reload": null,
+   "count": "5",
+   "special_stats": {
+    "self_damage": "3062"
+   }
+  }
+ },
+ "Talisman": {
+  "name": "Talisman",
+  "description": "A necklace that allows the wearer to anticipate enemy attacks.",
+  "common": {
+   "damage": "10",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "3%"
+   }
+  },
+  "unusual": {
+   "damage": "30",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "6%"
+   }
+  },
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "9%"
+   }
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "12%"
+   }
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "15%"
+   }
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "18%"
+   }
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "21%"
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "evasion": "24%"
+   }
+  }
+ },
+ "Third Eye": {
+  "name": "Third Eye",
+  "description": "Allows your flower to expand your petals further out. Does not stack.",
+  "mythic": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_range": "140"
+   }
+  },
+  "ultra": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_range": "240"
+   }
+  },
+  "super": {
+   "damage": null,
+   "health": null,
+   "petal_reload": null,
+   "usage_reload": null,
+   "count": "0",
+   "special_stats": {
+    "extra_range": "340"
+   }
+  }
+ },
+ "Tomato": {
+  "name": "Tomato",
+  "description": "Gets stronger over time.",
+  "common": {
+   "damage": "5~70",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "15~210",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1"
+  },
+  "rare": {
+   "damage": "45~630",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1",
+   "special_stats": {
+    "min_damage": "45",
+    "max_damage": "630"
+   }
+  },
+  "epic": {
+   "damage": "135~1890",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "405~5670",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "1215~17010",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "3645~51030",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1"
+  },
+  "super": {
+   "damage": "10935~153090",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": "3",
+   "count": "1"
+  }
+ },
+ "Uranium": {
+  "name": "Uranium",
+  "description": "Periodically releases radiation in a large radius. Causes even the most passive mobs to become very aggressive. Stronger the closer the victim is to the source. -75% damage versus other flowers.",
+  "rare": {
+   "damage": "90",
+   "health": "225",
+   "petal_reload": "2.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "poison": "270"
+   }
+  },
+  "epic": {
+   "damage": "270",
+   "health": "675",
+   "petal_reload": "2.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "poison": "810"
+   }
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "2025",
+   "petal_reload": "2.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "poison": "2430"
+   }
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "6075",
+   "petal_reload": "2.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "poison": "7290"
+   }
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "18225",
+   "petal_reload": "2.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "poison": "21870"
+   }
+  },
+  "super": {
+   "damage": "21870",
+   "health": "54675",
+   "petal_reload": "2.5",
+   "usage_reload": "1",
+   "count": "1",
+   "special_stats": {
+    "poison": "65610"
+   }
+  }
+ },
+ "Web": {
+  "name": "Web",
+  "description": "t's really sticky.",
+  "unusual": {
+   "damage": "15",
+   "health": "15",
+   "petal_reload": "3",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "10",
+    "radius": "60"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "45",
+   "petal_reload": "3",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "10",
+    "radius": "70"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "135",
+   "petal_reload": "3",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "10",
+    "radius": "80"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "405",
+   "petal_reload": "3",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "10",
+    "radius": "100"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "1215",
+   "petal_reload": "3",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "10",
+    "radius": "150"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "3645",
+   "petal_reload": "3",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "10",
+    "radius": "200"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "10935",
+   "petal_reload": "3",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "duration": "10",
+    "radius": "250"
+   }
+  }
+ },
+ "Wing": {
+  "name": "Wing",
+  "description": "It comes and goes.",
+  "common": {
+   "damage": "20",
+   "health": "10",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "unusual": {
+   "damage": "60",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "rare": {
+   "damage": "180",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "540",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "1620",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "4860",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "14580",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "43740",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Yggdrasil": {
+  "name": "Yggdrasil",
+  "description": "A dried leaf from the Yggdrasil tree. Rumored to be able to bring the fallen back to life.",
+  "legendary": {
+   "damage": "0",
+   "health": "810",
+   "petal_reload": "20",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "revive_heal": "20%"
+   }
+  },
+  "mythic": {
+   "damage": "0",
+   "health": "2430",
+   "petal_reload": "7.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "revive_heal": "20%"
+   }
+  },
+  "ultra": {
+   "damage": "0",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "revive_heal": "20%"
+   }
+  },
+  "super": {
+   "damage": "0",
+   "health": "21870",
+   "petal_reload": "1",
+   "usage_reload": "0.5",
+   "count": "1",
+   "special_stats": {
+    "revive_heal": "20%"
+   }
+  }
+ },
+ "Yin Yang": {
+  "name": "Yin Yang",
+  "description": "This mysterious petal affects the rotation of your petals in unpredictable ways.",
+  "rare": {
+   "damage": "90",
+   "health": "90",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "epic": {
+   "damage": "270",
+   "health": "270",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "legendary": {
+   "damage": "810",
+   "health": "810",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "mythic": {
+   "damage": "2430",
+   "health": "2430",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "ultra": {
+   "damage": "7290",
+   "health": "7290",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1"
+  },
+  "super": {
+   "damage": "21870",
+   "health": "21870",
+   "petal_reload": "2",
+   "usage_reload": null,
+   "count": "1"
+  }
+ },
+ "Yucca": {
+  "name": "Yucca",
+  "description": "Heals your flower but only while in the defensive position.",
+  "unusual": {
+   "damage": "15",
+   "health": "30",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal_(per_sec)": "5"
+   }
+  },
+  "rare": {
+   "damage": "45",
+   "health": "90",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal_(per_sec)": "14"
+   }
+  },
+  "epic": {
+   "damage": "135",
+   "health": "270",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal_(per_sec)": "43"
+   }
+  },
+  "legendary": {
+   "damage": "405",
+   "health": "810",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal_(per_sec)": "130"
+   }
+  },
+  "mythic": {
+   "damage": "1215",
+   "health": "2430",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal_(per_sec)": "389"
+   }
+  },
+  "ultra": {
+   "damage": "3645",
+   "health": "7290",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal_(per_sec)": "673"
+   }
+  },
+  "super": {
+   "damage": "10935",
+   "health": "21870",
+   "petal_reload": "2.5",
+   "usage_reload": null,
+   "count": "1",
+   "special_stats": {
+    "heal_(per_sec)": "1166"
+   }
+  }
+ }
+}
