@@ -2,6 +2,7 @@
 """v3: 从wasm内存bridge读取怪物数据 (玩家=camera固定地址, 怪=静态type id 1-83)
 用法: 先跑 bridge_server.py + 浏览器注入v4脚本, 然后 main.py 地图 --memory
 v1.18.0: 决策改用 mob_db 统一数据层(稀有度反推/真实碰撞箱/追击范围/掉落价值)
+v1.25.2: find_best_target 加 sticky_sid 目标粘滞(AI研究§8.1-2)
 """
 import time, math, json, urllib.request
 
@@ -139,12 +140,14 @@ def get_attack_distance(sid, rarity='Common'):
     return r + 1.5
 
 
-def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000, force_sid=None):
+def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000, force_sid=None, sticky_sid=None):
     """综合评分找最佳目标 (mob_db决策 + AI研究报告规则):
     秒杀优先(能秒的贴脸追) > 特殊稀有怪5倍 > 掉落价值 > 距离近
     危险怪/打不动的/不打清单(NO_FIGHT)自动跳过
     海星半血会逃 -> 一旦发现立即秒
-    v1.21.2: force_sid=Super雷达猎杀目标(公告给怪名时只追它, 哪怕打不动也冲过去蹭)"""
+    v1.21.2: force_sid=Super雷达猎杀目标(公告给怪名时只追它, 哪怕打不动也冲过去蹭)
+    v1.25.2: sticky_sid=当前粘滞目标(AI研究§8.1-2 仇恨随时间增长 -> 单目标速杀防拉扯),
+      同目标 +8000 分粘滞, 除非出现评分高一大截的新目标(如Super/海星半血/更高稀有度)才换"""
     mobs, _ = get_nearby_mobs(max_dist=max_dist)
     best = None
     best_score = -999
@@ -171,6 +174,9 @@ def find_best_target(player_x, player_y, can_kill_hp=500, max_dist=15000, force_
             max_hp = hi[1] if hi else hp
             if hp < max_hp * 0.5:
                 score += 100000.0
+        # v1.25.2 目标粘滞: 正在打的目标继续打(不频繁换目标拉扯引怪)
+        if sticky_sid and sid == sticky_sid:
+            score += 8000.0
         # v1.23.4: 官方bot评分公式(florr_clone bot_ai.cpp) - 稀有度胃口-距离
         # 单位都是"值得走这么远": Rare 460/Legendary 920/Mythic 1150/Super 6000
         score += mob_db.tier_appetite(rarity) - dist

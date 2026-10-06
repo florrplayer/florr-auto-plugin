@@ -6,6 +6,7 @@
 用法: py -3.12 main.py desert --memory
 v1.18.0: 决策走 mob_db(稀有度反推/真实碰撞箱/追击范围/掉落价值) + 逃跑不往墙角跑
 v1.24.0: bot式侧移避怪 + v1.24.1 导弹射程撤出 + v1.24.5 修NameError
+v1.25.2: 深度用AI研究§8 - 目标粘滞+传送门3秒无敌窗+蟑螂螃蟹打带跑
 """
 import time, math, threading
 import mob_db
@@ -94,69 +95,6 @@ class MemoryBattle:
             print(f"[聊天] 发送失败: {e}")
             return False
 
-
-    # v1.24.0: bot式侧移避怪(bot_ai.cpp移植) - 追击时前方有怪不撞上去, 侧移绕过
-    AVOID_MARGIN = 26.0       # kBotMobAvoidMargin
-    AVOID_LOOKAHEAD = 110.0   # kBotMobAvoidLookahead
-    AVOID_TANGENT = 0.85      # kBotMobAvoidTangent
-    AVOID_DEADBAND = 30.0     # kBotMobAvoidSideDeadband
-    AVOID_RADIUS = 260.0      # kBotMobAvoidQueryRadius
-    PLAYER_R = 20.0           # kPlayerBaseRadius
-
-    def _bot_avoid(self, px, py, tx, ty, mobs):
-        """正前方有怪挡路 -> 侧移绕过(不减速不撞); 返回True表示本次改走侧移"""
-        heading_x, heading_y = tx - px, ty - py
-        hlen = math.hypot(heading_x, heading_y)
-        if hlen < 1:
-            return False
-        fx, fy = heading_x / hlen, heading_y / hlen
-        lx, ly = -fy, fx   # 左向量
-        best = None
-        for m in mobs or []:
-            mx, my = m.get('x', 0), m.get('y', 0)
-            tox, toy = mx - px, my - py
-            dist = math.hypot(tox, toy)
-            if dist < 1:
-                continue
-            ahead = (tox * fx + toy * fy) / dist   # 归一化前方分量
-            if ahead <= 0.0:
-                continue   # 在身后不挡路
-            mr = m.get('radius') or m.get('r') or 10.0
-            ring = self.PLAYER_R + mr + self.AVOID_MARGIN
-            outer = ring + self.AVOID_LOOKAHEAD
-            if dist >= outer:
-                continue
-            strength = min(2.0, (outer - dist) / self.AVOID_LOOKAHEAD)
-            lateral = (tox * lx + toy * ly) / dist
-            side = -1.0 if abs(lateral) < self.AVOID_DEADBAND / 100.0 else (-1.0 if lateral >= 0 else 1.0)
-            headOn = min(1.0, ahead)
-            blend = headOn * self.AVOID_TANGENT
-            push_x, push_y = -tox / dist, -toy / dist   # 推离
-            sx, sy = lx * side, ly * side                # 侧移
-            # 混合: 推离*(1-blend) + 侧移*strength*blend
-            ox = push_x * (1.0 - blend) + sx * strength * blend
-            oy = push_y * (1.0 - blend) + sy * strength * blend
-            # 偏置(不反转意图): 目标方向 + 0.6*偏置
-            dx = fx + ox * 0.6
-            dy = fy + oy * 0.6
-            if best is None or dist < best[0]:
-                best = (dist, dx, dy, m)
-        if best is None:
-            return False
-        _, dx, dy, m = best
-        self._keys_release()
-        if abs(dx) > abs(dy):
-            if dx > 0: self.w.key_down(VK_D)
-            else:      self.w.key_down(VK_A)
-        else:
-            if dy > 0: self.w.key_down(VK_S)
-            else:      self.w.key_down(VK_W)
-        print(f"[侧移] 绕开 {m.get('cn','怪')}({m.get('rarity','')}) 距离{best[0]:.0f}")
-        return True
-
-    def _move_dir(self, d):
-        """按指定方向移动 (w/a/s/d)"""
-
     # v1.24.0: bot式侧移避怪(bot_ai.cpp移植) - 追击时前方有怪不撞上去, 侧移绕过
     AVOID_MARGIN = 26.0       # kBotMobAvoidMargin
     AVOID_LOOKAHEAD = 110.0   # kBotMobAvoidLookahead
@@ -228,6 +166,10 @@ class MemoryBattle:
         try: self.w.key_down(VK_RBUTTON)
         except: pass
         last_move = time.time()
+        # v1.25.2: 目标粘滞(AI研究§8.1-2 仇恨随存活增长->单目标速杀防拉扯) + 传送门3秒无敌窗(§8.1-6)
+        self._sticky_sid = None
+        self._last_px = self._last_py = None
+        self._invuln_until = 0.0
         # v1.21.2: Super出生公告雷达 (bridge聊天 -> 全图扫Super)
         try:
             from super_ping import SuperPing
@@ -242,6 +184,18 @@ class MemoryBattle:
                     time.sleep(0.2); continue
                 px, py = self.player['x'], self.player['y']
 
+                # v1.25.2 传送门3秒无敌窗口: 坐标突变=跨图, 传送门出来3秒敌对怪中立化(§8.1-6)
+                if self._last_px is not None:
+                    jump = math.hypot(px - self._last_px, py - self._last_py)
+                    if jump > 2000:
+                        self._invuln_until = time.time() + 3.0
+                        print(f"[传送] 检测到跨图位移{jump:.0f}px, 3秒无敌窗口原地防御重校准")
+                self._last_px, self._last_py = px, py
+                if time.time() < self._invuln_until:
+                    self._keys_release()
+                    time.sleep(0.25)
+                    continue
+
                 # 读怪物
                 mobs, _ = get_nearby_mobs()
 
@@ -251,13 +205,21 @@ class MemoryBattle:
                 if danger:
                     d = danger[0]
                     dx, dy = px - d['x'], py - d['y']
+                    # v1.25.2: 逃跑时清掉粘滞目标(保命优先, 回来再选)
+                    self._sticky_sid = None
                     print(f"[躲] 危险怪({d['cn']} {d.get('rarity','')}) {math.hypot(d['x']-px,d['y']-py):.0f}px, 逃跑(偏中心)")
                     self._run_away(dx, dy, px, py)
                     time.sleep(0.2)
                     continue
 
-                # 选目标: mob_db综合评分 (秒杀优先+特殊怪5倍+掉落价值+距离)
-                target = find_best_target(px, py, can_kill_hp=CAN_KILL_HP, max_dist=MAX_TARGET_DIST)
+                # 选目标: mob_db综合评分 (秒杀优先+特殊怪5倍+掉落价值+距离+粘滞)
+                target = find_best_target(px, py, can_kill_hp=CAN_KILL_HP, max_dist=MAX_TARGET_DIST,
+                                          sticky_sid=self._sticky_sid)
+                # v1.25.2: 更新粘滞(目标换了才更新, 打死了自然消失)
+                if target is not None:
+                    if target['sid'] != self._sticky_sid:
+                        print(f"[粘滞] 目标锁定 {target['cn']}({target['rarity']}) 不再频繁换怪")
+                    self._sticky_sid = target['sid']
 
                 # v1.21.2: Super公告雷达 - 每帧喂bridge聊天, 命中公告开启全图扫Super
                 if self.super_ping is not None:
@@ -308,8 +270,10 @@ class MemoryBattle:
                     dist = math.hypot(target['x']-px, target['y']-py)
                     spd = mob_db.get_aggro_speed(target['sid'])   # AI研究: 追击速度系数(≥1.0=追得上玩家)
                     # v1.23.7: stinger/导弹怪(黄蜂/胡蜂/螳螂)也进打带跑 - 摆尾蓄力250ms闪避窗
+                    # v1.25.2: +蟑螂(受击爆发冲撞)/螃蟹(40%血冲刺)(AI研究§8.2-12/13) -> 打带跑横移
                     ai_info = mob_db.mob_ai_info(target['sid'])
-                    stinger_dodge = bool(ai_info.get('stinger') or ai_info.get('projectile'))
+                    dash_dodge = target['sid'] in ('roach', 'crab', 'crab_mecha')
+                    stinger_dodge = bool(ai_info.get('stinger') or ai_info.get('projectile')) or dash_dodge
                     # 追得上的怪(冲撞/毒)或远程导弹怪不能站桩贴脸(接触伤害/导弹白嫖), 用打带跑: 蹭1下立刻拉开
                     hit_run = (spd >= 1.0 or stinger_dodge) and (target.get('score', 0) < 1000)
                     if hit_run:
