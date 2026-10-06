@@ -5,11 +5,13 @@
 不用截图! 窗口最小化也能跑!
 用法: py -3.12 main.py desert --memory
 v1.18.0: 决策走 mob_db(稀有度反推/真实碰撞箱/追击范围/掉落价值) + 逃跑不往墙角跑
+v1.24.0: bot式侧移避怪 + v1.24.1 导弹射程撤出 + v1.24.5 修NameError
 """
 import time, math, threading
 import mob_db
 from bridge_combat import (get_player, get_nearby_mobs, find_best_target,
                            wave_end_count)
+import bridge_combat  # v1.24.5: 修 NameError (第201行 bridge_combat._fetch_latest 需要模块名)
 
 # 危险怪type集合(统一走mob_db.DANGER_SIDS官方集)
 _DANGER_TYPES = {mob_db.SID_TO_TYPE_ID[s] for s in mob_db.DANGER_SIDS
@@ -91,6 +93,66 @@ class MemoryBattle:
         except Exception as e:
             print(f"[聊天] 发送失败: {e}")
             return False
+
+
+    # v1.24.0: bot式侧移避怪(bot_ai.cpp移植) - 追击时前方有怪不撞上去, 侧移绕过
+    AVOID_MARGIN = 26.0       # kBotMobAvoidMargin
+    AVOID_LOOKAHEAD = 110.0   # kBotMobAvoidLookahead
+    AVOID_TANGENT = 0.85      # kBotMobAvoidTangent
+    AVOID_DEADBAND = 30.0     # kBotMobAvoidSideDeadband
+    AVOID_RADIUS = 260.0      # kBotMobAvoidQueryRadius
+    PLAYER_R = 20.0           # kPlayerBaseRadius
+
+    def _bot_avoid(self, px, py, tx, ty, mobs):
+        """正前方有怪挡路 -> 侧移绕过(不减速不撞); 返回True表示本次改走侧移"""
+        heading_x, heading_y = tx - px, ty - py
+        hlen = math.hypot(heading_x, heading_y)
+        if hlen < 1:
+            return False
+        fx, fy = heading_x / hlen, heading_y / hlen
+        lx, ly = -fy, fx   # 左向量
+        best = None
+        for m in mobs or []:
+            mx, my = m.get('x', 0), m.get('y', 0)
+            tox, toy = mx - px, my - py
+            dist = math.hypot(tox, toy)
+            if dist < 1:
+                continue
+            ahead = (tox * fx + toy * fy) / dist   # 归一化前方分量
+            if ahead <= 0.0:
+                continue   # 在身后不挡路
+            mr = m.get('radius') or m.get('r') or 10.0
+            ring = self.PLAYER_R + mr + self.AVOID_MARGIN
+            outer = ring + self.AVOID_LOOKAHEAD
+            if dist >= outer:
+                continue
+            strength = min(2.0, (outer - dist) / self.AVOID_LOOKAHEAD)
+            lateral = (tox * lx + toy * ly) / dist
+            side = -1.0 if abs(lateral) < self.AVOID_DEADBAND / 100.0 else (-1.0 if lateral >= 0 else 1.0)
+            headOn = min(1.0, ahead)
+            blend = headOn * self.AVOID_TANGENT
+            push_x, push_y = -tox / dist, -toy / dist   # 推离
+            sx, sy = lx * side, ly * side                # 侧移
+            # 混合: 推离*(1-blend) + 侧移*strength*blend
+            ox = push_x * (1.0 - blend) + sx * strength * blend
+            oy = push_y * (1.0 - blend) + sy * strength * blend
+            # 偏置(不反转意图): 目标方向 + 0.6*偏置
+            dx = fx + ox * 0.6
+            dy = fy + oy * 0.6
+            if best is None or dist < best[0]:
+                best = (dist, dx, dy, m)
+        if best is None:
+            return False
+        _, dx, dy, m = best
+        self._keys_release()
+        if abs(dx) > abs(dy):
+            if dx > 0: self.w.key_down(VK_D)
+            else:      self.w.key_down(VK_A)
+        else:
+            if dy > 0: self.w.key_down(VK_S)
+            else:      self.w.key_down(VK_W)
+        print(f"[侧移] 绕开 {m.get('cn','怪')}({m.get('rarity','')}) 距离{best[0]:.0f}")
+        return True
 
     def _move_dir(self, d):
         """按指定方向移动 (w/a/s/d)"""
@@ -188,27 +250,40 @@ class MemoryBattle:
                     stinger_dodge = bool(ai_info.get('stinger') or ai_info.get('projectile'))
                     # 追得上的怪(冲撞/毒)或远程导弹怪不能站桩贴脸(接触伤害/导弹白嫖), 用打带跑: 蹭1下立刻拉开
                     hit_run = (spd >= 1.0 or stinger_dodge) and (target.get('score', 0) < 1000)
-                    if hit_run and dist > STOP_DIST:
-                        dx, dy = target['x']-px, target['y']-py
-                        self._move_towards(dx, dy)
-                        print(f"[打带跑] {target['cn']}({target.get('rarity','')}) 追击速度{spd:.2f} 距离{dist:.0f}" + (' [横闪]' if stinger_dodge else ''))
-                        last_move = time.time()
-                    elif hit_run and dist <= STOP_DIST:
-                        # 贴到跟前打一下立刻撤 (stinger: 0.3s输出窗对齐250ms蓄力, 其他0.8s)
-                        self._keys_release()
-                        now = time.time()
-                        hold = 0.3 if stinger_dodge else 0.8
-                        if now - last_move > hold:
-                            self._run_away(px-target['x'], py-target['y'], px, py)
-                            print(f"[打带跑] 蹭完即撤" + (' (闪避窗0.3s)' if stinger_dodge else ''))
-                            last_move = now
+                    if hit_run:
+                        # v1.24.1: 导弹怪在射程内优先持续撤出(黄蜂333/螳螂500), 撤到射程外才回冲输出
+                        mrange = mob_db.missile_range(target['sid']) if stinger_dodge else None
+                        if stinger_dodge and mrange and dist <= mrange + 10:
+                            if time.time() - last_move > 0.35:
+                                self._run_away(px-target['x'], py-target['y'], px, py)
+                                print(f"[打带跑] 撤出导弹射程({mrange:.0f}) 当前{dist:.0f}")
+                                last_move = time.time()
+                            else:
+                                time.sleep(0.15)
+                        elif dist > STOP_DIST:
+                            dx, dy = target['x']-px, target['y']-py
+                            self._move_towards(dx, dy)
+                            print(f"[打带跑] {target['cn']}({target.get('rarity','')}) 追击速度{spd:.2f} 距离{dist:.0f}" + (' [横闪]' if stinger_dodge else ''))
+                            last_move = time.time()
                         else:
-                            # 输出窗口内保持静止(防御状态的花瓣在打)
-                            time.sleep(0.15)
+                            # 贴到跟前打一下立刻撤 (stinger: 0.3s输出窗对齐250ms蓄力, 其他0.8s)
+                            self._keys_release()
+                            now = time.time()
+                            hold = 0.3 if stinger_dodge else 0.8
+                            if now - last_move > hold:
+                                self._run_away(px-target['x'], py-target['y'], px, py)
+                                print(f"[打带跑] 蹭完即撤" + (' (闪避窗0.3s)' if stinger_dodge else ''))
+                                last_move = now
+                            else:
+                                # 输出窗口内保持静止(防御状态的花瓣在打)
+                                time.sleep(0.15)
                     elif dist > STOP_DIST:
                         dx, dy = target['x']-px, target['y']-py
-                        self._move_towards(dx, dy)
-                        print(f"[打] {target['cn']}({target.get('rarity','')}) hp={target['hp']} 距离{dist:.0f} 评分{target.get('score',0):.0f}")
+                        # v1.24.0: bot式侧移避怪 - 前方有怪挡路先绕, 不撞上去
+                        if not self._bot_avoid(px, py, target['x'], target['y'],
+                                               get_nearby_mobs(self.player, max_dist=300)):
+                            self._move_towards(dx, dy)
+                            print(f"[打] {target['cn']}({target.get('rarity','')}) hp={target['hp']} 距离{dist:.0f} 评分{target.get('score',0):.0f}")
                         last_move = time.time()
                     else:
                         # 到跟前了, 停下输出
