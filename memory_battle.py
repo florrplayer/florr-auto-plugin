@@ -8,6 +8,7 @@ v1.18.0: 决策走 mob_db(稀有度反推/真实碰撞箱/追击范围/掉落价
 v1.24.0: bot式侧移避怪 + v1.24.1 导弹射程撤出 + v1.24.5 修NameError
 v1.25.2: 深度用AI研究§8 - 目标粘滞+传送门3秒无敌窗+蟑螂螃蟹打带跑
 v1.27.0: Mythic走位表(florr-auto-farm实测) - Mythic甲虫/火兵蚁/蝎子/沙蜈蚣 strafe/ram 打带跑
+v1.28.1: CAUTIOUS接入(Ultra沙尘暴/仙人掌/沙蜈蚣/火蚁可打但保持距离250px, 不站桩)
 """
 import time, math, threading
 import mob_db
@@ -299,6 +300,26 @@ class MemoryBattle:
 
                 if target:
                     dist = math.hypot(target['x']-px, target['y']-py)
+                    # v1.28.1: CAUTIOUS目标(Ultra沙尘暴/仙人掌/沙蜈蚣/火蚁)打带跑保持距离,
+                    # 不进停步半径(250px外输出), 贴近了就撤, 不站桩吃满Ultra伤害
+                    if target.get('cautious'):
+                        hold_px = target.get('cautious_hold_px', 250.0)
+                        if dist > hold_px:
+                            dx, dy = target['x']-px, target['y']-py
+                            self._move_towards(dx, dy)
+                            print(f"[谨慎] {target['cn']}({target.get('rarity','')}) 保持距离{hold_px:.0f} 当前{dist:.0f}")
+                            last_move = time.time()
+                            time.sleep(0.15)
+                            continue
+                        else:
+                            # 已贴近: 撤出保持距离(不站桩)
+                            if time.time() - last_move > 0.5:
+                                self._run_away(px-target['x'], py-target['y'], px, py)
+                                print(f"[谨慎] {target['cn']} 已贴近, 撤出到{hold_px:.0f}外")
+                                last_move = time.time()
+                            else:
+                                time.sleep(0.15)
+                            continue
                     spd = mob_db.get_aggro_speed(target['sid'])   # AI研究: 追击速度系数(≥1.0=追得上玩家)
                     # v1.23.7: stinger/导弹怪(黄蜂/胡蜂/螳螂)也进打带跑 - 摆尾蓄力250ms闪避窗
                     # v1.25.2: +蟑螂(受击爆发冲撞)/螃蟹(40%血冲刺)(AI研究§8.2-12/13) -> 打带跑横移
