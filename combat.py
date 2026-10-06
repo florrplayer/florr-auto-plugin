@@ -18,64 +18,62 @@ from mob_table import MOB_CN
 from drop_table import mob_id2sid, petal_id2sid
 
 # ===== v1.5.0 怪种识别 =====
-# 官方体型缩放表(相对 Common, Unofficial Florr Data Spreadsheet): Unusual x1.1 / Rare x1.3 / Epic x1.5 / Mythic x3 / Super x10
-# Legendary(表未列, 按趋势插值~x2) / Ultra(表未列, Mythic~Super 之间估 x6) -> 标注估算
 RARITY_SIZE_FACTOR = {
     "common": 1.0, "unusual": 1.1, "rare": 1.3, "epic": 1.5,
-    "legendary": 2.0,   # 估算
-    "mythic": 3.0, "ultra": 6.0,   # ultra 估算(官方表未列)
+    "legendary": 2.0,
+    "mythic": 3.0, "ultra": 6.0,
     "super": 10.0,
 }
-# 形状分类树(按 Common 基准半径 + 宽高比 + 矩形度 -> 怪种 sid)
-# 阈值基于官方图形知识初版, 实测误判可截图校准(同玩家点校准法)
 
 
 def classify_mob(r_common, aspect, rect):
-    """怪种识别 v1: 用官方体型缩放把屏幕半径换算回 Common 基准, 按大小+形状分类
-    返回 sid(未识别返回 None)"""
+    """怪种识别 v1: 官方体型缩放把屏幕半径换算回 Common 基准, 按大小+形状分类"""
     aspect = max(aspect, 1.0)
     if aspect > 2.4:
-        # 长条 -> 蜈蚣系
         return "centipede" if r_common < 60 else "centipede_desert"
     if rect > 0.86 and aspect < 1.3:
-        return "square"                     # 方方正正 -> 正方形
+        return "square"
     if aspect <= 1.35:
-        # 圆形系
         if r_common < 11:
-            return "rock"                   # 最小圆 -> 岩石
+            return "rock"
         if r_common < 19:
-            return "bee"                    # 小圆 -> 蜜蜂
+            return "bee"
         if r_common < 30:
-            return "ladybug"                # 中圆 -> 瓢虫
+            return "ladybug"
         if r_common < 48:
-            return "beetle"                 # 大圆 -> 甲虫
-        return "ant_hole"                   # 超大圆 -> 蚁穴
+            return "beetle"
+        return "ant_hole"
     else:
-        # 椭圆系
         if r_common < 13:
-            return "ant_baby"               # 极小椭圆 -> 幼蚁
+            return "ant_baby"
         if r_common < 24:
-            return "ant_worker"             # 小椭圆 -> 工蚁
+            return "ant_worker"
         if r_common < 38:
-            return "ant_soldier"            # 中椭圆 -> 兵蚁
+            return "ant_soldier"
         if r_common < 60:
-            return "hornet"                 # 大椭圆 -> 黄蜂
-        return "ant_queen"                  # 超大椭圆 -> 蚁后
+            return "hornet"
+        return "ant_queen"
 
 
 def mob_name(sid):
-    """怪种 sid -> 中文名(官方 73 sid 映射, 未收录显示原 sid)"""
     if not sid:
         return "未知"
     return MOB_CN.get(sid, sid)
 
+def mob_name_en(sid):
+    if not sid:
+        return ""
+    try:
+        from mob_db import mob_en_name
+        n = mob_en_name(sid)
+        return n if n and n != sid else ""
+    except Exception:
+        return ""
+
 
 _DROP_CACHE = {"raw": None, "idx": None}
 
-
 def _load_drops():
-    """懒加载官方掉率表(florr_dropchance.json, _Util_CalculateDropChance 实测 332 条)
-    -> idx[(mob_id, rarity)] = [(chance, petal_sid)...]"""
     if _DROP_CACHE["raw"] is not None:
         return _DROP_CACHE
     import json, os
@@ -98,9 +96,7 @@ def _load_drops():
 
 _HP_CACHE = {"data": None}
 
-
 def _fmt_hp(v):
-    """数字 -> 中文缩写显示: 157950 -> 15.8万, 218700000 -> 2.19亿"""
     if v >= 100000000:
         return "%.2f亿" % (v / 100000000.0)
     if v >= 10000:
@@ -109,7 +105,6 @@ def _fmt_hp(v):
 
 
 def mob_hp(sid, rarity=5):
-    """目标怪官方血量(v1.5.2, data/mob_hp.json): 返回 "15.8万" 或 None"""
     if not sid:
         return None
     if _HP_CACHE["data"] is None:
@@ -129,8 +124,6 @@ def mob_hp(sid, rarity=5):
 
 
 def drop_hint(sid, rarity=5):
-    """目标怪掉落提示(v1.5.1): 返回 "rose 8.9% / stinger 94.1%" 之类短句
-    rarity: 5=Mythic 6=Ultra; 无数据返回空串"""
     if not sid:
         return ""
     mid = None
@@ -153,32 +146,25 @@ def drop_hint(sid, rarity=5):
     return " ".join(parts)
 
 # ===== 参数(可调) =====
-# HSV 阈值(OpenCV 尺度: H 0-179 = 度数/2, S/V 0-255)
-# Mythic 青 #1FDBDE: 真H 181° -> OpenCV H 90, S 222, V 222
-# Ultra  粉 #FF2B75: 真H 339° -> OpenCV H 170, S 212, V 255
-# (Legendary 红 H=0, 与粉/青均不冲突)
-MYTHIC_HSV = ((85, 100, 100), (100, 255, 255))   # M 怪 青色
-ULTRA_HSV = ((162, 100, 100), (178, 255, 255))   # U 怪 粉色
-LEGENDARY_HSV = ((0, 100, 100), (8, 255, 255))     # 传奇 红 #DE1F1F (OpenCV H 0-4, 与青/粉不冲突)
-KILL_STOP = 0.5                          # 追击贴脸距离(地图像素, 用户要求 0.5)
-BODY_CLEAR = 2.5                         # 打怪: 目标点外移到 怪半径+2.5 地图单位(停在碰撞箱外, 不撞上去)
-LEECH_CLEAR = 5.5                        # 蹭掉落: 站定点外移到 怪半径+5.5 (高稀有度大怪更远站定, 不撞身体)
-WARN_MARGIN = 10.0                       # 危险怪预警距离: 进入10px内提前绕开(人先躲远)
-CHASE_WARN = 8.0                         # 打怪中危险怪进入8px内停手逃跑
-KISS_SLOW = 3.0                          # 贴脸减速区: 3px内放慢试探(人犹豫贴脸)
-PROJ_MIN_PX = 4                            # 飞行物最小尺寸(导弹/螯针比怪小)
-PROJ_MAX_PX = 24                           # 飞行物最大尺寸(含Mythic+大导弹, 降采样960宽基准)
-PROJ_DODGE_R = 120                         # 飞行物进入玩家周围120px内才闪避
-HP_BAR_Y = 30                            # 玩家脚下血条位置: 中心下方30px(屏幕px, 默认HUD)
-HP_BAR_H = 4                             # 血条半高(px)
-HP_BAR_W = 50                            # 血条半宽(px)
-HP_FLEE = 0.20                           # 血量低于20% 跑路(维基攻略建议提前切回血, 防秒杀)
-HP_RECOVER = 0.35                        # 血量恢复到35% 才回去继续
-# 回血花瓣种类 -> 低血触发线(研究落地: 玫瑰爆发20%救急/大丽花稳定30%/丝兰防御20%/海星被动40%提前切)
+MYTHIC_HSV = ((85, 100, 100), (100, 255, 255))
+ULTRA_HSV = ((162, 100, 100), (178, 255, 255))
+LEGENDARY_HSV = ((0, 100, 100), (8, 255, 255))
+KILL_STOP = 0.5
+BODY_CLEAR = 2.5
+LEECH_CLEAR = 5.5
+WARN_MARGIN = 10.0
+CHASE_WARN = 8.0
+KISS_SLOW = 3.0
+PROJ_MIN_PX = 4
+PROJ_MAX_PX = 24
+PROJ_DODGE_R = 120
+HP_BAR_Y = 30
+HP_BAR_H = 4
+HP_BAR_W = 50
+HP_FLEE = 0.20
+HP_RECOVER = 0.35
 HEAL_TRIGGER = {"rose": 0.20, "dahlia": 0.30, "yucca": 0.20, "starfish": 0.40, "leaf": 0.25}
-# 全稀有度颜色(怪本体色=稀有度色): 普通绿/罕见黄/稀有蓝/史诗紫/传奇红/神话青/究极粉
 RANK_ORDER = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ultra"]
-# 精确色相(OpenCV H=真角度/2) + 高S/V防背景误检; 绿/黄/蓝按实测收紧(M/U已校准不动)
 RANK_HSV = {
     "common":    ((52, 120, 160), (60, 255, 255)),
     "unusual":   ((22, 140, 180), (28, 255, 255)),
@@ -188,48 +174,36 @@ RANK_HSV = {
     "mythic":    MYTHIC_HSV,
     "ultra":     ULTRA_HSV,
 }
-_screen_center = [960, 540]                       # 实际窗口中心(启动时标定, 兼容4K)
-_downscale = 2.0                                   # 降采样比例(实际宽/检测宽, 标定后自动设)
-SCALE_PX_PER_UNIT = 5.0                          # 世界单位/像素(1px=5世界单位, 经验值需标定)
-WORLD_PER_MAPUNIT = 206.5                        # 世界单位/地图像素(desert 61952/300)
-MIN_MOB_PX = 12                                  # 怪物最小屏幕尺寸(过滤花瓣/粒子)
-MAX_MOB_PX = 260                                 # 怪物最大屏幕尺寸(过滤大色块)
-EXCLUDE_CENTER_R = 40                            # 排除玩家自身区域半径(屏幕px)
-ULTRA_AVOID = 5.0                                # 避开 U 距离(地图像素)
-ULTRA_KISS = 0.5                                 # 贴脸距离(地图像素)
-DEVIATION = 30.0                                 # 打 M 不偏离巡逻点超过该距离(地图像素)
-# ===== 特殊稀有生物优先打(用户点名) =====
-# 正方形(亮黄方形/10血100%掉正方形花瓣) / shiny闪亮(白亮高光, 如闪亮瓢虫掉Yggdrasil)
-# 金叶虫(金黄, 仅丛林, Ultra+才掉黄金之叶) / 潜水兵蚁(蓝灰, 仅海洋)
-# 颜色为初版估计(依据维基外观描述), 地图/形状过滤防误检; 实测误检漏检截图后可精调(同玩家点#F9DD64校准)
+_screen_center = [960, 540]
+_downscale = 2.0
+SCALE_PX_PER_UNIT = 5.0
+WORLD_PER_MAPUNIT = 206.5
+MIN_MOB_PX = 12
+MAX_MOB_PX = 260
+EXCLUDE_CENTER_R = 40
+ULTRA_AVOID = 5.0
+ULTRA_KISS = 0.5
+DEVIATION = 30.0
 SPECIAL_MOBS = [
-    # (名称, HSV区间, 地图白名单(仅这些图检测), 形状判定)
-    # 形状: "square"=矩形度>0.85(方) / "nonround"=矩形度<0.85(非圆, 叶虫形) / None=不限
     ("golden_leafbug",  ((18, 140, 130), (30, 255, 255)), ("jungle",), "nonround"),
     ("shiny_ladybug",   ((22, 140, 180), (28, 255, 255)), ("desert",), None),
     ("shiny",           ((0, 0, 190),    (180, 70, 255)), None,       None),
     ("diver_ant",       ((95, 60, 80),   (135, 255, 255)), ("ocean",), None),
     ("square",          ((20, 140, 150), (36, 255, 255)), None,       "square"),
 ]
-# 优先级按挂机价值: 金叶虫(黄金之叶) > 黄瓢虫(Yggdrasil) > shiny(白亮) > 潜水兵蚁 > 正方形(0.0001%几乎遇不到)
-# ⚠️ 黄瓢虫与罕见黄怪同黄色段, 初版仅靠"沙漠+尺寸"过滤, 实测误检可截图精调(同玩家点校准)
 SPECIAL_PRIORITY_ORDER = ["golden_leafbug", "shiny_ladybug", "shiny", "diver_ant", "square"]
-SPECIAL_DEVIATION = 60.0          # 特殊怪放宽偏离巡逻点限制(稀有生物值得追)
+SPECIAL_DEVIATION = 60.0
 SPECIAL_MIN_PX = 10
 SPECIAL_MAX_PX = 260
 
 
 def _rectangularity(area, w, h):
-    """矩形度(连通域面积/外接矩形面积): 正方形≈1.0, 圆形≈0.785, 长条≈0.5"""
     if w <= 0 or h <= 0:
         return 0.0
     return area / float(w * h)
 
 
 def detect_special(frame=None, map_name=None, exclude_center=True, with_size=False, hsv=None):
-    """检测特殊稀有生物, 返回 {名称: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)
-    square=亮黄方形(矩形度>0.88), shiny=白亮高光, golden_leafbug=金黄(仅丛林), diver_ant=蓝灰(仅海洋)
-    hsv 可传入已转换的HSV图(主循环共享一次cvtColor, 提速)"""
     if frame is None:
         frame = get_frame()
     if hsv is None:
@@ -257,19 +231,15 @@ def detect_special(frame=None, map_name=None, exclude_center=True, with_size=Fal
             if w * 4 < h or h * 4 < w:
                 continue
             if shape == "square":
-                # 方形判定: 面积/外接矩形≈1.0 是方形, 圆形≈0.785, 排除圆形怪
                 if _rectangularity(area, w, h) < 0.85:
                     continue
             elif shape == "nonround":
-                # 非圆判定: 圆度=面积/外接圆面积(圆≈0.98, 椭圆≈0.5-0.8, 方>1)
-                # 金叶虫=金色叶虫形(非圆), 罕见黄怪=圆形 -> 圆度>0.9 排除
                 if area <= 0:
                     continue
                 r2 = (max(w, h) / 2.0) ** 2
                 if area / (3.14159265 * r2) > 0.9:
                     continue
             if with_size:
-                # 实际碰撞箱: 轮廓最小外接圆半径(圆形怪=真实图形半径)
                 ys, xs = np.nonzero(labels == i)
                 if len(xs) >= 3:
                     (_, _), r_c = cv2.minEnclosingCircle(
@@ -292,14 +262,11 @@ def get_screen_center():
 
 
 def calibrate_screen(frame=None):
-    """标定实际窗口客户区尺寸, 设置屏幕中心和降采样比例(兼容4K/DPI缩放)
-    返回 (实际宽, 实际高)"""
     global _screen_center, _downscale
     if frame is None:
         frame = get_frame()
     h, w = frame.shape[:2]
     _screen_center = [w // 2, h // 2]
-    # 检测图统一缩到 960 宽(保持比例), 降采样比例 = 实际宽/960
     _downscale = w / 960.0
     set_screen_center(w, h)
     print(f"[标定] 实际窗口 {w}x{h}, 中心 {_screen_center}, 降采样 x{_downscale:.2f}")
@@ -308,17 +275,12 @@ def calibrate_screen(frame=None):
 
 def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None, with_size=False,
                     with_sid=False, rank=None):
-    """按 HSV 区间找色块, 返回中心点列表(屏幕坐标); min_px/max_px 可覆盖怪尺寸范围
-    with_size=True 时每点加近似半径(屏幕像素, 怪碰撞箱参考): (x, y, r)
-    with_sid=True 时每点为 (x, y, r, sid): 按官方体型缩放表换算 Common 基准半径 + 形状特征分类怪种
-      (rank='mythic' 等稀有度键, 决定体型缩放系数)"""
     lo = MIN_MOB_PX if min_px is None else min_px
     hi = MAX_MOB_PX if max_px is None else max_px
     mask = cv2.inRange(hsv, np.array(hsv_range[0]), np.array(hsv_range[1]))
     if exclude_center:
         cx, cy = get_screen_center()
         cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
-    # 降采样检测(统一960宽, 提速), 标定后自动适配实际分辨率
     det_w = 960
     det_h = int(hsv.shape[0] / _downscale)
     small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
@@ -333,10 +295,8 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None,
             continue
         if w * 4 < h or h * 4 < w:
             continue
-        # 怪近似圆形, 长条色块(草丛/水纹/墙影)滤掉
         cx_s, cy_s = cents[i]
         if with_size:
-            # 实际碰撞箱: florr 碰撞检测=圆形hitbox, 半径=轮廓最小外接圆(圆形怪=真实图形半径)
             ys, xs = np.nonzero(labels == i)
             if len(xs) >= 3:
                 (_, _), r_c = cv2.minEnclosingCircle(
@@ -345,7 +305,6 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None,
             else:
                 r_screen = round(0.25 * (w + h) * _downscale, 2)
             if with_sid:
-                # 怪种识别: 基准半径 = 屏幕半径 / 官方体型缩放; 形状特征(宽高比/矩形度)用降采样图统计
                 factor = RARITY_SIZE_FACTOR.get(rank or "", 1.0)
                 r_common = r_screen / factor if factor else r_screen
                 rw, rh = float(w), float(h)
@@ -356,19 +315,16 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None,
             else:
                 pts.append((int(cx_s * _downscale), int(cy_s * _downscale), r_screen))
         else:
-            pts.append((int(cx_s * _downscale), int(cy_s * _downscale)))   # 还原全分辨率坐标
+            pts.append((int(cx_s * _downscale), int(cy_s * _downscale)))
     return pts
 
 
-DROP_MIN_PX = 3          # 掉落花瓣最小屏幕尺寸(px)
-DROP_MAX_PX = 11         # 掉落最大尺寸: 怪最小MIN_MOB_PX=12, 两者互补
-PICKUP_RANGE = 60.0      # 掉落距玩家地图像素<=该值才去捡(v1.23.8: 掉落物死点±50散布, 30漏捡)
+DROP_MIN_PX = 3
+DROP_MAX_PX = 11
+PICKUP_RANGE = 60.0
 
 
 def detect_drops(frame=None, exclude_center=True, hsv=None, with_rank=False):
-    """检测掉落花瓣: 小尺寸(3-11px)的稀有度彩色块(怪最小12px, 互补不冲突)
-    排除中心玩家本体区域; 返回屏幕坐标列表; with_rank=True 时每点为 (x, y, rank)
-    v1.7.0: 连通域中心像素判稀有度(掉落价值筛选用); hsv 可传入已转换HSV图"""
     if frame is None:
         frame = get_frame()
     if hsv is None:
@@ -400,19 +356,12 @@ def detect_drops(frame=None, exclude_center=True, hsv=None, with_rank=False):
     return pts
 
 
-# Super 超级怪: 薄荷绿描边 #2BFFA3(UI色, 博客园配色表2023-04-05); 精确身体色需游戏截图实测
-SUPER_HSV = ((72, 120, 150), (82, 255, 255))   # 实测 #2BFFA3 -> HSV(77,212,255)
-# 官方体型缩放表(Unofficial Florr Data Spreadsheet, 游戏数据): 怪体型相对 Common
-#   Unusual x1.1 / Rare x1.3 / Epic x1.5 / Mythic x3 / Super x10
-# Super 怪 = 普通怪 10 倍体型(比 M 怪大 3.3 倍) -> 用最小半径过滤薄荷绿小色块误检
-# SUPER_MIN_R_PX: 960宽基准下的最小半径(自动乘降采样还原), Super 至少 M 怪最小尺寸的 3 倍
+SUPER_HSV = ((72, 120, 150), (82, 255, 255))
 SUPER_MIN_R_PX = 18.0
-AFK_DARK_MEAN = 70      # AFK弹窗: 屏幕中心区域灰度均值低于该值视为暗遮罩
+AFK_DARK_MEAN = 70
 
 
 def detect_super(frame=None, with_size=False, hsv=None):
-    """检测 Super 级怪(薄荷绿), 返回屏幕坐标列表; with_size=True 时每点为 (x, y, r)
-    官方体型: Super=Common x10 -> 薄荷绿小色块(半径<下限)直接忽略, 防误检; hsv 可传入已转换HSV图"""
     if frame is None:
         frame = get_frame()
     if hsv is None:
@@ -424,14 +373,10 @@ def detect_super(frame=None, with_size=False, hsv=None):
 
 
 def screen_r_to_map(r_screen):
-    """屏幕像素半径 -> 地图单位半径(怪碰撞箱在追停点里用的单位)"""
     return r_screen * SCALE_PX_PER_UNIT / WORLD_PER_MAPUNIT
 
 
 def detect_afk_check(frame, prev_gray_center=None):
-    """检测 AFK Check 弹窗("Are you here?", 60秒不点踢下线):
-    特征=屏幕中心大区域暗色遮罩(mean<AFK_DARK_MEAN)且画面静止(与上帧中心均值差<5)
-    返回 (中心是否暗, 画面是否静止, 中心灰度均值)"""
     try:
         h, w = frame.shape[:2]
         cx, cy = get_screen_center()
@@ -447,15 +392,11 @@ def detect_afk_check(frame, prev_gray_center=None):
 
 
 def solve_afk_drag(frame=None):
-    """自动解决挂机检测拖动验证(随机迷宫路径):
-    找亮绿色圆点(起点) -> BFS在亮色路径上寻路到终点 -> 回溯实际路径拖动
-    返回 (True, sx, sy, path_points) 或 (False,...)"""
     try:
         if frame is None:
             frame = get_frame()
         h, w = frame.shape[:2]
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-        # 亮绿色起点
         gmask = cv2.inRange(hsv, (45, 150, 150), (85, 255, 255))
         gmask[:h//5, :] = 0; gmask[4*h//5:, :] = 0
         gmask[:, :w//5] = 0; gmask[:, 4*w//5:] = 0
@@ -465,12 +406,10 @@ def solve_afk_drag(frame=None):
         best = max(range(1, n), key=lambda i: stats[i, cv2.CC_STAT_AREA])
         sx = int(stats[best, cv2.CC_STAT_LEFT] + stats[best, cv2.CC_STAT_WIDTH] / 2)
         sy = int(stats[best, cv2.CC_STAT_TOP] + stats[best, cv2.CC_STAT_HEIGHT] / 2)
-        # 路径: 高饱和度亮色 = 可走路径(排除暗色墙/背景)
         pathmask = cv2.inRange(hsv, (0, 50, 100), (180, 255, 255))
-        pathmask = pathmask & (~gmask)  # 排除起点
+        pathmask = pathmask & (~gmask)
         pathmask[:h//5, :] = 0; pathmask[4*h//5:, :] = 0
         pathmask[:, :w//5] = 0; pathmask[:, 4*w//5:] = 0
-        # 膨胀路径3px让BFS不卡墙缝
         pathmask = cv2.dilate(pathmask, np.ones((5,5), np.uint8), iterations=1)
         from collections import deque
         visited = np.zeros((h, w), dtype=bool)
@@ -489,7 +428,6 @@ def solve_afk_drag(frame=None):
                     q.append((nx,ny))
         if maxd < 20:
             return False, 0, 0, []
-        # 回溯实际路径
         rev = []
         cur = end
         while cur in parent:
@@ -497,7 +435,6 @@ def solve_afk_drag(frame=None):
             cur = parent[cur]
         rev.append((sx, sy))
         rev.reverse()
-        # 采样路径点(每5个取一个,减少拖动步数)
         path_points = rev[::5]
         if path_points[-1] != end:
             path_points.append(end)
@@ -509,17 +446,50 @@ def solve_afk_drag(frame=None):
 
 
 def detect_mobs(frame=None):
-    """检测 M/U 怪, 返回 (mythics, ultras) 屏幕坐标列表"""
+    """检测 M/U 怪, 返回 (mythics, ultras) 屏幕坐标列表
+    v1.34: M/U 两个 mask 合并成一次降采样+连通域(2次CC->1次), 逐连通域按中心5x5平均HSV分拣"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    mythics = _detect_color(hsv, MYTHIC_HSV)
-    ultras = _detect_color(hsv, ULTRA_HSV)
+    mask = cv2.inRange(hsv, np.array(MYTHIC_HSV[0]), np.array(MYTHIC_HSV[1]))
+    mask |= cv2.inRange(hsv, np.array(ULTRA_HSV[0]), np.array(ULTRA_HSV[1]))
+    cx, cy = get_screen_center()
+    cv2.circle(mask, (cx, cy), EXCLUDE_CENTER_R, 0, -1)
+    det_w = 960
+    det_h = int(hsv.shape[0] / _downscale)
+    small = cv2.resize(mask, (det_w, det_h), interpolation=cv2.INTER_NEAREST)
+    n, _, stats, cents = cv2.connectedComponentsWithStats(small, 8)
+    mythics, ultras = [], []
+    m_lo, m_hi = np.array(MYTHIC_HSV[0]), np.array(MYTHIC_HSV[1])
+    u_lo, u_hi = np.array(ULTRA_HSV[0]), np.array(ULTRA_HSV[1])
+    for i in range(1, n):
+        area = stats[i, cv2.CC_STAT_AREA]
+        w, h = stats[i, cv2.CC_STAT_WIDTH], stats[i, cv2.CC_STAT_HEIGHT]
+        if not (MIN_MOB_PX * MIN_MOB_PX / 4 <= area <= MAX_MOB_PX * MAX_MOB_PX):
+            continue
+        if w > MAX_MOB_PX * 1.5 or h > MAX_MOB_PX * 1.5:
+            continue
+        if w * 4 < h or h * 4 < w:
+            continue
+        cxs, cys = cents[i]
+        sx = int(cxs * _downscale)
+        sy = int(cys * _downscale)
+        sy = max(0, min(sy, hsv.shape[0] - 1))
+        sx = max(0, min(sx, hsv.shape[1] - 1))
+        y0, y1 = max(0, sy - 2), min(hsv.shape[0] - 1, sy + 2)
+        x0, x1 = max(0, sx - 2), min(hsv.shape[1] - 1, sx + 2)
+        patch = hsv[y0:y1 + 1, x0:x1 + 1].reshape(-1, 3).astype(int)
+        h_mean = int(patch[:, 0].mean())
+        s_mean = int(patch[:, 1].mean())
+        v_mean = int(patch[:, 2].mean())
+        if m_lo[0] <= h_mean <= m_hi[0] and m_lo[1] <= s_mean <= m_hi[1] and m_lo[2] <= v_mean <= m_hi[2]:
+            mythics.append((sx, sy))
+        elif u_lo[0] <= h_mean <= u_hi[0] and u_lo[1] <= s_mean <= u_hi[1] and u_lo[2] <= v_mean <= u_hi[2]:
+            ultras.append((sx, sy))
     return mythics, ultras
 
 
 def detect_legendary(frame=None):
-    """检测传奇怪(红色 #DE1F1F), 返回屏幕坐标列表"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -528,8 +498,6 @@ def detect_legendary(frame=None):
 
 _CC_CACHE = {"t": 0.0, "hsv_id": None, "small": None, "n": 0, "labels": None, "stats": None, "cents": None}
 def _cc_all(hsv):
-    """v1.18.3: 一次全档 mask + 中心排除 + 降采样 + 连通域分析, 按帧缓存供 detect_all/projectiles/drops 共享
-    原来每帧三套独立全档 inRange+CC(实测 detect_all 9.7ms + projectiles 9.9ms + drops 9.2ms) -> 同帧只算一套"""
     from utils import _FRAME
     t = _FRAME["t"]
     if _CC_CACHE["t"] == t and _CC_CACHE["hsv_id"] == id(hsv) and _CC_CACHE["small"] is not None:
@@ -550,10 +518,6 @@ def _cc_all(hsv):
 
 
 def detect_all(frame=None, with_size=False, with_sid=False, hsv=None):
-    """检测所有稀有度等级的怪, 返回 {rank: [屏幕坐标]}; with_size=True 时每点为 (x, y, r)
-    with_sid=True 时每点为 (x, y, r, sid): 怪种识别(按官方体型缩放+形状分类, 稀有度缩放系数内置)
-    hsv 可传入已转换HSV图(主循环共享一次cvtColor, 提速)
-    v1.6.0: 7档合并为1次连通域分析, 连通域中心单像素判档(原每档各跑一次全图CC, 快~3倍)"""
     if frame is None:
         frame = get_frame()
     if hsv is None:
@@ -605,9 +569,6 @@ def detect_all(frame=None, with_size=False, with_sid=False, hsv=None):
 
 
 def detect_mobs_classified(frame=None):
-    """检测 M/U/Super 怪并识别怪种, 返回 dict:
-    {"mythic": [(x, y, r, sid)...], "ultra": [...], "super": [...]}
-    主循环战斗日志用, 显示怪种中文名"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -621,7 +582,6 @@ def detect_mobs_classified(frame=None):
 
 def escape_direction(ranks_map, player_map=None, sectors=8, binary=None,
                     look_ahead=15, wall_radius=3):
-    """分 8 个扇区, 返回"怪少且前方开阔"的扇区方向(单位向量); binary=地图灰度图(255可走/0墙)"""
     if player_map is None:
         player_map = get_player_position()
     counts = [0.0] * sectors
@@ -633,7 +593,7 @@ def escape_direction(ranks_map, player_map=None, sectors=8, binary=None,
                 continue
             ang = math.degrees(math.atan2(m[1] - player_map[1], m[0] - player_map[0])) % 360
             d = math.hypot(m[0] - player_map[0], m[1] - player_map[1])
-            counts[int(ang / (360 / sectors)) % sectors] += 1.0 / max(d, 2.0)   # 近怪权重大, 人逃命躲近的
+            counts[int(ang / (360 / sectors)) % sectors] += 1.0 / max(d, 2.0)
     if binary is not None:
         h, w = binary.shape
         for s in range(sectors):
@@ -643,8 +603,7 @@ def escape_direction(ranks_map, player_map=None, sectors=8, binary=None,
             x0, x1 = max(0, tx - wall_radius), min(w - 1, tx + wall_radius)
             y0, y1 = max(0, ty - wall_radius), min(h - 1, ty + wall_radius)
             region = binary[y0:y1 + 1, x0:x1 + 1]
-            walls[s] = 1.0 - float(region.mean()) / 255.0   # 1=全墙 0=全开阔
-    # 综合评分: 怪少优先, 前方墙多扣分(不往墙角跑)
+            walls[s] = 1.0 - float(region.mean()) / 255.0
     best = min(range(sectors), key=lambda k: counts[k] + walls[k] * 2.5)
     ang = math.radians((best + 0.5) * (360 / sectors))
     return math.cos(ang), math.sin(ang)
@@ -654,8 +613,6 @@ _PROJ_PREV = {"mask": None}
 
 
 def detect_projectiles(frame=None, hsv=None):
-    """检测飞行物(黄蜂/胡蜂导弹, 蝎子螯针等):
-    全稀有度色 + 小尺寸(4-16px) + 帧间差分(运动物体才算); hsv 可传入已转换HSV图"""
     global _PROJ_PREV
     if frame is None:
         frame = get_frame()
@@ -686,7 +643,6 @@ _RANK_ORDER7 = ["common", "unusual", "rare", "epic", "legendary", "mythic", "ult
 
 
 def threat_load():
-    """懒加载官方怪威胁表 data/mob_threat.json (73怪 7档 伤害/血量/护甲/exp/掉落)"""
     global _THREAT
     if _THREAT is None:
         try:
@@ -699,7 +655,6 @@ def threat_load():
 
 
 def threat_hint(sid, rank_idx=5):
-    """目标怪威胁提示: 官方伤害/血量/经验 + 掉落花瓣名(v1.7.1 全数据驱动)"""
     t = threat_load().get(sid)
     if not t:
         return ""
@@ -719,7 +674,6 @@ def threat_hint(sid, rank_idx=5):
         for pid, ch in t.get("drops", [])[:3]:
             nm = PETAL_CN.get(pid) or petal_id2sid.get(pid, f"花瓣{pid}")
             kd = PETAL_KIND.get(str(pid)) or PETAL_KIND.get(pid, "")
-            # 只标特殊花瓣(回血/功能), 普通伤/血花瓣不标(每片都有, 噪音)
             tag = f"({kd})" if kd in ("回血",) else ""
             names.append(f"{nm}{tag}{ch*100:.1f}%")
         if names:
@@ -732,11 +686,9 @@ def threat_hint(sid, rank_idx=5):
 RANK_W = {"common": 0, "unusual": 1, "rare": 2, "epic": 3,
           "legendary": 4, "mythic": 5, "ultra": 6}
 
-# 花瓣 id -> 功能分类(从官方 petals tooltip 自动提取, v1.7.3)
 PETAL_KIND = {"1":"伤/血","2":"伤/血","3":"伤/血","4":"功能","5":"回血","6":"伤/血","7":"伤/血","8":"伤/血","9":"伤/血","10":"伤/血","11":"伤/血","12":"伤/血","13":"血","14":"伤/血","15":"伤/血","16":"血","17":"功能","18":"伤/血","19":"伤/血","20":"伤/血","21":"血","22":"回血","23":"伤/血","24":"伤/血","25":"伤/血","26":"伤/血","27":"伤/血","28":"回血","29":"伤/血","30":"回血","31":"回血","32":"伤/血","33":"伤/血","34":"伤/血","35":"伤/血","36":"伤/血","37":"伤","38":"回血","39":"伤/血","40":"功能","41":"伤/血","42":"回血","43":"功能","44":"伤/血","45":"功能","46":"伤/血","47":"血","48":"功能","49":"回血","50":"伤/血","51":"血","52":"伤/血","53":"血","54":"功能","55":"伤/血","56":"血","57":"伤/血","58":"伤/血","59":"伤/血","60":"血","61":"血","62":"伤/血","63":"伤/血","64":"伤/血","65":"功能","66":"血","67":"伤/血","68":"伤/血","69":"伤","70":"回血","71":"伤/血","72":"功能","73":"功能","74":"伤/血","75":"伤/血","76":"功能","77":"伤/血","78":"伤","79":"伤","80":"功能","81":"血","82":"伤/血","83":"功能","84":"伤/血","85":"伤/血","86":"伤/血","87":"功能","88":"伤/血","89":"功能","90":"伤/血","91":"功能","92":"功能","93":"功能","94":"伤/血","95":"伤/血","96":"血","97":"伤/血","98":"伤/血","99":"回血","100":"功能","101":"伤/血","102":"血","103":"功能","104":"功能","105":"回血","106":"血","107":"伤/血","108":"功能","109":"伤/血","110":"血","111":"伤/血","112":"伤/血","113":"伤/血","114":"伤/血","115":"功能","116":"功能","117":"血","118":"功能"}
 
 
-# 花瓣 id -> 中文名(中文维基常用名, v1.7.1 全数据驱动战斗日志)
 PETAL_CN = {
     1: "基础", 2: "轻", 3: "岩石", 4: "正方形", 5: "玫瑰", 6: "刺针",
     7: "鸢尾", 8: "翅膀", 9: "导弹", 10: "葡萄", 11: "仙人掌", 12: "加速",
@@ -760,7 +712,6 @@ PETAL_CN = {
 
 
 def get_hp_ratio(frame=None):
-    """检测玩家脚下血条(红色填充), 返回 0-1 血量比例(自适应标定满血); 检测不到返回 None"""
     global _HP_MAX
     if frame is None:
         frame = get_frame()
@@ -775,14 +726,13 @@ def get_hp_ratio(frame=None):
     red = (r > 140) & (r - g > 60) & (r - b > 60)
     filled = int(red.sum())
     if filled <= 0:
-        return None  # 没检测到血条(可能关闭了"显示个人资源")
+        return None
     if filled > _HP_MAX["v"]:
         _HP_MAX["v"] = filled
     return min(filled / max(_HP_MAX["v"], 1), 1.0)
 
 
 def screen_to_map(screen_pt, player_map=None):
-    """屏幕坐标 -> 地图坐标(0-300 地图像素)"""
     if player_map is None:
         player_map = get_player_position()
     if player_map is None:
@@ -795,7 +745,6 @@ def screen_to_map(screen_pt, player_map=None):
 
 
 def map_to_screen(map_pt, player_map=None):
-    """地图坐标 -> 屏幕坐标(用于朝怪移动)"""
     if player_map is None:
         player_map = get_player_position()
     if player_map is None:
@@ -808,12 +757,6 @@ def map_to_screen(map_pt, player_map=None):
 
 
 def choose_target(mythics_map, patrol_goal, player_map=None, dev_limit=None):
-    """从候选目标里挑: 距离最近 且 不偏离巡逻点
-
-    偏离容忍 = DEVIATION + 玩家到巡逻点的距离(走路途中顺路打, 快到了不乱跑)
-    dev_limit 可覆盖(特殊稀有生物放宽限制)
-    patrol_goal: 当前巡逻目标点(地图坐标)。返回目标地图坐标或 None
-    """
     if player_map is None:
         player_map = get_player_position()
     if player_map is None or not mythics_map:
@@ -831,7 +774,6 @@ def choose_target(mythics_map, patrol_goal, player_map=None, dev_limit=None):
 
 
 def ultra_blocked(ultras_map, player_map=None, margin=ULTRA_AVOID):
-    """U 怪是否贴着玩家(进入 margin 地图像素内) -> 返回最近的 U 地图坐标或 None"""
     if player_map is None:
         player_map = get_player_position()
     if player_map is None:
@@ -845,14 +787,9 @@ def ultra_blocked(ultras_map, player_map=None, margin=ULTRA_AVOID):
 
 
 def build_avoid_map(binary, ultras_map, player_map=None, margin=ULTRA_AVOID):
-    """把 U 怪周围 margin 地图像素设为墙, 返回 (新图, 是否与巡逻路径冲突)
-
-    若 U 圈住了必经通道(玩家与目标间所有路径都穿过 U 圈) -> 冲突
-    """
     avoid = binary.copy()
     for u in ultras_map:
         if player_map is not None:
-            # 太远的 U 不影响局部避让(只处理玩家周围 2*margin 内)
             if math.hypot(u[0] - player_map[0], u[1] - player_map[1]) > margin * 4:
                 continue
         cx, cy = int(u[0]), int(u[1])
@@ -861,27 +798,21 @@ def build_avoid_map(binary, ultras_map, player_map=None, margin=ULTRA_AVOID):
 
 
 def is_kiss_point(u_map, p, kiss=ULTRA_KISS):
-    """p 是否在 U 的 kiss 距离上(贴脸点判定)"""
     return math.hypot(p[0] - u_map[0], p[1] - u_map[1]) <= kiss + 0.3
 
 
-# ===== 回血花瓣自动扫描(副槽识别) =====
-# 回血花瓣(维基查证): 玫瑰/大丽花=粉色, 叶子/丝兰=绿色, 海星=橙色
 HEAL_HSV = [
-    ("rose/dahlia", (150, 60, 120), (180, 255, 255)),   # 粉: 玫瑰/大丽花
-    ("leaf/yucca",  (35, 80, 100),  (85, 255, 255)),     # 绿: 叶子/丝兰
-    ("starfish",    (5, 80, 100),   (22, 255, 255)),     # 橙: 海星
+    ("rose/dahlia", (150, 60, 120), (180, 255, 255)),
+    ("leaf/yucca",  (35, 80, 100),  (85, 255, 255)),
+    ("starfish",    (5, 80, 100),   (22, 255, 255)),
 ]
-SLOT_BAND_TOP = 0.80          # 槽位条带顶部(画布偏移之下, 窗口高比例)
-SLOT_BAND_BOT = 0.995         # 槽位条带底部
-SLOT_ROWS = 2                 # 主槽/副槽两行
-SLOT_COLS = 10                # 最多10个槽(数字键1-9, 0=10)
+SLOT_BAND_TOP = 0.80
+SLOT_BAND_BOT = 0.995
+SLOT_ROWS = 2
+SLOT_COLS = 10
 
 
 def scan_heal_slots(img=None):
-    """自动扫描屏幕底部槽位区, 检测回血花瓣候选
-    返回 [(行号0/1, 槽位1-10, 命中颜色名), ...] 按行从上到下、槽位从左到右
-    注意: 颜色只是候选(U级花瓣也粉/Common级也绿/传奇也偏红), 需人工确认"""
     if img is None:
         img = get_frame()
     from utils import _canvas_y_offset
@@ -908,7 +839,6 @@ def scan_heal_slots(img=None):
 
 
 def draw_heal_slots_mark(img, found, out_path):
-    """在原图上标出槽位行(ROW0绿/ROW1蓝)和检出候选槽位(黄框+编号+颜色名), 存图供玩家确认"""
     from utils import _canvas_y_offset
     h, w = img.shape[:2]
     off = _canvas_y_offset
@@ -932,16 +862,14 @@ def draw_heal_slots_mark(img, found, out_path):
 
 
 
-# ===== 花瓣稀有度扫描(底部槽位两行) + 推荐可秒等级(按稀有度估算) =====
 RANK_SCORE = {"common": 1, "unusual": 2, "rare": 4, "epic": 8,
               "legendary": 16, "mythic": 32, "ultra": 64}
 
 def scan_petal_ranks(img=None):
-    """扫描底部槽位区每格花瓣的稀有度颜色, 返回 (counts, per_slot)
-    counts: {rank: 数量}; per_slot: {(行,槽位): rank}
-    注意: 颜色只能判稀有度, 不能判花瓣种类(输出/防御/回血); U级粉色/普通绿在槽位里可能误判"""
     if img is None:
         img = get_frame()
+    if img is None or img.size == 0 or img.shape[0] < 50 or img.shape[1] < 50:
+        return {}, {}
     from utils import _canvas_y_offset
     h, w = img.shape[:2]
     off = _canvas_y_offset
@@ -969,10 +897,6 @@ def scan_petal_ranks(img=None):
 
 
 def rank_recommend(counts):
-    """按稀有度估算推荐可秒等级:
-    稳定档=主力同级(必秒必拿掉落, 首选); 降档=打不动时的备选
-    维基生物表: 高一级血量 x3.6~46(神话->究极x46), 经验只多约x4~9 -> 秒不了的高一级绝对不划算
-    注: 按稀有度估算, 未考虑花瓣种类/怪种, 实际以能3秒内秒杀为准"""
     if not any(counts.values()):
         return None
     main = max((r for r, c in counts.items() if c), key=lambda r: (RANK_SCORE[r], counts[r]))
@@ -982,11 +906,7 @@ def rank_recommend(counts):
     return main, rec
 
 
-# ===== Bossbar 检测(研究落地: Super/Eternal/Unique 专属, 顶部中央大血条) =====
 def detect_bossbar(frame=None):
-    """检测屏幕顶部中央的 Boss 血条(Super+ 才有; Ultra 自2024-04-07起不显示)
-    原理: 画布偏移之下的顶部区域, 中央 30%-70% 宽度内找横向连续红色长条(填充血)
-    返回 True/False。Bossbar 比聊天播报可靠: 进屏即显示, 不依赖设置开聊天"""
     if frame is None:
         frame = get_frame()
     try:
@@ -1010,4 +930,4 @@ def detect_bossbar(frame=None):
             seg += 1; best = max(best, seg)
         else:
             seg = 0
-    return best > w * 0.10   # 连续红色段 > 屏宽10% 视为 Boss 血条
+    return best > w * 0.10
