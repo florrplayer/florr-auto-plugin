@@ -72,6 +72,26 @@ class MemoryBattle:
             if ay < 0: self.w.key_down(VK_W)   # v1.18.3: 修方向反转(ay<0=逃向-y=按W向上)
             else:      self.w.key_down(VK_S)
 
+    def _send_chat_text(self, text):
+        """发聊天消息(全键盘): Enter开输入框 -> 剪贴板粘贴 -> Enter发送 (v1.23.3 Boss喊话用)"""
+        try:
+            import win32clipboard
+            win32clipboard.OpenClipboard()
+            win32clipboard.EmptyClipboard()
+            win32clipboard.SetClipboardText(text, win32clipboard.CF_UNICODETEXT)
+            win32clipboard.CloseClipboard()
+            import time as _t
+            self.w.key_down(0x0D); _t.sleep(0.05); self.w.key_up(0x0D)
+            _t.sleep(0.3)
+            self.w.key_down(0x11); self.w.key_down(0x56)
+            _t.sleep(0.05); self.w.key_up(0x56); self.w.key_up(0x11)
+            _t.sleep(0.3)
+            self.w.key_down(0x0D); _t.sleep(0.05); self.w.key_up(0x0D)
+            return True
+        except Exception as e:
+            print(f"[聊天] 发送失败: {e}")
+            return False
+
     def _move_dir(self, d):
         """按指定方向移动 (w/a/s/d)"""
         self._keys_release()
@@ -125,6 +145,15 @@ class MemoryBattle:
                             if hit:
                                 sid, cn, pos = hit
                                 print(f"[Super雷达] 公告: {cn} Super 已出生! {'公告位置:'+str(pos) if pos else '全图扫120s'} (去抢!)")
+                                # v1.23.3: 真人喊话(Boss闲聊模板, 防挂机+像玩家)
+                                try:
+                                    from chat_solver import BOSS_SHOUTS_SUPER, BOSS_SHOUTS_UNIQUE
+                                    import random as _r
+                                    pool = BOSS_SHOUTS_SUPER
+                                    text = _r.choice(pool).replace('{tier}', 'super').replace('{mob}', sid.replace('_', ' '))
+                                    self._send_chat_text(text)
+                                except Exception:
+                                    pass
                     except Exception:
                         pass
                     if self.super_ping.is_hunting():

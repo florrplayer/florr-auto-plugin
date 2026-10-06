@@ -34,6 +34,25 @@ MIN_INTERVAL = 360
 # 检测到新消息后回复概率
 REPLY_CHANCE = 0.7
 
+# v1.23.3: Boss喊话模板(偷自 florr_clone cpp/server/bot_ai.cpp 真人闲聊池)
+# 小写+不一致标点 = 融入玩家聊天; {tier}=super/unique, {mob}=怪英文名
+BOSS_SHOUTS_SUPER = [
+    "{tier} {mob}", "{tier} {mob} come", "{tier} {mob} lets go",
+    "who wants {tier} {mob}", "need help {tier} {mob}", "{tier} {mob} anyone",
+    "{mob} {tier} here", "{tier} {mob} spawn", "{tier} {mob} free",
+    "{tier} {mob} free mzone", "{tier} {mob} free lzone", "super shiny",
+    "free {tier} {mob}", "{tier} {mob} deep", "{tier} {mob} lured",
+    "s{mob}", "s{mob} unfree", "less than 20 ppl at {tier} {mob}",
+    "{tier} {mob} free carry", "pls carry",
+]
+BOSS_SHOUTS_UNIQUE = [
+    "q{mob}", "how {tier} {mob}", "{tier} {mob} come", "{tier} {mob} lets go",
+    "who wants {tier} {mob}", "{tier} {mob} anyone", "{mob} {tier} here",
+    "{tier} {mob} so free", "WHAT {tier} {mob}", "q{mob} pls loot",
+    "q{mob} pls carry", "{tier} {mob} pls carry", "{tier} {mob} pls loot",
+    "q{mob} so free",
+]
+
 
 class ChatSolver:
     def __init__(self, window, get_frame):
@@ -122,6 +141,23 @@ class ChatSolver:
             self.w.key_up(0x56)
             self.w.key_up(0x11)
             time.sleep(0.1)
+
+    # ---------- Boss喊话 (v1.23.3) ----------
+    def shout_boss(self, mob_sid, tier='super'):
+        """发现Super/Unique时真人喊话(模板来自florr_clone bot_ai.cpp闲聊池)
+        tier: 'super'/'unique'; 限流复用全局360s, 防止刷屏"""
+        with self._lock:
+            if time.time() - self.last_reply < MIN_INTERVAL:
+                return False
+        pool = BOSS_SHOUTS_UNIQUE if tier == 'unique' else BOSS_SHOUTS_SUPER
+        text = random.choice(pool).replace('{tier}', tier).replace('{mob}', mob_sid)
+        if self._send_chat(text):
+            with self._lock:
+                self.last_reply = time.time()
+            self._stats['replied'] += 1
+            print(f"[Boss喊话] {tier} {mob_sid}: {text}")
+            return True
+        return False
 
     # ---------- 主循环 ----------
     def loop(self):
