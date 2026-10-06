@@ -12,6 +12,7 @@ v1.27.0: Mythic走位表(florr-auto-farm实测) - Mythic甲虫/火兵蚁/蝎子/
 import time, math, threading
 import mob_db
 import combat_strategy  # v1.27.0: Mythic走位表(strafe/ram/hold)
+import flee_planner    # v1.28.0: 追逃逃跑规划(双源最短路, 死胡同/怪群自动避开)
 from bridge_combat import (get_player, get_nearby_mobs, find_best_target,
                            wave_end_count)
 import bridge_combat  # v1.24.5: 修 NameError (第201行 bridge_combat._fetch_latest 需要模块名)
@@ -54,8 +55,30 @@ class MemoryBattle:
             if dy > 0: self.w.key_down(VK_S)
             else:      self.w.key_down(VK_W)
 
-    def _run_away(self, dx, dy, px, py):
-        """反方向逃跑 + 偏向地图中心(不往墙角跑)"""
+    def _run_away(self, dx, dy, px, py, chasers=None, crowd=(), prefer=None):
+        """逃跑: v1.28.0 优先用追逃规划(双源最短路)选最优方向, 失败退回 反方向+偏中心
+        chasers: 要躲的怪坐标列表; crowd: 别撞进去的怪群; prefer: 上一拍目标"""
+        # v1.28.0: 追逃规划 (远离所有追兵 + 危险怪群当障碍 + 死胡同/活路识别)
+        if chasers:
+            plan = flee_planner.plan_flee_light(
+                (px, py), [(c['x'], c['y']) for c in chasers],
+                crowd=[(c['x'], c['y']) for c in crowd], prefer=prefer)
+            if plan and plan.get('dir'):
+                ux, uy = plan['dir']
+                # plan_flee_light 返回"往哪走"的单位向量 -> 直接按键
+                self._keys_release()
+                if abs(ux) > abs(uy):
+                    if ux > 0: self.w.key_down(VK_D)
+                    else:      self.w.key_down(VK_A)
+                else:
+                    if uy > 0: self.w.key_down(VK_S)
+                    else:      self.w.key_down(VK_W)
+                lead = plan.get('lead', 0)
+                self._flee_goal = plan.get('goal')  # v1.28.0: 下一拍 prefer 用(别每拍换路)
+                print(f"[逃] 追逃规划 goal={plan.get('goal')} lead={lead:.1f}格 "
+                      f"{'安全' if plan.get('safe') else '被堵(亏最少)'}")
+                return
+        # 退回: 反方向逃跑 + 偏向地图中心(不往墙角跑)
         self._keys_release()
         dlen = math.hypot(dx, dy)
         if dlen < 1:
@@ -209,8 +232,14 @@ class MemoryBattle:
                     dx, dy = px - d['x'], py - d['y']
                     # v1.25.2: 逃跑时清掉粘滞目标(保命优先, 回来再选)
                     self._sticky_sid = None
-                    print(f"[躲] 危险怪({d['cn']} {d.get('rarity','')}) {math.hypot(d['x']-px,d['y']-py):.0f}px, 逃跑(偏中心)")
-                    self._run_away(dx, dy, px, py)
+                    # v1.28.0: 追逃规划 - 所有危险怪当追兵, 附近怪群当障碍
+                    crowd = [m for m in mobs if m not in danger
+                             and math.hypot(m['x']-px, m['y']-py) < 1200
+                             and m.get('rarity', '') in ('Epic', 'Legendary', 'Mythic', 'Ultra')]
+                    print(f"[躲] 危险怪({d['cn']} {d.get('rarity','')}) {math.hypot(d['x']-px,d['y']-py):.0f}px, 追逃规划({len(danger)}追兵/{len(crowd)}怪群)")
+                    self._run_away(dx, dy, px, py, chasers=danger, crowd=crowd,
+                                   prefer=getattr(self, '_flee_goal', None))
+                    self._flee_goal = None
                     time.sleep(0.2)
                     continue
 
