@@ -503,6 +503,7 @@ LEECH_TIME = 2.5        # 站定输出秒数(总伤害>1%即可分掉落)
 PICKUP_DROPS = False   # 掉落自动拾取(顺路捡: 只捡距玩家<=PICKUP_RANGE的掉落); 装了磁铁花瓣建议关(磁铁自动吸附近掉落, 跑过去捡反而浪费时间)
 PICKUP_MIN_RANK = 3      # v1.7.0 掉落价值筛选: 只捡稀有度权重>=此值的掉落(3=Epic, 垃圾掉落不浪费时间)
 PICKUP_ARRIVE = 4.0     # 走到多近算"碰到"(玩家本体碰撞即拾取)
+PICKUP_RANGE = 60.0     # v1.23.8: 掉落物在死点±50随机散布(loot.cpp), 30太小会漏捡, 提到60全覆盖
 
 
 def walk_to_pickup(t, trail):

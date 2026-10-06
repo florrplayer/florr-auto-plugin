@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """战斗模式: 只打 M 怪(Mythic 青), 避 U 怪(Ultra 粉) 5px, 贴脸 0.5px 后沿原路撤退
 
 识别原理: florr 怪物本体颜色 = 稀有度颜色
@@ -362,7 +362,7 @@ def _detect_color(hsv, hsv_range, exclude_center=True, min_px=None, max_px=None,
 
 DROP_MIN_PX = 3          # 掉落花瓣最小屏幕尺寸(px)
 DROP_MAX_PX = 11         # 掉落最大尺寸: 怪最小MIN_MOB_PX=12, 两者互补
-PICKUP_RANGE = 30.0      # 掉落距玩家地图像素<=该值才去捡(只顺路捡近的)
+PICKUP_RANGE = 60.0      # 掉落距玩家地图像素<=该值才去捡(v1.23.8: 掉落物死点±50散布, 30漏捡)
 
 
 def detect_drops(frame=None, exclude_center=True, hsv=None, with_rank=False):
