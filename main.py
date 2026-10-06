@@ -933,6 +933,20 @@ if __name__ == "__main__":
             detect_canvas_offset()
         except Exception as e:
             print(f"[!] 画布偏移检测失败: {e}")
+        # v1.25.0 地图自动识别(移植 florr_assistant 模板匹配): 防进错图跑错巡逻点/掉落表
+        try:
+            from map_auto_detect import detect_map, get_map_label
+            _m = detect_map(get_frame())
+            if _m:
+                if _m['map'] != map_name:
+                    print(f"[地图识别] 当前地图疑似「{get_map_label(_m['map'])}」(conf={_m['confidence']:.2f})，与参数 {map_name} 不一致！")
+                    print(f"[地图识别] 若进错图请 Ctrl+C 后用: py -3.12 main.py {_m['map']}")
+                else:
+                    print(f"[地图识别] 地图确认「{get_map_label(_m['map'])}」 conf={_m['confidence']:.2f} ✓")
+            else:
+                print("[地图识别] 未能识别(小地图被遮挡?), 按参数继续")
+        except Exception as _me:
+            print(f"[地图识别] 跳过: {_me}")
         if COMBAT_ENABLED:
             print("[+] 战斗策略: =秒杀等级自动追(贴0.5px), 更高避开(往怪少处跑), 更低不管")
         print("[!] 提醒: 请把回血花瓣(玫瑰/叶子)放在副槽(配置时勾选的槽位)——血量<10%%时插件自动切到主槽+防御跑路, 恢复后自动切回")
