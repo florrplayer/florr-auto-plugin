@@ -183,20 +183,24 @@ class MemoryBattle:
                 if target:
                     dist = math.hypot(target['x']-px, target['y']-py)
                     spd = mob_db.get_aggro_speed(target['sid'])   # AI研究: 追击速度系数(≥1.0=追得上玩家)
-                    # 追得上的怪(冲撞/毒)不能站桩贴脸(接触伤害白嫖), 用打带跑: 蹭1下立刻拉开
-                    hit_run = (spd >= 1.0) and (target.get('score', 0) < 1000)
+                    # v1.23.7: stinger/导弹怪(黄蜂/胡蜂/螳螂)也进打带跑 - 摆尾蓄力250ms闪避窗
+                    ai_info = mob_db.mob_ai_info(target['sid'])
+                    stinger_dodge = bool(ai_info.get('stinger') or ai_info.get('projectile'))
+                    # 追得上的怪(冲撞/毒)或远程导弹怪不能站桩贴脸(接触伤害/导弹白嫖), 用打带跑: 蹭1下立刻拉开
+                    hit_run = (spd >= 1.0 or stinger_dodge) and (target.get('score', 0) < 1000)
                     if hit_run and dist > STOP_DIST:
                         dx, dy = target['x']-px, target['y']-py
                         self._move_towards(dx, dy)
-                        print(f"[打带跑] {target['cn']}({target.get('rarity','')}) 追击速度{spd:.2f} 距离{dist:.0f}")
+                        print(f"[打带跑] {target['cn']}({target.get('rarity','')}) 追击速度{spd:.2f} 距离{dist:.0f}" + (' [横闪]' if stinger_dodge else ''))
                         last_move = time.time()
                     elif hit_run and dist <= STOP_DIST:
-                        # 贴到跟前打一下立刻撤 (0.8s输出后反向拉开)
+                        # 贴到跟前打一下立刻撤 (stinger: 0.3s输出窗对齐250ms蓄力, 其他0.8s)
                         self._keys_release()
                         now = time.time()
-                        if now - last_move > 0.8:
+                        hold = 0.3 if stinger_dodge else 0.8
+                        if now - last_move > hold:
                             self._run_away(px-target['x'], py-target['y'], px, py)
-                            print(f"[打带跑] 蹭完即撤")
+                            print(f"[打带跑] 蹭完即撤" + (' (闪避窗0.3s)' if stinger_dodge else ''))
                             last_move = now
                         else:
                             # 输出窗口内保持静止(防御状态的花瓣在打)
