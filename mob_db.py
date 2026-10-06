@@ -21,7 +21,6 @@ def _load_json(name):
     try:
         _cache[name] = json.loads(raw)
     except Exception:
-        # 多JSON对象拼接文件(all_petals.json): 逐个raw_decode
         dec = json.JSONDecoder()
         idx, out = 0, []
         while idx < len(raw):
@@ -36,8 +35,6 @@ def _load_json(name):
     return _cache[name]
 
 
-# ================= type_id -> sid =================
-# 静态怪type id 1-83 (从wasm _Util_GetMobs / all_mobs_full.json 确认)
 TYPE_ID_TO_SID = {
     1:"rock",2:"cactus",3:"ladybug",4:"bee",5:"ant_baby",6:"ant_worker",7:"ant_soldier",
     8:"ant_queen",9:"ant_hole",10:"beetle",11:"hornet",12:"centipede",14:"centipede_evil",
@@ -56,7 +53,6 @@ TYPE_ID_TO_SID = {
 }
 SID_TO_TYPE_ID = {v: k for k, v in TYPE_ID_TO_SID.items()}
 
-# sid -> 中文名 (florr_mobs_official.json 生成)
 MOB_CN = {
     "rock":"岩石","cactus":"仙人掌","ladybug":"瓢虫","bee":"蜜蜂","ant_baby":"幼蚁",
     "ant_worker":"工蚁","ant_soldier":"兵蚁","ant_queen":"蚁后","ant_hole":"蚁穴",
@@ -78,11 +74,8 @@ MOB_CN = {
     "garbage":"垃圾","ant_soldier_diver":"潜水兵蚁","ghost":"幽灵",
 }
 
-# 野怪 team 值 (FlorrBt mob.h:290 m_team=2; 玩家召唤物=owner队 petals_behavior.h:1528)
-# 协议实体 team==WILD_TEAM 才算野怪可打, 其他(玩家/召唤物/友方)跳过
 WILD_TEAM = 2
 
-# 花瓣 sid -> 中文名 (all_petals.json)
 PETAL_CN = {
     "basic":"基础","light":"轻","rose":"玫瑰","dahlia":"大丽花","yucca":"丝兰","starfish":"海星",
     "leaf":"叶子","square":"正方形","rock":"岩石","cactus":"仙人掌","stinger":"毒刺","rice":"大米",
@@ -98,27 +91,16 @@ PETAL_CN = {
     "mushroom":"蘑菇","clover":"三叶草","ant":"蚂蚁","beetle":"甲虫","square_petal":"方块花瓣",
 }
 
-# 特殊优先怪(用户要求最先打)
 PRIORITY_SIDS = {"square", "ladybug_shiny", "leafbug_shiny", "ant_soldier_diver", "gambler", "assembler", "beetle_pharaoh", "ghost"}
 
-# 危险怪(自动避开: 高伤害/毒/远程/召唤)
 DANGER_SIDS = {"ant_queen", "ant_hole", "fire_ant_burrow", "hornet", "wasp", "centipede_evil",
                "scorpion", "jellyfish", "beetle_hel", "spider_hel", "centipede_hel", "wasp_hel",
                "gambler", "mecha_flower", "wasp_mecha", "spider_mecha", "crab_mecha", "termite_overmind",
                "beetle_mummy", "beetle_pharaoh", "assembler", "ghost"}
 
-# Super专属机制怪 (florr_SuperEternalUnique名单:220 + hfoj躲避导弹攻略研究)
-# v1.20.1: 用户决策——没有不硬刚的怪(收获大), 找突破点智取而非回避:
-#   水母/萤火虫: 闪电电波从身旁发射 -> 贴脸绕中心(中心安全)
-#   黄蜂/胡蜂: 预判导弹 -> 垂直移动+发射折返
-#   岩石/仙人掌: 受伤反击弹幕 -> 保持距离+打带跑
-#   冥界甲虫: 5s传送阵(2s红阵预警) -> 贴脸快速输出, 见阵就跑
-#   赌徒: 花瓣圈环绕 -> 远程保持距离
 SUPER_SPECIAL_SIDS = {"rock", "cactus", "hornet", "jellyfish", "firefly",
                       "beetle_hel", "spider_hel", "centipede_hel", "wasp_hel", "gambler"}
 
-# 突破点战术表: sid -> 打法参数 (依据: hfoj.net/blog/1941 躲避导弹攻略 + 中文维基)
-#   dist_mode: 'close'贴脸(绕中心/快速输出) / 'far'远程(保持距离) / 'kite'打带跑
 BREAKTHROUGH = {
     'jellyfish':     {'dist_mode': 'close', 'note': '环形电波从身旁发射, 贴脸中心安全'},
     'firefly':       {'dist_mode': 'close', 'note': '接触放闪电, 贴脸绕圈+减伤花瓣'},
@@ -132,9 +114,6 @@ BREAKTHROUGH = {
     'gambler':       {'dist_mode': 'far',   'note': '花瓣圈环绕, 远程打或撞进去'},
 }
 
-# wasm反汇编真实碰撞箱 (Common基准, 地图像素)
-# gardn Collision.cc 验证: 碰撞判定 = 圆碰撞(半径和), 玩家撞怪被质量比击退(_deal_knockback,
-# 花侧_cancel_movement 硬顶), 接触伤害 DamageType::kContact 双向结算, Web 减速 speed_ratio=0.5
 WASM_RADII = {
     "rock":12.0,"cactus":12.0,"ladybug":10.0,"bee":5.0,"ant_baby":10.0,"ant_worker":12.0,
     "ant_soldier":25.0,"ant_queen":10.0,"ant_hole":10.0,"beetle":10.0,"hornet":16.0,
@@ -157,7 +136,6 @@ RARITY_RADIUS_SCALE = {
     "Mythic":5.0,"Ultra":8.0,"Unique":10.0,
 }
 
-# 追击范围(wasm AI): 怪在这距离内主动追玩家
 AGGRO_RANGE = {
     "default":255,"aggressive":360,"very_aggressive":380,"passive":60,"turret":100,"boss":250,
 }
@@ -182,8 +160,6 @@ MOB_AGGRO_CLASS = {
     "ant_soldier_diver":"aggressive","beetle_mummy":"aggressive","mecha_flower":"boss",
 }
 
-# 追击速度系数(源码级: gardn Ai.cc, ×玩家加速度) —— 决定"能不能风筝"
-# ≥1.0 = 追得上玩家, 不能边走边打;  <1.0 = 追不上, 可风筝
 AGGRO_SPEED = {
     "scorpion":1.20,"spider":1.20,"centipede_desert":1.33,
     "soldier_ant":0.95,"ant_soldier":0.95,"fire_ant_soldier":0.95,"beetle":0.95,
@@ -205,9 +181,7 @@ def get_aggro_speed(sid):
 def knockback_share(sid, rarity='Common'):
     """v1.23.6: 怪承受击退份额 (florr_clone combat.h 质量模型)
     怪质量 = 1 + radius/25 (kGardnMassRadius), 花质量=1
-    击退份额 = 花质量/(花质量+怪质量) = 1/(2+radius/25)
-    大怪吃不到击退: ladybug r10=0.42 / sandstorm r40=0.28 / termite_overmind r60=0.23 / centipede r75=0.20
-    用途: '打不动'第二信号(重质量怪=击退免疫+贴脸难躲)"""
+    击退份额 = 花质量/(花质量+怪质量) = 1/(2+radius/25)"""
     r = get_radius(sid, rarity)
     return 1.0 / (2.0 + r / 25.0)
 
@@ -216,11 +190,9 @@ def get_escape_dist(sid):
     return 1.5 * get_aggro(sid)
 
 
-# ===== v1.23.1: florr_clone mobs.json 全AI配置 (aggro真值/web/stinger/poison/lightning/evasion) =====
 _MOB_AI = _load_json('florr_mobs_ai.json')
 _MOB_AI_MOBS = (_MOB_AI or {}).get('mobs', {})
 
-# 有特殊AI机制的怪(战斗模块用: 别站桩/避弹/避蛛网/防毒防电)
 AI_MECHANIC_SIDS = {
     'web': [], 'stinger': [], 'projectile': [], 'poison': [],
     'lightning': [], 'petal_ring': [], 'evasion': [],
@@ -238,8 +210,7 @@ def mob_ai_info(sid):
 
 def aggro_tier(sid):
     """v1.24.2: 攻击性档位(wasm三档+florr_clone ai_type)
-    hostile=主动攻击(进aggro range就追) / neutral=中立(被打才还手) / passive=被动(不主动惹人)
-    sandstorm=特殊档; 无数据按DANGER_SIDS推断hostile"""
+    hostile=主动攻击(进aggro range就追) / neutral=中立(被打才还手) / passive=被动(不主动惹人)"""
     ai = mob_ai_info(sid)
     t = ai.get('ai_type')
     if t:
@@ -251,9 +222,7 @@ def is_hostile(sid):
     return aggro_tier(sid) == 'hostile'
 
 def mechanism(system, key=None):
-    """v1.24.1: 机制库查询(mechanisms_wave2.json - 15系统源码级机制)
-    system: aggro_mechanics/spawn_mechanics/collision_mechanics/projectile_data/...
-    key: 具体项; None=返回整个系统"""
+    """v1.24.1: 机制库查询(mechanisms_wave2.json - 15系统源码级机制)"""
     d = _load_json('mechanisms_wave2.json') or {}
     sys_data = d.get(system, {})
     if key is None:
@@ -261,8 +230,7 @@ def mechanism(system, key=None):
     return sys_data.get(key)
 
 def missile_range(sid):
-    """v1.24.1: 导弹怪射程(撤出该距离才安全) - projectile_data 机制库
-    黄蜂/胡蜂333, 螳螂三连发500; 无导弹返回None"""
+    """v1.24.1: 导弹怪射程(撤出该距离才安全) - projectile_data 机制库"""
     ai = mob_ai_info(sid)
     proj = ai.get('projectile')
     if not proj:
@@ -277,23 +245,55 @@ def aggro_range(sid):
     return get_aggro(sid)
 
 
-# ===== v1.23.4: 官方bot目标评分公式 (florr_clone cpp/server/bot_ai.cpp) =====
 _RARITY_INDEX = {'common': 0, 'unusual': 1, 'rare': 2, 'epic': 3,
                  'legendary': 4, 'mythic': 5, 'ultra': 6, 'super': 7,
                  'unique': 7, 'eternal': 7}
 
+# v1.25.3: 稀有度13档官方RGB表 (NETWORK_PROTOCOL_DOC.md §7 真源, FlorrBt protocol.js)
+# 供截图/画布颜色识别统一映射; 含 Eternal/Primordial/Exotic 高稀有度档
+RARITY_RGB = {
+    'null':        (0, 0, 0),
+    'common':      (111, 211, 96),
+    'unusual':     (255, 230, 93),
+    'rare':        (68, 72, 200),
+    'epic':        (134, 31, 222),
+    'legendary':   (219, 31, 31),
+    'mythic':      (31, 219, 222),
+    'ultra':       (225, 38, 103),
+    'super':       (40, 240, 153),
+    'eternal':     (238, 238, 238),
+    'unique':      (53, 53, 53),
+    'primordial':  (110, 110, 110),
+    'exotic':      (218, 218, 218),
+}
+_RGB_LOOKUP = {v: k for k, v in RARITY_RGB.items()}
+
+
+def rarity_from_rgb(r, g, b):
+    """按官方13档RGB表反查稀有度名; 不在表内返回None (供截图/画布颜色识别)"""
+    key = (int(r), int(g), int(b))
+    if key in _RGB_LOOKUP:
+        return _RGB_LOOKUP[key]
+    # 容差匹配: 与官方色各通道差<=25 视为同档 (null档排除, 避免低饱和乱色误判)
+    best, best_d = None, 999
+    for name, (cr, cg, cb) in RARITY_RGB.items():
+        if name == 'null':
+            continue
+        d = abs(cr - r) + abs(cg - g) + abs(cb - b)
+        if d < best_d:
+            best, best_d = name, d
+    return best if best_d <= 75 else None
+
 
 def tier_appetite(rarity):
     """稀有度胃口 = 官方bot 'worth this many units of walking'
-    普通级 0x230, Rare 2x230=460, Legendary 920, Mythic 1150, Ultra 1380, Boss(Super+) 6000
-    v1.23.5: Super 是抢怪理由加一条 - Super 在场占着 biome 的 Unique/Apex 名额
-    (florr_clone spawning.cpp: 只有Super死后, unique/apex 时钟冷却完+抽中才升级出 Unique)"""
+    普通级 0x230, Rare 2x230=460, Legendary 920, Mythic 1150, Ultra 1380, Boss(Super+) 6000"""
     idx = _RARITY_INDEX.get((rarity or '').lower(), 0)
     if idx >= 7:
         return 6000.0
     return idx * 230.0
 
-# ================= 怪物属性 =================
+
 def mobs():
     m = _load_json('mob_stats_v2.json') or _load_json('mob_stats_full.json')
     if not m:
@@ -358,12 +358,9 @@ def get_aggro(sid):
 def cn(sid):
     return MOB_CN.get(sid, sid)
 
-# ================= 官方汉化映射 (FlorrTranslate-zh_CN, GPL-3.0) =================
-# 地图名官方中文 (汉化包): map key -> 中文名
 MAP_CN = {
     "garden": "后花园", "desert": "南部沙漠", "ocean": "东部水域", "jungle": "丛林",
     "anthell": "蚂蚁地狱", "hel": "冥界", "pyramid": "金字塔", "rift": "裂隙",
-    # Centralia 系列(后花园)
     "Centralia Fields 1": "后花园 1 (石头)", "Centralia Fields 2": "后花园 2",
     "Centralia Fields 3": "后花园 3 (瓢虫)", "Centralia Fields 4": "后花园 4",
     "Centralia Fields 5": "后花园 5 (蜈蚣)", "Centralia Fields 6": "后花园 6 (黄蜂)",
@@ -371,16 +368,13 @@ MAP_CN = {
     "Centralia Sewers 1": "后花园下水道 1 (飞蛾)", "Centralia Sewers 2": "后花园下水道 2 (蟑螂)",
     "Centralia Sewers 3": "后花园下水道 3 (苍蝇)", "Centralia Sewers 4": "后花园下水道 4 (蜘蛛)",
     "Centralia Beach": "后花园海滩",
-    # 沙漠
     "South Desert 1": "南部沙漠 1 (沙尘暴)", "South Desert 2": "南部沙漠 2",
     "South Desert 3": "南部沙漠 3 (仙人掌)", "South Desert 4": "南部沙漠 4 (闪亮瓢虫)",
     "South Desert 5": "南部沙漠 5 (甲虫)",
-    # 水域
     "East Waters 1": "东部水域 1", "East Waters 2": "东部水域 2",
     "East Waters 3": "东部水域 3", "East Waters 4": "东部水域 4 (贝壳)",
     "East Waters 6": "东部水域 6 (水蛭)", "Jellyfish Fields": "水母之地 (水母)",
     "Crab Kingdom": "螃蟹王国 (泡泡&螃蟹)",
-    # 蚂蚁地狱
     "Ant Hell 1": "火蚁地狱 (火蚁后)", "Ant Hell 2": "黑蚁地狱 (黑蚁后)",
     "Ant Hell 3": "白蚁地狱 (白蚁领主)",
 }
@@ -409,7 +403,6 @@ def map_cn(key):
 def type_id_to_sid(tid):
     return TYPE_ID_TO_SID.get(tid)
 
-# ================= 掉落价值 =================
 _RARITY_VALUE = {"Common":1,"Rare":2,"Super":3,"Epic":4,"Legendary":5,"Mythic":10,"Ultra":30,"Unique":50}
 
 def drop_value(sid):
@@ -422,7 +415,7 @@ def drop_value(sid):
         for tier, rows in v2.items():
             if not rows:
                 continue
-            exp = sum(r.get('rate', 0) for r in rows)  # 该档期望掉落花瓣数(每花瓣独立roll)
+            exp = sum(r.get('rate', 0) for r in rows)
             total += exp * _TIER_W.get(tier, 1)
         return total
     m = mobs().get(sid)
@@ -430,14 +423,11 @@ def drop_value(sid):
         return 0.0
     return sum(d.get('baseChance', 0) * 50 for d in m.get('drops', []))
 
-# ================= 真源掉率表 (FlorrBt私服 drop_rate.h + florr_clone mob_drops.json, v1.21.0) =================
-# v3 = 63怪(16怪FlorrBt矩阵 + 47怪clone补缺), 覆盖蝎子/仙人掌/蜈蚣/水母/shiny变体/冥界怪/金叶虫等
 _DROP_V2 = None
 def _load_drop_v2():
     global _DROP_V2
     if _DROP_V2 is None:
         d = _load_json('florr_dropchance_v3.json') or _load_json('florr_dropchance_v2.json') or {}
-        # v3 带 {source, mobs} 包装层, 解包成直接映射
         if 'mobs' in d and isinstance(d['mobs'], dict):
             d = d['mobs']
         _DROP_V2 = d
@@ -493,19 +483,13 @@ def assess_mob(sid, hp, player_dps, dist=None):
             action = 'ignore'
     else:
         action = 'fight' if max_hp < 500 else 'ignore'
-    # 危险怪: 秒不了的才避开(能秒的走 oneshot 追击)
-    # v1.20.1: Super专属机制怪(水母/萤火虫/冥界甲虫等)有突破点打法(BREAKTHROUGH表),
-    #   不回避 -> 落到下方 leech 蹭伤(收获大), 突破点距离由战斗模块执行
     if sid in DANGER_SIDS and action != 'oneshot':
         if sid in SUPER_SPECIAL_SIDS and rarity in ('Super', 'Unique', 'Eternal'):
-            pass  # 突破点智取: 能秒打秒, 打不动 leech 蹭 1% 参与奖
+            pass
         else:
             return 'danger', -1000, None, cn(sid)
-    # v1.20.1: Super专属机制怪不再回避(收获大) - 突破点打法见 BREAKTHROUGH 表,
-    # 打不动的Super机制怪走下方 leech 蹭伤(1%参与奖), 带突破点距离由战斗模块执行
     if sid in SUPER_SPECIAL_SIDS and rarity in ('Super', 'Unique', 'Eternal'):
-        pass  # 落到正常评分: 能秒打秒, 打不动走 leech 蹭伤(收获大)
-    # 评分: 秒杀优先 + 特殊怪加成 + 掉落价值 + 距离
+        pass
     score = 0.0
     if action == 'oneshot':
         score += 1000.0
@@ -514,13 +498,11 @@ def assess_mob(sid, hp, player_dps, dist=None):
     if sid in PRIORITY_SIDS:
         score += 5000.0
     score += drop_value(sid) * 10.0
-    # v1.19.0 真源掉率加分: 有高稀有度掉落的怪更值得打 (drop_rate.h 转译表)
     v2 = drop_rates(sid)
     if v2:
         hi = sum(1 for rar, rows in v2.items() if rar in ('Ultra', 'Super') and rows)
         score += hi * 800.0
         score += len(v2) * 15.0
-    # 源码级危险修正: 追得上的怪(≥1.0倍速)危险加倍 - 必须秒杀或立即风筝
     spd = get_aggro_speed(sid)
     if spd >= 1.0:
         score -= 3000.0 if action != 'oneshot' else 0.0
@@ -528,16 +510,13 @@ def assess_mob(sid, hp, player_dps, dist=None):
         score += 2000.0 / (dist + 50)
     return action, score, rarity, cn(sid)
 
-# ================= 花瓣库 =================
+
 def petals():
     return _load_json('all_petals.json') or []
 
 def petal_sids():
     return {p.get('sid') for p in petals()}
 
-# 回血花瓣 (从all_petals.json tooltip精确属性确认)
-#   Petal/Attribute/Heal            -> 一次性爆发回血 (玫瑰/大丽花)
-#   Petal/Attribute/HealPerSecond   -> 持续回血 (丝兰/海星/叶子, 防御时生效)
 _HEAL_ATTRS = ('Petal/Attribute/Heal', 'Petal/Attribute/HealPerSecond')
 
 def _petal_has_heal(sid):
