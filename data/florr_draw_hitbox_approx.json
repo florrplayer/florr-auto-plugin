@@ -1,0 +1,576 @@
+{
+ "1": {
+  "name": "rock",
+  "rx": 0.0,
+  "ry": 0.0,
+  "ovals": 0,
+  "pts": 2
+ },
+ "2": {
+  "name": "cactus",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "3": {
+  "name": "ladybug",
+  "rx": 30.0,
+  "ry": 30.0,
+  "ovals": 7,
+  "pts": 0
+ },
+ "4": {
+  "name": "bee",
+  "rx": 30.0,
+  "ry": 20.0,
+  "ovals": 10,
+  "pts": 5
+ },
+ "5": {
+  "name": "ant_baby",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "6": {
+  "name": "ant_worker",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "7": {
+  "name": "ant_soldier",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "8": {
+  "name": "ant_queen",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "9": {
+  "name": "ant_hole",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "10": {
+  "name": "beetle",
+  "rx": 5.0,
+  "ry": 5.0,
+  "ovals": 12,
+  "pts": 0
+ },
+ "11": {
+  "name": "hornet",
+  "rx": 30.0,
+  "ry": 20.0,
+  "ovals": 24,
+  "pts": 0
+ },
+ "12": {
+  "name": "centipede",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "13": {
+  "name": "centipede_body",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "14": {
+  "name": "centipede_evil",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "15": {
+  "name": "centipede_evil_body",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "16": {
+  "name": "centipede_desert",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "17": {
+  "name": "centipede_desert_body",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "18": {
+  "name": "square",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "19": {
+  "name": "ladybug_dark",
+  "rx": 30.0,
+  "ry": 30.0,
+  "ovals": 7,
+  "pts": 0
+ },
+ "20": {
+  "name": "ladybug_shiny",
+  "rx": 30.0,
+  "ry": 30.0,
+  "ovals": 7,
+  "pts": 0
+ },
+ "21": {
+  "name": "spider",
+  "rx": 17.5,
+  "ry": 17.5,
+  "ovals": 19,
+  "pts": 0
+ },
+ "22": {
+  "name": "scorpion",
+  "rx": 22.0,
+  "ry": 3.0,
+  "ovals": 0,
+  "pts": 4
+ },
+ "23": {
+  "name": "fire_ant_soldier",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "24": {
+  "name": "fire_ant_burrow",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "25": {
+  "name": "sandstorm",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "26": {
+  "name": "bubble",
+  "rx": 12.0,
+  "ry": 12.0,
+  "ovals": 6,
+  "pts": 0
+ },
+ "27": {
+  "name": "bumble_bee",
+  "rx": 30.0,
+  "ry": 25.0,
+  "ovals": 8,
+  "pts": 2
+ },
+ "28": {
+  "name": "shell",
+  "rx": 30.0,
+  "ry": 30.0,
+  "ovals": 1,
+  "pts": 5
+ },
+ "29": {
+  "name": "starfish",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "30": {
+  "name": "crab",
+  "rx": 1.5,
+  "ry": 1.5,
+  "ovals": 10,
+  "pts": 1
+ },
+ "31": {
+  "name": "jellyfish",
+  "rx": 50.0,
+  "ry": 50.0,
+  "ovals": 4,
+  "pts": 0
+ },
+ "32": {
+  "name": "digger",
+  "rx": 25.0,
+  "ry": 25.0,
+  "ovals": 2,
+  "pts": 4
+ },
+ "33": {
+  "name": "sponge",
+  "rx": 25.0,
+  "ry": 25.0,
+  "ovals": 2,
+  "pts": 0
+ },
+ "34": {
+  "name": "leech",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "35": {
+  "name": "leech_body",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "36": {
+  "name": "dandelion",
+  "rx": 26.5,
+  "ry": 26.5,
+  "ovals": 8,
+  "pts": 0
+ },
+ "37": {
+  "name": "fire_ant_baby",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "38": {
+  "name": "fire_ant_worker",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "39": {
+  "name": "fire_ant_queen",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "40": {
+  "name": "ant_egg",
+  "rx": 1.0,
+  "ry": 1.0,
+  "ovals": 4,
+  "pts": 0
+ },
+ "41": {
+  "name": "fire_ant_egg",
+  "rx": 1.0,
+  "ry": 1.0,
+  "ovals": 4,
+  "pts": 0
+ },
+ "42": {
+  "name": "fly",
+  "rx": 14.0,
+  "ry": 14.0,
+  "ovals": 10,
+  "pts": 0
+ },
+ "43": {
+  "name": "leafbug",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "44": {
+  "name": "mantis",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "45": {
+  "name": "termite_baby",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "46": {
+  "name": "termite_worker",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "47": {
+  "name": "termite_soldier",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "48": {
+  "name": "termite_overmind",
+  "rx": 14.0,
+  "ry": 14.0,
+  "ovals": 4,
+  "pts": 0
+ },
+ "49": {
+  "name": "termite_mound",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "50": {
+  "name": "termite_egg",
+  "rx": 1.0,
+  "ry": 1.0,
+  "ovals": 4,
+  "pts": 0
+ },
+ "51": {
+  "name": "bush",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "52": {
+  "name": "roach",
+  "rx": 7.961,
+  "ry": 8.006,
+  "ovals": 10,
+  "pts": 0
+ },
+ "53": {
+  "name": "moth",
+  "rx": 25.0,
+  "ry": 25.0,
+  "ovals": 16,
+  "pts": 2
+ },
+ "54": {
+  "name": "firefly",
+  "rx": 18.0,
+  "ry": 14.0,
+  "ovals": 14,
+  "pts": 0
+ },
+ "55": {
+  "name": "beetle_hel",
+  "rx": 5.0,
+  "ry": 5.0,
+  "ovals": 12,
+  "pts": 0
+ },
+ "56": {
+  "name": "wasp",
+  "rx": 30.0,
+  "ry": 20.0,
+  "ovals": 24,
+  "pts": 0
+ },
+ "57": {
+  "name": "dummy",
+  "rx": 28.0,
+  "ry": 28.0,
+  "ovals": 12,
+  "pts": 2
+ },
+ "58": {
+  "name": "spider_hel",
+  "rx": 17.5,
+  "ry": 17.5,
+  "ovals": 19,
+  "pts": 0
+ },
+ "59": {
+  "name": "centipede_hel",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "60": {
+  "name": "centipede_hel_body",
+  "rx": 15.0,
+  "ry": 15.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "61": {
+  "name": "wasp_hel",
+  "rx": 30.0,
+  "ry": 20.0,
+  "ovals": 24,
+  "pts": 0
+ },
+ "62": {
+  "name": "trader",
+  "rx": 28.0,
+  "ry": 28.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "63": {
+  "name": "gambler",
+  "rx": 28.0,
+  "ry": 28.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "64": {
+  "name": "oracle",
+  "rx": 28.0,
+  "ry": 28.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "65": {
+  "name": "firefly_magic",
+  "rx": 18.0,
+  "ry": 14.0,
+  "ovals": 14,
+  "pts": 0
+ },
+ "66": {
+  "name": "titan",
+  "rx": 28.0,
+  "ry": 28.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "67": {
+  "name": "beetle_nazar",
+  "rx": 5.0,
+  "ry": 5.0,
+  "ovals": 12,
+  "pts": 0
+ },
+ "68": {
+  "name": "worm",
+  "rx": 33.0,
+  "ry": 33.0,
+  "ovals": 6,
+  "pts": 1
+ },
+ "69": {
+  "name": "worm_guts",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "70": {
+  "name": "mecha_flower",
+  "rx": 28.0,
+  "ry": 28.0,
+  "ovals": 8,
+  "pts": 0
+ },
+ "71": {
+  "name": "wasp_mecha",
+  "rx": 30.0,
+  "ry": 20.0,
+  "ovals": 24,
+  "pts": 0
+ },
+ "72": {
+  "name": "spider_mecha",
+  "rx": 17.5,
+  "ry": 17.5,
+  "ovals": 19,
+  "pts": 0
+ },
+ "73": {
+  "name": "leafbug_shiny",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "74": {
+  "name": "crab_mecha",
+  "rx": 1.5,
+  "ry": 1.5,
+  "ovals": 10,
+  "pts": 1
+ },
+ "75": {
+  "name": "assembler",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "76": {
+  "name": "barrel",
+  "rx": 127.5,
+  "ry": 127.5,
+  "ovals": 2,
+  "pts": 0
+ },
+ "77": {
+  "name": "beetle_mummy",
+  "rx": 5.0,
+  "ry": 5.0,
+  "ovals": 12,
+  "pts": 0
+ },
+ "78": {
+  "name": "beetle_pharaoh",
+  "rx": 5.0,
+  "ry": 5.0,
+  "ovals": 12,
+  "pts": 0
+ },
+ "79": {
+  "name": "tomb",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "80": {
+  "name": "silverfish",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "81": {
+  "name": "garbage",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ },
+ "82": {
+  "name": "ant_soldier_diver",
+  "rx": null,
+  "ry": null,
+  "ovals": 0,
+  "pts": 0
+ }
+}

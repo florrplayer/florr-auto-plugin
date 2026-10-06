@@ -1,0 +1,1706 @@
+[
+ {
+  "id": 0,
+  "name": "none",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 0.0,
+  "display": "",
+  "description": ""
+ },
+ {
+  "id": 1,
+  "name": "basic",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 0.0,
+  "display": "Basic",
+  "description": "A nice petal, not too strong but not too weak."
+ },
+ {
+  "id": 2,
+  "name": "light",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Light",
+  "description": "Weaker than most petals, but recharges very quickly."
+ },
+ {
+  "id": 3,
+  "name": "rock",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Rock",
+  "description": "Extremely durable, but takes a bit longer to recharge."
+ },
+ {
+  "id": 4,
+  "name": "square",
+  "rarities": [
+   "common"
+  ],
+  "reload": 0.0,
+  "display": "Square",
+  "description": "This shape... it looks familiar..."
+ },
+ {
+  "id": 5,
+  "name": "rose",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Rose",
+  "description": "Its healing properties are amazing. Not so good at combat though."
+ },
+ {
+  "id": 6,
+  "name": "stinger",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Stinger",
+  "description": "It really hurts, but it's very fragile."
+ },
+ {
+  "id": 7,
+  "name": "iris",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Iris",
+  "description": "Very poisonous, but takes a little while to do its work.\n-50% damage vs other flowers."
+ },
+ {
+  "id": 8,
+  "name": "wing",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Wing",
+  "description": "It comes and goes."
+ },
+ {
+  "id": 9,
+  "name": "missile",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Missile",
+  "description": "You can actually shoot this one."
+ },
+ {
+  "id": 10,
+  "name": "grapes",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Grapes",
+  "description": "It goes poof. Now with a secret ingredient: poison."
+ },
+ {
+  "id": 11,
+  "name": "cactus",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Cactus",
+  "description": "Not very strong, but somehow increases your maximum health."
+ },
+ {
+  "id": 12,
+  "name": "faster",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Faster",
+  "description": "It's so light it makes your other petals spin faster."
+ },
+ {
+  "id": 13,
+  "name": "bubble",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Bubble",
+  "description": "Physics are for the weak."
+ },
+ {
+  "id": 14,
+  "name": "pollen",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Pollen",
+  "description": "Asthmatics beware."
+ },
+ {
+  "id": 15,
+  "name": "dandelion",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Dandelion",
+  "description": "Its interesting properties inhibits healing effects on affected units.\nAffected units have their healing reduced by 20%. Stacks with itself."
+ },
+ {
+  "id": 16,
+  "name": "beetle_egg",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Egg",
+  "description": "Something interesting might pop out of this."
+ },
+ {
+  "id": 17,
+  "name": "antennae",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Antennae",
+  "description": "Allows your flower to sense foes farther away."
+ },
+ {
+  "id": 18,
+  "name": "heavy",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Heavy",
+  "description": "This thing is so heavy that nothing gets in the way.\nSlows down petal rotation speed when equipped."
+ },
+ {
+  "id": 19,
+  "name": "yin_yang",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Yin Yang",
+  "description": "This mysterious petal affects the rotation of your petals in unpredictable ways."
+ },
+ {
+  "id": 20,
+  "name": "web",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Web",
+  "description": "It's really sticky."
+ },
+ {
+  "id": 21,
+  "name": "honey",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Honey",
+  "description": "Mobs love this. Attracts them in a large radius.\nMobs will prioritize this over flowers.\nAffected units develop immunity to its effects after some time."
+ },
+ {
+  "id": 22,
+  "name": "leaf",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Leaf",
+  "description": "Gathers energy from the sun to heal your flower passively."
+ },
+ {
+  "id": 23,
+  "name": "salt",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Salt",
+  "description": "Reflects some of the damage you take back to the enemy that dealt it.\nHigher rarity mobs have higher resistance to damage reflection."
+ },
+ {
+  "id": 24,
+  "name": "rice",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Rice",
+  "description": "Spawns very quickly, but not very strong."
+ },
+ {
+  "id": 25,
+  "name": "corn",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Corn",
+  "description": "Takes a long time to spawn, but has a lot of health."
+ },
+ {
+  "id": 26,
+  "name": "sand",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Sand",
+  "description": "A bunch of sand particles."
+ },
+ {
+  "id": 27,
+  "name": "pincer",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Pincer",
+  "description": "Debilitates enemies temporarily, reducing their movement speed."
+ },
+ {
+  "id": 28,
+  "name": "yucca",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Yucca",
+  "description": "Heals your flower but only while in the defensive position."
+ },
+ {
+  "id": 29,
+  "name": "magnet",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Magnet",
+  "description": "Increases drop pick up range."
+ },
+ {
+  "id": 30,
+  "name": "yggdrasil",
+  "rarities": [
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 100.0,
+  "display": "Yggdrasil",
+  "description": "A dried leaf from the Yggdrasil tree.\nRumored to be able to bring the fallen back to life."
+ },
+ {
+  "id": 31,
+  "name": "starfish",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Starfish",
+  "description": "Increases health regen while below 75% health."
+ },
+ {
+  "id": 32,
+  "name": "pearl",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Pearl",
+  "description": "Just drop it off somewhere and use your kinetic powers so you don't lose it."
+ },
+ {
+  "id": 33,
+  "name": "lightning",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Lightning",
+  "description": "Strikes several nearby enemies."
+ },
+ {
+  "id": 34,
+  "name": "jelly",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Jelly",
+  "description": "No one likes touching this."
+ },
+ {
+  "id": 35,
+  "name": "claw",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Claw",
+  "description": "Deals extra damage if the victim is above 80% health.\n-50% damage vs other flowers."
+ },
+ {
+  "id": 36,
+  "name": "shell",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Shell",
+  "description": "Adds a temporary shield to yourself or allies."
+ },
+ {
+  "id": 37,
+  "name": "cutter",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 10.0,
+  "display": "Cutter",
+  "description": "A friend used to own this... now it's time for revenge.\nIncreases body damage."
+ },
+ {
+  "id": 38,
+  "name": "dahlia",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Dahlia",
+  "description": "A small amount of heal but fairly consistent."
+ },
+ {
+  "id": 39,
+  "name": "uranium",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Uranium",
+  "description": "Periodically releases radiation.\n-75% damage versus other flowers.\nEffect strength depends on distance to petal."
+ },
+ {
+  "id": 40,
+  "name": "sponge",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Sponge",
+  "description": "Spreads damage taken by the flower over a period of time.\nIf destroyed, deals remaining damage all at once.\nDoes not delay Poison damage."
+ },
+ {
+  "id": 41,
+  "name": "soil",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 6.0,
+  "display": "Soil",
+  "description": "Increases health, but also increases flower size and decreases movement speed."
+ },
+ {
+  "id": 42,
+  "name": "fangs",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Fang",
+  "description": "Heals based on damage dealt by this petal."
+ },
+ {
+  "id": 43,
+  "name": "third_eye",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 10.0,
+  "display": "Third Eye",
+  "description": "Allows your flower to expand your petals further out."
+ },
+ {
+  "id": 44,
+  "name": "peas",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Peas",
+  "description": "It goes poof."
+ },
+ {
+  "id": 45,
+  "name": "stick",
+  "rarities": [
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Stick",
+  "description": "A mysterious stick that summons the forces of the wind."
+ },
+ {
+  "id": 46,
+  "name": "clover",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Clover",
+  "description": "Increases your luck.\nLuck is used by specific petals to change their stats.\nLuck also increases the rarity of mobs that spawn around you."
+ },
+ {
+  "id": 47,
+  "name": "powder",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Powder",
+  "description": "Increases movement speed.\nDisabled if flower takes damage or if near a mob higher than a certain rarity."
+ },
+ {
+  "id": 48,
+  "name": "air",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 0.5,
+  "display": "Air",
+  "description": "It's literally nothing."
+ },
+ {
+  "id": 49,
+  "name": "basil",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Basil",
+  "description": "Increases all healing received."
+ },
+ {
+  "id": 50,
+  "name": "orange",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Orange",
+  "description": "A sweet citrus fruit."
+ },
+ {
+  "id": 51,
+  "name": "ant_egg",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Egg",
+  "description": "Something interesting might pop out of this."
+ },
+ {
+  "id": 52,
+  "name": "poo",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Poo",
+  "description": "Makes mobs less likely to want to attack you."
+ },
+ {
+  "id": 53,
+  "name": "relic",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Relic",
+  "description": "A strange relic. Significantly increases maximum health.\nDamage taken is spread among other wearers."
+ },
+ {
+  "id": 54,
+  "name": "lotus",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Lotus",
+  "description": "Absorbs poison damage taken by the flower."
+ },
+ {
+  "id": 55,
+  "name": "bulb",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Bulb",
+  "description": "A shiny lightbulb. Draws aggro from mobs."
+ },
+ {
+  "id": 56,
+  "name": "cotton",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Cotton",
+  "description": "Absorbs damage taken by the flower."
+ },
+ {
+  "id": 57,
+  "name": "carrot",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Carrot",
+  "description": "Sturdy and reliable. Can be shot and bounces off walls."
+ },
+ {
+  "id": 58,
+  "name": "bone",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Bone",
+  "description": "Sturdy. Loses half of its armor each hit."
+ },
+ {
+  "id": 59,
+  "name": "plank",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Plank",
+  "description": "Does 20x damage vs projectiles and petals."
+ },
+ {
+  "id": 60,
+  "name": "tomato",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Tomato",
+  "description": "Gets stronger over time."
+ },
+ {
+  "id": 61,
+  "name": "mark",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Mark",
+  "description": "A dark mark that binds itself to a fallen soul."
+ },
+ {
+  "id": 62,
+  "name": "rubber",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Rubber",
+  "description": "Increases knockback received. Also absorbs lightning damage dealt to the flower."
+ },
+ {
+  "id": 63,
+  "name": "blood_stinger",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Stinger",
+  "description": "It really hurts, but it's very fragile.\nDeals damage to self when spawned."
+ },
+ {
+  "id": 64,
+  "name": "bur",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Bur",
+  "description": "Decreases armor of affected unit. Does not stack with itself."
+ },
+ {
+  "id": 65,
+  "name": "root",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Root",
+  "description": "Provides a layer of additional armor every interval, a layer is removed each time damage is taken."
+ },
+ {
+  "id": 66,
+  "name": "ankh",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Ankh",
+  "description": "An ancient relic.\nWhen destroyed, will teleport the flower back to where it was destroyed."
+ },
+ {
+  "id": 67,
+  "name": "dice",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Dice",
+  "description": "Has a 5% chance of dealing 35x damage.\nChance increases by 4% per point in luck."
+ },
+ {
+  "id": 68,
+  "name": "talisman",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Talisman",
+  "description": "A necklace that allows the wearer to anticipate enemy attacks."
+ },
+ {
+  "id": 69,
+  "name": "battery",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Battery",
+  "description": "Discharges electricity whenever the flower gets hit."
+ },
+ {
+  "id": 70,
+  "name": "amulet",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Amulet",
+  "description": "Converts a percentage of overheal into shields."
+ },
+ {
+  "id": 71,
+  "name": "compass",
+  "rarities": [
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Compass",
+  "description": "This crappy thing might be able to find something interesting..."
+ },
+ {
+  "id": 72,
+  "name": "disc",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Disc",
+  "description": "Reduces damage taken from collisions with mobs and flowers."
+ },
+ {
+  "id": 73,
+  "name": "shovel",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Shovel",
+  "description": "Becomes untargetable but unable to use petals for a limited time."
+ },
+ {
+  "id": 74,
+  "name": "coin",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 0.0,
+  "display": "Coin",
+  "description": "The power of capitalism compels you!"
+ },
+ {
+  "id": 75,
+  "name": "chip",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 0.0,
+  "display": "Chip",
+  "description": "ALL IN."
+ },
+ {
+  "id": 76,
+  "name": "card",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Card",
+  "description": "A playing card. Likely marked."
+ },
+ {
+  "id": 77,
+  "name": "moon",
+  "rarities": [
+   "ultra"
+  ],
+  "reload": 10.0,
+  "display": "Moon",
+  "description": "This thing is so big your petals orbit it instead.\nWhere did you find this anyway?"
+ },
+ {
+  "id": 78,
+  "name": "privet",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Privet",
+  "description": "Deals extra Poison damage based on the existing Poison damage per second."
+ },
+ {
+  "id": 79,
+  "name": "glass",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Glass",
+  "description": "Phases through enemies.\nCannot damage enemies more often than a certain interval."
+ },
+ {
+  "id": 80,
+  "name": "corruption",
+  "rarities": [
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Corruption",
+  "description": "Corrupts one's soul, turning them against their own kind."
+ },
+ {
+  "id": 81,
+  "name": "orb",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Orb",
+  "description": "Creates mana."
+ },
+ {
+  "id": 82,
+  "name": "blueberries",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Blueberries",
+  "description": "It goes poof. Now with the extra secret ingredient: lightning."
+ },
+ {
+  "id": 83,
+  "name": "magic_cotton",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Cotton",
+  "description": "Absorbs damage taken by the flower."
+ },
+ {
+  "id": 84,
+  "name": "magic_stinger",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Stinger",
+  "description": "It really hurts, but it's very fragile."
+ },
+ {
+  "id": 85,
+  "name": "magic_leaf",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Leaf",
+  "description": "Gathers mana from the environment passively."
+ },
+ {
+  "id": 86,
+  "name": "magic_cactus",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Cactus",
+  "description": "Increases maximum mana capacity."
+ },
+ {
+  "id": 87,
+  "name": "magic_eye",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 10.0,
+  "display": "Magic Eye",
+  "description": "Consumes half the current mana and deals damage based on that value."
+ },
+ {
+  "id": 88,
+  "name": "magic_missile",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Missile",
+  "description": "You can actually shoot this one... with magic."
+ },
+ {
+  "id": 89,
+  "name": "magic_stick",
+  "rarities": [
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Stick",
+  "description": "A mysterious stick that summons the forces of the wind... with magic."
+ },
+ {
+  "id": 90,
+  "name": "coral",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Coral",
+  "description": "Breaks apart on impact.\nEach piece has 50% of the stats of the predecessor."
+ },
+ {
+  "id": 91,
+  "name": "magic_bubble",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Bubble",
+  "description": "Physics are for the magicless."
+ },
+ {
+  "id": 92,
+  "name": "nazar",
+  "rarities": [
+   "common",
+   "epic",
+   "ultra"
+  ],
+  "reload": 5.0,
+  "display": "Nazar",
+  "description": "Reduce each damage instance by 98%."
+ },
+ {
+  "id": 93,
+  "name": "mimic",
+  "rarities": [
+   "ultra"
+  ],
+  "reload": 30.0,
+  "display": "Mimic",
+  "description": "Copies the petal to the left of this, with the same rarity as this."
+ },
+ {
+  "id": 94,
+  "name": "mjolnir",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "{#Petals/mjolnir/{0:rarity:is-unique}/Name}",
+  "description": "{#Petals/mjolnir/{0:rarity:is-unique}/Description}"
+ },
+ {
+  "id": 95,
+  "name": "mecha_missile",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Missile",
+  "description": "Locked on."
+ },
+ {
+  "id": 96,
+  "name": "wax",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Wax",
+  "description": "Don't ask where it came from."
+ },
+ {
+  "id": 97,
+  "name": "golden_leaf",
+  "rarities": [
+   "ultra"
+  ],
+  "reload": 10.0,
+  "display": "Leaf",
+  "description": "A very special leaf, seems to allow you to use your other petals even more."
+ },
+ {
+  "id": 98,
+  "name": "cog",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Cog",
+  "description": "Doesn't seem to do much..."
+ },
+ {
+  "id": 99,
+  "name": "monstera",
+  "rarities": [
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Monstera",
+  "description": "Heals flowers around it.\nEffect fades out with distance to petal."
+ },
+ {
+  "id": 100,
+  "name": "mecha_antennae",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Antennae",
+  "description": "Allows your flower to sense foes farther away.\nAnd it has a blinking red light on top."
+ },
+ {
+  "id": 101,
+  "name": "laser",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 3.0,
+  "display": "Laser",
+  "description": "Pew pew."
+ },
+ {
+  "id": 102,
+  "name": "domino",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Domino",
+  "description": "Damage depends on how many dots it has."
+ },
+ {
+  "id": 103,
+  "name": "bandage",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Bandage",
+  "description": "Turns the flower Undead for a limited time on death.\nDelays death until expiration.\nFlower Body Damage is reduced during this period.\nPrevents revival for some time afterwards."
+ },
+ {
+  "id": 104,
+  "name": "crown",
+  "rarities": [],
+  "reload": 0.0,
+  "display": "Crown",
+  "description": "Spawns Undead Beetles to fight at your side."
+ },
+ {
+  "id": 105,
+  "name": "totem",
+  "rarities": [
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Totem",
+  "description": "Grants health regen for a certain duration after killing a mob."
+ },
+ {
+  "id": 106,
+  "name": "triangle",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Triangle",
+  "description": "Each copy of this petal equipped grants additional damage to it."
+ },
+ {
+  "id": 107,
+  "name": "electric_web",
+  "rarities": [
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 2.0,
+  "display": "Web",
+  "description": "It's a little less sticky, but a bit more shocking."
+ },
+ {
+  "id": 108,
+  "name": "sacrifice",
+  "rarities": [
+   "super"
+  ],
+  "reload": 0.0,
+  "display": "Sacrifice",
+  "description": "On death, summons a mob to fight again.\nMob type depends on where the sacrifice happens.\nCannot be used in low mob rarity areas."
+ },
+ {
+  "id": 109,
+  "name": "sawblade",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 10.0,
+  "display": "Sawblade",
+  "description": "This looks like it'd hurt."
+ },
+ {
+  "id": 110,
+  "name": "clay",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Clay",
+  "description": "It sticks to dust in the air to get bigger and stronger."
+ },
+ {
+  "id": 111,
+  "name": "dust",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Dust",
+  "description": "Sometimes it sticks together, sometimes it doesn't."
+ },
+ {
+  "id": 112,
+  "name": "broccoli",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Broccoli",
+  "description": "Explodes when it hits something. For reasons unknown."
+ },
+ {
+  "id": 113,
+  "name": "lentil",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 1.0,
+  "display": "Lentil",
+  "description": "Increases petal attraction to enemies."
+ },
+ {
+  "id": 114,
+  "name": "dead_leaf",
+  "rarities": [
+   "mythic",
+   "ultra"
+  ],
+  "reload": 4.0,
+  "display": "Leaf",
+  "description": "Increases petal health but makes them reload slower."
+ },
+ {
+  "id": 115,
+  "name": "splitter",
+  "rarities": [
+   "common",
+   "unusual",
+   "rare",
+   "epic",
+   "legendary",
+   "mythic",
+   "ultra"
+  ],
+  "reload": 0.0,
+  "display": "Splitter",
+  "description": "{#Petals/splitter/Description/{0:rarity}#Petals/splitter/Description/default}"
+ }
+]

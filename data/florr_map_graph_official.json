@@ -1,0 +1,630 @@
+{
+ "desert_0": {
+  "biome": "desert",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 2,
+    "to": "desert_1"
+   },
+   {
+    "id": 3,
+    "to": "garden_0"
+   },
+   {
+    "id": 4,
+    "to": "desert_cactus"
+   }
+  ]
+ },
+ "desert_1": {
+  "biome": "desert",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_0"
+   },
+   {
+    "id": 2,
+    "to": "desert_2"
+   },
+   {
+    "id": 3,
+    "to": "garden_1"
+   },
+   {
+    "id": 4,
+    "to": "desert_soldier_ant"
+   },
+   {
+    "id": 5,
+    "to": "desert_sandstorm"
+   },
+   {
+    "id": 6,
+    "to": "desert_fire_ant"
+   },
+   {
+    "id": 7,
+    "to": "desert_bumble_bee"
+   },
+   {
+    "id": 8,
+    "to": "desert_beetle"
+   },
+   {
+    "id": 9,
+    "to": "desert_scorpion"
+   }
+  ]
+ },
+ "desert_2": {
+  "biome": "desert",
+  "tier": 2,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_1"
+   },
+   {
+    "id": 2,
+    "to": "desert_3"
+   },
+   {
+    "id": 3,
+    "to": "garden_2"
+   },
+   {
+    "id": 4,
+    "to": "desert_centipede"
+   },
+   {
+    "id": 5,
+    "to": "desert_ant_burrow"
+   }
+  ]
+ },
+ "desert_3": {
+  "biome": "desert",
+  "tier": 3,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_2"
+   },
+   {
+    "id": 2,
+    "to": "desert_4"
+   },
+   {
+    "id": 3,
+    "to": "garden_3"
+   },
+   {
+    "id": 4,
+    "to": "desert_shiny_ladybug"
+   },
+   {
+    "id": 5,
+    "to": "desert_ant_hole"
+   }
+  ]
+ },
+ "desert_4": {
+  "biome": "desert",
+  "tier": 4,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_3"
+   },
+   {
+    "id": 2,
+    "to": "desert_5"
+   },
+   {
+    "id": 3,
+    "to": "garden_4"
+   },
+   {
+    "id": 4,
+    "to": "desert_massive_beetle"
+   }
+  ]
+ },
+ "desert_5": {
+  "biome": "desert",
+  "tier": 5,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_4"
+   },
+   {
+    "id": 2,
+    "to": "desert_6"
+   },
+   {
+    "id": 3,
+    "to": "garden_5"
+   },
+   {
+    "id": 4,
+    "to": "desert_digger"
+   }
+  ]
+ },
+ "desert_6": {
+  "biome": "desert",
+  "tier": 6,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_5"
+   },
+   {
+    "id": 3,
+    "to": "garden_6"
+   }
+  ]
+ },
+ "desert_ant_burrow": {
+  "biome": "desert",
+  "tier": 2,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_2"
+   }
+  ]
+ },
+ "desert_ant_hole": {
+  "biome": "desert",
+  "tier": 3,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_3"
+   }
+  ]
+ },
+ "desert_beetle": {
+  "biome": "desert",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_1"
+   }
+  ]
+ },
+ "desert_bumble_bee": {
+  "biome": "desert",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_1"
+   }
+  ]
+ },
+ "desert_cactus": {
+  "biome": "desert",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_0"
+   }
+  ]
+ },
+ "desert_centipede": {
+  "biome": "desert",
+  "tier": 2,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_2"
+   }
+  ]
+ },
+ "desert_digger": {
+  "biome": "desert",
+  "tier": 5,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_5"
+   }
+  ]
+ },
+ "desert_fire_ant": {
+  "biome": "desert",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_1"
+   }
+  ]
+ },
+ "desert_massive_beetle": {
+  "biome": "desert",
+  "tier": 4,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_4"
+   }
+  ]
+ },
+ "desert_sandstorm": {
+  "biome": "desert",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_1"
+   }
+  ]
+ },
+ "desert_scorpion": {
+  "biome": "desert",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_1"
+   }
+  ]
+ },
+ "desert_shiny_ladybug": {
+  "biome": "desert",
+  "tier": 3,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_3"
+   }
+  ]
+ },
+ "desert_soldier_ant": {
+  "biome": "desert",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "desert_1"
+   }
+  ]
+ },
+ "garden_0": {
+  "biome": "garden",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 2,
+    "to": "garden_1"
+   },
+   {
+    "id": 3,
+    "to": "desert_0"
+   },
+   {
+    "id": 4,
+    "to": "garden_baby_ant"
+   },
+   {
+    "id": 5,
+    "to": "garden_worker_ant"
+   },
+   {
+    "id": 6,
+    "to": "garden_bee"
+   },
+   {
+    "id": 7,
+    "to": "garden_ladybug"
+   },
+   {
+    "id": 8,
+    "to": "garden_rock"
+   }
+  ]
+ },
+ "garden_1": {
+  "biome": "garden",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_0"
+   },
+   {
+    "id": 2,
+    "to": "garden_2"
+   },
+   {
+    "id": 3,
+    "to": "desert_1"
+   },
+   {
+    "id": 4,
+    "to": "garden_dandelion"
+   },
+   {
+    "id": 5,
+    "to": "garden_centipede"
+   },
+   {
+    "id": 6,
+    "to": "garden_boulder"
+   },
+   {
+    "id": 7,
+    "to": "garden_spider"
+   },
+   {
+    "id": 8,
+    "to": "garden_hornet"
+   }
+  ]
+ },
+ "garden_2": {
+  "biome": "garden",
+  "tier": 2,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_1"
+   },
+   {
+    "id": 2,
+    "to": "garden_3"
+   },
+   {
+    "id": 3,
+    "to": "desert_2"
+   }
+  ]
+ },
+ "garden_3": {
+  "biome": "garden",
+  "tier": 3,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_2"
+   },
+   {
+    "id": 2,
+    "to": "garden_4"
+   },
+   {
+    "id": 3,
+    "to": "desert_3"
+   },
+   {
+    "id": 4,
+    "to": "garden_evil_centipede"
+   },
+   {
+    "id": 5,
+    "to": "garden_massive_ladybug"
+   }
+  ]
+ },
+ "garden_4": {
+  "biome": "garden",
+  "tier": 4,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_3"
+   },
+   {
+    "id": 2,
+    "to": "garden_5"
+   },
+   {
+    "id": 3,
+    "to": "desert_4"
+   },
+   {
+    "id": 4,
+    "to": "garden_dark_ladybug"
+   }
+  ]
+ },
+ "garden_5": {
+  "biome": "garden",
+  "tier": 5,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_4"
+   },
+   {
+    "id": 2,
+    "to": "garden_6"
+   },
+   {
+    "id": 3,
+    "to": "desert_5"
+   },
+   {
+    "id": 4,
+    "to": "garden_queen_ant"
+   }
+  ]
+ },
+ "garden_6": {
+  "biome": "garden",
+  "tier": 6,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_5"
+   },
+   {
+    "id": 3,
+    "to": "desert_6"
+   },
+   {
+    "id": 4,
+    "to": "garden_square"
+   }
+  ]
+ },
+ "garden_baby_ant": {
+  "biome": "garden",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_0"
+   }
+  ]
+ },
+ "garden_bee": {
+  "biome": "garden",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_0"
+   }
+  ]
+ },
+ "garden_boulder": {
+  "biome": "garden",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_1"
+   }
+  ]
+ },
+ "garden_centipede": {
+  "biome": "garden",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_1"
+   }
+  ]
+ },
+ "garden_dandelion": {
+  "biome": "garden",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_1"
+   }
+  ]
+ },
+ "garden_dark_ladybug": {
+  "biome": "garden",
+  "tier": 4,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_4"
+   }
+  ]
+ },
+ "garden_evil_centipede": {
+  "biome": "garden",
+  "tier": 3,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_3"
+   }
+  ]
+ },
+ "garden_hornet": {
+  "biome": "garden",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_1"
+   }
+  ]
+ },
+ "garden_ladybug": {
+  "biome": "garden",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_0"
+   }
+  ]
+ },
+ "garden_massive_ladybug": {
+  "biome": "garden",
+  "tier": 3,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_3"
+   }
+  ]
+ },
+ "garden_queen_ant": {
+  "biome": "garden",
+  "tier": 5,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_5"
+   }
+  ]
+ },
+ "garden_rock": {
+  "biome": "garden",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_0"
+   }
+  ]
+ },
+ "garden_spider": {
+  "biome": "garden",
+  "tier": 1,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_1"
+   }
+  ]
+ },
+ "garden_square": {
+  "biome": "garden",
+  "tier": 6,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_6"
+   }
+  ]
+ },
+ "garden_worker_ant": {
+  "biome": "garden",
+  "tier": 0,
+  "warps": [
+   {
+    "id": 1,
+    "to": "garden_0"
+   }
+  ]
+ }
+}

@@ -733,6 +733,36 @@ def dominant_tier_for_difficulty(difficulty, luck=1.0):
     return mix['upper'] if mix['upperChance'] > 0.5 else mix['lower']
 
 
+# ===== v1.36: 官方地图传送图 + 稀有度倍率 (R2 资产) =====
+def map_graph():
+    """42 图官方传送图 {map_name: {biome, tier, warps:[{id,to}]}} - 选区/捷径导航"""
+    return _load_json('florr_map_graph_official.json') or {}
+
+def map_mobs_of(zone):
+    """官方子区域 -> 该区主怪 (由子区域名推断, 如 desert_scorpion->scorpion)"""
+    g = map_graph()
+    m = g.get(zone)
+    if not m:
+        return []
+    if m.get('biome') == m.get('tier') is not None:
+        pass
+    # 子区域名去掉 biome_ 前缀即怪名 (garden_square -> square, desert_ant_hole -> ant_hole)
+    z = zone.split('_', 1)
+    if len(z) == 2 and z[0] in ('garden', 'desert', 'ocean', 'jungle', 'anthell', 'hel', 'sewers'):
+        return [z[1]]
+    return []
+
+def rarity_scale():
+    """官方稀有度血量倍率 (common=1 ... unique=26244000)"""
+    return _load_json('florr_rarity_scale.json') or {}
+
+def zone_tier(zone):
+    """官方区域 tier (0-6) - 按秒杀等级选区的依据"""
+    g = map_graph()
+    m = g.get(zone)
+    return m.get('tier') if m else None
+
+
 if __name__ == '__main__':
     print(f"=== 统一数据层测试 ===")
     print(f"怪物: {len(mobs())} 只, 花瓣: {len(petals())} 个")

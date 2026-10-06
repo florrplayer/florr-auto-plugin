@@ -1,0 +1,11 @@
+{
+ "common": 1.0,
+ "unusual": 3.75,
+ "rare": 13.5,
+ "epic": 54.0,
+ "legendary": 324.0,
+ "mythic": 3159.0,
+ "ultra": 196830.0,
+ "super": 4374000.0,
+ "unique": 26244000.0
+}

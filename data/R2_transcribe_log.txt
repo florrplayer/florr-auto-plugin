@@ -1,0 +1,7 @@
+florr_rarity_scale.json: {'common': 1.0, 'unusual': 3.75, 'rare': 13.5, 'epic': 54.0, 'legendary': 324.0, 'mythic': 3159.0, 'ultra': 196830.0, 'super': 4374000.0, 'unique': 26244000.0}
+florr_mob_stats_official.json: 82 mobs
+florr_petal_reload.json: 116 petals
+florr_draw_hitbox_approx.json: 52/82 mobs with radius
+florr_map_graph_official.json: 42 maps
+florr_banned_words.json: 34 patterns
+florr_server_config_official.json: regions=['vultr-miami', 'vultr-frankfurt', 'vultr-tokyo'] reenable=75 shutdown=90

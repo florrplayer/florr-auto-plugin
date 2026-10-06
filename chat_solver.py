@@ -8,7 +8,26 @@ M28 会随机发"玩家消息挑战": 只解AFK检测但不回复消息可能封
   3. 按 Enter 打开聊天输入框 -> 输入随机短语 -> Enter 发送
   4. 限流: 每 6 分钟最多 1 条, 避免刷屏被盯
 """
-import time, random, threading
+import time, random, threading, json, os, re
+
+# v1.36: 官方屏蔽词表 (AstRatJP wasm 提取 banned_words.txt) - 回复前过滤防封
+_BANNED_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'florr_banned_words.json')
+_BANNED_PATTERNS = []
+try:
+    with open(_BANNED_FILE, encoding='utf-8') as f:
+        _BANNED_PATTERNS = [re.compile(p, re.I) for p in json.load(f)]
+except Exception:
+    pass
+
+def _safe_pick(pool, **fmt):
+    """从短语池随机选一条不含官方屏蔽词的短语"""
+    cands = list(pool)
+    random.shuffle(cands)
+    for t in cands:
+        s = t.format(**fmt)
+        if not any(p.search(s) for p in _BANNED_PATTERNS):
+            return s
+    return cands[0].format(**fmt) if cands else ''
 import cv2
 import numpy as np
 
@@ -153,7 +172,7 @@ class ChatSolver:
             if time.time() - self.last_reply < MIN_INTERVAL:
                 return False
         pool = BOSS_SHOUTS_UNIQUE if tier == 'unique' else BOSS_SHOUTS_SUPER
-        text = random.choice(pool).replace('{tier}', tier).replace('{mob}', mob_sid)
+        text = _safe_pick(pool, tier=tier, mob=mob_sid)
         if self._send_chat(text):
             with self._lock:
                 self.last_reply = time.time()
@@ -186,7 +205,7 @@ class ChatSolver:
                             continue
                     if random.random() > REPLY_CHANCE:
                         continue
-                    reply = random.choice(REPLIES)
+                    reply = _safe_pick(REPLIES)
                     if self._send_chat(reply):
                         self._stats['replied'] += 1
                         self.last_reply = time.time()

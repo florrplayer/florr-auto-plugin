@@ -62,3 +62,14 @@
 - **detect_mobs 合并连通域**：M(青)/U(粉) 两个 mask 合并成 1 次降采样+连通域，按中心 5x5 平均 HSV 分拣（2 次 CC → 1 次），实测 7.1ms → 5.8ms（-18%）
 - **Edge AIEP 窗口兼容**：Edge 更新后窗口类名带 `_AIEP_xxx:` 前缀，find_window 改包含匹配
 - **完全后台键盘移动**：auto/默认一律 PostMessage 键盘（不碰真实鼠标），后台/最小化都能挂
+
+## v1.36 (R2 挖掘资产接入)
+- data/florr_rarity_scale.json: 官方稀有度血量倍率 (mythic=3159/ultra=196830/super=4374000/unique=26244000)
+- data/florr_mob_stats_official.json: 82 怪官方数据 (florr_data 仓库)
+- data/florr_petal_reload.json: 116 花瓣官方 reload 表
+- data/florr_draw_hitbox_approx.json: 52 怪绘制形状半径
+- data/florr_map_graph_official.json: 42 图官方传送图 (biome/tier/warp, 含捷径 ant_burrow/ant_hole/cactus)
+- data/florr_banned_words.json: 官方屏蔽词表 (34 patterns, 聊天回复前过滤防封)
+- data/florr_server_config_official.json: 官方服务器配置 (3 区域/keepalive/shutdown)
+- chat_solver: 回复前官方屏蔽词过滤 (防触发聊天封禁)
+- mob_db: 新增 map_graph()/zone_tier()/rarity_scale() 官方数据查询

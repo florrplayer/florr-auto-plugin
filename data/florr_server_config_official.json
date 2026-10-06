@@ -1,0 +1,19 @@
+{
+ "reenableTimeout": 75,
+ "shutdownTimeout": 90,
+ "updateKeepAliveMin": 5,
+ "updateKeepAliveMax": 15,
+ "cutoffLoad": 1.22,
+ "serverSize": {
+  "cpus": 1,
+  "dedicatedCPUs": true,
+  "ram": 2000,
+  "transfer": 1.0,
+  "vultrPlanType": "voc-c"
+ },
+ "regions": [
+  "vultr-miami",
+  "vultr-frankfurt",
+  "vultr-tokyo"
+ ]
+}
