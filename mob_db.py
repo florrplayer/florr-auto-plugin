@@ -236,6 +236,39 @@ def mob_ai_info(sid):
     return _MOB_AI_MOBS.get(sid) or {}
 
 
+def aggro_tier(sid):
+    """v1.24.2: 攻击性档位(wasm三档+florr_clone ai_type)
+    hostile=主动攻击(进aggro range就追) / neutral=中立(被打才还手) / passive=被动(不主动惹人)
+    sandstorm=特殊档; 无数据按DANGER_SIDS推断hostile"""
+    ai = mob_ai_info(sid)
+    t = ai.get('ai_type')
+    if t:
+        return t
+    return 'hostile' if sid in DANGER_SIDS else 'passive'
+
+def is_hostile(sid):
+    """该怪是否主动攻击(进仇恨圈会被追)"""
+    return aggro_tier(sid) == 'hostile'
+
+def mechanism(system, key=None):
+    """v1.24.1: 机制库查询(mechanisms_wave2.json - 15系统源码级机制)
+    system: aggro_mechanics/spawn_mechanics/collision_mechanics/projectile_data/...
+    key: 具体项; None=返回整个系统"""
+    d = _load_json('mechanisms_wave2.json') or {}
+    sys_data = d.get(system, {})
+    if key is None:
+        return sys_data
+    return sys_data.get(key)
+
+def missile_range(sid):
+    """v1.24.1: 导弹怪射程(撤出该距离才安全) - projectile_data 机制库
+    黄蜂/胡蜂333, 螳螂三连发500; 无导弹返回None"""
+    ai = mob_ai_info(sid)
+    proj = ai.get('projectile')
+    if not proj:
+        return None
+    return proj.get('distance', 0)
+
 def aggro_range(sid):
     """怪的真实仇恨距离(florr_clone mobs.json range字段); 无则回退 wasm 检测半径"""
     m = _MOB_AI_MOBS.get(sid)
