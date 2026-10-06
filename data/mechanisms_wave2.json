@@ -46,5 +46,32 @@
   "petal_web_noslow": "花的Web花瓣不减速自己(源码: flower standing in Web field keeps full speed)",
   "water_slow": "水中 kWaterSpeedScale(水域减速)",
   "knockback_positional": "玩家被击退=位置性位移(不改变速度向量)"
+ },
+ "projectile_data": {
+  "hornet_missile": {
+   "count": 1,
+   "distance": 333,
+   "speed": 300,
+   "rarity": "uncommon",
+   "note": "黄蜂导弹: 射程333, 打带跑安全线=撤出333"
+  },
+  "wasp_missile": {
+   "count": 1,
+   "distance": 333,
+   "speed": 300,
+   "rarity": "uncommon"
+  },
+  "mantis_peas": {
+   "count": 1,
+   "burst": 3,
+   "burst_interval_ms": 300,
+   "distance": 500,
+   "speed": 500,
+   "note": "螳螂豌豆三连发: 射程500, 输出窗对齐300ms间隔"
+  },
+  "scorpion_poison": {
+   "poison": 0.006,
+   "note": "蝎子毒0.006/次"
+  }
  }
 }
