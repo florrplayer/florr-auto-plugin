@@ -6,6 +6,8 @@
 
 ## 快速开始（小白版）
 
+**免 Python 版**：到 [Releases 页面](https://github.com/florrplayer/florr-auto-plugin/releases) 下载最新 `florr-auto-beginners-vX.Y.zip`（即小白版，v1.34.0），解压后双击 `启动.bat`，按提示选择地图即可，无需安装 Python/依赖。
+
 1. 打开 florr.io（Edge/Chrome 都行，**不要最小化，窗口保持在前台**）
 2. 进地图（花园/沙漠/海洋/蚂蚁地狱都支持）
 3. 运行 `py main.py 地图名`（如 `py main.py desert`）
