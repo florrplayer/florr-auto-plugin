@@ -7,7 +7,6 @@ import json, os
 
 _DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'real_florr_mob_stats.json')
 
-# 插件稀有度名 -> 真实表键
 RARITY_KEY = {
     'Common': 'common', 'Unusual': 'unusual', 'Rare': 'rare', 'Epic': 'epic',
     'Legendary': 'legendary', 'Mythic': 'mythic', 'Ultra': 'ultra',
@@ -28,7 +27,6 @@ def _load():
 
 
 def real_health(sid, rarity='Common'):
-    """真实官方 HP; 未知稀有度回退 scale*base; 未知怪返回 None"""
     d = _load()
     m = d['by_sid'].get(sid)
     if not m:
@@ -47,7 +45,20 @@ def real_damage(sid):
 
 def real_armor(sid):
     m = _load()['by_sid'].get(sid)
-    return m.get('armor', 0) if m else 0
+    if m and m.get('armor') is not None:
+        return m.get('armor', 0)
+    # v1.29.2: 官方默认护甲 defaultArmor=0.8 (florr_mechanics_jp, clone共享), 未知怪回退该默认值
+    return 0.8 if m else 0
+
+
+def default_armor():
+    """官方默认护甲 0.8 (florr_mechanics_jp database.defaultArmor)"""
+    try:
+        p = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'florr_mechanics_jp.json')
+        d = json.load(open(p, encoding='utf-8'))
+        return d.get('database', {}).get('defaultArmor', 0.8)
+    except Exception:
+        return 0.8
 
 
 def real_lightning(sid):
@@ -56,7 +67,6 @@ def real_lightning(sid):
 
 
 def kill_time(sid, rarity, dps):
-    """真实秒杀所需秒数; dps<=0 或未知怪返回 None (表示无法秒)"""
     if dps <= 0:
         return None
     hp = real_health(sid, rarity)
@@ -66,13 +76,11 @@ def kill_time(sid, rarity, dps):
 
 
 def can_kill(sid, rarity, dps, max_sec=2.0):
-    """是否能在 max_sec 内秒杀 (真实官方 HP)"""
     t = kill_time(sid, rarity, dps)
     return t is not None and t <= max_sec
 
 
 def calibrate_mob_db():
-    """把真实数值写回 mob_db 模块级缓存 (不落盘, 运行时校准)"""
     try:
         import mob_db
     except ImportError:
@@ -87,7 +95,6 @@ def calibrate_mob_db():
 
 
 def missing_sids():
-    """真实表有而插件没有的怪 (补全用)"""
     try:
         from mob_db import MOB_CN
     except ImportError:
