@@ -27,19 +27,14 @@ var (
 func handleGet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Content-Type", "application/json")
-	// 锁内浅拷贝顶层map: 值引用共享(浏览器POST从不修改嵌套结构, 只替换顶层键),
-	// 避免 Marshal 在锁外遍历时与 POST 并发写冲突
 	mu.RLock()
-	snap := make(map[string]any, len(latest))
-	for k, v := range latest {
-		snap[k] = v
-	}
+	data := latest
 	mu.RUnlock()
 	var b []byte
 	if r.URL.Query().Get("pretty") == "1" {
-		b, _ = json.MarshalIndent(snap, "", "  ")
+		b, _ = json.MarshalIndent(data, "", "  ")
 	} else {
-		b, _ = json.Marshal(snap)
+		b, _ = json.Marshal(data)
 	}
 	w.Write(b)
 }
