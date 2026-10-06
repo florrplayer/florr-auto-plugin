@@ -205,6 +205,34 @@ def get_escape_dist(sid):
     """风筝线 = 1.5 × 检测半径(源码 _focus_lose_clause): 出这个圈才丢仇恨"""
     return 1.5 * get_aggro(sid)
 
+
+# ===== v1.23.1: florr_clone mobs.json 全AI配置 (aggro真值/web/stinger/poison/lightning/evasion) =====
+_MOB_AI = _load_json('florr_mobs_ai.json')
+_MOB_AI_MOBS = (_MOB_AI or {}).get('mobs', {})
+
+# 有特殊AI机制的怪(战斗模块用: 别站桩/避弹/避蛛网/防毒防电)
+AI_MECHANIC_SIDS = {
+    'web': [], 'stinger': [], 'projectile': [], 'poison': [],
+    'lightning': [], 'petal_ring': [], 'evasion': [],
+}
+for _sid, _m in _MOB_AI_MOBS.items():
+    for _k in AI_MECHANIC_SIDS:
+        if _m.get(_k):
+            AI_MECHANIC_SIDS[_k].append(_sid)
+
+
+def mob_ai_info(sid):
+    """返回怪AI配置 dict (range/speed/web/stinger/poison/lightning/evasion等)"""
+    return _MOB_AI_MOBS.get(sid) or {}
+
+
+def aggro_range(sid):
+    """怪的真实仇恨距离(florr_clone mobs.json range字段); 无则回退 wasm 检测半径"""
+    m = _MOB_AI_MOBS.get(sid)
+    if m and m.get('range'):
+        return m['range']
+    return get_aggro(sid)
+
 # ================= 怪物属性 =================
 def mobs():
     m = _load_json('mob_stats_v2.json') or _load_json('mob_stats_full.json')

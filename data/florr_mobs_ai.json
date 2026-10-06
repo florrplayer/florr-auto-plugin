@@ -1,0 +1,934 @@
+{
+ "source": "florr_clone src/mobs.json (63怪全AI配置)",
+ "mobs": {
+  "bee": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0.1,
+   "cooldown": 2000,
+   "groups": [
+    "garden"
+   ],
+   "bee_ai": "always",
+   "name": "Bee"
+  },
+  "ladybug": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0.1,
+   "cooldown": 2000,
+   "groups": [
+    "garden"
+   ],
+   "gardn_ai": true,
+   "name": "Ladybug"
+  },
+  "soldier_ant": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": [
+    "ant_hell"
+   ],
+   "gardn_ai": true,
+   "name": "Soldier Ant"
+  },
+  "worker_ant": {
+   "ai_type": "neutral",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": [
+    "ant_hell"
+   ],
+   "gardn_ai": true,
+   "name": "Worker Ant"
+  },
+  "baby_ant": {
+   "ai_type": "passive",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": [
+    "ant_hell"
+   ],
+   "gardn_ai": true,
+   "name": "Baby Ant"
+  },
+  "ant_hole": {
+   "ai_type": "passive",
+   "range": 0,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": {
+    "garden": 0.15
+   },
+   "spawn_waves": [
+    [
+     "baby_ant"
+    ],
+    [
+     "worker_ant",
+     "baby_ant"
+    ],
+    [
+     "worker_ant",
+     "worker_ant"
+    ],
+    [
+     "soldier_ant",
+     "worker_ant"
+    ],
+    [
+     "baby_ant",
+     "worker_ant",
+     "soldier_ant"
+    ],
+    [
+     "worker_ant",
+     "soldier_ant"
+    ],
+    [
+     "soldier_ant",
+     "worker_ant",
+     "worker_ant"
+    ],
+    [
+     "soldier_ant",
+     "soldier_ant"
+    ],
+    [
+     "soldier_ant",
+     "soldier_ant",
+     "queen_ant"
+    ]
+   ],
+   "initial_spawns": [
+    "baby_ant",
+    "baby_ant",
+    "baby_ant",
+    "worker_ant",
+    "worker_ant",
+    "soldier_ant"
+   ],
+   "hole": true,
+   "no_mob_collision": true,
+   "hideRotation": true,
+   "name": "Ant Hole"
+  },
+  "fire_ant_hole": {
+   "ai_type": "passive",
+   "range": 0,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": {
+    "desert": 0.15
+   },
+   "spawn_waves": [
+    [
+     "baby_fire_ant"
+    ],
+    [
+     "worker_fire_ant",
+     "baby_fire_ant"
+    ],
+    [
+     "worker_fire_ant",
+     "worker_fire_ant"
+    ],
+    [
+     "soldier_fire_ant",
+     "worker_fire_ant"
+    ],
+    [
+     "baby_fire_ant",
+     "worker_fire_ant",
+     "soldier_fire_ant"
+    ],
+    [
+     "worker_fire_ant",
+     "soldier_fire_ant"
+    ],
+    [
+     "soldier_fire_ant",
+     "worker_fire_ant",
+     "worker_fire_ant"
+    ],
+    [
+     "soldier_fire_ant",
+     "soldier_fire_ant"
+    ],
+    [
+     "soldier_fire_ant",
+     "soldier_fire_ant",
+     "soldier_fire_ant"
+    ]
+   ],
+   "initial_spawns": [
+    "baby_fire_ant",
+    "baby_fire_ant",
+    "baby_fire_ant",
+    "worker_fire_ant",
+    "worker_fire_ant",
+    "soldier_fire_ant"
+   ],
+   "hole": true,
+   "no_mob_collision": true,
+   "hideRotation": true,
+   "name": "Fire Ant Hole"
+  },
+  "worker_fire_ant": {
+   "ai_type": "neutral",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": [
+    "fire_ant_hell"
+   ],
+   "gardn_ai": true,
+   "name": "Worker Fire Ant"
+  },
+  "baby_fire_ant": {
+   "ai_type": "passive",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": [
+    "fire_ant_hell"
+   ],
+   "gardn_ai": true,
+   "name": "Baby Fire Ant"
+  },
+  "rock": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "garden"
+   ],
+   "name": "Rock"
+  },
+  "dandelion": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "petal_ring": {
+    "petalType": "dandelion",
+    "count": 10,
+    "orbit": 1.65,
+    "hitScale": 0.35,
+    "spin": false,
+    "shootOnHit": true,
+    "shotSpeed": 250,
+    "shotDistance": 1000
+   },
+   "groups": [
+    "garden"
+   ],
+   "name": "Dandelion"
+  },
+  "soldier_fire_ant": {
+   "ai_type": "hostile",
+   "range": 600,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": [
+    "fire_ant_hell"
+   ],
+   "gardn_ai": true,
+   "name": "Soldier Fire Ant"
+  },
+  "shiny_ladybug": {
+   "ai_type": "neutral",
+   "range": 200,
+   "speed": 0.2,
+   "cooldown": 2000,
+   "groups": {
+    "desert": 0.05
+   },
+   "spawn_weight": 0.05,
+   "gardn_ai": true,
+   "name": "Shiny Ladybug"
+  },
+  "dark_ladybug": {
+   "ai_type": "neutral",
+   "range": 400,
+   "speed": 0.3,
+   "cooldown": 2000,
+   "groups": [
+    "jungle"
+   ],
+   "gardn_ai": true,
+   "name": "Dark Ladybug"
+  },
+  "sandstorm": {
+   "ai_type": "sandstorm",
+   "range": 100,
+   "speed": 0.4,
+   "cooldown": 2000,
+   "groups": [
+    "desert"
+   ],
+   "hideRotation": true,
+   "name": "Sandstorm"
+  },
+  "cactus": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "desert"
+   ],
+   "name": "Cactus"
+  },
+  "scorpion": {
+   "ai_type": "hostile",
+   "range": 400,
+   "speed": 0.56,
+   "cooldown": 2000,
+   "poison": 0.006,
+   "poisonDuration": 2500,
+   "groups": [
+    "desert"
+   ],
+   "gardn_ai": true,
+   "name": "Scorpion"
+  },
+  "beetle": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.52,
+   "cooldown": 2000,
+   "groups": [
+    "desert"
+   ],
+   "gardn_ai": true,
+   "name": "Beetle"
+  },
+  "hel_beetle": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.52,
+   "cooldown": 2000,
+   "groups": [
+    "hel"
+   ],
+   "gardn_ai": true,
+   "name": "Hel Beetle"
+  },
+  "jellyfish": {
+   "ai_type": "hostile",
+   "range": 400,
+   "speed": 0.1,
+   "cooldown": 2000,
+   "lightning": {
+    "radius": 300
+   },
+   "groups": [
+    "ocean"
+   ],
+   "hideRotation": true,
+   "gardn_ai": true,
+   "name": "Jellyfish"
+  },
+  "bubble": {
+   "ai_type": "passive",
+   "range": 200,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "ocean"
+   ],
+   "name": "Bubble"
+  },
+  "starfish": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": [
+    "ocean"
+   ],
+   "hideRotation": true,
+   "gardn_ai": true,
+   "name": "Starfish"
+  },
+  "sponge_2": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "ocean"
+   ],
+   "name": "Sponge"
+  },
+  "sponge_1": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "ocean"
+   ],
+   "name": "Sponge"
+  },
+  "shell": {
+   "ai_type": "neutral",
+   "range": 100,
+   "speed": 2,
+   "cooldown": 2000,
+   "groups": [
+    "ocean"
+   ],
+   "name": "Shell"
+  },
+  "crab": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.56,
+   "cooldown": 2000,
+   "groups": [
+    "ocean"
+   ],
+   "name": "Crab"
+  },
+  "leech": {
+   "ai_type": "hostile",
+   "range": 500,
+   "speed": 0.96,
+   "cooldown": 2000,
+   "groups": [
+    "ocean"
+   ],
+   "name": "Leech"
+  },
+  "leech_body": {
+   "ai_type": "hostile",
+   "range": 0,
+   "speed": 0.96,
+   "cooldown": 2000,
+   "groups": {
+    "ocean": 0
+   },
+   "name": "Leech"
+  },
+  "hornet": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.4,
+   "cooldown": 2000,
+   "stinger": true,
+   "projectile": {
+    "count": 1,
+    "distance": 333,
+    "petalType": "hornet_missile",
+    "petalRarity": "uncommon",
+    "speed": 300,
+    "spreadAngle": 0
+   },
+   "groups": [
+    "garden"
+   ],
+   "bee_ai": "idle",
+   "name": "Hornet"
+  },
+  "mantis": {
+   "ai_type": "hostile",
+   "range": 500,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "projectile": {
+    "count": 1,
+    "burstCount": 3,
+    "burstInterval": 300,
+    "distance": 500,
+    "petalType": "peas",
+    "petalRarity": "common",
+    "speed": 500,
+    "spreadAngle": 0
+   },
+   "groups": [
+    "jungle"
+   ],
+   "name": "Mantis"
+  },
+  "leafbug": {
+   "ai_type": "neutral",
+   "range": 100,
+   "speed": 0.48,
+   "cooldown": 0,
+   "armor": 10,
+   "groups": [
+    "jungle"
+   ],
+   "gardn_ai": true,
+   "name": "Leafbug"
+  },
+  "bush": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 0,
+   "groups": [
+    "jungle"
+   ],
+   "name": "Bush"
+  },
+  "golden_leafbug": {
+   "ai_type": "neutral",
+   "range": 100,
+   "speed": 0.48,
+   "cooldown": 0,
+   "armor": 10,
+   "groups": {
+    "jungle": 0.02
+   },
+   "spawn_weight": 0.02,
+   "gardn_ai": true,
+   "name": "Golden Leafbug"
+  },
+  "wasp": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.4,
+   "cooldown": 1000,
+   "stinger": true,
+   "projectile": {
+    "count": 1,
+    "distance": 333,
+    "petalType": "wasp_missile",
+    "petalRarity": "uncommon",
+    "speed": 300,
+    "spreadAngle": 0
+   },
+   "groups": [
+    "jungle"
+   ],
+   "bee_ai": "idle",
+   "name": "Wasp"
+  },
+  "firefly": {
+   "ai_type": "neutral",
+   "range": 100,
+   "speed": 0.48,
+   "cooldown": 0,
+   "lightning": {
+    "radius": 250,
+    "onContact": true
+   },
+   "groups": [
+    "jungle"
+   ],
+   "bee_ai": "always",
+   "name": "Firefly"
+  },
+  "magic_firefly": {
+   "ai_type": "neutral",
+   "range": 100,
+   "speed": 0.48,
+   "cooldown": 0,
+   "lightning": {
+    "radius": 250,
+    "onContact": true
+   },
+   "groups": {
+    "jungle": 0.05
+   },
+   "spawn_weight": 0.05,
+   "bee_ai": "always",
+   "name": "Magic Firefly"
+  },
+  "target_dummy": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "npc": {
+    "team": "hostile"
+   },
+   "hideRotation": true,
+   "name": "Target Dummy"
+  },
+  "fly": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 1.3,
+   "cooldown": 2000,
+   "evasion": 0.9,
+   "groups": [
+    "sewers"
+   ],
+   "bee_ai": "always",
+   "name": "Fly"
+  },
+  "roach": {
+   "ai_type": "neutral",
+   "range": 300,
+   "speed": 1,
+   "cooldown": 2000,
+   "groups": [
+    "sewers"
+   ],
+   "name": "Roach"
+  },
+  "garbage": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "sewers"
+   ],
+   "reversed": true,
+   "hideRotation": true,
+   "name": "Garbage"
+  },
+  "moth": {
+   "ai_type": "neutral",
+   "range": 400,
+   "speed": -0.48,
+   "cooldown": 2000,
+   "groups": [
+    "sewers"
+   ],
+   "bee_ai": "always",
+   "name": "Moth"
+  },
+  "item_spawner": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "name": "Item Spawner"
+  },
+  "spider": {
+   "ai_type": "hostile",
+   "range": 600,
+   "speed": 0.95,
+   "cooldown": 2000,
+   "web": {
+    "intervalMs": 1000,
+    "lifetimeMs": 10000,
+    "radiusScale": 1.6667,
+    "slowFactor": 0.5,
+    "minRarity": "legendary"
+   },
+   "groups": [
+    "sewers"
+   ],
+   "gardn_ai": true,
+   "name": "Spider"
+  },
+  "soldier_ant_pet": {
+   "ai_type": "passive",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "name": "Soldier Ant Pet"
+  },
+  "soldier_fire_ant_pet": {
+   "ai_type": "passive",
+   "range": 300,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "name": "Soldier Fire Ant Pet"
+  },
+  "javascript": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0.2,
+   "cooldown": 2000,
+   "groups": [
+    "computer"
+   ],
+   "hideRotation": true,
+   "name": "JavaScript"
+  },
+  "dust": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "computer"
+   ],
+   "name": "Dust"
+  },
+  "glitch": {
+   "ai_type": "hostile",
+   "range": 300,
+   "speed": 0.5,
+   "cooldown": 2000,
+   "projectile": {
+    "count": 1,
+    "distance": 300,
+    "petalType": "javascript",
+    "petalRarity": "common",
+    "speed": 200,
+    "spreadAngle": 0.2
+   },
+   "groups": [
+    "computer"
+   ],
+   "name": "Glitch"
+  },
+  "glitch_flower": {
+   "ai_type": "hostile",
+   "range": 700,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "petal_ring": {
+    "petalType": "glitch",
+    "count": 5,
+    "face": true
+   },
+   "groups": {
+    "computer": 0.08
+   },
+   "hideRotation": true,
+   "name": "Glitch Flower"
+  },
+  "cube": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": [
+    "computer"
+   ],
+   "hideRotation": true,
+   "name": "Cube"
+  },
+  "sun": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": {
+    "computer": 0.05
+   },
+   "hideRotation": true,
+   "name": "Sun"
+  },
+  "server": {
+   "ai_type": "passive",
+   "range": 0,
+   "speed": 0,
+   "cooldown": 2000,
+   "groups": {
+    "computer": 0.15
+   },
+   "spawn_waves": [
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch_flower"
+    ],
+    [
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch",
+     "glitch_flower",
+     "glitch_flower",
+     "glitch_flower"
+    ]
+   ],
+   "initial_spawns": [
+    "glitch",
+    "javascript",
+    "javascript",
+    "glitch",
+    "glitch_flower",
+    "glitch"
+   ],
+   "no_mob_collision": true,
+   "hideRotation": true,
+   "name": "Server"
+  },
+  "centipede": {
+   "ai_type": "passive",
+   "range": 500,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": {
+    "garden": 0.2
+   },
+   "name": "Centipede"
+  },
+  "centipede_body": {
+   "ai_type": "passive",
+   "range": 0,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "groups": {
+    "garden": 0
+   },
+   "name": "Centipede"
+  },
+  "desert_centipede": {
+   "ai_type": "passive",
+   "range": 500,
+   "speed": 0.96,
+   "cooldown": 2000,
+   "groups": {
+    "desert": 0.4
+   },
+   "name": "Desert Centipede"
+  },
+  "desert_centipede_body": {
+   "ai_type": "passive",
+   "range": 0,
+   "speed": 0.96,
+   "cooldown": 2000,
+   "groups": {
+    "desert": 0
+   },
+   "name": "Desert Centipede"
+  },
+  "evil_centipede": {
+   "ai_type": "hostile",
+   "range": 500,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "poison": 0.005,
+   "poisonDuration": 2000,
+   "groups": {
+    "jungle": 0.2
+   },
+   "name": "Evil Centipede"
+  },
+  "evil_centipede_body": {
+   "ai_type": "hostile",
+   "range": 0,
+   "speed": 0.48,
+   "cooldown": 2000,
+   "poison": 0.005,
+   "poisonDuration": 2000,
+   "groups": {
+    "jungle": 0
+   },
+   "name": "Evil Centipede"
+  },
+  "queen_ant": {
+   "ai_type": "hostile",
+   "range": 750,
+   "speed": 0.44,
+   "cooldown": 2000,
+   "groups": [],
+   "periodic_spawn": {
+    "mobType": "soldier_ant",
+    "intervalMs": 2000,
+    "lifetimeMs": 10000,
+    "maxAlive": 5,
+    "spawnRarityOffset": -1
+   },
+   "min_rarity": "rare",
+   "gardn_ai": true,
+   "name": "Queen Ant"
+  },
+  "digger": {
+   "ai_type": "hostile",
+   "range": 600,
+   "speed": 0.52,
+   "cooldown": 2000,
+   "hideRotation": true,
+   "name": "Digger"
+  },
+  "oracle": {
+   "ai_type": "hostile",
+   "range": 450,
+   "speed": 0.15,
+   "cooldown": 2000,
+   "npc": {
+    "service": "oracle"
+   },
+   "bee_ai": "idle",
+   "name": "Oracle"
+  },
+  "trader": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 0.15,
+   "cooldown": 2000,
+   "npc": {
+    "service": "trader"
+   },
+   "bee_ai": "idle",
+   "name": "Trader"
+  },
+  "bumble_bee": {
+   "ai_type": "passive",
+   "range": 100,
+   "speed": 2,
+   "cruiseSpeed": 0.6,
+   "cooldown": 2000,
+   "dropProjectile": {
+    "petalType": "bumble_bee_pollen",
+    "intervalMs": 1000,
+    "lifetimeMs": 3000
+   },
+   "groups": {
+    "garden": 0.27
+   },
+   "bee_ai": "always",
+   "name": "Bumble Bee"
+  }
+ }
+}
