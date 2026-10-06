@@ -824,17 +824,49 @@ if __name__ == "__main__":
         print("[!] 请先打开浏览器，进入 florr.io，最大化窗口后再运行(无需F11全屏)")
         exit(1)
 
-    # ===== 内存战斗模式: py main.py 地图 --memory (直接读wasm内存, 不用截图) =====
-    if "--memory" in sys.argv:
-        import memory_battle
-        print("[+] 内存战斗模式: 直接读游戏内存(玩家坐标/怪物HP/类型ID)")
-        print("[+] 无需截图, 窗口最小化/后台都行! 但必须开着bridge_server(先跑 py bridge_server.py)")
-        try:
-            memory_battle.run_memory_battle(get_window())
-        except KeyboardInterrupt:
-            pass
-        get_window().move_onscreen()
-        exit(0)
+    # ===== 内存战斗模式（v1.35 默认自动开启）=====
+    # 直读游戏内存(玩家坐标/怪HP/类型ID): 免截图、最快最准、窗口最小化/后台都能跑
+    # 自动: 探测 bridge(18899) -> 没起就自动拉起 bridge_server.py -> 有数据进内存模式
+    #       连不上/无数据(浏览器没注入hook) -> 打印提示后回退截图模式, 小白零配置
+    # 参数: --screenshot 强制截图模式; --memory 强制内存模式(连不上也回退)
+    force_screenshot = "--screenshot" in sys.argv
+    if not force_screenshot:
+        import urllib.request, json
+        def _bridge_has_data(timeout):
+            t0 = time.time()
+            while time.time() - t0 < timeout:
+                try:
+                    with urllib.request.urlopen("http://127.0.0.1:18899", timeout=0.8) as r:
+                        d = json.loads(r.read().decode())
+                        if d.get("px") and d.get("py"):
+                            return True
+                except Exception:
+                    pass
+                time.sleep(0.4)
+            return False
+        if not _bridge_has_data(1.5):
+            import subprocess
+            bp = os.path.join(os.path.dirname(os.path.abspath(__file__)), "bridge_server.py")
+            if os.path.exists(bp):
+                try:
+                    subprocess.Popen([sys.executable, bp], creationflags=0x08000000)  # CREATE_NO_WINDOW
+                    print("[内存] 自动启动 bridge_server(127.0.0.1:18899)...")
+                except Exception:
+                    pass
+        if _bridge_has_data(8.0 if "--memory" in sys.argv else 6.0):
+            import memory_battle
+            print("[+] 内存战斗模式: 直读游戏内存(玩家坐标/怪HP/类型ID), 免截图, 最小化/后台也能跑")
+            try:
+                b = memory_battle.run_memory_battle(get_window(), no_data_timeout=12.0)
+                if not getattr(b, "had_data", True):
+                    print("[!] 内存模式12s无数据(浏览器未注入hook?), 回退截图模式")
+                else:
+                    get_window().move_onscreen()
+                    exit(0)
+            except KeyboardInterrupt:
+                get_window().move_onscreen()
+                exit(0)
+        print("[内存] 未连上 bridge(需浏览器注入), 使用截图模式")
 
     get_window().move_offscreen()
     set_title("运行中")

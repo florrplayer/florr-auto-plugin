@@ -49,6 +49,9 @@ class MemoryBattle:
         self.w = window
         self.player = None
         self.running = True
+        self.had_data = False       # v1.35: 是否读到过内存数据(供main.py判断回退截图模式)
+        self.no_data_timeout = 15.0 # v1.35: 连续无数据多久自动退出内存模式
+        self._no_data_since = None
 
     def _keys_release(self):
         for vk in (VK_W, VK_A, VK_S, VK_D):
@@ -215,7 +218,16 @@ class MemoryBattle:
                 # 读玩家 (camera = 精确世界坐标)
                 self.player = get_player()
                 if not self.player:
+                    # v1.35: 无数据计时, 超时自动退出(供main回退截图模式)
+                    if self._no_data_since is None:
+                        self._no_data_since = time.time()
+                    elif time.time() - self._no_data_since > self.no_data_timeout:
+                        print(f"[内存] {self.no_data_timeout:.0f}s 无数据(bridge无浏览器注入?), 退出内存模式")
+                        self.running = False
+                        break
                     time.sleep(0.2); continue
+                self._no_data_since = None
+                self.had_data = True
                 px, py = self.player['x'], self.player['y']
 
                 # v1.25.2 传送门3秒无敌窗口: 坐标突变=跨图, 传送门出来3秒敌对怪中立化(§8.1-6)
@@ -399,9 +411,10 @@ class MemoryBattle:
         except: pass
 
 
-def run_memory_battle(window, duration=None):
-    """在main.py里调用: 运行内存战斗"""
+def run_memory_battle(window, duration=None, no_data_timeout=15.0):
+    """在main.py里调用: 运行内存战斗 (v1.35: 无数据超时自动退出, 供回退截图)"""
     battle = MemoryBattle(window)
+    battle.no_data_timeout = no_data_timeout
     t = threading.Thread(target=battle.battle_loop, daemon=True)
     t.start()
     print("[+] 内存战斗模式运行中... Ctrl+C停止")
