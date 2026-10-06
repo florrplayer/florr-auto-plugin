@@ -156,6 +156,68 @@ class MemoryBattle:
 
     def _move_dir(self, d):
         """按指定方向移动 (w/a/s/d)"""
+
+    # v1.24.0: bot式侧移避怪(bot_ai.cpp移植) - 追击时前方有怪不撞上去, 侧移绕过
+    AVOID_MARGIN = 26.0       # kBotMobAvoidMargin
+    AVOID_LOOKAHEAD = 110.0   # kBotMobAvoidLookahead
+    AVOID_TANGENT = 0.85      # kBotMobAvoidTangent
+    AVOID_DEADBAND = 30.0     # kBotMobAvoidSideDeadband
+    AVOID_RADIUS = 260.0      # kBotMobAvoidQueryRadius
+    PLAYER_R = 20.0           # kPlayerBaseRadius
+
+    def _bot_avoid(self, px, py, tx, ty, mobs):
+        """正前方有怪挡路 -> 侧移绕过(不减速不撞); 返回True表示本次改走侧移"""
+        heading_x, heading_y = tx - px, ty - py
+        hlen = math.hypot(heading_x, heading_y)
+        if hlen < 1:
+            return False
+        fx, fy = heading_x / hlen, heading_y / hlen
+        lx, ly = -fy, fx   # 左向量
+        best = None
+        for m in mobs or []:
+            mx, my = m.get('x', 0), m.get('y', 0)
+            tox, toy = mx - px, my - py
+            dist = math.hypot(tox, toy)
+            if dist < 1:
+                continue
+            ahead = (tox * fx + toy * fy) / dist   # 归一化前方分量
+            if ahead <= 0.0:
+                continue   # 在身后不挡路
+            mr = m.get('radius') or m.get('r') or 10.0
+            ring = self.PLAYER_R + mr + self.AVOID_MARGIN
+            outer = ring + self.AVOID_LOOKAHEAD
+            if dist >= outer:
+                continue
+            strength = min(2.0, (outer - dist) / self.AVOID_LOOKAHEAD)
+            lateral = (tox * lx + toy * ly) / dist
+            side = -1.0 if abs(lateral) < self.AVOID_DEADBAND / 100.0 else (-1.0 if lateral >= 0 else 1.0)
+            headOn = min(1.0, ahead)
+            blend = headOn * self.AVOID_TANGENT
+            push_x, push_y = -tox / dist, -toy / dist   # 推离
+            sx, sy = lx * side, ly * side                # 侧移
+            # 混合: 推离*(1-blend) + 侧移*strength*blend
+            ox = push_x * (1.0 - blend) + sx * strength * blend
+            oy = push_y * (1.0 - blend) + sy * strength * blend
+            # 偏置(不反转意图): 目标方向 + 0.6*偏置
+            dx = fx + ox * 0.6
+            dy = fy + oy * 0.6
+            if best is None or dist < best[0]:
+                best = (dist, dx, dy, m)
+        if best is None:
+            return False
+        _, dx, dy, m = best
+        self._keys_release()
+        if abs(dx) > abs(dy):
+            if dx > 0: self.w.key_down(VK_D)
+            else:      self.w.key_down(VK_A)
+        else:
+            if dy > 0: self.w.key_down(VK_S)
+            else:      self.w.key_down(VK_W)
+        print(f"[侧移] 绕开 {m.get('cn','怪')}({m.get('rarity','')}) 距离{best[0]:.0f}")
+        return True
+
+    def _move_dir(self, d):
+        """按指定方向移动 (w/a/s/d)"""
         self._keys_release()
         self.w.key_down({'w': VK_W, 'a': VK_A, 's': VK_S, 'd': VK_D}[d])
 
