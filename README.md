@@ -73,3 +73,13 @@
 - data/florr_server_config_official.json: 官方服务器配置 (3 区域/keepalive/shutdown)
 - chat_solver: 回复前官方屏蔽词过滤 (防触发聊天封禁)
 - mob_db: 新增 map_graph()/zone_tier()/rarity_scale() 官方数据查询
+
+## v1.37 文件整理 + 浏览器兼容警告
+- 40 个一次性挖矿/反编译脚本移到 tools/ (根目录 81→41 个 .py, 更清爽)
+- real_stats.py 保留根目录(mob_db 运行依赖)
+
+### 浏览器兼容(重要, 来自 Shiny-Ladybug 官方主页)
+- **Edge 已结束支持**: 2025-05-27 起 Edge 无法关闭 CalculateNativeWinOcclusion, 后台截图会黑屏
+- **Chrome 启动参数**: chrome.exe --disable-features=CalculateNativeWinOcclusion
+- **Firefox**: 原生支持后台截图, 无需额外参数
+- 跑挂机脚本请用 Chrome(带参数) 或 Firefox, 不要用 Edge
