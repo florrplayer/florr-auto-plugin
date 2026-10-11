@@ -17,31 +17,6 @@ _STAGE_CACHE = {"image": None, "stage": None}
 ARRIVE = 5.0        # 到达判定阈值（地图像素）
 FRAME_TTL = 0.05    # 帧缓存有效期（秒）
 _screen_center = [960, 540]   # 实际窗口客户区中心(启动时标定, 兼容4K/DPI缩放)
-_CAPTURE_ON = False            # v1.18.3: 异步抓帧线程标志
-_capture_thread = None
-
-
-def start_capture_thread():
-    """v1.18.3: 后台抓帧线程 - ImageGrab 实测固定~100ms/次(屏幕合成器开销, 与区域无关)
-    主循环每圈 get_frame 都会阻塞100ms -> 决策仅~10fps。线程持续抓帧, 主循环读最新帧不阻塞。
-    线程安全: _FRAME["img"] 整体替换引用(GIL下原子), 读者拿到旧/新帧均完整"""
-    global _CAPTURE_ON, _capture_thread
-    if _CAPTURE_ON:
-        return
-    import threading
-    _CAPTURE_ON = True
-    def _worker():
-        while _CAPTURE_ON:
-            try:
-                img = get_window().capture()
-                if img is not None:
-                    _FRAME["t"] = time.time()
-                    _FRAME["img"] = img
-            except Exception:
-                pass
-            time.sleep(0.02)   # 尝试 ~50fps; capture 自身~100ms 决定实际 ~10fps
-    _capture_thread = threading.Thread(target=_worker, daemon=True)
-    _capture_thread.start()
 
 
 def set_screen_center(w, h):
@@ -70,17 +45,11 @@ def load_binary_map():
 
 
 def get_frame(force=False):
-    """共享帧缓存：一次截图供同帧多次读取复用。
-    v1.18.3: 若异步抓帧线程已启动(capture 实测固定~100ms/次, 阻塞主循环), get_frame 直接读最新帧不阻塞;
-    否则走原逻辑(主线程截图)"""
-    if _CAPTURE_ON:
-        img = _FRAME["img"]
-        if img is None or force:
-            if force:
-                _FRAME["t"] = time.time()
-                _FRAME["img"] = img = get_window().capture()
-            return img
-        return img
+    """共享帧缓存：一次 PrintWindow 截图供同帧多次读取复用。
+
+    原实现每次 get_pixel / get_map 都做一次全窗口 PrintWindow 截图
+    （单次可达 30~200ms），运动循环每 50ms 就要截 2~3 次，是最大瓶颈。
+    """
     now = time.time()
     img = _FRAME["img"]
     if force or img is None or now - _FRAME["t"] > FRAME_TTL:
@@ -125,26 +94,6 @@ def check_stage(img=None):
         if p is not None:
             _STAGE_CACHE.update(image=img, stage="in_game")
             return "in_game"
-    except Exception:
-        pass
-
-    # 1d. 底部花瓣槽特征(游戏中): 画面底部中央区域有彩色圆点(花瓣图标), 菜单没有
-    #     v1.32: 跨桌面渲染瞬时异常时小地图检测失败, 用花瓣槽兜底防误判菜单
-    try:
-        by0 = h - int(h * 0.12)
-        by1 = h - int(h * 0.03)
-        bx0 = int(w * 0.15)
-        bx1 = int(w * 0.85)
-        if 0 < by0 < by1 <= h and 0 <= bx0 < bx1 <= w:
-            crop = img[by0:by1, bx0:bx1]
-            if crop is not None and crop.size > 0 and crop.shape[0] > 10 and crop.shape[1] > 10:
-                hsv2 = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
-                sat = hsv2[:, :, 1]
-                val = hsv2[:, :, 2]
-                colored = np.sum((sat > 80) & (val > 60)) / (crop.shape[0] * crop.shape[1])
-                if colored > 0.02:
-                    _STAGE_CACHE.update(image=img, stage="in_game")
-                    return "in_game"
     except Exception:
         pass
 
@@ -374,14 +323,18 @@ def abandon_game():
 
 
 def respawn():
-    """死亡后按Enter复活(全键盘操作, 不用鼠标)"""
+    """死亡后自动点击复活按钮(坐标按游戏画面实际尺寸比例缩放+画布偏移)"""
     w = get_window()
     print("[+] 等待死亡动画...")
     time.sleep(2.5)
-    w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # Enter 复活
-    time.sleep(1.5)
-    w.key_down(0x0D); time.sleep(0.1); w.key_up(0x0D)   # 再按一次(保险)
-    print("[+] 已按Enter复活，等待加载...")
+    frame = get_frame()
+    fh, fw = frame.shape[:2]
+    off = _canvas_y_offset
+    game_h = max(fh - off, 1)
+    rx, ry = int(960 * fw / 1920), off + int(620 * game_h / 1080)
+    ry = min(ry, fh - 1)
+    w.left_click(rx, ry)
+    print(f"[+] 已点击复活({rx},{ry})，等待加载...")
     time.sleep(5)
 
 
@@ -398,8 +351,6 @@ def preprocess_map(image):
 
 
 def get_player_location_on_map(opencv_img, target_color, map, precise=False):
-    if opencv_img is None or opencv_img.size == 0 or opencv_img.shape[0] < 50 or opencv_img.shape[1] < 50:
-        return None   # v1.32: 空图保护(渲染停止瞬间截图), 防 cv::inRange 崩溃
     target_color_bgr = tuple(int(target_color[i:i + 2], 16) for i in (4, 2, 0))
     lower_bound = np.array([max(0, c - 30) for c in target_color_bgr])
     upper_bound = np.array([min(255, c + 30) for c in target_color_bgr])

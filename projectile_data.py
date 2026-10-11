@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """从wasm反汇编提取的投射物数据 - 插件用来躲避子弹/导弹"""
 
+WORLD_PER_MAPUNIT = 206.5
+
 # 投射物类型: 速度 + 半径
 # 速度越快越难躲,半径越大越容易撞
 PROJECTILE_TYPES = {

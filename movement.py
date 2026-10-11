@@ -9,6 +9,9 @@ florr 角色朝鼠标位置移动(速度=鼠标距角色距离, 越远越快)
       mover.stop()
 """
 import math
+import random
+import time
+import win32api
 from window_ctrl import get_window
 
 # 键盘虚拟码
@@ -20,6 +23,22 @@ _VK = {'w': VK_W, 'a': VK_A, 's': VK_S, 'd': VK_D}
 MAX_OFFSET_FRAC = 0.30   # 满速 = 客户区短边*30% (原作者硬编码500/1080≈46%, 30%更稳)
 MIN_OFFSET = 18          # 最小偏移(太小=贴脸=停)
 STOP_EPS = 1e-6
+CURSOR_SPEED_MIN = 900.0
+CURSOR_SPEED_MAX = 1600.0
+CURSOR_DURATION_MAX = 0.25
+
+
+def _bezier_point(start, control, end, progress, easing_power):
+    """按随机缓入/缓出进度计算二次贝塞尔轨迹点。"""
+    t = max(0.0, min(1.0, progress))
+    if t < 0.5:
+        eased = 0.5 * (2.0 * t) ** easing_power
+    else:
+        eased = 1.0 - 0.5 * (2.0 * (1.0 - t)) ** easing_power
+    inverse = 1.0 - eased
+    return tuple(inverse * inverse * start[i]
+                 + 2.0 * inverse * eased * control[i]
+                 + eased * eased * end[i] for i in (0, 1))
 
 
 class Mover:
@@ -27,6 +46,7 @@ class Mover:
         self.mode = 'auto'       # 'mouse' / 'keyboard' / 'auto'
         self._keys_down = set()
         self._mouse_at = None    # 上次鼠标目标位置
+        self._mouse_curve = None
 
     # ---- 模式 ----
     def set_mode(self, mode):
@@ -74,13 +94,14 @@ class Mover:
             if c:
                 w.mouse_to_screen(c[0], c[1])
             self._mouse_at = None
+            self._mouse_curve = None
         for k in list(self._keys_down):
             w.key_up(_VK[k])
         self._keys_down.clear()
 
     # ---- 实现 ----
     def _mouse(self, ux, uy, speed):
-        """鼠标模式: 窗口中心 + 方向*偏移(偏移=速度*满速)"""
+        """鼠标模式: 窗口中心 + 方向偏移，并逐帧推进随机曲线。"""
         w = get_window()
         if not w:
             return
@@ -95,8 +116,44 @@ class Mover:
         max_off = max(MIN_OFFSET, min(cw, ch) * MAX_OFFSET_FRAC)
         off = max(MIN_OFFSET, max_off * speed)
         sx, sy = cx + ux * off, cy + uy * off
-        w.mouse_to_screen(sx, sy)
-        self._mouse_at = (sx, sy)
+        now = time.monotonic()
+        curve = self._mouse_curve
+        destination_shift = (math.hypot(sx - curve['end'][0], sy - curve['end'][1])
+                             if curve else float('inf'))
+        if (curve is None or now >= curve['started'] + curve['duration']
+                or destination_shift > max(12.0, math.hypot(
+                    curve['end'][0] - curve['start'][0],
+                    curve['end'][1] - curve['start'][1]) * 0.1)):
+            if self._mouse_at is None:
+                try:
+                    start = win32api.GetCursorPos()
+                except Exception:
+                    start = (cx, cy)
+            else:
+                start = self._mouse_at
+            dx, dy = sx - start[0], sy - start[1]
+            distance = math.hypot(dx, dy)
+            if distance > 1.0:
+                bend = random.uniform(-min(36.0, distance * 0.22),
+                                      min(36.0, distance * 0.22))
+                control = ((start[0] + sx) * 0.5 - dy / distance * bend,
+                           (start[1] + sy) * 0.5 + dx / distance * bend)
+            else:
+                control = (sx, sy)
+            duration = min(CURSOR_DURATION_MAX,
+                           max(0.035, distance / random.uniform(
+                               CURSOR_SPEED_MIN, CURSOR_SPEED_MAX)))
+            self._mouse_curve = {
+                'start': start, 'control': control, 'end': (sx, sy),
+                'started': now, 'duration': duration,
+                'easing_power': random.uniform(1.4, 2.6),
+            }
+            curve = self._mouse_curve
+        progress = (now - curve['started']) / curve['duration']
+        point = _bezier_point(curve['start'], curve['control'], curve['end'],
+                              progress, curve['easing_power'])
+        w.mouse_to_screen(*point)
+        self._mouse_at = point
 
     def _keys(self, ux, uy):
         """键盘模式: 主方向键+必要时对角"""

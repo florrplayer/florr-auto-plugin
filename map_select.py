@@ -1,9 +1,63 @@
 import sys
 import os
+import random
+import math
 import cv2
+import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from utils import MAP_DIR
+
+
+def generate_patrol_points(map_name, count=8, min_distance=35, margin=4, region=None):
+    """从最大连通可走区选取分散巡逻点，可限制在 (cx, cy, radius) 圆区内。"""
+    map_path = os.path.join(MAP_DIR, map_name + ".png")
+    map_image = cv2.imread(map_path, cv2.IMREAD_GRAYSCALE)
+    if map_image is None:
+        return []
+
+    walkable = (map_image == 255).astype(np.uint8)
+    component_count, labels, stats, _ = cv2.connectedComponentsWithStats(walkable, 8)
+    if component_count <= 1:
+        return []
+    component = 1 + int(np.argmax(stats[1:, cv2.CC_STAT_AREA]))
+    ys, xs = np.where(labels == component)
+    interior = ((xs >= margin) & (xs < map_image.shape[1] - margin)
+                & (ys >= margin) & (ys < map_image.shape[0] - margin))
+    if region:
+        center_x, center_y, radius = region
+        interior &= (xs - center_x) ** 2 + (ys - center_y) ** 2 <= radius ** 2
+    candidates = np.column_stack((xs[interior], ys[interior]))
+    if not len(candidates):
+        return []
+
+    chosen = [random.randrange(len(candidates))]
+    nearest_sq = np.full(len(candidates), np.inf)
+    min_distance_sq = min_distance * min_distance
+    while len(chosen) < count:
+        point = candidates[chosen[-1]]
+        delta = candidates - point
+        nearest_sq = np.minimum(nearest_sq, np.sum(delta * delta, axis=1))
+        nearest_sq[chosen] = -1
+        next_index = int(np.argmax(nearest_sq))
+        if nearest_sq[next_index] < min_distance_sq:
+            break
+        chosen.append(next_index)
+    return [tuple(map(int, candidates[index])) for index in chosen]
+
+
+def generate_random_patrol_point(map_name, region=None, avoid=None, min_distance=12, attempts=8):
+    """在可走区域内重新抽取一个巡逻点，尽量避开上一目标。"""
+    candidate = None
+    for _ in range(max(1, attempts)):
+        points = generate_patrol_points(map_name, count=1, region=region)
+        if not points:
+            return None
+        candidate = points[0]
+        if avoid is None or math.hypot(candidate[0] - avoid[0], candidate[1] - avoid[1]) >= min_distance:
+            return candidate
+    return candidate
+
 
 def select_patrol_points(map_name):
     map_path = os.path.join(MAP_DIR, map_name + ".png")

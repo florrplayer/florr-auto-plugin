@@ -7,6 +7,8 @@
   - MYTHIC_KITE: Mythic怪走位表 (strafe垂直环绕/ram直接撞/hold站桩保持距离)
   - MYTHIC_TARGET_RANK: 多个Mythic在场先打谁
 """
+import mob_db
+
 # 稀有度档序 (与 mob_db 13档同向, 这里取 combat 需要的 10 档)
 RARITY_ORDER = ['Common', 'Unusual', 'Rare', 'Epic', 'Legendary',
                 'Mythic', 'Ultra', 'Super', 'Eternal', 'Unique']
@@ -69,6 +71,14 @@ def classify_action(sid, rarity):
     if (sid, rarity) in AVOID_PAIRS:
         return 'AVOID'
     if (sid, rarity) in CAUTIOUS_PAIRS:
+        return 'CAUTIOUS'
+    behavior = mob_db.get_behavior(sid)
+    ultra_behavior = behavior['ultra_behavior'].casefold()
+    if ultra_behavior not in ('', 'n/a', 'none', 'unknown'):
+        direct_threats = ('attack', 'damage', 'fire', 'shoot', 'missile',
+                          'projectile', 'poison', 'explode', 'spawn')
+        if any(term in ultra_behavior for term in direct_threats):
+            return 'AVOID'
         return 'CAUTIOUS'
     return 'AVOID'
 

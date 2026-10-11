@@ -194,6 +194,26 @@ def plan_flee_light(me, chasers, crowd=(), horizon=HORIZON, margin=SAFE_MARGIN, 
     返回同 plan_flee: {"dir","goal","lead","safe"} 或 None。"""
     if not chasers:
         return None
+    import mob_ai
+    active_chasers = []
+    for chaser in chasers:
+        if isinstance(chaser, dict):
+            point = (chaser.get('x'), chaser.get('y'))
+            radius = chaser.get('detection_radius', chaser.get('aggro_range'))
+            if radius is None and chaser.get('sid'):
+                import mob_db
+                radius = mob_db.aggro_radius(chaser['sid'])
+            if (radius is not None and point[0] is not None and point[1] is not None
+                    and mob_ai.is_detached(math.hypot(me[0] - point[0], me[1] - point[1]), radius)):
+                continue
+            if point[0] is None or point[1] is None:
+                continue
+            active_chasers.append(point)
+        else:
+            active_chasers.append(chaser)
+    chasers = active_chasers
+    if not chasers:
+        return None
     # 网格采样: 自己周围 ±horizon, 步长1 (世界单位)
     mx, my = me
     grid = []
@@ -229,6 +249,48 @@ def plan_flee_light(me, chasers, crowd=(), horizon=HORIZON, margin=SAFE_MARGIN, 
         return None
     return {"dir": (dx / n, dy / n), "goal": goal, "lead": lead,
             "safe": lead >= margin and not crowd_near(goal)}
+
+
+def plan_projectile_dodge(me, projectiles, player_radius=0.0, max_eta=1.5):
+    """弹道预计会穿过玩家时，返回垂直于弹道的闪避方向。"""
+    from protocol_db import ENTITY_MISSILE, ENTITY_TRAP
+    import projectile_data
+
+    projectile_names = {
+        ENTITY_MISSILE: 'wasp_missile',
+        ENTITY_TRAP: 'scorpion_sting',
+    }
+    candidates = []
+    for projectile in projectiles:
+        name = projectile_names.get(projectile.get('type_id'))
+        if name is None:
+            continue
+        info = projectile_data.PROJECTILE_TYPES[name]
+        angle = projectile.get('angle')
+        if angle is None:
+            continue
+        ux, uy = math.cos(angle), math.sin(angle)
+        rx, ry = me[0] - projectile['x'], me[1] - projectile['y']
+        along = rx * ux + ry * uy
+        if along < 0:
+            continue
+        eta = along / (info['speed'] * projectile_data.WORLD_PER_MAPUNIT)
+        if eta > max_eta:
+            continue
+        signed_offset = rx * uy - ry * ux
+        projectile_radius = max(
+            projectile.get('radius', 0.0),
+            info['radius'] * projectile_data.WORLD_PER_MAPUNIT)
+        if abs(signed_offset) > player_radius + projectile_radius:
+            continue
+        side = 1.0 if signed_offset >= 0 else -1.0
+        candidates.append((eta, {
+            'dir': (-uy * side, ux * side),
+            'eta': eta,
+            'type': name,
+            'entity_id': projectile.get('entity_id'),
+        }))
+    return min(candidates, key=lambda item: item[0])[1] if candidates else None
 
 
 if __name__ == '__main__':

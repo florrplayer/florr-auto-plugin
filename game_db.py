@@ -30,11 +30,19 @@ def _load(name):
 
 # ===== 怪物 =====
 def mobs():
-    """返回 {sid: mob_data} 字典"""
+    """返回合并后的 {sid: mob_data} 字典；旧统计数据优先，JSON补缺。"""
     raw = _load('mob_stats_full.json')
     if isinstance(raw, list):
-        return {m['sid']: m for m in raw}
-    return raw
+        records = {m['sid']: dict(m) for m in raw if isinstance(m, dict) and m.get('sid')}
+    else:
+        records = {sid: dict(record) for sid, record in raw.items()
+                   if isinstance(record, dict)}
+    from game_data import mob_records
+    for sid, record in mob_records().items():
+        target = records.setdefault(sid, {'sid': sid})
+        for key, value in record.items():
+            target.setdefault(key, value)
+    return records
 
 def mob(sid):
     return mobs().get(sid)

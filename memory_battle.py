@@ -11,7 +11,11 @@ v1.27.0: Mythic走位表(florr-auto-farm实测) - Mythic甲虫/火兵蚁/蝎子/
 v1.28.1: CAUTIOUS接入(Ultra沙尘暴/仙人掌/沙蜈蚣/火蚁可打但保持距离250px, 不站桩)
 """
 import time, math, threading
+from collections import deque
 import mob_db
+import mob_ai
+import game_data
+import protocol_db
 import combat_strategy  # v1.27.0: Mythic走位表(strafe/ram/hold)
 import flee_planner    # v1.28.0: 追逃逃跑规划(双源最短路, 死胡同/怪群自动避开)
 from bridge_combat import (get_player, get_nearby_mobs, find_best_target,
@@ -44,6 +48,22 @@ MAP_CENTER = (32500, 32500)  # 地图中心(逃跑偏向, 避免往墙角跑)
 CENTER_BIAS = 0.35       # 逃跑方向偏向地图中心的强度
 
 
+def find_heal_slot(secondary_slots, configured_slots, petal_sid):
+    """仅当 JSON 中存在该花瓣且协议槽内容匹配时，返回配置中的副槽编号。"""
+    petals = game_data.GAME_DATA.get('petals', {})
+    if petal_sid not in petals or not isinstance(secondary_slots, list):
+        return None
+    for slot_number in configured_slots:
+        index = int(slot_number) - 1
+        if not 0 <= index < len(secondary_slots):
+            continue
+        slot = secondary_slots[index]
+        sid = protocol_db.net_petal_sid(slot.get('petalType'))
+        if sid == petal_sid:
+            return int(slot_number)
+    return None
+
+
 class MemoryBattle:
     def __init__(self, window):
         self.w = window
@@ -52,6 +72,16 @@ class MemoryBattle:
         self.had_data = False       # v1.35: 是否读到过内存数据(供main.py判断回退截图模式)
         self.no_data_timeout = 15.0 # v1.35: 连续无数据多久自动退出内存模式
         self._no_data_since = None
+        from config import load_config
+        settings = load_config() or {}
+        self._heal_slots = settings.get('heal_slots', [])
+        self._heal_type = settings.get('heal_type', 'rose')
+        self._low_hp_active = False
+        self._heal_slot = None
+        self._heal_warned = False
+        self._position_history = deque(maxlen=400)
+        self._heal_retreat_path = None
+        self._heal_retreat_index = -1
 
     def _keys_release(self):
         for vk in (VK_W, VK_A, VK_S, VK_D):
@@ -67,13 +97,68 @@ class MemoryBattle:
             if dy > 0: self.w.key_down(VK_S)
             else:      self.w.key_down(VK_W)
 
+    def _press_slot(self, slot_number):
+        key = '0' if slot_number == 10 else str(slot_number)
+        vk = ord(key)
+        self.w.key_down(vk)
+        try:
+            time.sleep(0.05)
+        finally:
+            self.w.key_up(vk)
+
+    def _begin_low_hp(self):
+        self._low_hp_active = True
+        self._heal_retreat_path = list(self._position_history)
+        self._heal_retreat_index = len(self._heal_retreat_path) - 2
+        slots = bridge_combat.get_secondary_slots()
+        self._heal_slot = find_heal_slot(slots, self._heal_slots, self._heal_type)
+        if self._heal_slot is not None:
+            self._press_slot(self._heal_slot)
+            print(f"[回血] HP低于10%，切换副槽{self._heal_slot} ({self._heal_type})")
+        elif not self._heal_warned:
+            print(f"[回血] HP低于10%，但配置副槽中没有核验到 {self._heal_type}，只执行撤退")
+            self._heal_warned = True
+
+    def _retreat_along_trail(self, px, py):
+        path = self._heal_retreat_path or []
+        while self._heal_retreat_index >= 0:
+            tx, ty = path[self._heal_retreat_index]
+            dx, dy = tx - px, ty - py
+            if math.hypot(dx, dy) > 50:
+                self._move_towards(dx, dy)
+                return
+            self._heal_retreat_index -= 1
+        self._keys_release()
+
+    def _handle_low_hp(self, hp_percent, px, py):
+        if hp_percent is None:
+            if self._low_hp_active:
+                self._retreat_along_trail(px, py)
+                return True
+            return False
+        if self._low_hp_active and hp_percent > 0.70:
+            if self._heal_slot is not None:
+                self._press_slot(self._heal_slot)
+                print(f"[回血] HP恢复超过70%，切回原副槽状态")
+            self._low_hp_active = False
+            self._heal_slot = None
+            self._heal_retreat_path = None
+            self._heal_retreat_index = -1
+            return False
+        if self._low_hp_active or hp_percent < 0.10:
+            if not self._low_hp_active:
+                self._begin_low_hp()
+            self._retreat_along_trail(px, py)
+            return True
+        return False
+
     def _run_away(self, dx, dy, px, py, chasers=None, crowd=(), prefer=None):
         """逃跑: v1.28.0 优先用追逃规划(双源最短路)选最优方向, 失败退回 反方向+偏中心
         chasers: 要躲的怪坐标列表; crowd: 别撞进去的怪群; prefer: 上一拍目标"""
         # v1.28.0: 追逃规划 (远离所有追兵 + 危险怪群当障碍 + 死胡同/活路识别)
         if chasers:
             plan = flee_planner.plan_flee_light(
-                (px, py), [(c['x'], c['y']) for c in chasers],
+                (px, py), chasers,
                 crowd=[(c['x'], c['y']) for c in crowd], prefer=prefer)
             if plan and plan.get('dir'):
                 ux, uy = plan['dir']
@@ -242,12 +327,30 @@ class MemoryBattle:
                     time.sleep(0.25)
                     continue
 
+                self._position_history.append((px, py))
+                if self._handle_low_hp(self.player.get('hp_percent'), px, py):
+                    time.sleep(0.2)
+                    continue
+
+                incoming = flee_planner.plan_projectile_dodge(
+                    (px, py), bridge_combat.get_projectiles(),
+                    player_radius=self.player.get('radius') or 0.0)
+                if incoming:
+                    self._move_towards(*incoming['dir'])
+                    tlog("projectile", f"[弹道闪避] {incoming['type']} "
+                         f"预计{incoming['eta']:.2f}s到达，垂直闪避")
+                    time.sleep(0.2)
+                    continue
+
                 # 读怪物
                 mobs, _ = get_nearby_mobs()
 
                 # 危险检测: 危险怪进入它的追击范围就跑 (每只怪用自己的aggro)
-                danger = [m for m in mobs if m['type'] in _DANGER_TYPES
-                          and math.hypot(m['x']-px, m['y']-py) < max(DANGER_DIST, m.get('aggro', 255) * 1.5)]
+                danger = [m for m in mobs
+                          if (m['type'] in _DANGER_TYPES or mob_db.is_aggressive(m['sid']))
+                          and not mob_ai.is_detached(
+                              math.hypot(m['x'] - px, m['y'] - py),
+                              mob_db.aggro_radius(m['sid']))]
                 if danger:
                     d = danger[0]
                     dx, dy = px - d['x'], py - d['y']

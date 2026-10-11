@@ -1,5 +1,18 @@
 """从client.wasm挖到的游戏数据"""
 
+import json
+import os
+
+
+def _load_game_data():
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'game_data.json')
+    try:
+        with open(path, 'r', encoding='utf-8') as source:
+            data = json.load(source)
+    except (OSError, ValueError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
 # 各区域怪物生成率
 MAP_MOBS = {
     'garden': {'bee':1, 'ladybug':1, 'rock':1, 'ant_baby':1, 'ant_worker':1, 'ant_soldier':1, 'hornet':1, 'beetle':1, 'spider':1},
@@ -55,6 +68,16 @@ MOBS = [
     'bee','bumble_bee','hornet','mantis','firefly','leafbug',
     'centipede_evil','centipede_hel','mecha_flower','gambler','ghost',
 ]
+
+GAME_DATA = _load_game_data()
+JSON_MOBS = GAME_DATA.get('mobs', {}) if isinstance(GAME_DATA.get('mobs'), dict) else {}
+MOBS = list(dict.fromkeys([*MOBS, *JSON_MOBS]))
+
+
+def mob_records():
+    """返回 game_data.json 中可用的怪物记录副本。"""
+    return {sid: dict(record) for sid, record in JSON_MOBS.items()
+            if isinstance(record, dict)}
 
 # 稀有度8档
 RARITIES = ['common','rare','super','epic','legendary','mythic','ultra','unique']

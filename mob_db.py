@@ -188,12 +188,28 @@ def knockback_share(sid, rarity='Common'):
     return 1.0 / (2.0 + r / 25.0)
 
 def get_escape_dist(sid):
-    """风筝线 = 1.5 × 检测半径(源码 _focus_lose_clause): 出这个圈才丢仇恨"""
-    return 1.5 * get_aggro(sid)
+    """风筝线 = AI 规则的丢失倍率 × 怪物仇恨半径。"""
+    multiplier = ai_rule('detection_lose_multiplier', 1.5)
+    if not isinstance(multiplier, (int, float)) or isinstance(multiplier, bool) or multiplier < 0:
+        multiplier = 1.5
+    return multiplier * get_aggro(sid)
 
 
 _MOB_AI = _load_json('florr_mobs_ai.json')
 _MOB_AI_MOBS = (_MOB_AI or {}).get('mobs', {})
+_GAME_DATA = _load_json('game_data.json') or {}
+_GAME_DATA_MOBS = (_GAME_DATA or {}).get('mobs', {})
+_GAME_DATA_SID_ALIASES = {
+    'ant_baby': 'baby_ant', 'ant_worker': 'worker_ant',
+    'ant_soldier': 'soldier_ant', 'ant_queen': 'queen_ant',
+    'fire_ant_soldier': 'soldier_fire_ant', 'fire_ant_worker': 'worker_fire_ant',
+    'fire_ant_baby': 'baby_fire_ant', 'fire_ant_queen': 'queen_fire_ant',
+    'fire_ant_burrow': 'fire_ant_hole', 'centipede_evil': 'evil_centipede',
+    'centipede_desert': 'desert_centipede', 'beetle_hel': 'hel_beetle',
+    'ladybug_shiny': 'shiny_ladybug',
+    'ladybug_dark': 'dark_ladybug',
+}
+_VALID_AI_TYPES = {'passive', 'neutral', 'hostile', 'aggressive'}
 
 AI_MECHANIC_SIDS = {
     'web': [], 'stinger': [], 'projectile': [], 'poison': [],
@@ -207,14 +223,90 @@ for _sid, _m in _MOB_AI_MOBS.items():
 
 def mob_ai_info(sid):
     """返回怪AI配置 dict (range/speed/web/stinger/poison/lightning/evasion等)"""
+    if isinstance(sid, dict):
+        sid = sid.get('sid') or _game_mob_key(sid)
     return _MOB_AI_MOBS.get(sid) or {}
+
+
+def _game_mob_key(identifier):
+    if isinstance(identifier, dict):
+        identifier = identifier.get('sid') or identifier.get('name')
+    if identifier is None:
+        return None
+    value = str(identifier).strip()
+    if value.startswith('#'):
+        color = value.lower()
+        return next((key for key, mob in _GAME_DATA_MOBS.items()
+                     if str(mob.get('color_hex', '')).lower() == color), None)
+    key = value.lower().replace(' ', '_').replace('-', '_')
+    key = _GAME_DATA_SID_ALIASES.get(key, key)
+    if key in _GAME_DATA_MOBS:
+        return key
+    normalized = ''.join(char for char in value.casefold() if char.isalnum())
+    for candidate, mob in _GAME_DATA_MOBS.items():
+        if normalized in (
+                ''.join(char for char in candidate.casefold() if char.isalnum()),
+                ''.join(char for char in str(mob.get('name', '')).casefold() if char.isalnum())):
+            return candidate
+    return None
+
+
+def get_mob(identifier):
+    """按官方 sid、英文名或颜色查询 game_data.json 中的怪物记录。"""
+    key = _game_mob_key(identifier)
+    mob = _GAME_DATA_MOBS.get(key) if key else None
+    return dict(mob) if isinstance(mob, dict) else None
+
+
+def all_mobs():
+    """合并静态怪物映射与 game_data.json；静态字段冲突时优先保留。"""
+    records = {sid: {'sid': sid, 'name': MOB_CN.get(sid, sid)}
+               for sid in TYPE_ID_TO_SID.values()}
+    for sid, mob in _GAME_DATA_MOBS.items():
+        target = records.setdefault(sid, {'sid': sid})
+        for key, value in mob.items():
+            target.setdefault(key, value)
+    return records
+
+
+def get_behavior(identifier):
+    """返回 game_data.json 中统一结构的怪物行为表。"""
+    mob = get_mob(identifier) or {}
+    fields = ('passive', 'aggro_trigger', 'aggro_behavior',
+              'defensive_behavior', 'ultra_behavior')
+    return {field: str(mob.get(field) or 'N/A').strip() for field in fields}
+
+
+def ai_rule(name, default=None):
+    """读取 game_data.json 中的 AI 规则；缺失时返回调用方默认值。"""
+    rules = _GAME_DATA.get('ai_rules', {})
+    return rules.get(name, default) if isinstance(rules, dict) else default
+
+
+def _normalize_ai_type(ai_type):
+    value = str(ai_type or '').strip().lower()
+    if value == 'aggressive':
+        return 'hostile'
+    if value == 'sandstorm':
+        return 'passive'
+    return value if value in _VALID_AI_TYPES - {'aggressive'} else None
 
 
 def aggro_tier(sid):
     """v1.24.2: 攻击性档位(wasm三档+florr_clone ai_type)
     hostile=主动攻击(进aggro range就追) / neutral=中立(被打才还手) / passive=被动(不主动惹人)"""
+    game_mob = get_mob(sid)
+    if game_mob:
+        special = str(game_mob.get('special', '')).casefold()
+        if 'friendly unit' in special and 'does not harm player' in special:
+            return 'neutral'
+        tier = _normalize_ai_type(game_mob.get('ai_type'))
+        if tier:
+            return tier
+    if isinstance(sid, dict):
+        sid = sid.get('sid') or _game_mob_key(sid)
     ai = mob_ai_info(sid)
-    t = ai.get('ai_type')
+    t = _normalize_ai_type(ai.get('ai_type'))
     if t:
         return t
     return 'hostile' if sid in DANGER_SIDS else 'passive'
@@ -222,6 +314,32 @@ def aggro_tier(sid):
 def is_hostile(sid):
     """该怪是否主动攻击(进仇恨圈会被追)"""
     return aggro_tier(sid) == 'hostile'
+
+
+def is_passive(mob):
+    """该怪是否为被动 AI；中立怪不视为被动。"""
+    return aggro_tier(mob) == 'passive'
+
+
+def is_aggressive(mob):
+    """该怪是否会主动索敌；hostile/aggressive 统一归为主动。"""
+    return aggro_tier(mob) == 'hostile'
+
+
+def aggro_radius(mob):
+    """优先从 game_data 读取仇恨范围；缺失时回退旧 AI/WASM 范围表。"""
+    game_mob = get_mob(mob)
+    value = game_mob.get('aggro_range') if game_mob else None
+    if isinstance(value, (int, float)) and not isinstance(value, bool) and value >= 0:
+        return value
+    sid = (mob.get('sid') or _game_mob_key(mob)) if isinstance(mob, dict) else mob
+    ai = mob_ai_info(sid)
+    value = ai.get('range')
+    if isinstance(value, (int, float)) and not isinstance(value, bool) and value >= 0:
+        return value
+    cls = MOB_AGGRO_CLASS.get(sid, 'default')
+    return AGGRO_RANGE.get(cls, AGGRO_RANGE['default'])
+
 
 def mechanism(system, key=None):
     """v1.24.1: 机制库查询(mechanisms_wave2.json - 15系统源码级机制)"""
@@ -241,10 +359,7 @@ def missile_range(sid):
 
 def aggro_range(sid):
     """怪的真实仇恨距离(florr_clone mobs.json range字段); 无则回退 wasm 检测半径"""
-    m = _MOB_AI_MOBS.get(sid)
-    if m and m.get('range'):
-        return m['range']
-    return get_aggro(sid)
+    return aggro_radius(sid)
 
 
 _RARITY_INDEX = {'common': 0, 'unusual': 1, 'rare': 2, 'epic': 3,
@@ -401,9 +516,8 @@ def official_hitbox(sid):
     return _HITBOXES.get(_norm_sid(sid) or sid) or {}
 
 def get_aggro(sid):
-    """追击范围"""
-    cls = MOB_AGGRO_CLASS.get(sid, 'default')
-    return AGGRO_RANGE.get(cls, 255)
+    """追击范围；优先查询 game_data.json，缺失时使用既有回退表。"""
+    return aggro_radius(sid)
 
 def cn(sid):
     return MOB_CN.get(sid, sid)
@@ -576,7 +690,7 @@ def assess_mob(sid, hp, player_dps, dist=None):
             action = 'ignore'
     else:
         action = 'fight' if max_hp < 500 else 'ignore'
-    if sid in DANGER_SIDS and action != 'oneshot':
+    if (sid in DANGER_SIDS or is_aggressive(sid)) and action != 'oneshot':
         if sid in SUPER_SPECIAL_SIDS and rarity in ('Super', 'Unique', 'Eternal'):
             pass
         else:

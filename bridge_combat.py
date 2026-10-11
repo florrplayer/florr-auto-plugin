@@ -4,14 +4,88 @@
 v1.18.0: 决策改用 mob_db 统一数据层(稀有度反推/真实碰撞箱/追击范围/掉落价值)
 v1.25.2: find_best_target 加 sticky_sid 目标粘滞(AI研究§8.1-2)
 """
-import time, math, json, urllib.request
+import time, math, json, base64, struct, threading, urllib.request
 
 import mob_db
 import protocol_db  # v1.27.0: 网络协议全表(怪名/花瓣名/稀有度/实体解码)
+import net_protocol
 import combat_strategy  # v1.27.0: 移植florr-auto-farm实测战斗策略(Ultra危险对/物种档/Mythic走位)
 import ws_client  # v1.29.2: WebSocket 增量订阅 (延迟~200ms→<10ms, 断线回退HTTP)
 
 BRIDGE_URL = "http://127.0.0.1:18899"
+_PROTOCOL_LOCK = threading.Lock()
+_PROTOCOL_STATE = {
+    'owner_entity_id': None, 'player': None, 'player_seen': 0.0,
+    'secondary_slots': None, 'slots_seen': 0.0, 'projectiles': {},
+}
+
+
+def _decode_ws_updates(data):
+    """从现有 hook 的 ws_raw 帧中提取玩家快照、副槽和投射物。"""
+    now = time.time()
+    with _PROTOCOL_LOCK:
+        for raw in data.get('ws_raw') or []:
+            if not isinstance(raw, dict) or raw.get('d') != 'r':
+                continue
+            try:
+                buffer = base64.b64decode(raw.get('p', ''), validate=True)
+            except (ValueError, TypeError):
+                continue
+            while buffer:
+                payload, buffer = net_protocol.pop_frame(buffer)
+                if payload is None:
+                    break
+                if not payload:
+                    continue
+                try:
+                    message = net_protocol.parse_server_message(payload)
+                except (IndexError, KeyError, ValueError, struct.error):
+                    continue
+                if message.get('typeName') == 'Welcome':
+                    _PROTOCOL_STATE['owner_entity_id'] = message.get('ownerEntityId')
+                elif message.get('typeName') == 'OwnerState':
+                    _PROTOCOL_STATE['secondary_slots'] = message.get('secondarySlots', [])
+                    _PROTOCOL_STATE['slots_seen'] = now
+                elif message.get('typeName') == 'Snapshot':
+                    owner_id = message.get('ownerEntityId')
+                    if owner_id is not None:
+                        _PROTOCOL_STATE['owner_entity_id'] = owner_id
+                    owner_id = _PROTOCOL_STATE['owner_entity_id']
+                    for entity in message.get('entities', []):
+                        entity_id = entity.get('entityId')
+                        if entity_id == owner_id:
+                            _PROTOCOL_STATE['player'] = dict(entity)
+                            _PROTOCOL_STATE['player_seen'] = now
+                        if protocol_db.entity_kind(entity.get('entityType', -1)) == 'projectile':
+                            _PROTOCOL_STATE['projectiles'][entity_id] = {
+                                'entity_id': entity_id,
+                                'type_id': entity.get('entityType'),
+                                'x': entity.get('x'), 'y': entity.get('y'),
+                                'radius': entity.get('radius', 0),
+                                'angle': entity.get('angle', 0), 'seen': now,
+                            }
+                    for entity_id in message.get('removedEntityIds', []):
+                        _PROTOCOL_STATE['projectiles'].pop(entity_id, None)
+
+        state = dict(_PROTOCOL_STATE)
+        state['projectiles'] = [dict(projectile) for projectile in
+                                _PROTOCOL_STATE['projectiles'].values()
+                                if now - projectile['seen'] <= 0.8]
+        for entity_id, projectile in list(_PROTOCOL_STATE['projectiles'].items()):
+            if now - projectile['seen'] > 0.8:
+                del _PROTOCOL_STATE['projectiles'][entity_id]
+
+    result = dict(data)
+    player = state['player']
+    if player and now - state['player_seen'] <= 1.5:
+        result['player_hp_percent'] = player.get('hpPercent')
+        result['player_radius'] = player.get('radius')
+        result.setdefault('px', player.get('x'))
+        result.setdefault('py', player.get('y'))
+    if state['secondary_slots'] is not None and now - state['slots_seen'] <= 30:
+        result['secondary_slots'] = state['secondary_slots']
+    result['projectiles'] = state['projectiles']
+    return result
 
 # ===== 怪物type ID -> 名字 (从wasm偷的all_mobs_full.json, id=静态怪id) =====
 TYPE_NAMES = {
@@ -60,21 +134,36 @@ def _fetch_latest():
     ws_client.start()  # 幂等
     d = ws_client.get_latest()
     if d is not None:
-        return d
+        return _decode_ws_updates(d)
     try:
         with urllib.request.urlopen(BRIDGE_URL, timeout=1) as r:
-            return json.loads(r.read().decode())
+            return _decode_ws_updates(json.loads(r.read().decode()))
     except:
-        return {}
+        return _decode_ws_updates({})
 
 
 def get_player():
     """读camera固定地址 = 玩家世界坐标 (100%准确)"""
     d = _fetch_latest()
     px, py = d.get('px'), d.get('py')
-    if px and py:
-        return {'x': px, 'y': py, 'hp': None}
+    if px is None or py is None:
+        player = d.get('player') or {}
+        px, py = player.get('x'), player.get('y')
+    if px is not None and py is not None:
+        hp_percent = d.get('player_hp_percent')
+        return {'x': px, 'y': py, 'hp': hp_percent,
+                'hp_percent': hp_percent, 'radius': d.get('player_radius')}
     return None
+
+
+def get_secondary_slots():
+    """返回最近协议快照中的副槽列表；无数据时返回 None。"""
+    return _fetch_latest().get('secondary_slots')
+
+
+def get_projectiles():
+    """返回近0.8秒内的协议投射物实体。"""
+    return _fetch_latest().get('projectiles', [])
 
 
 def get_nearby_mobs(max_dist=3000):
