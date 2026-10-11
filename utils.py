@@ -306,14 +306,35 @@ def keyup(direction):
         w.key_up(keys)
 
 
+_LAST_POS = None
+_POS_REJECT = 0
+
+
 def get_player_position(precise=False, image=None):
+    """定位玩家点(地图坐标 0~300)。跳变拒绝: 单帧跳>30地图单位=误检, 返回旧位置;
+    连续拒绝3帧后强制接受(防传送/复活/换图卡死旧坐标)"""
+    global _LAST_POS, _POS_REJECT
     image = get_map(image)
     binary_map = load_binary_map()
+    position = None
     for color in ("f9dd64", "ffde3d", "ffd700", "fffacd", "f0e68c", "e6c200", "f5d76e", "f0c040"):
         position = get_player_location_on_map(image, color, binary_map, precise)
         if position is not None:
-            return position
-    return None
+            break
+    if position is None:
+        return None
+    if _LAST_POS is not None:
+        jump = math.hypot(position[0] - _LAST_POS[0],
+                          position[1] - _LAST_POS[1])
+        if jump > 30:
+            _POS_REJECT += 1
+            if _POS_REJECT >= 3:
+                _POS_REJECT = 0
+                _LAST_POS = position
+            return _LAST_POS
+    _POS_REJECT = 0
+    _LAST_POS = position
+    return position
 
 
 def abandon_game():
@@ -350,19 +371,60 @@ def preprocess_map(image):
     return binary
 
 
+def _has_dark_ring(opencv_img, x, y, radius):
+    """玩家点特征检查: 黄色小圆点周围是否有深色描边(实测 #222027)
+    排除地面黄花/杂物(无深描边)。返回 True=有描边"""
+    h, w = opencv_img.shape[:2]
+    r_out = int(radius) + 2
+    x0, x1 = max(0, int(x) - r_out), min(w, int(x) + r_out + 1)
+    y0, y1 = max(0, int(y) - r_out), min(h, int(y) + r_out + 1)
+    if x1 - x0 < 3 or y1 - y0 < 3:
+        return False
+    ring = opencv_img[y0:y1, x0:x1]
+    yy, xx = np.mgrid[0:ring.shape[0], 0:ring.shape[1]]
+    d = np.sqrt((xx - r_out) ** 2 + (yy - r_out) ** 2)
+    band = (d >= radius + 0.3) & (d <= radius + 2.5)
+    if band.sum() < 4:
+        return False
+    px = ring[band].astype(np.int32)
+    dark_ratio = float((px.sum(axis=1) < 220).mean())
+    return dark_ratio > 0.25
+
+
 def get_player_location_on_map(opencv_img, target_color, map, precise=False):
+    """在小地图上找玩家点: 黄色小圆点 + 深色描边(黄花/杂物是大块或无描边)。
+    候选按"小+圆"过滤, 优先选有描边的, 否则选最圆的"""
     target_color_bgr = tuple(int(target_color[i:i + 2], 16) for i in (4, 2, 0))
     lower_bound = np.array([max(0, c - 30) for c in target_color_bgr])
     upper_bound = np.array([min(255, c + 30) for c in target_color_bgr])
     mask = cv2.inRange(opencv_img, lower_bound, upper_bound)
     contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    s = opencv_img.shape[1]
+    ring_best, round_best = None, None
+    ring_score, round_score = -1.0, -1.0
     for contour in contours:
         ((x, y), radius) = cv2.minEnclosingCircle(contour)
-        if radius > 2:
-            if precise:
-                return (x, y)
-            return calibrate_player(map, (round(x), round(y)))
-    return None
+        if radius < s * 0.008 or radius > s * 0.05:
+            continue
+        area = cv2.contourArea(contour)
+        circularity = area / (3.14159 * radius * radius)
+        if circularity < 0.55:
+            continue
+        if circularity > round_score:
+            round_score = circularity
+            round_best = (x, y, radius)
+        if _has_dark_ring(opencv_img, x, y, radius):
+            if circularity > ring_score:
+                ring_score = circularity
+                ring_best = (x, y, radius)
+    # 有描边的候选最像玩家点; 完全没有描边时退而取最圆(防降采样导致描边丢失)
+    best = ring_best if ring_best is not None else round_best
+    if best is None:
+        return None
+    x, y, _ = best
+    if precise:
+        return (x, y)
+    return calibrate_player(map, (round(x), round(y)))
 
 
 def _nearest_grid(binary):

@@ -34,6 +34,30 @@ DEVIATION = 30.0                                 # 打 M 不偏离巡逻点超�
 ATTACK_MIN_DIST = 1.0                            # 持续攻击时的最小距离(地图像素)
 ATTACK_MAX_DIST = 2.0                            # 持续攻击时的最大距离(地图像素)
 _MOB_MOTION_TRACKS = []
+_UI_FIXED = {}        # UI固定元素过滤: 玩家在动但屏幕位置不变的候选 = UI
+
+
+def _filter_ui_fixed(pts, now):
+    """过滤屏幕固定位置的候选(UI/花瓣图标/装饰):
+    玩家在移动但候选屏幕位置几乎没动 -> 是UI(真实怪的屏幕位置会随玩家移动而移动)"""
+    global _UI_FIXED
+    player = get_player_position()
+    moved = False
+    if player is not None and _UI_FIXED.get('player') is not None:
+        moved = math.hypot(player[0] - _UI_FIXED['player'][0],
+                           player[1] - _UI_FIXED['player'][1]) > 1.0
+    _UI_FIXED['player'] = player
+    prev = _UI_FIXED.get('pts', set())
+    _UI_FIXED['pts'] = set(pts)
+    _UI_FIXED['t'] = now
+    if not moved or not prev:
+        return pts
+    out = []
+    for p in pts:
+        fixed = any(math.hypot(p[0] - q[0], p[1] - q[1]) < 6 for q in prev)
+        if not fixed:
+            out.append(p)
+    return out
 
 
 def _track_mob_motion(mobs, now):
@@ -115,12 +139,16 @@ def _detect_color(hsv, hsv_range, exclude_center=True):
 
 
 def detect_mobs(frame=None):
-    """检测 M/U 怪, 返回 (mythics, ultras) 屏幕坐标列表"""
+    """检测 M/U 怪, 返回 (mythics, ultras) 屏幕坐标列表
+    带UI误检过滤: 玩家移动时屏幕位置不变的候选 = UI/花瓣图标, 丢弃"""
     if frame is None:
         frame = get_frame()
     hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
     mythics = _detect_color(hsv, MYTHIC_HSV)
     ultras = _detect_color(hsv, ULTRA_HSV)
+    now = time.monotonic()
+    mythics = _filter_ui_fixed(mythics, now)
+    ultras = _filter_ui_fixed(ultras, now)
     return mythics, ultras
 
 
