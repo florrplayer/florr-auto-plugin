@@ -14,7 +14,7 @@ MAX_STUCK = 5   # 连续卡死/无路次数上限，超过则跳过当前巡逻�
 PATH_STEP = 40  # 巡逻分段长度(地图像素)：每走完一段回主循环检查战斗
 COMBAT_ENABLED = True  # 战斗模式总开关
 TRAIL_MAX = 800        # 撤退轨迹缓存长度
-MOVE_PROGRESS_TIMEOUT = 1.5  # 持续无有效进展多久才判定卡住
+MOVE_PROGRESS_TIMEOUT = 3.0  # 持续无有效进展多久才判定卡住(SendInput置前有延迟, 放宽到3s)
 PATH_CACHE = {"goal": None, "path": None}
 
 
@@ -97,7 +97,7 @@ def go_neighbor(type, count):
 
 
 def reset_keyboard():
-    get_window().key_up(win32con.VK_SPACE)
+    keyup("space")
     keyup("w")
     keyup("a")
     keyup("s")
@@ -460,7 +460,7 @@ if __name__ == "__main__":
         exit(1)
     get_window().move_offscreen()
     get_window().right_button_up()
-    get_window().key_up(win32con.VK_SPACE)
+    keyup("space")
     print("[+] 脚本运行中... 按 Ctrl+C 停止（停止后窗口自动移回）")
 
     # ===== 地图自动识别 (没传参数时用截图模板匹配当前地图) =====
@@ -486,7 +486,7 @@ if __name__ == "__main__":
             if control_mode == "defense":
                 get_window().right_button_down()
             elif control_mode == "attack":
-                get_window().key_down(win32con.VK_SPACE)
+                keydown("space")
             time.sleep(0.5)
     control_thread = threading.Thread(target=control_loop, daemon=True)
     control_thread.start()

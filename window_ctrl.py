@@ -96,6 +96,47 @@ def _lparam(x, y):
     return (int(y) << 16) | (int(x) & 0xFFFF)
 
 
+# ===== SendInput 真实键盘 (v1.40: Chromium/Edge 忽略 PostMessage 键盘, 必须真实输入) =====
+INPUT_KEYBOARD = 1
+KEYEVENTF_KEYUP = 0x0002
+KEYEVENTF_SCANCODE = 0x0008
+
+
+class _KEYBDINPUT(ctypes.Structure):
+    _fields_ = [("wVk", wintypes.WORD), ("wScan", wintypes.WORD),
+                ("dwFlags", wintypes.DWORD), ("time", wintypes.DWORD),
+                ("dwExtraInfo", ctypes.c_size_t)]
+
+
+class _INPUT_UNION(ctypes.Union):
+    _fields_ = [("ki", _KEYBDINPUT)]
+
+
+class _INPUT(ctypes.Structure):
+    _anonymous_ = ("i",)
+    _fields_ = [("type", wintypes.DWORD), ("i", _INPUT_UNION)]
+
+
+_SendInput = windll.user32.SendInput
+_SendInput.argtypes = [wintypes.UINT, POINTER(_INPUT), ctypes.c_int]
+_SendInput.restype = wintypes.UINT
+
+
+def _make_input(vk, up=False):
+    """构造单条 SendInput 键盘事件(扫描码模式, Chromium 最可靠)"""
+    try:
+        ki = _KEYBDINPUT()
+        ki.wVk = vk
+        ki.wScan = win32api.MapVirtualKey(vk, 0)
+        ki.dwFlags = KEYEVENTF_SCANCODE | (KEYEVENTF_KEYUP if up else 0)
+        inp = _INPUT()
+        inp.type = INPUT_KEYBOARD
+        inp.ki = ki
+        return inp
+    except Exception:
+        return None
+
+
 class WindowController:
     def __init__(self, title_keyword="florr.io"):
         self.title_keyword = title_keyword
@@ -314,8 +355,26 @@ class WindowController:
         lp = _lparam(x, y)
         self._post(win32con.WM_RBUTTONUP, 0, lp)
 
-    def key_down(self, vk):
+    # 置前台节流(避免高频按键反复抢焦点)
+    _fg_attempt = 0.0
+
+    def _ensure_foreground(self):
         if not self.hwnd:
+            return False
+        if self.is_foreground():
+            return True
+        now = time.time()
+        if now - WindowController._fg_attempt < 3.0:
+            return False
+        WindowController._fg_attempt = now
+        return self.set_foreground()
+
+    def key_down(self, vk):
+        """v1.40: SendInput 真实按键优先(Chromium/Edge 必应), 回退后台 PostMessage"""
+        if not self.hwnd:
+            return
+        if self._ensure_foreground():
+            self.send_input_keys(downs=[vk])
             return
         # 完整lParam: 重复计数1 + 扫描码(16-23位), 否则游戏可能解析错键
         scan = win32api.MapVirtualKey(vk, 0)
@@ -323,11 +382,58 @@ class WindowController:
         self._post(win32con.WM_KEYDOWN, vk, lparam)
 
     def key_up(self, vk):
+        """v1.40: SendInput 真实按键优先, 回退后台 PostMessage"""
         if not self.hwnd:
+            return
+        if self.is_foreground():
+            self.send_input_keys(ups=[vk])
             return
         scan = win32api.MapVirtualKey(vk, 0)
         lparam = (1) | (scan << 16) | (1 << 30)  # 先前按下 + 释放
         self._post(win32con.WM_KEYUP, vk, lparam)
+
+    # ===== SendInput 真实按键 (v1.40: 游戏/Chromium 前台必需) =====
+    def send_input_keys(self, downs=(), ups=()):
+        """SendInput 发送真实键盘事件(需窗口前台)。downs/ups 为 VK 列表, 先 up 后 down。"""
+        events = []
+        for vk in ups:
+            e = _make_input(vk, up=True)
+            if e is not None:
+                events.append(e)
+        for vk in downs:
+            e = _make_input(vk, up=False)
+            if e is not None:
+                events.append(e)
+        if not events:
+            return 0
+        arr = (_INPUT * len(events))(*events)
+        return _SendInput(len(arr), arr, ctypes.sizeof(_INPUT))
+
+    def set_foreground(self):
+        """临时把游戏窗口置前台(移动/按键前调用)。返回是否成功"""
+        if not self.hwnd:
+            return False
+        try:
+            if win32gui.GetForegroundWindow() == self.hwnd:
+                return True
+            cur = win32gui.GetWindowThreadProcessId(win32gui.GetForegroundWindow())
+            tgt = win32gui.GetWindowThreadProcessId(self.hwnd)
+            attached = False
+            if cur[1] != tgt[1]:
+                win32api.AttachThreadInput(cur[0], tgt[0], True)
+                attached = True
+            try:
+                if win32gui.IsIconic(self.hwnd):
+                    win32gui.ShowWindow(self.hwnd, win32con.SW_RESTORE)
+                win32gui.SetForegroundWindow(self.hwnd)
+                win32gui.BringWindowToTop(self.hwnd)
+            finally:
+                if attached:
+                    win32api.AttachThreadInput(cur[0], tgt[0], False)
+            time.sleep(0.06)
+            return win32gui.GetForegroundWindow() == self.hwnd
+        except Exception:
+            return False
 
     def press(self, vk, delay=0.05):
         import time

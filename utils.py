@@ -274,36 +274,66 @@ def execute_anti_stuck(duration=1.5):
         keyup(direction)
 
 
+# ===== 键盘发送模式 (v1.40: Chromium 忽略 PostMessage, 默认真实 SendInput 前置) =====
+_KEY_MODE = "sendinput"      # sendinput=真实按键(Chromium必应) / post=旧后台PostMessage
+_FOREGROUND_THROTTLE = 3.0   # 置前台节流(秒), 避免频繁抢焦点
+_last_foreground_attempt = 0.0
+
+
+def set_key_mode(mode):
+    """切换键盘发送模式: 'sendinput'(默认) / 'post'(后台PostMessage)"""
+    global _KEY_MODE
+    if mode in ("sendinput", "post"):
+        _KEY_MODE = mode
+
+
+def _ensure_foreground():
+    """确保游戏窗口前台(带节流)。返回 True=可发真实按键"""
+    global _last_foreground_attempt
+    w = get_window()
+    if w is None or not w.hwnd:
+        return False
+    if w.is_foreground():
+        return True
+    now = time.time()
+    if now - _last_foreground_attempt < _FOREGROUND_THROTTLE:
+        return False
+    _last_foreground_attempt = now
+    return w.set_foreground()
+
+
 def keydown(direction, delta=500):
     """真正的键盘按键(WASD), delta参数保留兼容但不使用"""
     w = get_window()
-    vk_map = {"w": 0x57, "a": 0x41, "s": 0x53, "d": 0x44,
+    vk_map = {"w": 0x57, "a": 0x41, "s": 0x53, "d": 0x44, "space": 0x20,
               "wa": (0x57, 0x41), "wd": (0x57, 0x44),
               "sa": (0x53, 0x41), "sd": (0x53, 0x44)}
     keys = vk_map.get(direction)
     if keys is None:
         return
-    if isinstance(keys, tuple):
-        for k in keys:
-            w.key_down(k)
+    vks = keys if isinstance(keys, tuple) else (keys,)
+    if _KEY_MODE == "sendinput" and _ensure_foreground():
+        w.send_input_keys(downs=list(vks))
     else:
-        w.key_down(keys)
+        for k in vks:
+            w.key_down(k)
 
 
 def keyup(direction):
     """松开键盘按键"""
     w = get_window()
-    vk_map = {"w": 0x57, "a": 0x41, "s": 0x53, "d": 0x44,
+    vk_map = {"w": 0x57, "a": 0x41, "s": 0x53, "d": 0x44, "space": 0x20,
               "wa": (0x57, 0x41), "wd": (0x57, 0x44),
               "sa": (0x53, 0x41), "sd": (0x53, 0x44)}
     keys = vk_map.get(direction)
     if keys is None:
         return
-    if isinstance(keys, tuple):
-        for k in keys:
-            w.key_up(k)
+    vks = keys if isinstance(keys, tuple) else (keys,)
+    if _KEY_MODE == "sendinput" and _ensure_foreground():
+        w.send_input_keys(ups=list(vks))
     else:
-        w.key_up(keys)
+        for k in vks:
+            w.key_up(k)
 
 
 _LAST_POS = None
