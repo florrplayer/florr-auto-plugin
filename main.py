@@ -394,6 +394,43 @@ def handle_ultra(pos, near_u, trail, chasers=None):
 if __name__ == "__main__":
     import threading
 
+    # ===== 内存模式接入(WebSocket hook 数据桥, 截图识别自动回退) =====
+    # v1.38.2: 之前 bridge_combat/afk_solver 等模块从未接入主循环, 现接入:
+    #   玩家位置/游戏状态优先用内存真实数据(世界坐标/206.5=地图坐标), 无hook时回退截图
+    MEMORY_OK = False
+    memory_api = None
+    try:
+        import ws_client
+        ws_client.start()
+        import bridge_combat as memory_api
+        MEMORY_OK = True
+        print("[+] 内存模式: 桥接已启动(hook数据可用时优先真实玩家/怪数据)")
+    except Exception as _e:
+        print(f"[!] 内存模式不可用(自动回退截图识别): {_e}")
+
+    WORLD_TO_MAP = 206.5  # 世界单位/地图像素
+
+    def check_stage_smart():
+        """状态检测: 内存模式有玩家数据=游戏中(绕开小地图缺失/菜单误判); 否则回退截图"""
+        if MEMORY_OK:
+            try:
+                if memory_api.get_player() is not None:
+                    return "in_game"
+            except Exception:
+                pass
+        return check_stage()
+
+    def get_pos_smart(image=None):
+        """玩家位置: 内存(世界坐标)优先, 回退截图小地图识别"""
+        if MEMORY_OK:
+            try:
+                p = memory_api.get_player()
+                if p and p.get('x') is not None:
+                    return (p['x'] / WORLD_TO_MAP, p['y'] / WORLD_TO_MAP)
+            except Exception:
+                pass
+        return get_player_position(image=image)
+
     # ===== 地图选择：python main.py [地图名]（自动忽略注释等无效参数）=====
     available = [p[:-4] for p in os.listdir(MAP_DIR) if p.lower().endswith(".png")]
     map_name = None
@@ -409,7 +446,7 @@ if __name__ == "__main__":
         if real_args:
             print(f"[!] 未知地图 '{real_args[0]}'，可选: {available}")
             exit(1)
-        map_name = "anthell"
+        map_name = None  # 不传参数 -> init窗口后自动识别, 失败默认anthell
 
     from config import load_config
     settings = load_config() or {}
@@ -425,6 +462,22 @@ if __name__ == "__main__":
     get_window().right_button_up()
     get_window().key_up(win32con.VK_SPACE)
     print("[+] 脚本运行中... 按 Ctrl+C 停止（停止后窗口自动移回）")
+
+    # ===== 地图自动识别 (没传参数时用截图模板匹配当前地图) =====
+    if map_name is None:
+        try:
+            from map_auto_detect import detect_map
+            from utils import get_frame, detect_canvas_offset
+            detect_canvas_offset()
+            auto = detect_map(get_frame())
+            if auto in available:
+                map_name = auto
+                print(f"[+] 自动识别地图: {map_name}")
+        except Exception as _e:
+            print(f"[!] 地图自动识别失败: {_e}")
+        if map_name is None:
+            map_name = "anthell"
+            print(f"[+] 默认地图: {map_name}")
 
     # ===== 后台攻击/防御控制 =====
     control_running = True
@@ -499,8 +552,94 @@ if __name__ == "__main__":
         dedicated_area = []   # 可选：[[左上], [右下]]，进入该区域即算到达
         patrol_index = 0
         trail = deque(maxlen=TRAIL_MAX)
+        heal_active = False
+        heal_slot = None
+        heal_path = []
+        heal_path_index = -1
+        heal_warned = False
+        heal_slots = settings.get("heal_slots", [])
+        heal_type = settings.get("heal_type", "rose")
+
+        def tap_slot(slot_number):
+            key = "0" if slot_number == 10 else str(slot_number)
+            vk = ord(key)
+            w = get_window()
+            w.key_down(vk)
+            try:
+                time.sleep(0.05)
+            finally:
+                w.key_up(vk)
+
+        def release_move_keys():
+            for key in ("w", "a", "s", "d"):
+                keyup(key)
+
+        def direction_keys(dx, dy):
+            keys = set()
+            if abs(dx) > 0.2:
+                keys.add("d" if dx > 0 else "a")
+            if abs(dy) > 0.2:
+                keys.add("s" if dy > 0 else "w")
+            if len(keys) == 2 and abs(dx) < abs(dy):
+                keys.discard("d" if dx > 0 else "a")
+            elif len(keys) == 2:
+                keys.discard("s" if dy > 0 else "w")
+            return keys
 
         print(f"[巡逻模式] 共 {len(patrol_points)} 个巡逻点，循环移动中...")
+
+        # ===== 防挂机后台线程: 验证弹窗自动破解(截图/内存战斗都生效) =====
+        _afk_running = True
+        def _afk_loop():
+            while _afk_running:
+                try:
+                    from afk_solver import try_solve_and_drag
+                    if try_solve_and_drag(get_window(), get_frame()):
+                        print("[防挂机] 检测到验证弹窗并已自动破解")
+                except Exception:
+                    pass
+                time.sleep(12)
+        threading.Thread(target=_afk_loop, daemon=True).start()
+
+        # ===== 死亡自救(ygg求复活, PostMessage打字不抢焦点) + 聊天挑战监控(防封号) =====
+        _death_start = 0.0   # 死亡时刻, 0=未死
+        _last_ygg = 0.0      # 上次发ygg时间
+        chat_solver_obj = None
+        try:
+            from chat_solver import ChatSolver
+            chat_solver_obj = ChatSolver(get_window(), get_frame)
+            chat_solver_obj.start()
+            print("[+] 聊天挑战监控已启动(防封号: 检测新消息/管理员红字自动回复)")
+        except Exception as _e:
+            print(f"[!] 聊天监控不可用: {_e}")
+
+        def _send_ygg():
+            try:
+                w = get_window()
+                w.key_down(0x0D); time.sleep(0.05); w.key_up(0x0D)
+                time.sleep(0.3)
+                for ch in "ygg":
+                    vk = ord(ch.upper())
+                    w.key_down(vk); time.sleep(0.04); w.key_up(vk)
+                time.sleep(0.2)
+                w.key_down(0x0D); time.sleep(0.05); w.key_up(0x0D)
+                print("[死亡] 发 ygg 求复活")
+            except Exception as _e:
+                print(f"[死亡] ygg发送失败: {_e}")
+
+        # ===== 内存战斗优先: 有hook数据时跑完整内存战斗(真实玩家/怪/弹道/Super雷达/低血回血/危险躲避), 无数据15s自动回退截图 =====
+        if MEMORY_OK:
+            try:
+                from memory_battle import MemoryBattle
+                print("[内存模式] 启动完整内存战斗(每200ms读真实游戏内存)")
+                _mb = MemoryBattle(get_window())
+                _mb.no_data_timeout = 15.0
+                _mb.battle_loop()
+                print("[内存模式] 内存战斗退出(无hook数据), 回退截图巡逻模式")
+            except KeyboardInterrupt:
+                raise
+            except Exception as _e:
+                print(f"[!] 内存战斗异常, 回退截图巡逻: {_e}")
 
         # 主循环需要的 combat 函数(一次性import, 避免作用域内NameError)
         from combat import detect_mobs, screen_to_map, ultra_blocked, choose_target
@@ -510,9 +649,9 @@ if __name__ == "__main__":
         next_slot_interval = 60 + random.random() * 30  # 60-90秒
 
         while True:
-            # 防挂机: 定时切换槽位
             now = time.time()
-            if now - last_slot_switch > next_slot_interval:
+            # 防挂机: 定时切换槽位
+            if not heal_active and now - last_slot_switch > next_slot_interval:
                 slot_key = random.choice(['1','2','3','4','5','6','7','8','9','0'])
                 print(f"[防挂机] 切换槽位 {slot_key}")
                 w = get_window()
@@ -527,11 +666,21 @@ if __name__ == "__main__":
                 last_slot_switch = now
                 next_slot_interval = 60 + random.random() * 30
 
-            # 先检查状态
-            stage = check_stage()
+            # 先检查状态 (内存模式优先: 有玩家数据=游戏中, 绕开小地图/菜单误判)
+            stage = check_stage_smart()
             if stage == "in_game_dead":
-                print("[!] 死亡，正在自动复活...")
-                respawn()
+                # 死亡自救: 先每10s发ygg求复活, 2分钟没人救再点Continue回家
+                if _death_start == 0.0:
+                    _death_start = time.time()
+                    print("[!] 死亡，开始自救(每10s发ygg求复活, 2分钟没救就回家)")
+                if time.time() - _death_start < 120:
+                    if time.time() - _last_ygg > 10:
+                        _send_ygg()
+                        _last_ygg = time.time()
+                else:
+                    _death_start = 0.0
+                    print("[!] 2分钟没人复活, 点Continue回家")
+                    respawn()
                 continue
             elif stage == "in_menu":
                 print("[!] 在菜单，自动点击开始...")
@@ -548,9 +697,97 @@ if __name__ == "__main__":
                 time.sleep(5)
                 continue
 
-            pos = get_player_position()
+            pos = get_pos_smart()
             if pos is not None:
                 trail.append(pos)
+
+            protocol_player = None
+            if MEMORY_OK:
+                try:
+                    protocol_player = memory_api.get_player()
+                except Exception:
+                    pass
+            hp_percent = protocol_player.get("hp_percent") if protocol_player else None
+
+            if (not heal_active and hp_percent is not None and hp_percent < 0.10
+                    and protocol_player is not None):
+                heal_active = True
+                heal_path = list(trail)
+                heal_path_index = len(heal_path) - 2
+                try:
+                    from memory_battle import find_heal_slot
+                    heal_slot = find_heal_slot(
+                        memory_api.get_secondary_slots(), heal_slots, heal_type)
+                except Exception:
+                    heal_slot = None
+                if heal_slot is not None:
+                    tap_slot(heal_slot)
+                    print(f"[回血] HP低于10%，切换副槽{heal_slot} ({heal_type})")
+                elif not heal_warned:
+                    print(f"[回血] HP低于10%，配置副槽中没有核验到 {heal_type}，只撤退")
+                    heal_warned = True
+                if control_mode != "defense":
+                    get_window().right_button_down()
+
+            if heal_active:
+                if hp_percent is not None and hp_percent > 0.70:
+                    if heal_slot is not None:
+                        tap_slot(heal_slot)
+                        print("[回血] HP恢复超过70%，切回原副槽状态")
+                    if control_mode != "defense":
+                        get_window().right_button_up()
+                    heal_active = False
+                    heal_slot = None
+                    heal_path = []
+                    heal_path_index = -1
+                else:
+                    while heal_path_index >= 0:
+                        retreat_target = heal_path[heal_path_index]
+                        current = get_pos_smart()
+                        if current is None:
+                            release_move_keys()
+                            break
+                        if distance(current, retreat_target) <= ARRIVE:
+                            heal_path_index -= 1
+                            continue
+                        dx = retreat_target[0] - current[0]
+                        dy = retreat_target[1] - current[1]
+                        retreat_keys = direction_keys(dx, dy)
+                        release_move_keys()
+                        for key in retreat_keys:
+                            keydown(key)
+                        try:
+                            time.sleep(0.10)
+                        finally:
+                            for key in retreat_keys:
+                                keyup(key)
+                        break
+                    if heal_path_index < 0:
+                        release_move_keys()
+                    time.sleep(0.05)
+                    continue
+
+            if MEMORY_OK and protocol_player is not None:
+                try:
+                    from flee_planner import plan_projectile_dodge
+                    incoming = plan_projectile_dodge(
+                        (protocol_player["x"], protocol_player["y"]),
+                        memory_api.get_projectiles(),
+                        player_radius=protocol_player.get("radius") or 0.0)
+                except Exception:
+                    incoming = None
+                if incoming is not None:
+                    dodge_keys = direction_keys(*incoming["dir"])
+                    release_move_keys()
+                    for key in dodge_keys:
+                        keydown(key)
+                    try:
+                        time.sleep(0.12)
+                    finally:
+                        for key in dodge_keys:
+                            keyup(key)
+                    print(f"[弹道闪避] {incoming['type']} ETA={incoming['eta']:.2f}s，垂直闪避")
+                    continue
 
             goal_pt = patrol_points[patrol_index]
 
@@ -558,7 +795,7 @@ if __name__ == "__main__":
             if COMBAT_ENABLED:
                 frame = get_frame()
                 mythics, ultras = detect_mobs(frame)
-                pos = get_player_position(image=frame)
+                pos = get_pos_smart(image=frame)
                 if pos is not None:
                     ultras_map = [m for m in (screen_to_map_safe(u, pos) for u in ultras) if m]
                     near_u = None
@@ -616,6 +853,15 @@ if __name__ == "__main__":
     finally:
         control_running = False
         control_thread.join(timeout=1.0)
+        try:
+            _afk_running = False
+        except Exception:
+            pass
+        if 'chat_solver_obj' in dir() and chat_solver_obj is not None:
+            try:
+                chat_solver_obj.stop()
+            except Exception:
+                pass
         reset_keyboard()
         get_window().right_button_up()
         print("[+] 右键防御已关闭")

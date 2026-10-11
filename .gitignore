@@ -199,3 +199,9 @@ filelist.txt
 
 # 大型克隆仓库(原始参考, 不入库)
 reference-florr-tools/
+
+# 大体积临时/偷取目录(不入库)
+build2/
+dist2/
+stolen/
+assets/_icon_preview.png

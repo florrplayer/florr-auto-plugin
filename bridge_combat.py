@@ -5,6 +5,7 @@ v1.18.0: 决策改用 mob_db 统一数据层(稀有度反推/真实碰撞箱/追
 v1.25.2: find_best_target 加 sticky_sid 目标粘滞(AI研究§8.1-2)
 """
 import time, math, json, base64, struct, threading, urllib.request
+from collections import deque
 
 import mob_db
 import protocol_db  # v1.27.0: 网络协议全表(怪名/花瓣名/稀有度/实体解码)
@@ -14,6 +15,8 @@ import ws_client  # v1.29.2: WebSocket 增量订阅 (延迟~200ms→<10ms, 断�
 
 BRIDGE_URL = "http://127.0.0.1:18899"
 _PROTOCOL_LOCK = threading.Lock()
+_PROTOCOL_SEEN_ORDER = deque(maxlen=2048)
+_PROTOCOL_SEEN = set()
 _PROTOCOL_STATE = {
     'owner_entity_id': None, 'player': None, 'player_seen': 0.0,
     'secondary_slots': None, 'slots_seen': 0.0, 'projectiles': {},
@@ -27,8 +30,18 @@ def _decode_ws_updates(data):
         for raw in data.get('ws_raw') or []:
             if not isinstance(raw, dict) or raw.get('d') != 'r':
                 continue
+            frame_payload = raw.get('p', '')
+            frame_key = (raw.get('t'), frame_payload)
+            if frame_key in _PROTOCOL_SEEN:
+                continue
+            if len(_PROTOCOL_SEEN_ORDER) == _PROTOCOL_SEEN_ORDER.maxlen:
+                _PROTOCOL_SEEN.discard(_PROTOCOL_SEEN_ORDER.popleft())
+            _PROTOCOL_SEEN_ORDER.append(frame_key)
+            _PROTOCOL_SEEN.add(frame_key)
+            event_time = raw.get('t')
+            event_time = event_time / 1000.0 if isinstance(event_time, (int, float)) else now
             try:
-                buffer = base64.b64decode(raw.get('p', ''), validate=True)
+                buffer = base64.b64decode(frame_payload, validate=True)
             except (ValueError, TypeError):
                 continue
             while buffer:
@@ -45,7 +58,7 @@ def _decode_ws_updates(data):
                     _PROTOCOL_STATE['owner_entity_id'] = message.get('ownerEntityId')
                 elif message.get('typeName') == 'OwnerState':
                     _PROTOCOL_STATE['secondary_slots'] = message.get('secondarySlots', [])
-                    _PROTOCOL_STATE['slots_seen'] = now
+                    _PROTOCOL_STATE['slots_seen'] = event_time
                 elif message.get('typeName') == 'Snapshot':
                     owner_id = message.get('ownerEntityId')
                     if owner_id is not None:
@@ -55,14 +68,14 @@ def _decode_ws_updates(data):
                         entity_id = entity.get('entityId')
                         if entity_id == owner_id:
                             _PROTOCOL_STATE['player'] = dict(entity)
-                            _PROTOCOL_STATE['player_seen'] = now
+                            _PROTOCOL_STATE['player_seen'] = event_time
                         if protocol_db.entity_kind(entity.get('entityType', -1)) == 'projectile':
                             _PROTOCOL_STATE['projectiles'][entity_id] = {
                                 'entity_id': entity_id,
                                 'type_id': entity.get('entityType'),
                                 'x': entity.get('x'), 'y': entity.get('y'),
                                 'radius': entity.get('radius', 0),
-                                'angle': entity.get('angle', 0), 'seen': now,
+                                'angle': entity.get('angle', 0), 'seen': event_time,
                             }
                     for entity_id in message.get('removedEntityIds', []):
                         _PROTOCOL_STATE['projectiles'].pop(entity_id, None)
