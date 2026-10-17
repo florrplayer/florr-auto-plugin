@@ -173,6 +173,8 @@ class WindowController:
     def __init__(self, title_keyword="florr.io"):
         self.title_keyword = title_keyword
         self.hwnd = None
+        self._down_keys = set()   # v1.40.2: 已按下的真实按键(幂等, 防止循环重复DOWN)
+        self._rbtn_state = False  # v1.40.2: 右键按住状态(防御循环每0.5s调用, 只发一次DOWN)
 
     def find_window(self):
         """严格匹配: 类名=Chrome窗口 + 标题含 florr.io + 客户区>200px
@@ -403,11 +405,15 @@ class WindowController:
         self._post(win32con.WM_LBUTTONUP, 0, lp)
 
     def right_button_down(self, x=960, y=540):
-        """按住右键（防御）。优先 SendInput, 回退 PostMessage"""
+        """按住右键（防御）。优先 SendInput, 回退 PostMessage。
+        v1.40.2: 幂等——已按住时直接返回, 不再重复 SetCursorPos(修复防御循环每0.5s拽走鼠标)"""
         if not self.hwnd:
+            return
+        if self._rbtn_state:
             return
         sx, sy = self._client_to_screen(x, y)
         if self._send_mouse(MOUSEEVENTF_RIGHTDOWN, sx, sy):
+            self._rbtn_state = True
             return
         lp = _lparam(x, y)
         self._post(win32con.WM_RBUTTONDOWN, win32con.MK_RBUTTON, lp)
@@ -418,9 +424,11 @@ class WindowController:
             return
         sx, sy = self._client_to_screen(x, y)
         if self._send_mouse(MOUSEEVENTF_RIGHTUP, sx, sy):
+            self._rbtn_state = False
             return
         lp = _lparam(x, y)
         self._post(win32con.WM_RBUTTONUP, 0, lp)
+        self._rbtn_state = False
 
     # 置前台节流(避免高频按键反复抢焦点)
     _fg_attempt = 0.0
@@ -461,20 +469,27 @@ class WindowController:
 
     # ===== SendInput 真实按键 (v1.40: 游戏/Chromium 前台必需) =====
     def send_input_keys(self, downs=(), ups=()):
-        """SendInput 发送真实键盘事件(需窗口前台)。downs/ups 为 VK 列表, 先 up 后 down。"""
+        """SendInput 发送真实键盘事件(需窗口前台)。downs/ups 为 VK 列表, 先 up 后 down。
+        v1.40.2: 幂等——已按下的键不重复 DOWN(攻击循环每0.5s调keydown, 只需真实按住一次)"""
         events = []
         for vk in ups:
             e = _make_input(vk, up=True)
             if e is not None:
                 events.append(e)
-        for vk in downs:
+            self._down_keys.discard(vk)
+        real_downs = [vk for vk in downs if vk not in self._down_keys]
+        for vk in real_downs:
             e = _make_input(vk, up=False)
             if e is not None:
                 events.append(e)
         if not events:
             return 0
         arr = (_INPUT * len(events))(*events)
-        return _SendInput(len(arr), arr, ctypes.sizeof(_INPUT))
+        n = _SendInput(len(arr), arr, ctypes.sizeof(_INPUT))
+        if n > 0:
+            for vk in real_downs:
+                self._down_keys.add(vk)
+        return n
 
     def set_foreground(self):
         """临时把游戏窗口置前台(移动/按键前调用)。返回是否成功"""
