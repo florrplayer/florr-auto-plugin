@@ -42,6 +42,9 @@
 
 - `docs/`：全部研究报告与速查表（怪血量/掉落概率/稀有生物/地图与Boss机制等 12 份）
 - `data/`：官方游戏数据（73 怪 / 118 花瓣 / 96 天赋 / 3.6万 wasm 字符串 / 332 条掉率实测 / 1px 换算表）
+- `data/i18n_en/`：官方英文 i18n（en_mobs/en_petals/en_achievements/en_ui/en_tutorial，权威怪名/花瓣名英文源）
+- `data/xiuxian_zh_i18n.txt`：社区"修仙版"完整中文 i18n（2898 键，成就/属性/界面，存档对照用）
+- `data/en_zh_mob_petal_names.json`：修仙版英→中怪名/花瓣名词典（158 对，玄幻风名，存档不接入显示，避免误导）
 - `maps/`：全地图图片 + Tiled 地图源文件（*.tmj/*.tsj）
 - `releases/`：小白版打包
 - 根目录：插件源码（main.py / combat.py / utils.py …）
