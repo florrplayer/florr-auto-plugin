@@ -98,8 +98,15 @@ def _lparam(x, y):
 
 # ===== SendInput 真实键盘 (v1.40: Chromium/Edge 忽略 PostMessage 键盘, 必须真实输入) =====
 INPUT_KEYBOARD = 1
+INPUT_MOUSE = 0
 KEYEVENTF_KEYUP = 0x0002
 KEYEVENTF_SCANCODE = 0x0008
+MOUSEEVENTF_MOVE = 0x0001
+MOUSEEVENTF_LEFTDOWN = 0x0002
+MOUSEEVENTF_LEFTUP = 0x0004
+MOUSEEVENTF_RIGHTDOWN = 0x0008
+MOUSEEVENTF_RIGHTUP = 0x0010
+MOUSEEVENTF_ABSOLUTE = 0x8000
 
 
 class _KEYBDINPUT(ctypes.Structure):
@@ -108,8 +115,14 @@ class _KEYBDINPUT(ctypes.Structure):
                 ("dwExtraInfo", ctypes.c_size_t)]
 
 
+class _MOUSEINPUT(ctypes.Structure):
+    _fields_ = [("dx", wintypes.LONG), ("dy", wintypes.LONG),
+                ("mouseData", wintypes.DWORD), ("dwFlags", wintypes.DWORD),
+                ("time", wintypes.DWORD), ("dwExtraInfo", ctypes.c_size_t)]
+
+
 class _INPUT_UNION(ctypes.Union):
-    _fields_ = [("ki", _KEYBDINPUT)]
+    _fields_ = [("mi", _MOUSEINPUT), ("ki", _KEYBDINPUT)]
 
 
 class _INPUT(ctypes.Structure):
@@ -132,6 +145,25 @@ def _make_input(vk, up=False):
         inp = _INPUT()
         inp.type = INPUT_KEYBOARD
         inp.ki = ki
+        return inp
+    except Exception:
+        return None
+
+
+def _make_mouse(flags, screen_x=None, screen_y=None):
+    """构造单条 SendInput 鼠标事件。screen_x/y 为屏幕像素坐标(绝对模式)"""
+    try:
+        mi = _MOUSEINPUT()
+        if screen_x is not None and screen_y is not None:
+            sw = win32api.GetSystemMetrics(0)
+            sh = win32api.GetSystemMetrics(1)
+            mi.dx = int(screen_x * 65535 // max(1, sw - 1))
+            mi.dy = int(screen_y * 65535 // max(1, sh - 1))
+            flags |= MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE
+        mi.dwFlags = flags
+        inp = _INPUT()
+        inp.type = INPUT_MOUSE
+        inp.mi = mi
         return inp
     except Exception:
         return None
@@ -316,6 +348,25 @@ class WindowController:
         except Exception:
             pass
 
+    def _client_to_screen(self, x, y):
+        """客户区坐标 -> 屏幕坐标"""
+        try:
+            return win32gui.ClientToScreen(self.hwnd, (int(x), int(y)))
+        except Exception:
+            return (int(x), int(y))
+
+    def _send_mouse(self, flags, sx, sy):
+        """SendInput 真实鼠标事件(Chromium 必应), 失败回退 False"""
+        try:
+            if self._ensure_foreground():
+                win32api.SetCursorPos((int(sx), int(sy)))
+                time.sleep(0.03)
+                arr = (_INPUT * 1)(_make_mouse(flags, int(sx), int(sy)))
+                return _SendInput(1, arr, ctypes.sizeof(_INPUT)) > 0
+        except Exception:
+            pass
+        return False
+
     def mouse_move(self, x, y):
         if not self.hwnd:
             return
@@ -323,7 +374,14 @@ class WindowController:
         self._post(win32con.WM_MOUSEMOVE, 0, lp)
 
     def mouse_double_click(self, x, y):
+        """左键双击。优先 SendInput, 回退 PostMessage"""
         if not self.hwnd:
+            return
+        sx, sy = self._client_to_screen(x, y)
+        if self._send_mouse(MOUSEEVENTF_LEFTDOWN, sx, sy):
+            self._send_mouse(MOUSEEVENTF_LEFTUP, sx, sy)
+            self._send_mouse(MOUSEEVENTF_LEFTDOWN, sx, sy)
+            self._send_mouse(MOUSEEVENTF_LEFTUP, sx, sy)
             return
         lp = _lparam(x, y)
         self._post(win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lp)
@@ -332,25 +390,34 @@ class WindowController:
         self._post(win32con.WM_LBUTTONUP, 0, lp)
 
     def left_click(self, x, y):
-        """左键单击（点复活按钮用）"""
+        """左键单击（点复活按钮用）。优先 SendInput, 回退 PostMessage"""
         if not self.hwnd:
             return
-        import time
+        sx, sy = self._client_to_screen(x, y)
+        if self._send_mouse(MOUSEEVENTF_LEFTDOWN, sx, sy):
+            self._send_mouse(MOUSEEVENTF_LEFTUP, sx, sy)
+            return
         lp = _lparam(x, y)
         self._post(win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, lp)
         time.sleep(0.08)
         self._post(win32con.WM_LBUTTONUP, 0, lp)
 
     def right_button_down(self, x=960, y=540):
-        """按住右键（防御）"""
+        """按住右键（防御）。优先 SendInput, 回退 PostMessage"""
         if not self.hwnd:
+            return
+        sx, sy = self._client_to_screen(x, y)
+        if self._send_mouse(MOUSEEVENTF_RIGHTDOWN, sx, sy):
             return
         lp = _lparam(x, y)
         self._post(win32con.WM_RBUTTONDOWN, win32con.MK_RBUTTON, lp)
 
     def right_button_up(self, x=960, y=540):
-        """松开右键"""
+        """松开右键。优先 SendInput, 回退 PostMessage"""
         if not self.hwnd:
+            return
+        sx, sy = self._client_to_screen(x, y)
+        if self._send_mouse(MOUSEEVENTF_RIGHTUP, sx, sy):
             return
         lp = _lparam(x, y)
         self._post(win32con.WM_RBUTTONUP, 0, lp)
