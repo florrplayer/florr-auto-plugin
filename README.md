@@ -94,3 +94,19 @@
 - **Chrome 启动参数**: chrome.exe --disable-features=CalculateNativeWinOcclusion
 - **Firefox**: 原生支持后台截图, 无需额外参数
 - 跑挂机脚本请用 Chrome(带参数) 或 Firefox, 不要用 Edge
+
+## v1.41 发布信息（2026-10-18）
+
+- **真实输入全面修复**: 键盘/鼠标全部改 SendInput 真实输入（PostMessage 会被 Chromium 忽略——此前挂机验证码拖动/飞行**从未真正破解成功**，现改为真实拖动+真实按键）
+- **输入幂等**: 右键防御只发一次 DOWN、space 攻击不重复按下——不再"鼠标一直乱动"
+- **挂机验证码真实拖动破解**: 拖动圆点（随机颜色/随机迷宫）SendInput 插值拖动到终点；飞行圆球用真实 WASD 按键
+- **内存模式默认开启**: 免截图更快更准，连不上自动回退截图模式
+- **官方 i18n 入库**: 官方英文 en_{mobs,petals,achievements,ui,tutorial}.txt + 修仙版中文 i18n（2898 键）+ 英中词典 158 对
+- **官方更新日志**: data/official_changelog.txt（官方 changelog 全量）
+- 小白版 zip: `florr-auto-beginners-v1.41.zip`（87.3MB，解压双击 启动.bat）
+
+## 官方渠道情报
+
+- 官方 Discord: <https://discord.gg/tv4k6jFHKu>（来源: 官方 Steam 公告"Free to Play"；另一候选 <https://discord.gg/68S85MPZjJ> 来自 FlorrMobNotify FAQ）— 公告/维护/活动信息源
+- 官方更新日志: <https://florr.io/static/i18n/en_US/changelog.txt>（已镜像到 data/official_changelog.txt）
+- 社区: reddit.com/r/florr.io、中文维基 florrio.fandom.com/zh
