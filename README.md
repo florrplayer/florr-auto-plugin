@@ -6,11 +6,11 @@
 
 ## 快速开始（小白版）
 
-**免 Python 版**：到 [Releases 页面](https://github.com/florrplayer/florr-auto-plugin/releases) 下载最新 `florr-auto-beginners-vX.Y.zip`（即小白版，当前 v1.36），解压后双击 `启动.bat`，按提示选择地图即可，无需安装 Python/依赖（内含 bridge_server.exe，内存模式开箱即用）。
+**免 Python 版**：到 [Releases 页面](https://github.com/florrplayer/florr-auto-plugin/releases) 下载最新 `florr-auto-beginners-vX.Y.zip`（即小白版，当前 v1.41），解压后双击 `启动.bat`，按提示选择地图即可，无需安装 Python/依赖（内含 bridge_server.exe，内存模式开箱即用）。
 
 ### 下载直达
 
-- **小白版 v1.36 直接下载**（免 Python，解压双击 `启动.bat`）：<https://github.com/florrplayer/florr-auto-plugin/releases/latest/download/florr-auto-beginners-v1.36.zip>
+- **小白版 v1.41 直接下载**（免 Python，解压双击 `启动.bat`）：<https://github.com/florrplayer/florr-auto-plugin/releases/latest/download/florr-auto-beginners-v1.41.zip>
 - **Releases 全部版本**：<https://github.com/florrplayer/florr-auto-plugin/releases>
 - **源码版**：`git clone https://github.com/florrplayer/florr-auto-plugin.git` 后运行 `py main.py 地图名`（如 `py main.py desert`）
 
