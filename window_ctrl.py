@@ -375,6 +375,46 @@ class WindowController:
         lp = _lparam(x, y)
         self._post(win32con.WM_MOUSEMOVE, 0, lp)
 
+    def drag_real(self, points, speed_px_per_s=60.0, hold_ms=150):
+        """v1.41: SendInput 真实拖动(Chromium 验证码弹窗必应, PostMessage 会被忽略)。
+        points=客户区坐标列表; 按下起点 -> 按speed插值移动 -> 终点松开。成功返回 True"""
+        if not self.hwnd or points is None or len(points) < 2:
+            return False
+        try:
+            if not self._ensure_foreground():
+                return False
+            sx, sy = self._client_to_screen(*points[0])
+            win32api.SetCursorPos((int(sx), int(sy)))
+            time.sleep(0.05)
+            arr = (_INPUT * 1)(_make_mouse(MOUSEEVENTF_LEFTDOWN, sx, sy))
+            if _SendInput(1, arr, ctypes.sizeof(_INPUT)) <= 0:
+                return False
+            try:
+                prev = points[0]
+                for i in range(1, len(points)):
+                    px, py = points[i]
+                    d = math.hypot(px - prev[0], py - prev[1])
+                    if d < 1:
+                        continue
+                    steps = max(2, int(d / max(8.0, speed_px_per_s / 12.0)))
+                    for s in range(1, steps + 1):
+                        mx = prev[0] + (px - prev[0]) * s / steps
+                        my = prev[1] + (py - prev[1]) * s / steps
+                        sp = self._client_to_screen(mx, my)
+                        arr2 = (_INPUT * 1)(_make_mouse(MOUSEEVENTF_MOVE, sp[0], sp[1]))
+                        if _SendInput(1, arr2, ctypes.sizeof(_INPUT)) <= 0:
+                            break
+                        time.sleep(max(0.008, d / speed_px_per_s / steps))
+                    prev = points[i]
+                time.sleep(hold_ms / 1000.0)
+            finally:
+                ex, ey = self._client_to_screen(*points[-1])
+                arr3 = (_INPUT * 1)(_make_mouse(MOUSEEVENTF_LEFTUP, ex, ey))
+                _SendInput(1, arr3, ctypes.sizeof(_INPUT))
+            return True
+        except Exception:
+            return False
+
     def mouse_double_click(self, x, y):
         """左键双击。优先 SendInput, 回退 PostMessage"""
         if not self.hwnd:

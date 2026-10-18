@@ -281,8 +281,14 @@ def solve_afk_drag_v2(frame=None, crop_margin=0.05):
 
 
 def drag_path(window, path_points, speed=60.0, hold_ms=150):
-    """后台拖动: PostMessage 到窗口 (不抢焦点, 最小化也行)
+    """v1.41: SendInput 真实拖动优先(Chromium 验证码弹窗必应), 失败回退后台 PostMessage
     path_points: 窗口客户区坐标列表"""
+    # 真实拖动: 置前台+真实鼠标(验证码是浏览器 DOM, PostMessage 会被 Chromium 忽略)
+    try:
+        if window.drag_real(path_points, speed_px_per_s=speed, hold_ms=hold_ms):
+            return True
+    except Exception:
+        pass
     import win32api, win32con
     hwnd = window.hwnd
     def _lp(x, y):
@@ -301,6 +307,7 @@ def drag_path(window, path_points, speed=60.0, hold_ms=150):
         time.sleep(max(0.01, d / speed))
     time.sleep(hold_ms / 1000.0)
     win32api.PostMessage(hwnd, win32con.WM_LBUTTONUP, 0, _lp(ex, ey))
+    return True
 
 
 def solve_afk_flap_v2(frame=None, crop_margin=0.05):
@@ -353,14 +360,10 @@ def solve_afk_flap_v2(frame=None, crop_margin=0.05):
 
 
 def flap_path(window, path, speed_px_per_s=95.0, min_hold=0.05):
-    """Flap 飞行执行: 键盘 WASD 沿路径逐段飞 (非拖动!)
+    """v1.41: Flap 飞行执行改用真实按键(utils SendInput 优先, Chromium 必应)
+    键盘 WASD 沿路径逐段飞 (非拖动!)
     每段按方向键, 按(段长/速度)秒后换向; 最后一小段多飞0.3s保证到终点"""
-    import win32api, win32con
-    hwnd = window.hwnd
-    def _key(vk):
-        win32api.PostMessage(hwnd, win32con.WM_KEYDOWN, vk, 1)
-        win32api.PostMessage(hwnd, win32con.WM_KEYUP, vk, 1)
-    VK = {'w': 0x57, 'a': 0x41, 's': 0x53, 'd': 0x44}
+    from utils import keydown, keyup
     for i in range(1, len(path)):
         px, py = path[i]
         qx, qy = path[i - 1]
@@ -376,10 +379,10 @@ def flap_path(window, path, speed_px_per_s=95.0, min_hold=0.05):
         if i == len(path) - 1:
             hold += 0.35  # 终点多飞一程
         for k in keys:
-            win32api.PostMessage(hwnd, win32con.WM_KEYDOWN, VK[k], 1)
+            keydown(k)
         time.sleep(hold)
         for k in keys:
-            win32api.PostMessage(hwnd, win32con.WM_KEYUP, VK[k], 1)
+            keyup(k)
         time.sleep(0.03)
 
 
