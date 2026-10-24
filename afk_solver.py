@@ -183,6 +183,33 @@ def extend_to_end(path, end, length=10):
     return path
 
 
+def detect_afk_popup(frame):
+    """v1.41.1: 纯检测是否有AFK验证弹窗(无兜底!)。有弹窗返回True, 无返回False。
+    与 find_afk_window 检测主体一致, 但绝不把无弹窗画面误判为窗口(防误拖鼠标/乱飞)"""
+    try:
+        h, w = frame.shape[:2]
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        dark = ((gray <= 55) & (gray >= 8)).astype(np.uint8) * 255
+        # 弹窗是局部深灰遮罩: 全屏大面积偏暗(加载黑屏/隧道) -> 不是弹窗
+        if dark.sum() / 255.0 > h * w * 0.7:
+            return False
+        dark = cv2.morphologyEx(dark, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
+        n, labels, stats, _ = cv2.connectedComponentsWithStats(dark, connectivity=8)
+        for i in range(1, n):
+            x, y, ww, hh, area = stats[i]
+            if area < w * h * 0.01:
+                continue
+            ratio = ww / max(1, hh)
+            if 0.5 < ratio < 3.0 and ww > 120 and hh > 80:
+                roi = frame[y:y + hh, x:x + ww]
+                white = ((cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY) > 60)).sum()
+                if white / max(1, roi.size) > 0.012:
+                    return True
+        return False
+    except Exception:
+        return False
+
+
 def find_afk_window(frame):
     """定位AFK窗口: 找大块深灰矩形(背景)+内部浅灰路径
     返回 (x0,y0,x1,y1) 窗口边界 或 None"""

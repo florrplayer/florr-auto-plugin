@@ -15,7 +15,16 @@ PATH_STEP = 40  # 巡逻分段长度(地图像素)：每走完一段回主循环
 COMBAT_ENABLED = True  # 战斗模式总开关
 TRAIL_MAX = 800        # 撤退轨迹缓存长度
 MOVE_PROGRESS_TIMEOUT = 3.0  # 持续无有效进展多久才判定卡住(SendInput置前有延迟, 放宽到3s)
+ACTION_WATCHDOG_TIMEOUT = 12.0  # 警戒动作耗时，超过直接退出当前动作
+COMBAT_SCAN_INTERVAL = 0.20  # 战斗扫描节流，避免循环里重复做高成本检测
+HEAL_RETREAT_MIN_PATH = 4    # 低血撤退最少回溯轨迹点，太短就直接转安全退路
 PATH_CACHE = {"goal": None, "path": None}
+BOT_STATE_PATROL = "patrol"
+BOT_STATE_COMBAT = "combat"
+BOT_STATE_HEAL = "heal"
+BOT_STATE_ULTRA = "ultra"
+BOT_STATE_DEAD = "dead"
+BOT_STATE_MENU = "menu"
 
 
 def line_of_sight(map, n1, n2):
@@ -36,6 +45,14 @@ def line_of_sight(map, n1, n2):
         if e2 < dx:
             err += dx
             y0 += sy
+
+
+def action_watchdog(start_ts, label, timeout=ACTION_WATCHDOG_TIMEOUT):
+    """统一动作超时保护：避免某个动作永远卡住。"""
+    if time.monotonic() - start_ts > timeout:
+        print(f"[守护] {label} 超时，强制退出当前动作")
+        return "timeout"
+    return None
 
 
 def lazy_theta_star(map, start, goal):
@@ -104,9 +121,42 @@ def reset_keyboard():
     keyup("d")
 
 
+def build_heal_retreat_path(current, trail):
+    """构造低血撤退路线：优先回溯历史轨迹，极短/空轨迹时退化为安全反向位移。"""
+    history = list(trail)
+    if not history:
+        return [current, (current[0] - 25, current[1] - 25)]
+    points = []
+    for point in reversed(history):
+        if not points or distance(point, points[-1]) > 1.0:
+            points.append(point)
+        if len(points) >= HEAL_RETREAT_MIN_PATH:
+            break
+    points.reverse()
+    if len(points) >= 2:
+        return points
+    last = history[-1]
+    if distance(last, current) < 1.0:
+        return [current, (current[0] - 20, current[1] - 20)]
+    dx = current[0] - last[0]
+    dy = current[1] - last[1]
+    nd = math.hypot(dx, dy) or 1.0
+    fallback = (current[0] + dx / nd * 25, current[1] + dy / nd * 25)
+    return [current, fallback]
+
+
+def set_bot_state(current_state, next_state, history):
+    """状态切换：只在状态真实改变时记录日志，降低噪音。"""
+    if current_state != next_state:
+        print(f"[状态] {current_state or 'none'} -> {next_state}")
+        history.append(next_state)
+    return next_state
+
+
 def go_direction(start, end):
     """朝 end 移动，用 WASD 键盘控制；改为带迟滞的平滑走路，降低抖动和来回切键。"""
     w = get_window()
+    start_ts = time.monotonic()
     last_dist, min_dist = 1e9, 1e9
     last_progress = time.monotonic()
     current_keys = set()
@@ -119,6 +169,10 @@ def go_direction(start, end):
         current_keys = keys
     try:
         while True:
+            watchdog = action_watchdog(start_ts, "go_direction")
+            if watchdog is not None:
+                set_keys(set())
+                return watchdog
             pos = get_player_position()
             if pos is None:
                 set_keys(set())
@@ -167,7 +221,12 @@ def go_direction(start, end):
 def lazy_theta_execute_path(path):
     if not path:
         return True
+    start_ts = time.monotonic()
     for i in range(len(path) - 1):
+        watchdog = action_watchdog(start_ts, f"path_segment_{i}")
+        if watchdog is not None:
+            reset_keyboard()
+            return watchdog
         stage = check_stage()
         if stage != "in_game":
             return stage
@@ -286,7 +345,7 @@ def chase_target(patrol_goal, trail):
     用 WASD 键盘移动"""
     from combat import detect_mobs, choose_target, ultra_blocked, map_to_screen
     w = get_window()
-    start_time = time.time()
+    start_time = time.monotonic()
     current_keys = set()
     def set_k(keys):
         nonlocal current_keys
@@ -297,7 +356,7 @@ def chase_target(patrol_goal, trail):
         current_keys = keys
     try:
         while True:
-            if time.time() - start_time > 15:
+            if action_watchdog(start_time, "chase_target", ACTION_WATCHDOG_TIMEOUT) == "timeout":
                 print("[战斗] 追击超时，放弃")
                 return "done"
             pos = get_player_position()
@@ -336,6 +395,7 @@ def handle_ultra(pos, near_u, trail, chasers=None):
     from combat import (build_avoid_map, ULTRA_KISS, ULTRA_AVOID,
                         detect_mobs, screen_to_map)
     from flee_planner import plan_flee
+    watchdog_start = time.monotonic()
     binary = load_binary_map()
     snapped_pos = calibrate_player(binary, pos)
     plan = plan_flee(binary, snapped_pos, chasers or [near_u])
@@ -370,6 +430,8 @@ def handle_ultra(pos, near_u, trail, chasers=None):
     go_direction(pos, kiss)
     # 3) 沿原路撤退直到 U 检测不到
     while True:
+        if action_watchdog(watchdog_start, "handle_ultra") == "timeout":
+            return "stuck"
         pos = get_player_position()
         if pos is None:
             time.sleep(0.3)
@@ -483,6 +545,9 @@ if __name__ == "__main__":
     control_running = True
     def control_loop():
         while control_running:
+            if control_mode == "none":
+                time.sleep(0.2)
+                continue
             if control_mode == "defense":
                 get_window().right_button_down()
             elif control_mode == "attack":
@@ -490,7 +555,7 @@ if __name__ == "__main__":
             time.sleep(0.5)
     control_thread = threading.Thread(target=control_loop, daemon=True)
     control_thread.start()
-    mode_text = {"attack": "空格攻击", "defense": "右键防御", "none": "手动控制"}[control_mode]
+    mode_text = {"attack": "空格攻击", "defense": "右键防御", "none": "手动控制（后台不持续按键）"}[control_mode]
     print(f"[+] 控制模式: {mode_text}")
 
     try:
@@ -589,16 +654,21 @@ if __name__ == "__main__":
         print(f"[巡逻模式] 共 {len(patrol_points)} 个巡逻点，循环移动中...")
 
         # ===== 防挂机后台线程: 验证弹窗自动破解(截图/内存战斗都生效) =====
+        # v1.41.1: 先纯检测弹窗(无兜底不误判) -> 有弹窗1.5s密集重试, 无弹窗12s省CPU
         _afk_running = True
         def _afk_loop():
             while _afk_running:
                 try:
-                    from afk_solver import try_solve_and_drag
-                    if try_solve_and_drag(get_window(), get_frame()):
-                        print("[防挂机] 检测到验证弹窗并已自动破解")
+                    from afk_solver import detect_afk_popup, try_solve_and_drag
+                    frame = get_frame()
+                    if frame is not None and detect_afk_popup(frame):
+                        if try_solve_and_drag(get_window(), frame):
+                            print("[防挂机] 检测到验证弹窗并已自动破解")
+                        time.sleep(1.5)   # 弹窗期: 求解失败快速重试
+                    else:
+                        time.sleep(12)    # 无弹窗: 轻量轮询省CPU
                 except Exception:
-                    pass
-                time.sleep(12)
+                    time.sleep(12)
         threading.Thread(target=_afk_loop, daemon=True).start()
 
         # ===== 死亡自救(ygg求复活, PostMessage打字不抢焦点) + 聊天挑战监控(防封号) =====
@@ -648,8 +718,12 @@ if __name__ == "__main__":
         last_slot_switch = time.time()
         next_slot_interval = 60 + random.random() * 30  # 60-90秒
 
+        last_combat_scan = 0.0
+        bot_state = BOT_STATE_PATROL
+        state_history = []
         while True:
             now = time.time()
+            bot_state = BOT_STATE_PATROL
             # 防挂机: 定时切换槽位
             if not heal_active and now - last_slot_switch > next_slot_interval:
                 slot_key = random.choice(['1','2','3','4','5','6','7','8','9','0'])
@@ -669,6 +743,7 @@ if __name__ == "__main__":
             # 先检查状态 (内存模式优先: 有玩家数据=游戏中, 绕开小地图/菜单误判)
             stage = check_stage_smart()
             if stage == "in_game_dead":
+                bot_state = set_bot_state(bot_state, BOT_STATE_DEAD, state_history)
                 # 死亡自救: 先每10s发ygg求复活, 2分钟没人救再点Continue回家
                 if _death_start == 0.0:
                     _death_start = time.time()
@@ -683,6 +758,7 @@ if __name__ == "__main__":
                     respawn()
                 continue
             elif stage == "in_menu":
+                bot_state = set_bot_state(bot_state, BOT_STATE_MENU, state_history)
                 print("[!] 在菜单，自动点击开始...")
                 # 自动点击"开始"按钮(屏幕中央偏下, 按比例)
                 w = get_window()
@@ -730,6 +806,7 @@ if __name__ == "__main__":
                     get_window().right_button_down()
 
             if heal_active:
+                bot_state = set_bot_state(bot_state, BOT_STATE_HEAL, state_history)
                 if hp_percent is not None and hp_percent > 0.70:
                     if heal_slot is not None:
                         tap_slot(heal_slot)
@@ -741,12 +818,16 @@ if __name__ == "__main__":
                     heal_path = []
                     heal_path_index = -1
                 else:
+                    current = get_pos_smart()
+                    if current is None:
+                        release_move_keys()
+                        time.sleep(0.05)
+                        continue
+                    if not heal_path or len(heal_path) < 2:
+                        heal_path = build_heal_retreat_path(current, trail)
+                        heal_path_index = max(len(heal_path) - 2, 0)
                     while heal_path_index >= 0:
                         retreat_target = heal_path[heal_path_index]
-                        current = get_pos_smart()
-                        if current is None:
-                            release_move_keys()
-                            break
                         if distance(current, retreat_target) <= ARRIVE:
                             heal_path_index -= 1
                             continue
@@ -791,8 +872,9 @@ if __name__ == "__main__":
 
             goal_pt = patrol_points[patrol_index]
 
-            # ===== 战斗检测（仅巡逻间隙/分段间执行）=====
-            if COMBAT_ENABLED:
+            # ===== 战斗检测（状态机式分流：U 怪优先，M 怪追击，否者巡逻）=====
+            if COMBAT_ENABLED and time.monotonic() - last_combat_scan >= COMBAT_SCAN_INTERVAL:
+                last_combat_scan = time.monotonic()
                 frame = get_frame()
                 mythics, ultras = detect_mobs(frame)
                 pos = get_pos_smart(image=frame)
@@ -802,6 +884,7 @@ if __name__ == "__main__":
                     from combat import ultra_blocked
                     near_u = ultra_blocked(ultras_map, pos)
                     if near_u:
+                        bot_state = set_bot_state(bot_state, BOT_STATE_ULTRA, state_history)
                         r = handle_ultra(pos, near_u, trail, ultras_map)
                         if r in ("in_game_dead", "in_menu"):
                             continue
@@ -810,6 +893,7 @@ if __name__ == "__main__":
                     from combat import choose_target
                     target = choose_target(mythics_map, goal_pt, pos)
                     if target is not None:
+                        bot_state = set_bot_state(bot_state, BOT_STATE_COMBAT, state_history)
                         print(f"[战斗] 发现 M 怪 {target}，追击...")
                         r = chase_target(goal_pt, trail)
                         if r == "ultra":
@@ -818,6 +902,7 @@ if __name__ == "__main__":
                         continue
 
             # ===== 正常巡逻（分段走，走一段回来看怪）=====
+            bot_state = set_bot_state(bot_state, BOT_STATE_PATROL, state_history)
             result = lazy_theta_pathing(goal_pt, dedicated_area, step=PATH_STEP if COMBAT_ENABLED else 0)
             if result is True:
                 if random_patrol:
