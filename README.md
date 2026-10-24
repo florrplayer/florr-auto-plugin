@@ -6,11 +6,11 @@
 
 ## 快速开始（小白版）
 
-**免 Python 版**：到 [Releases 页面](https://github.com/florrplayer/florr-auto-plugin/releases) 下载最新 `florr-auto-beginners-vX.Y.zip`（即小白版，当前 v1.41），解压后双击 `启动.bat`，按提示选择地图即可，无需安装 Python/依赖（内含 bridge_server.exe，内存模式开箱即用）。
+**免 Python 版**：到 [Releases 页面](https://github.com/florrplayer/florr-auto-plugin/releases) 下载最新 `florr-auto-beginners-vX.Y.zip`（即小白版，当前 v1.41.1），解压后双击 `启动.bat`，按提示选择地图即可，无需安装 Python/依赖（内含 bridge_server.exe，内存模式开箱即用）。
 
 ### 下载直达
 
-- **小白版 v1.41 直接下载**（免 Python，解压双击 `启动.bat`）：<https://github.com/florrplayer/florr-auto-plugin/releases/latest/download/florr-auto-beginners-v1.41.zip>
+- **小白版 v1.41.1 直接下载**（免 Python，解压双击 `启动.bat`）：<https://github.com/florrplayer/florr-auto-plugin/releases/latest/download/florr-auto-beginners-v1.41.1.zip>
 - **Releases 全部版本**：<https://github.com/florrplayer/florr-auto-plugin/releases>
 - **源码版**：`git clone https://github.com/florrplayer/florr-auto-plugin.git` 后运行 `py main.py 地图名`（如 `py main.py desert`）
 
@@ -103,7 +103,12 @@
 - **内存模式默认开启**: 免截图更快更准，连不上自动回退截图模式
 - **官方 i18n 入库**: 官方英文 en_{mobs,petals,achievements,ui,tutorial}.txt + 修仙版中文 i18n（2898 键）+ 英中词典 158 对
 - **官方更新日志**: data/official_changelog.txt（官方 changelog 全量）
-- 小白版 zip: `florr-auto-beginners-v1.41.zip`（87.3MB，解压双击 启动.bat）
+- 小白版 zip: `florr-auto-beginners-v1.41.1.zip`（87.3MB，解压双击 启动.bat）
+
+### v1.41.1（AFK 响应提速 + 防误触发）
+
+- **AFK 验证码响应提速**: 弹窗出现后 1.5 秒密集重试破解（原 12 秒固定轮询），弹窗消失回到 12 秒省 CPU
+- **防误触发**: 新增 `detect_afk_popup` 纯检测（无兜底）——只有确认存在验证弹窗才执行真实拖动/按键，杜绝无弹窗时误拖鼠标或角色乱飞
 
 ## 官方渠道情报
 
